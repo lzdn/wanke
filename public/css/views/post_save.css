@@ -1,0 +1,14 @@
+
+.am-header-right-extend{
+    margin-right:-20px;
+}
+.am-header-left-extend{
+   margin-left: -20px;
+}
+.am-dropdown-extend{
+    width:40%;
+    margin: 0 auto;
+}
+#usersay{
+    border: 1px solid #ccc;
+}
