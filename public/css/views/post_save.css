@@ -3,7 +3,7 @@
     margin-right:-20px;
 }
 .am-header-left-extend{
-   margin-left: -20px;
+    margin-left: -20px;
 }
 .am-dropdown-extend{
     width:40%;
@@ -11,4 +11,21 @@
 }
 #usersay{
     border: 1px solid #ccc;
+}
+#usersay div{
+    margin:0;
+}
+textarea{
+    width: 100%;
+}
+.am-panel-hd-extend{
+    border: 1px solid #ccc;
+}
+#usr-say-leg{
+    display:block;
+    width: 60px;
+    height: 10px;
+    margin: 0;
+    float:right;
+    text-align:center;
 }
