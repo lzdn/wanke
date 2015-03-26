@@ -12,13 +12,19 @@
     width:40%;
     margin: 0 auto;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> f752188aa8f311de6da4fb1859b2b0efed1c54f7
 #usersay div{
     margin:0;
 }
 textarea{
+    border:none;
     width: 100%;
+    margin-bottom: 5px;
 }
+<<<<<<< HEAD
 /*#navbar{*/
     /*width: 100%;*/
     /*height: 41px;*/
@@ -59,24 +65,58 @@ textarea{
     /*color:#fff;*/
 /*}*/
 .am-panel-hd-extend{
+=======
+.am-panel-extend{
+>>>>>>> f752188aa8f311de6da4fb1859b2b0efed1c54f7
     border: 1px solid #ccc;
+}
+.am-panel-extend i{
+    margin-left: 5px;
+}
+#navbar{
+    padding:6px;
+    border-top:1px solid #ccc;
+}
+#navbar a{
+    margin:2px;
+}
+.am-form-group-extend{
+    border-top:1px solid #ccc;
+    margin-bottom: 5px;
 }
 #usr-say-leg{
     display:block;
+<<<<<<< HEAD
     width: 120px;
     height: 30px;
     margin: 0;
+=======
+    width: 60px;
+    height: 30px;
+    margin-right:5px;
+>>>>>>> f752188aa8f311de6da4fb1859b2b0efed1c54f7
     float:right;
 }
 #usr-say-leg div{
     float: left;
+<<<<<<< HEAD
     width: 60px;
+=======
+    width: 30px;
+>>>>>>> f752188aa8f311de6da4fb1859b2b0efed1c54f7
     height: 30px;
 }
 #usr-say-leg p{
     display: block;
+<<<<<<< HEAD
     width: 60px;
     height: 30px;
+=======
+    width: 30px;
+    height: 30px;
+    font-size: 10px;
+    line-heigh:30px;
+>>>>>>> f752188aa8f311de6da4fb1859b2b0efed1c54f7
 }
 .usr-say-leg-2{
     text-align: right;
