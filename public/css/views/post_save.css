@@ -1,4 +1,7 @@
-
+*{
+    margin:0;
+    padding:0;
+}
 .am-header-right-extend{
     margin-right:-20px;
 }
@@ -9,23 +12,75 @@
     width:40%;
     margin: 0 auto;
 }
-#usersay{
-    border: 1px solid #ccc;
-}
+
 #usersay div{
     margin:0;
 }
 textarea{
     width: 100%;
 }
+/*#navbar{*/
+    /*width: 100%;*/
+    /*height: 41px;*/
+    /*border-bottom: 1px solid #ccc;*/
+/*}*/
+/*@media(max-device-width:329px){*/
+    /*#navbar{*/
+        /*width: 100%;*/
+        /*height:82px;*/
+        /*border-bottom: 1px solid #ccc;*/
+    /*}*/
+/*}*/
+/*@media(max-device-width:205px){*/
+    /*#navbar{*/
+        /*width: 100%;*/
+        /*height: 123px;*/
+        /*border-bottom: 1px solid #ccc;*/
+    /*}*/
+/*}*/
+/*@media(max-device-width:130px){*/
+    /*#navbar{*/
+        /*width: 100%;*/
+        /*height: 205px;*/
+        /*border-bottom: 1px solid #ccc;*/
+    /*}*/
+/*}*/
+/*#navbar div{*/
+    /*float: left;*/
+    /*width: 66px;*/
+    /*height: 41px;*/
+/*}*/
+/*#navbar div #maxbtn{*/
+    /*width: 82px;*/
+/*}*/
+/*.selectbtn{*/
+    /*background:#0e90d2;*/
+    /*border-radius: 20px;*/
+    /*color:#fff;*/
+/*}*/
 .am-panel-hd-extend{
     border: 1px solid #ccc;
 }
 #usr-say-leg{
     display:block;
-    width: 60px;
-    height: 10px;
+    width: 120px;
+    height: 30px;
     margin: 0;
     float:right;
-    text-align:center;
+}
+#usr-say-leg div{
+    float: left;
+    width: 60px;
+    height: 30px;
+}
+#usr-say-leg p{
+    display: block;
+    width: 60px;
+    height: 30px;
+}
+.usr-say-leg-2{
+    text-align: right;
+}
+.maxlegcss p{
+    color:#dd514c;
 }

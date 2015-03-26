@@ -45,6 +45,12 @@
 </form>
 
 <div id="navbar" class="">
+    <!--<div><a class="am-btn-idx am-btn selectbtn" href="#">约吃</a></div>-->
+    <!--<div><a class="am-btn-idx am-btn " href="#">约玩</a></div>-->
+    <!--<div><a class="am-btn-idx am-btn " href="#">约聊</a></div>-->
+    <!--<div><a class="am-btn-idx am-btn maxbtn " href="#">约运动</a></div>-->
+    <!--<div><a class="am-btn-idx am-btn" href="#">更多</a></div>-->
+
     <a class="am-btn-extend am-btn am-btn-primary am-round">约吃</a>
     <a class="am-btn-extend am-btn am-btn-link am-round" >约玩</a>
     <a class="am-btn-extend am-btn am-btn-link ">约运动</a>
@@ -62,7 +68,14 @@
 </div>
     <div class="am-panel-hd am-panel-hd-extend">
        <i class="am-icon am-icon-area-chart"></i>
-        <div id="usr-say-leg" class="oMaxleg"><p>0/140</p></div>
+        <div id="usr-say-leg">
+                <div class="usr-say-leg-2">
+                    <p>0</p>
+                </div>
+                <div>
+                    <p>/140</p>
+                </div>
+        </div>
     </div>
 <form id="doc-vld-ta" name="doc-vld-ta'" action="#">
     <div class="am-form-group">
@@ -79,6 +92,16 @@
         <div class="am-modal-footer">
             <span class="am-modal-btn" data-am-modal-cancel>取消</span>
             <span class="am-modal-btn" data-am-modal-confirm>确定</span>
+        </div>
+    </div>
+</div>
+<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+    <div class="am-modal-dialog">
+        <div class="am-modal-bd">
+            超出文字上限
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn">确定</span>
         </div>
     </div>
 </div>
