@@ -57,6 +57,7 @@
             bShow=!bShow;
         });
         $("#addimg").on("click",function(){
+<<<<<<< HEAD
             //$("<div class=\"imgnav\" ><img src=\"#\" alt=\"#\"/></div>").prependTo("#imgwall");
              alert("haha");
             wx.chooseImage({
@@ -65,6 +66,9 @@
                 }
             })
 
+=======
+            $("<div class=\"imgnav\" ><img src=\"#\" alt=\"#\"/></div>").prependTo("#imgwall");
+>>>>>>> origin/master
         });
 
 

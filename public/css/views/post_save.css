@@ -44,15 +44,22 @@ textarea{
     padding:8px 15px 8px 15px;
 }
 .am-panel-extend{
+<<<<<<< HEAD
     background: #f9f9f9;
     height: 50px;
+=======
+>>>>>>> origin/master
     border-bottom: 1px solid #ccc;
     border-top:1px solid #ccc;
     margin-bottom: 10px;
 }
 .am-panel-extend i{
     padding:0;
+<<<<<<< HEAD
     margin: 8px 0 0 25px;
+=======
+    margin: -5px 0 0 5px;
+>>>>>>> origin/master
 }
 #navbar{
     padding:6px;
@@ -79,9 +86,15 @@ textarea{
 #usr-say-leg p{
     padding-top:3px;
     display: block;
+<<<<<<< HEAD
     width: 50px;
     height: 40px;
     font-size: 20px;
+=======
+    width: 30px;
+    height: 30px;
+    font-size: 10px;
+>>>>>>> origin/master
     /*line-heigh:30px;*/
 }
 .usr-say-leg-2{
