@@ -2,6 +2,28 @@
     margin:0;
     padding:0;
 }
+.am-header-extend{
+    background: #f9f9f9;
+    border-bottom: 1px solid #ccc;
+}
+.am-header-extend div{
+    maigin:0;
+    padding: 0;
+}
+#title-1{
+    width: 90px;
+    height: 49px;
+    margin:0 auto;
+}
+#title-1 h1{
+    margin:0 auto;
+}
+#usr-sbm-s,#usr-sbm{
+    color: #ff8200;
+}
+#usr-sbm>.am-disabled{
+    color: rgba(68, 68, 68, 3);
+}
 .am-header-right-extend{
     margin-right:-20px;
 }
@@ -18,17 +40,22 @@
 textarea{
     border:none;
     width: 100%;
-    margin-bottom: 5px;
+    margin: 8px 0 8px 0;
+    padding:8px 15px 8px 15px;
 }
 .am-panel-extend{
-    border: 1px solid #ccc;
+    background: #f9f9f9;
+    height: 50px;
+    border-bottom: 1px solid #ccc;
+    border-top:1px solid #ccc;
+    margin-bottom: 10px;
 }
 .am-panel-extend i{
-    margin-left: 5px;
+    padding:0;
+    margin: 8px 0 0 25px;
 }
 #navbar{
     padding:6px;
-    border-top:1px solid #ccc;
 }
 #navbar a{
     margin:2px;
@@ -39,26 +66,44 @@ textarea{
 }
 #usr-say-leg{
     display:block;
-    width: 60px;
-    height: 30px;
-    margin-right:5px;
+    width: 100px;
+    height: 60px;
+    margin:5px 0px 0px 0px;
     float:right;
 }
 #usr-say-leg div{
     float: left;
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 40px;
 }
 #usr-say-leg p{
+    padding-top:3px;
     display: block;
-    width: 30px;
-    height: 30px;
-    font-size: 10px;
-    line-heigh:30px;
+    width: 50px;
+    height: 40px;
+    font-size: 20px;
+    /*line-heigh:30px;*/
 }
 .usr-say-leg-2{
     text-align: right;
 }
 .maxlegcss p{
     color:#dd514c;
+}
+#imgwall{
+    width: 100%;
+}
+#imgwall div{
+    margin:6px 0 0 6px;
+    float: left;
+}
+#addimg{
+    width: 100px;
+    height: 100px;
+    border: 1px dashed #ccc;
+}
+#imgwall .imgnav{
+    width: 100px;
+    height: 100px;
+    background: blue;
 }
