@@ -7,16 +7,16 @@
     border-bottom: 1px solid #ccc;
 }
 .am-header-extend div{
-   
+    maigin:0;
     padding: 0;
 }
 #title-1{
-    width: 100px;
+    width: 90px;
     height: 49px;
     margin:0 auto;
 }
 #title-1 h1{
-    text-align: center;
+    margin:0 auto;
 }
 #usr-sbm-s,#usr-sbm{
     color: #ff8200;
