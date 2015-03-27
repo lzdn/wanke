@@ -36,21 +36,17 @@
     <!--</script>-->
 </head>
 <body>
-<header data-am-widget='header' class="am-header am-header-extend am-header-default">
-    <div class="am-header-left am-header-nav am-header-nav-extend">
-        <a href="#left-link" id="usr-sbm-s" class="am-btn-lg">
-            取消
-        </a>
+<div id="header" class="am-header-extend">
+    <div id="haederleft">
+        <a id="usr-sbm-s" class="am-btn am-btn-link am-btn-xl ">取消</a>
     </div>
     <div id="title-1">
         <h1 class="am-header am-header-title-extend">userId</h1>
     </div>
-    <div class="am-header-right am-header-nav am-header-nav-extend">
-        <a href="#right-link" id="usr-sbm" class=" am-btn-lg am-disabled">
-            发送
-        </a>
+    <div id="haederright">
+        <a id="usr-sbm-sub" class="am-btn am-btn-link am-btn-xl am-disabled">发送</a>
     </div>
-</header>
+</div>
 <form id="usersay" name="'USERSAY" action="#" method="get">
     <div class="am-form-group">
       <textarea class="" rows="5" id="doc-ta-1" maxlength="200" placeholder="想要说的话…………"></textarea>
@@ -77,7 +73,7 @@
     <!--</label>-->
 <!--</div>-->
     <div class="am-panel am-panel-extend">
-       <i class="am-icon am-btn am-icon-image am-icon-md" id="smimg"></i>
+       <i class="am-icon am-btn am-icon-image am-icon-sm" id="smimg" data-am-modal="{target: '#my-actions'}"></i>
         <div id="usr-say-leg">
                 <div class="usr-say-leg-2">
                     <p>0</p>
@@ -108,6 +104,19 @@
         </div>
     </div>
 </div>
+
+<div class="am-modal-actions" id="my-actions">
+    <div class="am-modal-actions-group">
+        <ul class="am-list">
+            <li><a href="#" id="dophoto" data-am-modal-close>拍照</a></li>
+            <li><a href="#" id="photolibrary" data-am-modal-close am-btn am-disabled>照片库存</a></li>
+        </ul>
+    </div>
+    <div class="am-modal-actions-group">
+        <button class="am-btn am-btn-secondary am-btn-block" data-am-modal="{target: '#my-actions'}">取消</button>
+    </div>
+</div>
+
 
 <div id="imgwall">
     <div id="addimg"></div>

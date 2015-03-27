@@ -4,7 +4,6 @@
     $(function(){
        // AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
 
-
         var aNav=document.getElementsByClassName("am-btn-extend");
         for(var i=0;i<aNav.length;i++){
             aNav[i].onclick=function(){
@@ -14,7 +13,7 @@
                 this.className="am-btn-extend am-btn am-btn-primary am-round";
             }
         }
-        $("#usr-sbm").css({color:"rgba(68,68,68,3)"});
+        $("#usr-sbm-sub").css({color:"rgba(68,68,68,3)"});
         $("#doc-ta-1").keydown(function(){
             setTimeout(function(){
                 var aUserval =$("#doc-ta-1").val();
@@ -24,20 +23,16 @@
                     $(".usr-say-leg-2").html("<p>"+aUserval.length+"</p>").removeClass("maxlegcss");
                 }
                 if($("#doc-ta-1").val()!=""){
-                    $("#usr-sbm").removeClass("am-disabled").css({color:"#ff8200"});
+                    $("#usr-sbm-sub").removeClass("am-disabled").css({color:"#ff8200"});
                 }else{
-                    $("#usr-sbm").addClass("am-disabled").css({color:"rgba(68,68,68,3)"});
+                    $("#usr-sbm-sub").addClass("am-disabled").css({color:"rgba(68,68,68,3)"});
                 }
             },100);
         });
-        $("#usr-sbm").on("click",function(){
-            var aUserval2=$("#doc-ta-1").val();
-            if(aUserval2.length>140){
-                //alert("haha");
-                $("#my-alert").modal();
-            }else{
+        $("#usr-sbm-s").on("click",function(){
+            var aUserval3=$("#doc-ta-1").val();
+            if(aUserval3!=""){
                 $("#modal-confirm").modal({
-                    //relatedTarget: this,
                     onConfirm: function() {
                         alert('准备上传');
                     },
@@ -46,16 +41,45 @@
                 });
             }
         });
+        $("#usr-sbm-sub").on("click",function(){
+            var aUserval2=$("#doc-ta-1").val();
+            if(aUserval2.length>140){
+                $("#my-alert").modal();
+            }else{
+                alert('准备上传');
+            }
+        });
+
+        $("#smimg").on("click",function(){
+                $("my-actions").modal();
+        });
+
+       //function domouseclick(){
+       //     $("my-actions").modal(toggle);
+       //};
+
+
         $("#addimg").hide();
         var bShow= true;
-        $("#smimg").on("click",function(){
+        $("#photolibrary").on("click",function(){
             if(bShow){
-                $("#addimg").show();
-            }else{
-                $("#addimg").hide();
-            }
-            bShow=!bShow;
+                        $("#addimg").show();
+                    }else{
+                        $("#addimg").hide();
+                    }
+                    bShow=!bShow;
         });
+
+        //$("#addimg").hide();
+        //var bShow= true;
+        //$("#smimg").on("click",function(){
+        //    if(bShow){
+        //        $("#addimg").show();
+        //    }else{
+        //        $("#addimg").hide();
+        //    }
+        //    bShow=!bShow;
+        //});
         $("#addimg").on("click",function(){
             $("<div class=\"imgnav\" ><img src=\"#\" alt=\"#\"/></div>").prependTo("#imgwall");
 

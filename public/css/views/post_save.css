@@ -3,27 +3,40 @@
     padding:0;
 }
 .am-header-extend{
+    width: 100%;
+    height: 49px;
+    position: relative;
     background: #f9f9f9;
     border-bottom: 1px solid #ccc;
 }
 .am-header-extend div{
-   
+    float: left;
+    width: 100px;
     padding: 0;
 }
 #title-1{
-    width: 100px;
+    position: absolute;
+    left:50%;
+    margin-left:-50px;
     height: 49px;
-    margin:0 auto;
 }
 #title-1 h1{
     text-align: center;
 }
-#usr-sbm-s,#usr-sbm{
+#haederleft ,#haederright{
+    width: 82px;
+}
+#haederright{
+    position:absolute;
+    right:-5px;
+}
+#usr-sbm-s,#usr-sbm-sub{
     color: #ff8200;
 }
-#usr-sbm>.am-disabled{
-    color: rgba(68, 68, 68, 3);
+#usr-sbm-s:hover,#usr-sbm-sub:hover{
+    text-decoration: none;
 }
+
 .am-header-right-extend{
     margin-right:-20px;
 }
@@ -52,7 +65,7 @@ textarea{
 }
 .am-panel-extend i{
     padding:0;
-    margin: 8px 0 0 25px;
+    margin: 10px 0 0 25px;
 }
 #navbar{
     padding:6px;
