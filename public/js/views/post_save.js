@@ -116,6 +116,25 @@
     //},json)
 
          //……………………………………数据库操作……………………………………………
+        var aJsTags=[];
+        var tags = AV.Object.extend("tags");
+        var query = new AV.Query(tags);
+       // query.equalTo("playerName", "Dan Stemkoski");
+            query.find({
+            success: function(results) {
+
+                for (var i = 0; i < results.length; i++) {
+                    var object = results[i];
+                    aJsTags.push(object.get('tagKey')+object.get('tagValue'));
+                    alert(object.id + ' - ' + object.get('tagKey')+'-'+ object.get('tagValue'));
+                    console.log(aJsTags);
+                }
+            },
+            error: function(error) {
+                alert("Error: " + error.code + " " + error.message);
+            }
+        });
+
         //function wx_get_token() {
         //    $token = S('access_token');
         //    if (!$token) {
@@ -134,23 +153,6 @@
         //    }
         //    return $token;
         //}
-
-
-
-
-        //var TestObject = AV.Object.extend("TestObject");
-        //var testObject = new TestObject();
-        //testObject.save({foo: "bar"}, {
-        //    success: function(object) {
-        //       // alert("LeanCloud works!");
-        //    }
-        //});
-
-
-
-
-
-
 
     });
 
