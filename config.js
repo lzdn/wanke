@@ -1,0 +1,13 @@
+/**
+ * Created by amberglasses on 15/3/30.
+ */
+var config;
+
+config = {
+    appId: "wxf44ff09e67caaad3",
+    appSecret: "3ccef678e38cf9bb3e5a1f137804210c",
+    authUrl: "http://123.57.14.126",
+    token: "dianyingren"
+};
+
+exports.config = config;
