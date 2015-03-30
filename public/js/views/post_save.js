@@ -2,7 +2,7 @@
  * Created by amberglasses on 15/3/24.
  */
     $(function(){
-       // AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
+       AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
 
         var aNav=document.getElementsByClassName("am-btn-extend");
         for(var i=0;i<aNav.length;i++){
@@ -46,13 +46,20 @@
             if(aUserval2.length>140){
                 $("#my-alert").modal();
             }else{
-                alert('准备上传');
+                //alert('准备上传');
+                var Extendss = AV.Object.extend("Extendss");
+                var extendss = new Extendss();
+                    extendss.save({usersay: aUserval2}, {
+                       success: function(object) {
+                       alert("发表成功");
+                       }
+                    });
             }
         });
 
-        $("#smimg").on("click",function(){
-                $("my-actions").modal();
-        });
+        //$("#smimg").on("click",function(){
+        //        $("my-actions").modal();
+        //});
 
        //function domouseclick(){
        //     $("my-actions").modal(toggle);
@@ -60,15 +67,27 @@
 
 
         $("#addimg").hide();
-        var bShow= true;
-        $("#photolibrary").on("click",function(){
-            if(bShow){
-                        $("#addimg").show();
-                    }else{
-                        $("#addimg").hide();
-                    }
-                    bShow=!bShow;
+        //var bShow= true;
+        //$("#photolibrary").on("click",function(){
+        //    if(bShow){
+        //                $("#addimg").show();
+        //            }else{
+        //                $("#addimg").hide();
+        //            }
+        //            bShow=!bShow;
+        //});
+
+
+        $("#dophoto").on("click",function(){
+            $("#addimg").hide();
         });
+        $("#photolibrary").on("click",function(){
+            $("#addimg").show();
+        });
+        $("#escphoto").on("click",function(){
+            $("#addimg").hide();
+        });
+
 
         //$("#addimg").hide();
         //var bShow= true;

@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="assets/css/amazeui.min.css">
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="stylesheet" href="css/views/post_save.css"/>
-    <!--<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>-->
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <!--<script>-->
         <!--wx.config({-->
             <!--debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。-->
@@ -47,7 +47,7 @@
         <a id="usr-sbm-sub" class="am-btn am-btn-link am-btn-xl am-disabled">发送</a>
     </div>
 </div>
-<form id="usersay" name="'USERSAY" action="#" method="get">
+<form id="usersay" name="'USERSAY" action="js/views/post_save.js" method="get">
     <div class="am-form-group">
       <textarea class="" rows="5" id="doc-ta-1" maxlength="200" placeholder="想要说的话…………"></textarea>
     </div>
@@ -113,7 +113,7 @@
         </ul>
     </div>
     <div class="am-modal-actions-group">
-        <button class="am-btn am-btn-secondary am-btn-block" data-am-modal="{target: '#my-actions'}">取消</button>
+        <button id="escphoto" class="am-btn am-btn-secondary am-btn-block" data-am-modal="{target: '#my-actions'}">取消</button>
     </div>
 </div>
 
@@ -124,11 +124,10 @@
 
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/amazeui.min.js"></script>
-<script src="assets/js/amazeui.legacy.min.js"></script>
+<!--<script src="assets/js/amazeui.legacy.min.js"></script>-->
 <script src="assets/js/amazeui.widgets.helper.min.js"></script>
 <script src="assets/js/handlebar.min.js"></script>
-
-<!--<script src="https://leancloud.cn/scripts/lib/av-0.5.0.min.js"></script>-->
+<script src="https://leancloud.cn/scripts/lib/av-0.5.0.min.js"></script>
 
 <script src="js/views/post_save.js"></script>
 </body>
