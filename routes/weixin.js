@@ -28,12 +28,13 @@ router.get('/getJsConfig', function (req, res) {
     var param = {
         debug: false,
         jsApiList: ['chooseImage', 'previewImage'],
-        url: config.authUrl
+        url: config.authUrl + "/post_save.html"
     };
     api.getJsConfig(param, function (err, result) {
         console.log(err);
         console.log('------------------------------');
         console.log(result);
+        res.json();
     });
 });
 
