@@ -26,7 +26,7 @@ router.get('/getJsConfig', function (req, res) {
         console.log(err);
         console.log('------------------------------');
         console.log(result);
-        res.json();
+        res.json(result);
     });
 });
 
