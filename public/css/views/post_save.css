@@ -117,6 +117,18 @@ textarea{
     height: 100px;
     border: 1px dashed #ccc;
 }
+#addimg p{
+    margin:0;
+    padding:0px;
+    display:block;
+    width: 100px;
+    height: 100px;
+    line-height: 90px;
+    text-align: center;
+    font-size: 50px;
+    font-weight:100;
+    color:#ccc;
+}
 #imgwall .imgnav{
     width: 100px;
     height: 100px;

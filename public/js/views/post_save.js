@@ -1,7 +1,13 @@
 /**
  * Created by amberglasses on 15/3/24.
  */
-$(function () {
+$(function (){
+
+    $.get("http://123.57.14.126/weixin/getJsConfig",function(json){
+        alert(json);
+        console.log(json);
+    });
+
     var user = AV.User;
     var post = AV.Object.extend("post");
     var tags = AV.Object.extend("tags");
@@ -54,34 +60,37 @@ $(function () {
             $("#my-alert").modal();
         } else {
             //alert('准备上传');
-            alert(newtag);
             savecontent()
         }
     });
-
-
     $("#addimg").hide();
-    $("#dophoto").on("click", function () {
-        $("#addimg").hide();
-    });
-    $("#photolibrary").on("click", function () {
-        $("#addimg").show();
-    });
-    $("#escphoto").on("click", function () {
-        $("#addimg").hide();
-    });
+    //$("#addimg").hide();
+    //$("#dophoto").on("click", function () {
+    //    $("#addimg").hide();
+    //});
+    //$("#photolibrary").on("click", function () {
+    //    $("#addimg").show();
+    //});
+    //$("#escphoto").on("click", function () {
+    //
+    //});$("#addimg").hide();
 
 
     //var postc = AV.post.current();
     var postc = new post();
     var relation = postc.relation("imgs");
-    var imgnavidx = 1;
-    $("#addimg").on("click", function () {
-        var file = AV.File.withURL('mm3.jpg', 'imgs/mm3.jpg');
-        file.save().then(function () {
-            //var postc = new post();
-            //var relation = postc.relation("imgs");
-            relation.add(file);
+    $("#photolibrary").on("click", function () {
+        var ofileid = "";
+        var file = AV.File.withURL('img11.jpg', 'imgs/mm3.jpg');
+        file.save({
+            success: function (ofile) {
+                ofileid = ofile.id;
+                console.log(ofileid);
+            }
+        }).then(function () {
+            var postc = new post();
+            var relation = postc.relation("imgs");
+            //relation.add(file);
             // postc.save();
 
             // var postc = new post();
@@ -91,16 +100,47 @@ $(function () {
             //         alert("发表成功");
             //     }
             // });
+            $("<div class=\"imgnav imgnav-" + ofileid + " \" ><a href=\"#\" value=\"" + ofileid + "\" class=\"am-close\">&times;</a><img src=\"imgs/mm1.jpg\" alt=\"#\"/></div>").prependTo("#imgwall");
+            $("#addimg").show();
+            var aimgnav = $(".am-close");
+            for (var i = 0; i < aimgnav.length; i++) {
+                aimgnav[i].onclick = function () {
+                    var remobeidx = $(this).attr('value');
+                    console.log(remobeidx);
+                    var query = new AV.Query('_File');
+                    query.get(remobeidx, {
+                        success: function (ofile) {
+                            // The object was retrieved successfully.
+                            console.log("ofile.id:" + ofile.id);
+                            //ofile.remove(ofile);
+                            ofile.destroy().then(function () {
+                                //删除成功
+                                console.log('删除成功');
+                            }, function (error) {
+                                //删除失败
+                                console.dir(error);
+                            });
+                        },
+                        error: function (object, error) {
+                            // The object was not retrieved successfully.
+                            // error is a AV.Error with an error code and description.
+                        }
+                    });
+                    //file.equalTo("objectId", "" + remobeidx + "");
+                    //file.find({
+                    //    success: function (ofile) {
+                    //
+                    //    }
+                    //});
+                    $(".imgnav-" + remobeidx + "").remove();
+                    var aimgshow = $(".imgnav");
+                    if (aimgshow.length == 0) {
+                        $("#addimg").hide();
+                    }
+                };
+            }
         });
 
-        $("<div class=\"imgnav imgnav-"+imgnavidx+" \" ><a href=\"#\" value=\""+imgnavidx+"\" class=\"am-close\">&times;</a><img src=\"imgs/mm1.jpg\" alt=\"#\"/></div>").prependTo("#imgwall");
-        var aimgnav=$(".am-close");
-        for(var i=0; i<aimgnav.length;i++){
-            aimgnav[i].onclick= function () {
-                $(".imgnav-" +($(this).attr('value'))+ "") .remove();
-            };
-        }
-        imgnavidx = imgnavidx + 1;
     });
 
 
@@ -133,37 +173,37 @@ $(function () {
                 savetags = "5518eafbe4b04d688d6b2f83";
                 break;
             case 3:
-                savetags = "5518eb06e4b04d688d6b2fc3";
+                savetags = "551b72c8e4b04d688d7fa777";
                 break;
             case 4:
-                savetags = "5518ec8de4b04d688d6b3a7d";
+                savetags = "551b72fbe4b04d688d7fa931";
                 break;
             case 5:
-                savetags = "5518ecabe4b04d688d6b3b1a";
+                savetags = "551b731ce4b04d688d7faa4b";
                 break;
             case 6:
-                savetags = "5518ecbfe4b04d688d6b3b91";
+                savetags = "551b7329e4b04d688d7faac3";
                 break;
             case 7:
-                savetags = "5518ecdfe4b04d688d6b3c5c";
+                savetags = "551b73b5e4b04d688d7faf39";
                 break;
             case 8:
-                savetags = "5518ecebe4b04d688d6b3c95";
+                savetags = "551b73c9e4b04d688d7fafda";
                 break;
             case 8:
-                savetags = "5518ecf2e4b04d688d6b3cb6"
+                savetags = "551b73d3e4b04d688d7fb038"
                 break;
         }
         // ………………此处有疑问……………
         //var query = new AV.Query("tags");
-        //query.equalTo("tagKey", newtag);
+        //query.equalTo("tagKey", ""+newtag+"");
         //query.find({
         //    success: function (results) {
-        //        alert(results);
+        //        alert("haha");
         //        console.log(results);
         //        //var saveTag = results.get("tagKey");
-        //        var tagKey = results.get("tagKey");
-        //        console.log(tagKey);
+        //        //var tagKey = results.get("tagKey");
+        //       // console.log(tagKey);
         //    }
         //});
         // ………………此处有疑问……………
@@ -173,14 +213,13 @@ $(function () {
         postc.save({
             content: aUserval2,
             tagkey: tag,
-            imas: relation
+            imgs: relation
         }, {
             success: function (object) {
                 alert("发表成功");
+               // console.log(relation);
             }
         });
-        console.log(relation);
-        //postc.save();
     }
 
 
