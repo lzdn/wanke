@@ -109,6 +109,7 @@ $(function () {
                 };
                 wx.chooseImage({
                     success: function (res) {
+                        alert("wxhaha");
                         images.localId = res.localIds;
                         alert('已选择 ' + res.localIds.length + ' 张图片');
                     }
