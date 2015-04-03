@@ -67,6 +67,13 @@ $(function () {
     var postc = new post();
     var relation = postc.relation("imgs");
 
+    wx.ready(function () {
+        var images = {
+            localId: [],
+            serverId: [],
+            downloadId: []
+        };
+
     $("#photolibrary").on("click", function () {
         //var localIds = "";
         //var ofileid = "";
