@@ -185,9 +185,11 @@ $(function () {
     function wximages(saveimgs) {
         wx.chooseImage({
             success: function (res) {
-                alert("wxhaha");
+                console.log(res);
                 localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                 console.log(localIds);
+            },fail:function(){
+                alert("sb");
             }
         });
         //saveimgs();
