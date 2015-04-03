@@ -2,7 +2,38 @@
  * Created by amberglasses on 15/3/24.
  */
 $(function () {
+    var Id = ""
+    var jslist = ""
+    var noncestr = ""
+    var signature = ""
+    var timestamp = ""
+    $(function () {
+        $.get("http://123.57.14.126/weixin/getJsConfig", function (json) {
+            alert(json);
+            console.log(json);
+            Id = json.appId;
+            jslist = json.jsApiList;
+            noncestr = json.nonceStr;
+            signature = json.signature;
+            timestamp = json.timestamp;
+        });
+        alert(Id);
+        alert(jslist);
+        alert(noncestr);
+        alert(signature);
+        alert(timestamp);
 
+
+        wx.config({
+            debug: true,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: Id, // 必填，公众号的唯一标识
+            timestamp: timestamp, // 必填，生成签名的时间戳
+            nonceStr: noncestr, // 必填，生成签名的随机串
+            signature: signature,// 必填，签名，见附录1
+            jsApiList: jslist // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+    });
+//………………………………以上调用微信接口………………………………
     var user = AV.User;
     var post = AV.Object.extend("post");
     var tags = AV.Object.extend("tags");
