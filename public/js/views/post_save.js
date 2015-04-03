@@ -70,46 +70,46 @@ $(function () {
     $("#photolibrary").on("click", function () {
         var localIds = "";
         var ofileid = "";
-        dataLoad(wximages(
-            function () {
-                var file = AV.File.withURL('img11.jpg', localIds);
-                file.save({
-                    success: function (ofile) {
-                        ofileid = ofile.id;
-                        console.log(ofileid);
-                    }
-                }).then(function () {
-                    var postc = new post();
-                    var relation = postc.relation("imgs");
-                    $("<div class=\"imgnav imgnav-" + ofileid + " \" ><a href=\"#\" value=\"" + ofileid + "\" class=\"am-close\">&times;</a><img src=localIds alt=\"#\"/></div>").prependTo("#imgwall");
-                    $("#addimg").show();
-                    var aimgnav = $(".am-close");
-                    for (var i = 0; i < aimgnav.length; i++) {
-                        aimgnav[i].onclick = function () {
-                            var remobeidx = $(this).attr('value');
-                            console.log(remobeidx);
-                            var query = new AV.Query('_File');
-                            query.get(remobeidx, {
-                                success: function (ofile) {
-                                    // The object was retrieved successfully.
-                                    console.log("ofile.id:" + ofile.id);
-                                    //ofile.remove(ofile);
-                                    ofile.destroy().then(function () {
-                                        //删除成功
-                                        console.log('删除成功');
-                                    });
-                                }
-                            });
-                            $(".imgnav-" + remobeidx + "").remove();
-                            var aimgshow = $(".imgnav");
-                            if (aimgshow.length == 0) {
-                                $("#addimg").hide();
+        wximages();
+
+
+            var file = AV.File.withURL('img11.jpg', localIds);
+            file.save({
+                success: function (ofile) {
+                    ofileid = ofile.id;
+                    console.log(ofileid);
+                }
+            }).then(function () {
+                var postc = new post();
+                var relation = postc.relation("imgs");
+                $("<div class=\"imgnav imgnav-" + ofileid + " \" ><a href=\"#\" value=\"" + ofileid + "\" class=\"am-close\">&times;</a><img src=localIds alt=\"#\"/></div>").prependTo("#imgwall");
+                $("#addimg").show();
+                var aimgnav = $(".am-close");
+                for (var i = 0; i < aimgnav.length; i++) {
+                    aimgnav[i].onclick = function () {
+                        var remobeidx = $(this).attr('value');
+                        console.log(remobeidx);
+                        var query = new AV.Query('_File');
+                        query.get(remobeidx, {
+                            success: function (ofile) {
+                                // The object was retrieved successfully.
+                                console.log("ofile.id:" + ofile.id);
+                                //ofile.remove(ofile);
+                                ofile.destroy().then(function () {
+                                    //删除成功
+                                    console.log('删除成功');
+                                });
                             }
-                        };
-                    }
-                });
-            }
-        ));
+                        });
+                        $(".imgnav-" + remobeidx + "").remove();
+                        var aimgshow = $(".imgnav");
+                        if (aimgshow.length == 0) {
+                            $("#addimg").hide();
+                        }
+                    };
+                }
+            });
+
     });
 
     //…………………………保存心情 和 tagkey………………………………
@@ -133,7 +133,7 @@ $(function () {
 //………………………………储备函数…………………………………………
     function dataLoad(callbak) {
         var appId, jslist, noncestr, signature, timestamp;
-        $.get("http://123.57.14.126/weixin/getJsConfig", function (result) {
+        $.get(config/server, function (result) {
             alert(result);
             console.log(result);
             appId = result.appId;
