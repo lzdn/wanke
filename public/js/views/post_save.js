@@ -158,11 +158,11 @@ $(function () {
         var appId, jslist, noncestr, signature, timestamp;
         $.get("http://123.57.14.126/weixin/getJsConfig", function (result) {
             alert(result);
-            appId = result.appId;
-            jslist = result.jsApiList;
-            noncestr = result.nonceStr;
-            signature = result.signature;
-            timestamp = result.timestamp;
+            appId = result.appId+"";
+            jslist = result.jsApiList+"";
+            noncestr = result.nonceStr+"";
+            signature = result.signature+"";
+            timestamp = result.timestamp+"";
             console.log(appId);
             console.log(jslist);
             console.log(noncestr);
