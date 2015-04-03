@@ -74,6 +74,8 @@ $(function () {
 
         wx.chooseImage({
             success: function (res) {
+                alert(res);
+                console.log(res);
                 images.localId = res.localIds;
                 $.each(res.localIds, function (i, n) {
                     $("#imgwall").append('<img src=" ' + n + '" /> <br />');
