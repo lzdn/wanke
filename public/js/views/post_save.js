@@ -9,15 +9,19 @@ $(function () {
     var newtag = 1;
     dataLoad(function () {
         var aNav = document.getElementsByClassName("am-btn-extend");
+        console.log(aNav);
+        alert(aNav.length);
         aNav[0].className = "am-btn-extend am-btn am-btn-primary am-round";
         for (var i = 0; i < aNav.length; i++) {
-            aNav[i].index = i + 1;
+            console.log(aNav[i]);
+            aNav[i].index = i +1;
             aNav[i].onclick = function () {
                 for (var j = 0; j < aNav.length; j++) {
                     aNav[j].className = "am-btn-extend am-btn am-btn-link am-round";
                 }
                 this.className = "am-btn-extend am-btn am-btn-primary am-round";
-                newtag = this.index;
+                newtag = this.val();
+                alert(newtag);
             }
         }
     });
@@ -64,7 +68,7 @@ $(function () {
     var relation = postc.relation("imgs");
 
     $("#photolibrary").on("click", function () {
-        var localIds = ""
+        var localIds = "";
         var ofileid = "";
         dataLoad(wximages(
             function () {
@@ -165,7 +169,6 @@ $(function () {
                 var tags = [];
                 for (var i = 0; i < results.length; i++) {
                     var object = results[i];
-                    console.log(object.id);
                     var tagid=object.id;
                     var tagvalue = object.get('tagtitle');
                     var tag = {
@@ -189,6 +192,7 @@ $(function () {
     function wximages(saveimgs) {
         wx.chooseImage({
             success: function (res) {
+                alert("wxhaha");
                 localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                 console.log(localIds);
             }
