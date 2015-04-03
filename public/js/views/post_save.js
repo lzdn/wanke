@@ -62,6 +62,7 @@ $(function () {
             savecontent()
         }
     });
+
     $("#addimg").hide();
     //var postc = AV.post.current();
     var postc = new post();
@@ -189,7 +190,7 @@ $(function () {
                 console.log(localIds);
             }
         });
-        saveimgs();
+        //saveimgs();
     }
 });
 
