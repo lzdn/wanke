@@ -80,17 +80,20 @@ $(function () {
                     'previewImage'
                 ],
                 success: function (res) {
+                    alert("haha");
                     alert(JSON.stringify(res));
                 }
             });
 
             setTimeout(function(){
+                alert("kaishi");
                 var images = {
                     localId: [],
                     serverId: []
                 };
                 wx.chooseImage({
                     success: function (res) {
+                        alert("wxwxwx");
                         images.localId = res.localIds;
                         alert('已选择 ' + res.localIds.length + ' 张图片');
                     }
