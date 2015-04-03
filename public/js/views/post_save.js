@@ -92,6 +92,16 @@ $(function () {
                 signature: signature,// 必填，签名，见附录1
                 jsApiList:jslist // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
             });
+            wx.checkJsApi({
+                jsApiList: [
+                    'getNetworkType',
+                    'previewImage'
+                ],
+                success: function (res) {
+                    alert(JSON.stringify(res));
+                }
+            });
+
             setTimeout(function(){
                 var images = {
                     localId: [],
@@ -103,7 +113,7 @@ $(function () {
                         alert('已选择 ' + res.localIds.length + ' 张图片');
                     }
                 });
-            },200)
+            },200);
 
 
         });
