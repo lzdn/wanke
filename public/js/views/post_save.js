@@ -80,20 +80,20 @@ $(function () {
                     'previewImage'
                 ],
                 success: function (res) {
-                    alert("haha");
-                    alert(JSON.stringify(res));
+                   // alert("haha");
+                   // alert(JSON.stringify(res));
                 }
             });
 
             setTimeout(function(){
-                alert("kaishi");
+               // alert("kaishi");
                 var images = {
                     localId: [],
                     serverId: []
                 };
                 wx.chooseImage({
                     success: function (res) {
-                        alert("wxwxwx");
+                        //alert("wxwxwx");
                         images.localId = res.localIds;
                         alert('已选择 ' + res.localIds.length + ' 张图片');
                     }
@@ -173,7 +173,6 @@ $(function () {
     function dataLoad(callbak) {
         var appId, jslist, noncestr, signature, timestamp;
         $.get("http://123.57.14.126/weixin/getJsConfig", function (result) {
-            alert(result);
             appId = result.appId;
             jslist = result.jsApiList;
             noncestr = result.nonceStr;
