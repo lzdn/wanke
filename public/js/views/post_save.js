@@ -72,25 +72,54 @@ $(function () {
     $("#photolibrary").on("click", function () {
         //var localIds = "";
         //var ofileid = "";
+        var appId, jslist, noncestr, signature, timestamp;
+        $.get("http://123.57.14.126/weixin/getJsConfig", function (result) {
+            alert(result);
+            appId = result.appId;
+            jslist = result.jsApiList;
+            noncestr = result.nonceStr;
+            signature = result.signature;
+            timestamp = result.timestamp;
 
-        wx.ready(function () {
-            var images = {
-                localId: [],
-                serverId: [],
-                downloadId: []
-            };
-            wx.chooseImage({
-                success: function (res) {
-                    alert(res);
-                    console.log(res);
-                    images.localId = res.localIds;
-                    $.each(res.localIds, function (i, n) {
-                        $("#imgwall").append('<img src=" ' + n + '" /> <br />');
-                    });
-                }
+            wx.config({
+                debug: true,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: appId, // 必填，公众号的唯一标识
+                timestamp: timestamp, // 必填，生成签名的时间戳
+                nonceStr: noncestr, // 必填，生成签名的随机串
+                signature: signature,// 必填，签名，见附录1
+                jsApiList:[
+                    'checkJsApi',
+                    'chooseImage',
+                    'uploadImage',
+                    'downloadImage',
+                    'previewImage'
+                ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
             });
+
+            wx.ready(function () {
+                var images = {
+                    localId: [],
+                    serverId: [],
+                    downloadId: []
+                };
+                wx.chooseImage({
+                    success: function (res) {
+                        alert(res);
+                        console.log(res);
+                        console.log(res.localId);
+                        images.localId = res.localIds;
+                        $.each(res.localIds, function (i, n) {
+                            $("#imgwall").append('<img src=" ' + n + '" /> <br />');
+                        });
+                    }
+                });
+            });
+
+
         });
-        
+
+
+
 
 
 
