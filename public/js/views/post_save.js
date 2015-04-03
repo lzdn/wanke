@@ -2,15 +2,6 @@
  * Created by amberglasses on 15/3/24.
  */
 $(function () {
-    $.get("http://123.57.14.126/weixin/getJsConfig", function (json) {
-        alert(json);
-        console.log(json);
-        Id =json.appId;
-        jslist =json.jsApiList;
-        noncestr =json.nonceStr;
-        signature =json.signature;
-        timestamp =json.timestamp;
-    });
 
     var user = AV.User;
     var post = AV.Object.extend("post");
