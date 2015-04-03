@@ -17,8 +17,12 @@ router.get('/', function (req, res, next) {
 router.get('/getJsConfig', function (req, res) {
     console.log(config);
     var param = {
-        debug: false,
-        jsApiList: ['chooseImage', 'previewImage'],
+        debug: true,
+        jsApiList: ['checkJsApi',
+            'chooseImage',
+            'uploadImage',
+            'downloadImage',
+            'previewImage'],
         url: config.authUrl + "/post_save.html"
     };
     console.log(param);
