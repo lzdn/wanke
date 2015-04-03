@@ -65,6 +65,7 @@ $(function () {
     var relation = postc.relation("imgs");
 
     $("#photolibrary").on("click", function () {
+        var localIds=""
         var ofileid = "";
         wximages(function () {
             var file = AV.File.withURL('img11.jpg', localIds);
@@ -169,7 +170,7 @@ $(function () {
     function wximages(saveimgs) {
         wx.chooseImage({
             success: function (res) {
-                var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                 console.log(localIds);
             }
         });
