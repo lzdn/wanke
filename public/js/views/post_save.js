@@ -67,27 +67,33 @@ $(function () {
     var postc = new post();
     var relation = postc.relation("imgs");
 
-    wx.ready(function () {
-        var images = {
-            localId: [],
-            serverId: [],
-            downloadId: []
-        };
+
 
     $("#photolibrary").on("click", function () {
         //var localIds = "";
         //var ofileid = "";
 
-        wx.chooseImage({
-            success: function (res) {
-                alert(res);
-                console.log(res);
-                images.localId = res.localIds;
-                $.each(res.localIds, function (i, n) {
-                    $("#imgwall").append('<img src=" ' + n + '" /> <br />');
-                });
-            }
+        wx.ready(function () {
+            var images = {
+                localId: [],
+                serverId: [],
+                downloadId: []
+            };
+            wx.chooseImage({
+                success: function (res) {
+                    alert(res);
+                    console.log(res);
+                    images.localId = res.localIds;
+                    $.each(res.localIds, function (i, n) {
+                        $("#imgwall").append('<img src=" ' + n + '" /> <br />');
+                    });
+                }
+            });
         });
+        
+
+
+
 
 
         //var file = AV.File.withURL('img11.jpg', localIds);
