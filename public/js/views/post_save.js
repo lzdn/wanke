@@ -9,7 +9,7 @@ $(function () {
     var newtag = 1;
     dataLoad(function () {
         var aNav = document.getElementsByClassName("am-btn-extend");
-        setTimeout(function(){
+        setTimeout(function () {
             aNav[0].className = "am-btn-extend am-btn am-btn-primary am-round";
             for (var i = 0; i < aNav.length; i++) {
                 console.log(aNav[i]);
@@ -22,7 +22,7 @@ $(function () {
                     alert(newtag);
                 }
             }
-        },100);
+        }, 100);
 
     });
     $("#usr-sbm-sub").css({color: "rgba(68,68,68,3)"});
@@ -69,65 +69,73 @@ $(function () {
     var relation = postc.relation("imgs");
 
     $("#photolibrary").on("click", function () {
-        var localIds = "";
-        var ofileid = "";
-        wximages();
+        //var localIds = "";
+        //var ofileid = "";
+
+        wx.chooseImage({
+            success: function (res) {
+                images.localId = res.localIds;
+                $.each(res.localIds, function (i, n) {
+                    $("#imgwall").append('<img src=" ' + n + '" /> <br />');
+                });
+            }
+        });
 
 
-            var file = AV.File.withURL('img11.jpg', localIds);
-            file.save({
-                success: function (ofile) {
-                    ofileid = ofile.id;
-                    console.log(ofileid);
-                }
-            }).then(function () {
-                var postc = new post();
-                var relation = postc.relation("imgs");
-                $("<div class=\"imgnav imgnav-" + ofileid + " \" ><a href=\"#\" value=\"" + ofileid + "\" class=\"am-close\">&times;</a><img src=localIds alt=\"#\"/></div>").prependTo("#imgwall");
-                $("#addimg").show();
-                var aimgnav = $(".am-close");
-                for (var i = 0; i < aimgnav.length; i++) {
-                    aimgnav[i].onclick = function () {
-                        var remobeidx = $(this).attr('value');
-                        console.log(remobeidx);
-                        var query = new AV.Query('_File');
-                        query.get(remobeidx, {
-                            success: function (ofile) {
-                                // The object was retrieved successfully.
-                                console.log("ofile.id:" + ofile.id);
-                                //ofile.remove(ofile);
-                                ofile.destroy().then(function () {
-                                    //删除成功
-                                    console.log('删除成功');
-                                });
-                            }
-                        });
-                        $(".imgnav-" + remobeidx + "").remove();
-                        var aimgshow = $(".imgnav");
-                        if (aimgshow.length == 0) {
-                            $("#addimg").hide();
-                        }
-                    };
-                }
-            });
+        //var file = AV.File.withURL('img11.jpg', localIds);
+        //file.save({
+        //    success: function (ofile) {
+        //        ofileid = ofile.id;
+        //        console.log(ofileid);
+        //    }
+        //}).then(function () {
+        //    var postc = new post();
+        //    var relation = postc.relation("imgs");
+        //    $("<div class=\"imgnav imgnav-" + ofileid + " \" ><a href=\"#\" value=\"" + ofileid + "\" class=\"am-close\">&times;</a><img src=localIds alt=\"#\"/></div>").prependTo("#imgwall");
+        //    $("#addimg").show();
+        //    var aimgnav = $(".am-close");
+        //    for (var i = 0; i < aimgnav.length; i++) {
+        //        aimgnav[i].onclick = function () {
+        //            var remobeidx = $(this).attr('value');
+        //            console.log(remobeidx);
+        //            var query = new AV.Query('_File');
+        //            query.get(remobeidx, {
+        //                success: function (ofile) {
+        //                    // The object was retrieved successfully.
+        //                    console.log("ofile.id:" + ofile.id);
+        //                    //ofile.remove(ofile);
+        //                    ofile.destroy().then(function () {
+        //                        //删除成功
+        //                        console.log('删除成功');
+        //                    });
+        //                }
+        //            });
+        //            $(".imgnav-" + remobeidx + "").remove();
+        //            var aimgshow = $(".imgnav");
+        //            if (aimgshow.length == 0) {
+        //                $("#addimg").hide();
+        //            }
+        //        };
+        //    }
+        //});
 
     });
 
     //…………………………保存心情 和 tagkey………………………………
     function savecontent() {
         var aUserval2 = $("#doc-ta-1").val();
-                var tag = new tags();
-                tag.id = newtag;
-                var postc = new post();
-                postc.save({
-                    content: aUserval2,
-                    tagkey: tag,
-                    imgs: relation
-                }, {
-                    success: function (object) {
-                        alert("发表成功");
-                    }
-                });
+        var tag = new tags();
+        tag.id = newtag;
+        var postc = new post();
+        postc.save({
+            content: aUserval2,
+            tagkey: tag,
+            imgs: relation
+        }, {
+            success: function (object) {
+                alert("发表成功");
+            }
+        });
 
     }
 
@@ -182,18 +190,18 @@ $(function () {
         callbak();
     }
 
-    function wximages(saveimgs) {
-        wx.chooseImage({
-            success: function (res) {
-                console.log(res);
-                localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                console.log(localIds);
-            },fail:function(){
-                alert("sb");
-            }
-        });
-        //saveimgs();
-    }
+    //function wximages(saveimgs) {
+    //    wx.chooseImage({
+    //        success: function (res) {
+    //            console.log(res);
+    //            localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+    //            console.log(localIds);
+    //        },fail:function(){
+    //            alert("sb");
+    //        }
+    //    });
+    //    saveimgs();
+    //}
 });
 
 
