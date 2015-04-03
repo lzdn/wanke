@@ -90,32 +90,22 @@ $(function () {
                 timestamp: timestamp, // 必填，生成签名的时间戳
                 nonceStr: noncestr, // 必填，生成签名的随机串
                 signature: signature,// 必填，签名，见附录1
-                jsApiList:[
-                    'checkJsApi',
-                    'chooseImage',
-                    'uploadImage',
-                    'downloadImage',
-                    'previewImage'
-                ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                jsApiList:jslist // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
             });
-
-            wx.ready(function () {
+            setTimeout(function(){
                 var images = {
                     localId: [],
-                    serverId: [],
-                    downloadId: []
+                    serverId: []
                 };
                 wx.chooseImage({
                     success: function (res) {
-                        alert(res);
-                        console.log(res.localId);
                         images.localId = res.localIds;
-                        $.each(res.localIds, function (i, n) {
-                            $("#imgwall").append('<img src=" ' + n + '" /> <br />');
-                        });
+                        alert('已选择 ' + res.localIds.length + ' 张图片');
                     }
                 });
-            });
+            },200)
+
+
         });
 
 
