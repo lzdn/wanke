@@ -74,7 +74,6 @@ $(function () {
         //var ofileid = "";
         var appId, jslist, noncestr, signature, timestamp;
         $.get("http://123.57.14.126/weixin/getJsConfig", function (result) {
-            alert(result);
             appId = result.appId;
             jslist = result.jsApiList;
             noncestr = result.nonceStr;
@@ -99,27 +98,29 @@ $(function () {
                     'previewImage'
                 ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
             });
-        });
 
-
-
-        wx.ready(function () {
-            var images = {
-                localId: [],
-                serverId: [],
-                downloadId: []
-            };
-            wx.chooseImage({
-                success: function (res) {
-                    alert(res);
-                    console.log(res.localId);
-                    images.localId = res.localIds;
-                    $.each(res.localIds, function (i, n) {
-                        $("#imgwall").append('<img src=" ' + n + '" /> <br />');
-                    });
-                }
+            wx.ready(function () {
+                var images = {
+                    localId: [],
+                    serverId: [],
+                    downloadId: []
+                };
+                wx.chooseImage({
+                    success: function (res) {
+                        alert(res);
+                        console.log(res.localId);
+                        images.localId = res.localIds;
+                        $.each(res.localIds, function (i, n) {
+                            $("#imgwall").append('<img src=" ' + n + '" /> <br />');
+                        });
+                    }
+                });
             });
         });
+
+
+
+
 
 
 
