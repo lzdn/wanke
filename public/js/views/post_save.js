@@ -2,41 +2,10 @@
  * Created by amberglasses on 15/3/24.
  */
 $(function () {
-    var Id = ""
-    var jslist = ""
-    var noncestr = ""
-    var signature = ""
-    var timestamp = ""
-    $(function () {
-        $.get("http://123.57.14.126/weixin/getJsConfig", function (json) {
-            alert(json);
-            console.log(json);
-            Id = json.appId;
-            jslist = json.jsApiList;
-            noncestr = json.nonceStr;
-            signature = json.signature;
-            timestamp = json.timestamp;
-        });
-        alert(Id);
-        alert(jslist);
-        alert(noncestr);
-        alert(signature);
-        alert(timestamp);
-
-
-        wx.config({
-            debug: true,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-            appId: Id, // 必填，公众号的唯一标识
-            timestamp: timestamp, // 必填，生成签名的时间戳
-            nonceStr: noncestr, // 必填，生成签名的随机串
-            signature: signature,// 必填，签名，见附录1
-            jsApiList: jslist // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-        });
-    });
 //………………………………以上调用微信接口………………………………
     var user = AV.User;
-    var post = AV.Object.extend("post");
-    var tags = AV.Object.extend("tags");
+    var post = AV.Object.extend("posts");
+    var tags = AV.Object.extend("tag");
     var newtag = 1;
     dataLoad(function () {
         var aNav = document.getElementsByClassName("am-btn-extend");
@@ -95,50 +64,49 @@ $(function () {
     var relation = postc.relation("imgs");
 
     $("#photolibrary").on("click", function () {
-        var localIds=""
+        var localIds = ""
         var ofileid = "";
-        wximages(function () {
-            var file = AV.File.withURL('img11.jpg', localIds);
-            file.save({
-                success: function (ofile) {
-                    ofileid = ofile.id;
-                    console.log(ofileid);
-                }
-            }).then(function () {
-                var postc = new post();
-                var relation = postc.relation("imgs");
-                $("<div class=\"imgnav imgnav-" + ofileid + " \" ><a href=\"#\" value=\"" + ofileid + "\" class=\"am-close\">&times;</a><img src=localIds alt=\"#\"/></div>").prependTo("#imgwall");
-                $("#addimg").show();
-                var aimgnav = $(".am-close");
-                for (var i = 0; i < aimgnav.length; i++) {
-                    aimgnav[i].onclick = function () {
-                        var remobeidx = $(this).attr('value');
-                        console.log(remobeidx);
-                        var query = new AV.Query('_File');
-                        query.get(remobeidx, {
-                            success: function (ofile) {
-                                // The object was retrieved successfully.
-                                console.log("ofile.id:" + ofile.id);
-                                //ofile.remove(ofile);
-                                ofile.destroy().then(function () {
-                                    //删除成功
-                                    console.log('删除成功');
-                                });
+        dataLoad(wximages(
+            function () {
+                var file = AV.File.withURL('img11.jpg', localIds);
+                file.save({
+                    success: function (ofile) {
+                        ofileid = ofile.id;
+                        console.log(ofileid);
+                    }
+                }).then(function () {
+                    var postc = new post();
+                    var relation = postc.relation("imgs");
+                    $("<div class=\"imgnav imgnav-" + ofileid + " \" ><a href=\"#\" value=\"" + ofileid + "\" class=\"am-close\">&times;</a><img src=localIds alt=\"#\"/></div>").prependTo("#imgwall");
+                    $("#addimg").show();
+                    var aimgnav = $(".am-close");
+                    for (var i = 0; i < aimgnav.length; i++) {
+                        aimgnav[i].onclick = function () {
+                            var remobeidx = $(this).attr('value');
+                            console.log(remobeidx);
+                            var query = new AV.Query('_File');
+                            query.get(remobeidx, {
+                                success: function (ofile) {
+                                    // The object was retrieved successfully.
+                                    console.log("ofile.id:" + ofile.id);
+                                    //ofile.remove(ofile);
+                                    ofile.destroy().then(function () {
+                                        //删除成功
+                                        console.log('删除成功');
+                                    });
+                                }
+                            });
+                            $(".imgnav-" + remobeidx + "").remove();
+                            var aimgshow = $(".imgnav");
+                            if (aimgshow.length == 0) {
+                                $("#addimg").hide();
                             }
-                        });
-                        $(".imgnav-" + remobeidx + "").remove();
-                        var aimgshow = $(".imgnav");
-                        if (aimgshow.length == 0) {
-                            $("#addimg").hide();
-                        }
-                    };
-                }
-            });
-        });
-
-
+                        };
+                    }
+                });
+            }
+        ));
     });
-
 
     //…………………………保存心情 和 tagkey………………………………
     function savecontent() {
@@ -149,7 +117,6 @@ $(function () {
         query.find({
             success: function (results) {
                 savetags = results[0].id;
-                console.log(savetags);
                 var tag = new tags();
                 tag.id = savetags;
                 var postc = new post();
@@ -168,20 +135,41 @@ $(function () {
 
 //………………………………储备函数…………………………………………
     function dataLoad(callbak) {
+        var appId, jslist, noncestr, signature, timestamp;
+        $.get("http://123.57.14.126/weixin/getJsConfig", function (result) {
+            alert(result);
+            console.log(result);
+            appId = result.appId;
+            jslist = result.jsApiList;
+            noncestr = result.nonceStr;
+            signature = result.signature;
+            timestamp = result.timestamp;
+
+            wx.config({
+                debug: true,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: appId, // 必填，公众号的唯一标识
+                timestamp: timestamp, // 必填，生成签名的时间戳
+                nonceStr: noncestr, // 必填，生成签名的随机串
+                signature: signature,// 必填，签名，见附录1
+                jsApiList: jslist // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            });
+
+        });
+
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
         var post = AV.Object.extend("post");
-
-        var tags = AV.Object.extend("tags");
-        var query = new AV.Query(tags);
+        var tag = AV.Object.extend("tag");
+        var query = new AV.Query(tag);
         query.find({
             success: function (results) {
                 var tags = [];
                 for (var i = 0; i < results.length; i++) {
                     var object = results[i];
-                    var tagkey = object.get('tagKey');
-                    var tagvalue = object.get('tagValue');
+                    console.log(object.id);
+                    var tagid=object.id;
+                    var tagvalue = object.get('tagtitle');
                     var tag = {
-                        key: tagkey,
+                        key: tagid,
                         value: tagvalue
                     };
                     tags.push(tag);
@@ -192,9 +180,10 @@ $(function () {
                 var data = {tags: tags};
                 var html = template(data);
                 $tpl.before(html);
-                callbak();
             }
-        });
+         });
+
+        callbak();
     }
 
     function wximages(saveimgs) {
@@ -206,10 +195,6 @@ $(function () {
         });
         saveimgs();
     }
-
-
-
-
 });
 
 
