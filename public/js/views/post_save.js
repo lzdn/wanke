@@ -9,21 +9,21 @@ $(function () {
     var newtag = 1;
     dataLoad(function () {
         var aNav = document.getElementsByClassName("am-btn-extend");
-        console.log(aNav);
-        alert(aNav.length);
-        aNav[0].className = "am-btn-extend am-btn am-btn-primary am-round";
-        for (var i = 0; i < aNav.length; i++) {
-            console.log(aNav[i]);
-            aNav[i].index = i +1;
-            aNav[i].onclick = function () {
-                for (var j = 0; j < aNav.length; j++) {
-                    aNav[j].className = "am-btn-extend am-btn am-btn-link am-round";
+        setTimeout(function(){
+            aNav[0].className = "am-btn-extend am-btn am-btn-primary am-round";
+            for (var i = 0; i < aNav.length; i++) {
+                console.log(aNav[i]);
+                aNav[i].onclick = function () {
+                    for (var j = 0; j < aNav.length; j++) {
+                        aNav[j].className = "am-btn-extend am-btn am-btn-link am-round";
+                    }
+                    this.className = "am-btn-extend am-btn am-btn-primary am-round";
+                    newtag = $(this).attr('value');
+                    alert(newtag);
                 }
-                this.className = "am-btn-extend am-btn am-btn-primary am-round";
-                newtag = this.val();
-                alert(newtag);
             }
-        }
+        },100);
+
     });
     $("#usr-sbm-sub").css({color: "rgba(68,68,68,3)"});
     $("#doc-ta-1").keydown(function () {
@@ -115,14 +115,8 @@ $(function () {
     //…………………………保存心情 和 tagkey………………………………
     function savecontent() {
         var aUserval2 = $("#doc-ta-1").val();
-        var savetags = "";
-        var query = new AV.Query("tags");
-        query.equalTo("tagKey", newtag);
-        query.find({
-            success: function (results) {
-                savetags = results[0].id;
                 var tag = new tags();
-                tag.id = savetags;
+                tag.id = newtag;
                 var postc = new post();
                 postc.save({
                     content: aUserval2,
@@ -133,8 +127,7 @@ $(function () {
                         alert("发表成功");
                     }
                 });
-            }
-        });
+
     }
 
 //………………………………储备函数…………………………………………
@@ -157,7 +150,6 @@ $(function () {
                 signature: signature,// 必填，签名，见附录1
                 jsApiList: jslist // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
             });
-
         });
 
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
@@ -169,7 +161,7 @@ $(function () {
                 var tags = [];
                 for (var i = 0; i < results.length; i++) {
                     var object = results[i];
-                    var tagid=object.id;
+                    var tagid = object.id;
                     var tagvalue = object.get('tagtitle');
                     var tag = {
                         key: tagid,
@@ -184,7 +176,7 @@ $(function () {
                 var html = template(data);
                 $tpl.before(html);
             }
-         });
+        });
 
         callbak();
     }
