@@ -7,8 +7,8 @@ $(function () {
     var tags = AV.Object.extend("tag");
     var newtag = 1;
     dataLoad(function () {
-            var aNav = document.getElementsByClassName("am-btn-extend");
-        setTimeout(function(){
+        var aNav = document.getElementsByClassName("am-btn-extend");
+        setTimeout(function () {
             aNav[0].className = "am-btn-extend am-btn am-round am-btn-primary";
             for (var i = 0; i < aNav.length; i++) {
                 aNav[i].onclick = function () {
@@ -17,10 +17,10 @@ $(function () {
                         this.className = "am-btn-extend am-btn am-round am-btn-primary";
                     }
                     console.log(this);
-                    newtag=($(this).attr("value"));
+                    newtag = ($(this).attr("value"));
                 };
             }
-        },300);
+        }, 300);
     });
     $("#usr-sbm-sub").css({color: "rgba(68,68,68,3)"});
     $("#doc-ta-1").keydown(function () {
@@ -73,9 +73,9 @@ $(function () {
                 'previewImage'
             ],
             success: function (res) {
-               alert("haha");
-               console.log(JSON.stringify(res));
-                setTimeout(function(){
+                alert("haha");
+                console.log(JSON.stringify(res));
+                setTimeout(function () {
                     alert("kaishi");
                     var images = {
                         localId: [],
@@ -88,7 +88,7 @@ $(function () {
                             alert('已选择 ' + res.localIds.length + ' 张图片');
                         }
                     });
-                },200);
+                }, 200);
             }
         });
         //var file = AV.File.withURL('img11.jpg', localIds);
@@ -150,27 +150,7 @@ $(function () {
 
 //………………………………储备函数…………………………………………
     function dataLoad(callbak) {
-        var appId, jslist, noncestr, signature, timestamp;
-        $.get("http://123.57.14.126/weixin/getJsConfig", function (result) {
-            appId = result.appId;
-            jslist = result.jsApiList;
-            noncestr = result.nonceStr;
-            signature = result.signature;
-            timestamp = result.timestamp;
-            console.log(appId);
-            console.log(jslist);
-            console.log(noncestr);
-            console.log(signature);
-            console.log(timestamp);
-            wx.config({
-                debug: true,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                appId: appId, // 必填，公众号的唯一标识
-                timestamp: timestamp, // 必填，生成签名的时间戳
-                nonceStr: noncestr, // 必填，生成签名的随机串
-                signature: signature,// 必填，签名，见附录1
-                jsApiList:[ "chooseImage", "imagePreview"]// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-            });
-        });
+
 
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
         var tags = AV.Object.extend("tag");
