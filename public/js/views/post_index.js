@@ -1,5 +1,5 @@
 (function($) {
-
+    $("#arrow").hide();
     loading(function(){
         $(".viewmore").on("click",function(){
             var postview=$(this).attr("value");
@@ -8,7 +8,20 @@
 
     });
 
-
+    $(window).scroll(function(){
+        //下面这句主要是获取网页的总高度，主要是考虑兼容性所以把Ie支持的documentElement也写了，这个方法至少支持IE8
+        var htmlHeight=document.body.scrollHeight||document.documentElement.scrollHeight;
+        //clientHeight是网页在浏览器中的可视高度，
+        var clientHeight=document.body.clientHeight||document.documentElement.clientHeight;
+        //scrollTop是浏览器滚动条的top位置，
+        var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
+        //通过判断滚动条的top位置与可视网页之和与整个网页的高度是否相等来决定是否加载内容；
+        if(scrollTop>800){
+            $("#arrow").show();
+        }else{
+            $("#arrow").hide();
+        }
+    })
     function loading (callbak){
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
         //ject.createWithoutData('className',id);
