@@ -23,9 +23,9 @@ body{
 .am-icon-extend{
     color: #1E90FF;
 }
-.am-btn-extend{
-    background: none;
-}
+/*.am-icon-extend{*/
+
+/*}*/
 .am-input-exend{
     margin: 10px 0 10px 0;
 }
@@ -106,25 +106,27 @@ body{
     cursor:pointer;
 }
 #bottom{
+    height: 70px;
     border: 1px solid #ccc;
     background: #fff;
     position: fixed;
     left:0;
     top:100%;
-    margin-top: -49px;
+    margin-top: -70px;
 }
 #bottom i{
     color: #333333;
 }
 
 #foots{
+    background: #f9f9f9;
     width: 58px;
     height: 58px;
     border:1px solid #ccc;
     border-radius: 29px;
     position: fixed;
-    right:0px;
-    bottom:  50px;
+    right:11px;
+    bottom:  90px;
 }
 #foots i{
     font-size: 24px;
@@ -133,17 +135,30 @@ body{
     margin-left: 19px;
 }
 #arrow{
+    background: #f9f9f9;
     width: 58px;
     height: 58px;
     border:1px solid #ccc;
     border-radius: 29px;
     position: fixed;
-    right:0px;
-    bottom:120px;
+    right:11px;
+    bottom:160px;
 }
 #arrow i{
     font-size: 24px;
     text-align: center;
     line-height: 58px;
-    margin-left: 19px;
+    margin-left: 18px;
+    margin-top:-3px;
+}
+.am-header-left-extend i{
+    display: block;
+    margin-left:5px;
+    padding:0;
+}
+.am-header-left-extend span,.am-header-title-extend span,.am-header-right-extend span{
+    display:block;
+    margin-top:-20px;
+    color:#000;
+    font-size: 10px;
 }
