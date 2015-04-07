@@ -7,12 +7,7 @@ $(function () {
     var tags = AV.Object.extend("tag");
     var newtag = 1;
     dataLoad(function () {
-<<<<<<< HEAD
-            var aNav = document.getElementsByClassName("am-btn-extend");
-=======
         var aNav = document.getElementsByClassName("am-btn-extend");
-        setTimeout(function () {
->>>>>>> origin/master
             aNav[0].className = "am-btn-extend am-btn am-round am-btn-primary";
             for (var i = 0; i < aNav.length; i++) {
                 aNav[i].onclick = function () {
@@ -24,10 +19,6 @@ $(function () {
                     newtag = ($(this).attr("value"));
                 };
             }
-<<<<<<< HEAD
-=======
-        }, 300);
->>>>>>> origin/master
     });
     $("#usr-sbm-sub").css({color: "rgba(68,68,68,3)"});
     $("#doc-ta-1").keydown(function () {
@@ -67,77 +58,12 @@ $(function () {
         }
     });
     $("#addimg").hide();
-
-   // var posts = AV.post.current();
+    //var postc = AV.posts.current();
     var postc = new posts();
     var relation = postc.relation("imgs");
 
     $("#smimg").on("click", function () {
         var ofileid = "";
-<<<<<<< HEAD
-       // alert("调试");
-       // wx.checkJsApi({
-       //     jsApiList: [
-       //         'getNetworkType',
-       //         'previewImage'
-       //     ],
-       //     success: function (res) {
-       //        alert("haha");
-       //        console.log(JSON.stringify(res));
-       //         setTimeout(function(){
-       //             alert("kaishi");
-       //             var images = {
-       //                 localId: [],
-       //                 serverId: []
-       //             };
-       //             wx.chooseImage({
-       //                 success: function (res) {
-       //                     //alert("wxwxwx");
-       //                     images.localId = res.localIds;
-       //                     alert('已选择 ' + res.localIds.length + ' 张图片');
-       //                 }
-       //             });
-       //         },200);
-       //     }
-       // });
-        //var file = AV.File.withURL('img11.jpg', localIds);
-        //以下保存图片…………………………………………
-        var file = AV.File.withURL('img11.jpg','imgs/mm1.jpg');
-        file.save({
-            success: function (ofile) {
-                ofileid = ofile.id;
-                console.log(ofileid);
-                relation.add(ofile);
-            }
-        }).then(function () {
-            var postc = new posts();
-            var relation = postc.relation("imgs");
-            $("<div class=\"imgnav imgnav-" + ofileid + " \" ><a href=\"#\" value=\"" + ofileid + "\" class=\"am-close\">&times;</a><img src=\"imgs/mm1.jpg\" alt=\"#\"/></div>").prependTo("#imgwall");
-            $("#addimg").show();
-            var aimgnav = $(".am-close");
-            for (var i = 0; i < aimgnav.length; i++) {
-                aimgnav[i].onclick = function () {
-                    var remobeidx = $(this).attr('value');
-                    console.log(remobeidx);
-                    var query = new AV.Query('_File');
-                    query.get(remobeidx, {
-                        success: function (ofile) {
-                            // The object was retrieved successfully.
-                            console.log("ofile.id:" + ofile.id);
-                            //ofile.remove(ofile);
-                            ofile.destroy().then(function () {
-                                //删除成功
-                                relation.remove(ofile);
-                            });
-                        }
-                    });
-                    $(".imgnav-" + remobeidx + "").remove();
-                    var aimgshow = $(".imgnav");
-                    if (aimgshow.length == 0) {
-                        $("#addimg").hide();
-                    }
-                };
-=======
         alert("调试");
         wx.checkJsApi({
             jsApiList: [
@@ -161,9 +87,46 @@ $(function () {
                         }
                     });
                 }, 200);
->>>>>>> origin/master
             }
         });
+        //var file = AV.File.withURL('img11.jpg', localIds);
+        //以下保存图片…………………………………………
+        //var file = AV.File.withURL('img11.jpg','imgs/mm1.jpg');
+        //file.save({
+        //    success: function (ofile) {
+        //        ofileid = ofile.id;
+        //        console.log(ofileid);
+        //    }
+        //}).then(function () {
+        //    var postc = new posts();
+        //    var relation = postc.relation("imgs");
+        //    $("<div class=\"imgnav imgnav-" + ofileid + " \" ><a href=\"#\" value=\"" + ofileid + "\" class=\"am-close\">&times;</a><img src=\"imgs/mm1.jpg\" alt=\"#\"/></div>").prependTo("#imgwall");
+        //    $("#addimg").show();
+        //    var aimgnav = $(".am-close");
+        //    for (var i = 0; i < aimgnav.length; i++) {
+        //        aimgnav[i].onclick = function () {
+        //            var remobeidx = $(this).attr('value');
+        //            console.log(remobeidx);
+        //            var query = new AV.Query('_File');
+        //            query.get(remobeidx, {
+        //                success: function (ofile) {
+        //                    // The object was retrieved successfully.
+        //                    console.log("ofile.id:" + ofile.id);
+        //                    //ofile.remove(ofile);
+        //                    ofile.destroy().then(function () {
+        //                        //删除成功
+        //                        console.log('删除成功');
+        //                    });
+        //                }
+        //            });
+        //            $(".imgnav-" + remobeidx + "").remove();
+        //            var aimgshow = $(".imgnav");
+        //            if (aimgshow.length == 0) {
+        //                $("#addimg").hide();
+        //            }
+        //        };
+        //    }
+        //});
     });
 
     //…………………………保存心情 和 tagkey………………………………
@@ -213,7 +176,7 @@ $(function () {
             }
         });
         // alert("haha");
-        ;
+       ;
     }
 
     //function wximages(saveimgs) {
