@@ -168,7 +168,7 @@ $(function () {
                 timestamp: timestamp, // 必填，生成签名的时间戳
                 nonceStr: noncestr, // 必填，生成签名的随机串
                 signature: signature,// 必填，签名，见附录1
-                jsApiList:[ "getNetworkType", "imagePreview"]// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                jsApiList:[ "chooseImage", "imagePreview"]// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
             });
         });
 
