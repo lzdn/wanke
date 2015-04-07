@@ -1,6 +1,6 @@
 (function($) {
     $("#arrow").hide();
-    var idx= 5 ;
+    var idx= 10 ;
     loading(function(){
         $(".viewmore").on("click",function(){
             var postview=$(this).attr("value");
@@ -13,14 +13,13 @@
         var htmlHeight=document.body.scrollHeight||document.documentElement.scrollHeight;
         var clientHeight=document.body.clientHeight||document.documentElement.clientHeight;
         var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
-        console.log(clientHeight);
-        console.log(scrollTop);
+        var newheight =window.screen.availHeight;
         if(scrollTop>800){
             $("#arrow").show();
         }else{
             $("#arrow").hide();
         }
-        if(scrollTop+500>=clientHeight){
+        if(scrollTop+newheight+20>=htmlHeight){
             idx+=5;
             loading(function(){
                 $(".viewmore").on("click",function(){
