@@ -5,14 +5,6 @@
 body{
     background: #f9f9f9;
 }
-.am-header-extend{
-    background:#fff;
-    border-bottom: 1px solid #999999;
-}
-#headerl{
-    height: 100%;
-    width: 70px;
-}
 
 #headerl p{
     display: block;
@@ -33,7 +25,7 @@ body{
 }
 .am-btn-extend{
     background: none;
-    height: 43px;
+
 }
 .am-input-exend{
     margin: 10px 0 10px 0;
