@@ -19,7 +19,7 @@
         }else{
             $("#arrow").hide();
         }
-        if(scrollTop+newheight+20>=htmlHeight){
+        if(scrollTop+newheight+200>=htmlHeight){
             idx+=5;
             loading(function(){
                 $(".viewmore").on("click",function(){

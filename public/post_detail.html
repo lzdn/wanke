@@ -23,39 +23,13 @@
 </head>
 <body>
 
-<!-- <header data-am-widget="header" class="am-header am-header-default am-header-fixed">
-  <div class="am-header-left am-header-nav">
-    <a href="#left-link" class="">
-      <i class="am-header-icon am-icon-home"></i>
-    </a>
-  </div>
-  <h1 class="am-header-title">
-    <a href="#title-link">Amaze UI</a>
-  </h1>
-  <div class="am-header-right am-header-nav">
-    <a href="#right-link" class="">
-      <i class="am-header-icon am-icon-bars"></i>
-    </a>
-  </div>
-</header> -->
-
-
-<header data-am-widget="header" class="am-header-extend am-header am-header-default am-header-fixed">
-    <div id="headerl"  style="cursor:pointer">
-        <i class="am-header-icon am-icon-chevron-left am-icon-sm"></i>
-        <p>返回</p>
-    </div>
-</header>
-
-
-
 <div id="content">
-    <div class="am-input-group am-input-exend">
-        <input type="text" class="am-form-field "placeholder="搜索" >
-      <span class="am-input-group-btn">
-        <button class="am-btn am-btn-extend" type="button"><span class="am-icon-search am-icon-extend"></button>
-      </span>
-    </div>
+    <!--<div class="am-input-group am-input-exend">-->
+        <!--<input type="text" class="am-form-field "placeholder="搜索" >-->
+      <!--<span class="am-input-group-btn">-->
+        <!--<button class="am-btn am-btn-extend" type="button"><span class="am-icon-search am-icon-extend"></button>-->
+      <!--</span>-->
+    <!--</div>-->
     <script type="text/x-handlebars-template" id="amz-tags">
         {{#each tags}}
         <div class="Publish">
@@ -91,24 +65,29 @@
 </div>
 
 
-<header id="bottom" data-am-widget="header" class="am-header am-header-default">
-    <div class="am-header-left am-header-nav">
-        <a href="#left-link" class="">
-            <i class="am-header-icon am-icon-home am-icon-sm"></i>
-        </a>
-    </div>
-    <h1 class="am-header-title">
-        <a href="#left-link" class="">
-            <i class="am-header-icon am-icon-users am-icon-sm"></i>
-        </a>
-    </h1>
-    <div class="am-header-right am-header-nav">
-        <a href="#right-link" class="">
-            <i class="am-header-icon am-icon-user am-icon-sm"></i>
-        </a>
-    </div>
-
-    <i class="am-icon-arrow-circle-up"></i>
+<div data-am-widget="navbar" class="am-navbar am-cf  "
+     id="">
+    <ul class="am-navbar-nav am-cf am-avg-sm-4 am-navbar-nav-extend ">
+        <li>
+            <a href="sms:18601860186?body=约吗？" class="">
+                <i class="am-header-icon am-icon-cutlery am-icon-sm"></i>
+                <span class="am-navbar-label">易生活</span>
+            </a>
+        </li>
+        <li>
+            <a href="tel:18601860186" class="">
+                <i class="am-header-icon am-icon-users am-icon-sm"></i>
+                <span class="am-navbar-label">邻里圈</span>
+            </a>
+        </li>
+        <li data-am-navbar-share>
+            <a href="###" class="">
+                <i class="am-header-icon am-icon-user am-icon-sm"></i>
+                <span class="am-navbar-label">个人中心</span>
+            </a>
+        </li>
+    </ul>
+</div>
 
 
 
