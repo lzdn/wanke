@@ -1,0 +1,158 @@
+*{
+    padding:0;
+    margin:0;
+}
+body{
+    background: #f9f9f9;
+}
+.am-header-extend{
+    background:#fff;
+    border-bottom: 1px solid #999999;
+}
+#headerl{
+    height: 100%;
+    width: 70px;
+}
+
+#headerl p{
+    display: block;
+    height: 100%;
+    width: 50px;
+    margin:0 0 0 35px;
+    position: absolute;
+    left:0;
+    top:0;
+    /*font-size: 10px;*/
+}
+#content{
+    margin:0 10px 100px 10px;
+}
+
+.am-icon-extend{
+    color: #1E90FF;
+}
+.am-btn-extend{
+    background: none;
+    height: 43px;
+}
+.am-input-exend{
+    margin: 10px 0 10px 0;
+}
+.Publish{
+    background: #fff;
+    width: 100%;
+    border:1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.title{
+    width: 100%;
+    height: 78px;
+    position: relative;
+}
+.username{
+    margin:0;
+    display: block;
+    width: 80px;
+    height: 20px;
+    position: absolute;
+    left:0;
+    top:0;
+    margin:20px 0 0 88px;
+}
+.tag{
+    margin:0;
+    display: block;
+    width: 80px;
+    height: 20px;
+    position: absolute;
+    text-align: right;
+    right:0;
+    top:0;
+    margin:20px 0 5px 0px;
+}
+.show{
+    width: 68px;
+    height: 68px;
+    border: 1px solid #ccc;
+    border-radius: 34px;
+    overflow: hidden;
+}
+.show img{
+    width: 68px;
+    height: 68px;
+}
+.content{
+    width: 100%;
+}
+.images{
+    width: 160px;
+    height: 160px;
+    background: yellow url(file:///D:/Documents/GitHub/wanke/public/assets/i/img/background.png) repeat;
+}
+.images .h{
+    height: 160px;
+    background: red;
+    position: relative;
+    float: left;
+}
+.images img{
+    width: 70px;
+    height: 70px;
+    margin: 10px 0 0 10px;
+    float:left;
+}
+.foot{
+    width: 100%;
+}
+.foot a{
+    display: block;
+    width: 65px;
+    float:right;
+    color:#000;
+}
+.foot a:hover{
+    cursor:pointer;
+}
+#bottom{
+    border: 1px solid #ccc;
+    background: #fff;
+    position: fixed;
+    left:0;
+    top:100%;
+    margin-top: -49px;
+}
+#bottom i{
+    color: #333333;
+}
+
+#foots{
+    width: 58px;
+    height: 58px;
+    border:1px solid #ccc;
+    border-radius: 29px;
+    position: fixed;
+    right:0px;
+    bottom:  50px;
+}
+#foots i{
+    font-size: 24px;
+    text-align: center;
+    line-height: 58px;
+    margin-left: 19px;
+}
+#arrow{
+    width: 58px;
+    height: 58px;
+    border:1px solid #ccc;
+    border-radius: 29px;
+    position: fixed;
+    right:0px;
+    bottom:120px;
+}
+#arrow i{
+    font-size: 24px;
+    text-align: center;
+    line-height: 58px;
+    margin-left: 19px;
+}
