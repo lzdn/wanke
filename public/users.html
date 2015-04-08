@@ -19,32 +19,28 @@
     <meta name="msapplication-TileColor" content="#0e90d2">
     <link rel="stylesheet" href="assets/css/amazeui.min.css">
     <link rel="stylesheet" href="css/views/post_index.css">
-    <link rel="stylesheet" href="css/views/post_detail.css">
+    <link rel="stylesheet" href="css/views/users.css">
 </head>
 <body>
 
-<div id="content">
 
+
+<div id="userheard"><img src="assets/i/img/ss1.jpg" alt="" class="am-circle"/></div>
+<div id="username"><p>小爽依然</p></div>
+<div id="content">
+    <ul class="am-list  am-list-static am-list-border">
+        <li><i class="am-icon am-icon-users icon-1 am-icon-sm"></i>个人动态<i class="am-icon am-icon-chevron-right icon-2 am-icon-sm"></i></li>
+        <li><i class="am-icon am-icon-phone icon-1 am-icon-sm"></i>更改小区 <i class="am-icon am-icon-chevron-right icon-2 am-icon-sm"></i></li>
+        <li><i class="am-icon am-icon-map-marker icon-1 am-icon-sm"></i>联系方式 <i class="am-icon am-icon-chevron-right icon-2 am-icon-sm"></i></li>
+    </ul>
+    <ul class="am-list  am-list-static am-list-border list">
+        <li><i class="am-icon am-icon-envelope icon-1 am-icon-sm"></i>个人动态<i class="am-icon am-icon-chevron-right icon-2 am-icon-sm"></i></li>
+    </ul>
+</div>
     <script type="text/x-handlebars-template" id="amz-tags">
         {{#each tags}}
-       <div id="userheard"><img src="" alt=""/></div>
-        <div class="name"><p class="username"></p></div>
 
-        <section data-am-widget="accordion" class="am-accordion am-accordion-default"
-                 data-am-accordion='{ "multiple": true }'>
-            <dl class="am-accordion-item">
-                <dt class="am-accordion-title">就这样恣意的活着</dt>
-                <i class="am-icom-home"></i>
-            </dl>
-            <dl class="am-accordion-item">
-                <dt class="am-accordion-title">让生命去等候，去等候，去等候，去等候</dt>
-            </dl>
-            <dl class="am-accordion-item">
-                <dt class="am-accordion-title">我就这样告别山下的家</dt>
-            </dl>
-        </section>
 
-</div>
 {{/each}}
 </script>
 
@@ -52,15 +48,15 @@
   <div class="ds-thread"></div>
 </div> -->
 
-<div id="arrow">
-    <i class="am-icon am-icon-arrow-up"></i>
-</div>
-<div id="foots">
-    <i class="am-icon am-icon-plus"></i>
-</div>
+<!--<div id="arrow">-->
+    <!--<i class="am-icon am-icon-arrow-up"></i>-->
+<!--</div>-->
+<!--<div id="foots">-->
+    <!--<i class="am-icon am-icon-plus"></i>-->
+<!--</div>-->
 
 
-<div data-am-widget="navbar" class="am-navbar am-cf  "
+<div data-am-widget="navbar" class="am-navbar am-cf  am-navbar-default"
      id="">
     <ul class="am-navbar-nav am-cf am-avg-sm-4 am-navbar-nav-extend ">
         <li>
@@ -75,10 +71,10 @@
                 <span class="am-navbar-label">邻里圈</span>
             </a>
         </li>
-        <li data-am-navbar-share>
-            <a href="###" class="">
+        <li>
+            <a  class="users">
                 <i class="am-header-icon am-icon-user am-icon-sm"></i>
-                <span class="am-navbar-label">个人中心</span>
+                <span class="am-navbar-label">反馈建议</span>
             </a>
         </li>
     </ul>
@@ -94,7 +90,7 @@
 <script src="assets/js/amazeui.widgets.helper.min.js"></script>
 <script src="assets/js/handlebars.min.js"></script>
 <script src="https://leancloud.cn/scripts/lib/av-0.5.0.min.js"></script>
-<script src="js/views/post_detail.js"></script>
+<script src="js/views/users.js"></script>
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
 <![endif]-->

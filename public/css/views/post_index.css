@@ -154,13 +154,7 @@ body{
     margin-left: 18px;
     margin-top:-3px;
 }
-.am-navbar-nav-extend{
-    border-top:1px solid #ccc;
-    background: #f9f9f9;
-}
-.am-navbar-nav-extend i,.am-navbar-nav-extend span{
-    color:#333;
-}
+
 #load{
     width: 22px;
     height: 22px;

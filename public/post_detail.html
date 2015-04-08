@@ -55,19 +55,17 @@
 <div data-am-widget="duoshuo" class="am-duoshuo am-duoshuo-primary" data-ds-short-name="55223dcfe4b0cd5b62664791">
     <div class="ds-thread"></div>
 </div>
-<!-- 多说评论框 end -->
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<!--<script type="text/javascript">-->
-    <!--var duoshuoQuery = {short_name:"sunshuang"};-->
-    <!--(function() {-->
-        <!--var ds = document.createElement('script');-->
-        <!--ds.type = 'text/javascript';ds.async = true;-->
-        <!--ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';-->
-        <!--ds.charset = 'UTF-8';-->
-        <!--(document.getElementsByTagName('head')[0]-->
-        <!--|| document.getElementsByTagName('body')[0]).appendChild(ds);-->
-    <!--})();-->
-<!--</script>-->
+<script type="text/javascript">
+    var duoshuoQuery = {short_name:"sunshuang"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
 
 
 <!-- <div data-am-widget="duoshuo" class="am-duoshuo am-duoshuo-default" data-ds-short-name="amazeui">
@@ -82,7 +80,7 @@
 </div>
 
 
-<div data-am-widget="navbar" class="am-navbar am-cf  "
+<div data-am-widget="navbar" class="am-navbar am-cf  am-navbar-default"
      id="">
     <ul class="am-navbar-nav am-cf am-avg-sm-4 am-navbar-nav-extend ">
         <li>
@@ -97,8 +95,8 @@
                 <span class="am-navbar-label">邻里圈</span>
             </a>
         </li>
-        <li data-am-navbar-share>
-            <a href="###" class="">
+        <li>
+            <a  class="users">
                 <i class="am-header-icon am-icon-user am-icon-sm"></i>
                 <span class="am-navbar-label">个人中心</span>
             </a>
