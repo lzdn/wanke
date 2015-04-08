@@ -66,14 +66,14 @@ $(function () {
 
     $("#smimg").on("click", function () {
         var ofileid = "";
-        alert("调试");
+        //alert("调试");
         wx.checkJsApi({
             jsApiList: [
-                'getNetworkType',
+                'chooseImage',
                 'previewImage'
             ],
             success: function (res) {
-                alert("haha");
+                //alert("haha");
                 console.log(JSON.stringify(res));
                 setTimeout(function () {
                     alert("kaishi");
