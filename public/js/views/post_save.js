@@ -65,27 +65,16 @@ $(function () {
     var relation = postc.relation("imgs");
 
     $("#smimg").on("click", function () {
-        var ofileid = "";
-        //alert("调试");
-        wx.checkJsApi({
-            jsApiList: [
-                'chooseImage',
-                'previewImage'
-            ],
+        //var ofileid = "";
+        var images = {
+            localId: [],
+            serverId: []
+        };
+        wx.chooseImage({
             success: function (res) {
-                alert("haha");
-                console.log(JSON.stringify(res));
-                    var images = {
-                        localId: [],
-                        serverId: []
-                    };
-                    wx.chooseImage({
-                        success: function (res) {
-                            //alert("wxwxwx");
-                            images.localId = res.localIds;
-                            alert('已选择 ' + res.localIds.length + ' 张图片');
-                        }
-                    });
+                alert("wxwxwx");
+                images.localId = res.localIds;
+                alert('已选择 ' + res.localIds.length + ' 张图片');
             }
         });
         //var file = AV.File.withURL('img11.jpg', localIds);
