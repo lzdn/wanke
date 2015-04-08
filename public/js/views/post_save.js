@@ -8,7 +8,6 @@ $(function () {
     var newtag = 1;
     dataLoad(function () {
         var aNav = document.getElementsByClassName("am-btn-extend");
-        setTimeout(function () {
             aNav[0].className = "am-btn-extend am-btn am-round am-btn-primary";
             for (var i = 0; i < aNav.length; i++) {
                 aNav[i].onclick = function () {
@@ -20,7 +19,6 @@ $(function () {
                     newtag = ($(this).attr("value"));
                 };
             }
-        }, 300);
     });
     $("#usr-sbm-sub").css({color: "rgba(68,68,68,3)"});
     $("#doc-ta-1").keydown(function () {
@@ -193,10 +191,11 @@ $(function () {
                 var data = {tags: tags};
                 var html = template(data);
                 $tpl.before(html);
+                callbak();
             }
         });
         // alert("haha");
-        callbak();
+
     }
 
     //function wximages(saveimgs) {
