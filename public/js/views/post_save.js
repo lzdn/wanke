@@ -64,14 +64,13 @@ $(function () {
 
     $("#smimg").on("click", function () {
         var ofileid = "";
-        alert("调试");
         wx.checkJsApi({
             jsApiList: [
                 'chooseImage',
                 'previewImage'
             ],
             success: function (res) {
-                //alert("haha");
+                alert("haha");
                 console.log(JSON.stringify(res));
                     var images = {
                         localId: [],
@@ -147,8 +146,6 @@ $(function () {
     function dataLoad(callbak) {
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
         $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig", function (result) {
-            alert("haha");
-            alert(result);
             appId = result.appId;
             jslist = result.jsApiList;
             noncestr = result.nonceStr;
