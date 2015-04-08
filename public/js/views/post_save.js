@@ -8,6 +8,7 @@ $(function () {
     var newtag = 1;
     dataLoad(function () {
         var aNav = document.getElementsByClassName("am-btn-extend");
+        setTimeout(function () {
             aNav[0].className = "am-btn-extend am-btn am-round am-btn-primary";
             for (var i = 0; i < aNav.length; i++) {
                 aNav[i].onclick = function () {
@@ -19,6 +20,7 @@ $(function () {
                     newtag = ($(this).attr("value"));
                 };
             }
+        }, 300);
     });
     $("#usr-sbm-sub").css({color: "rgba(68,68,68,3)"});
     $("#doc-ta-1").keydown(function () {
@@ -64,16 +66,26 @@ $(function () {
 
     $("#smimg").on("click", function () {
         var ofileid = "";
-        alert("haha");
-        var images = {
-            localId: [],
-            serverId: []
-        };
-        wx.chooseImage({
+        //alert("调试");
+        wx.checkJsApi({
+            jsApiList: [
+                'chooseImage',
+                'previewImage'
+            ],
             success: function (res) {
-                alert("wxwxwx");
-                images.localId = res.localIds;
-                alert('已选择 ' + res.localIds.length + ' 张图片');
+                //alert("haha");
+                console.log(JSON.stringify(res));
+                    var images = {
+                        localId: [],
+                        serverId: []
+                    };
+                    wx.chooseImage({
+                        success: function (res) {
+                            console.log(res);
+                            images.localId = res.localIds;
+                            alert('已选择 ' + res.localIds.length + ' 张图片');
+                        }
+                    });
             }
         });
         //var file = AV.File.withURL('img11.jpg', localIds);
@@ -137,6 +149,7 @@ $(function () {
     function dataLoad(callbak) {
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
         $.get("http://123.57.14.126/weixin/getJsConfig", function (result) {
+            alert(result);
             appId = result.appId;
             jslist = result.jsApiList;
             noncestr = result.nonceStr;
@@ -180,11 +193,10 @@ $(function () {
                 var data = {tags: tags};
                 var html = template(data);
                 $tpl.before(html);
-                callbak();
             }
         });
         // alert("haha");
-
+        callbak();
     }
 
     //function wximages(saveimgs) {
