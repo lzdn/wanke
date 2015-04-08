@@ -1,6 +1,16 @@
 
 (function($) {
     var postview=window.location.search.split('?')[1];
+    var thread =$(".ds-thread");
+    var thread_url=thread.attr("data-url"), thread_key=thread.attr("data-thread-key"), thread_title=thread.attr("data-title");
+    console.log(thread_url);
+    thread_url= "http://localhost:63342/wanke/public/post_detail.html?55223dcfe4b0cd5b62664791";
+    thread_key= postview;
+    thread_title = "post_detail";
+    console.log( thread_url);
+    console.log(thread_key);
+    console.log(thread_title);
+
     AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
     //ject.createWithoutData('className',id);
     var post = AV.Object.extend("post");

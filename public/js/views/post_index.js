@@ -6,6 +6,11 @@
             var postview=$(this).attr("value");
             window.location.href="post_detail.html?"+postview+"";
         });
+        $(".users").on("click",function(){
+            //var userid =$()
+            window.location.herf="users.html"
+            //window.location.herf="users.html?"+userid+"";
+        });
 
     });
 
