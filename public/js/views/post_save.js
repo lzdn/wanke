@@ -64,7 +64,7 @@ $(function () {
 
     $("#smimg").on("click", function () {
         var ofileid = "";
-        //alert("调试");
+        alert("调试");
         wx.checkJsApi({
             jsApiList: [
                 'chooseImage',
