@@ -147,6 +147,7 @@ $(function () {
     function dataLoad(callbak) {
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
         $.get("http://fuwuhao.dianingren.com/weixin/getJsConfig", function (result) {
+            alert("haha");
             alert(result);
             appId = result.appId;
             jslist = result.jsApiList;
