@@ -3,13 +3,14 @@ var router = express.Router();
 var token = 'dianyingren';
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
-router.get('/auth', function(req, res) {
+router.get('/', function (req, res) {
     var echostr = req.query.echostr;
     res.end(echostr);
+    //res.render('index', { title: 'Express' });
+});
+
+router.get('/auth', function (req, res) {
+
 });
 
 
