@@ -146,7 +146,7 @@ $(function () {
 //………………………………储备函数…………………………………………
     function dataLoad(callbak) {
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
-        $.get("http://123.57.14.126/weixin/getJsConfig", function (result) {
+        $.get("http://fuwuhao.dianingren.com/weixin/getJsConfig", function (result) {
             alert(result);
             appId = result.appId;
             jslist = result.jsApiList;
