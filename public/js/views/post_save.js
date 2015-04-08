@@ -73,10 +73,8 @@ $(function () {
                 'previewImage'
             ],
             success: function (res) {
-                //alert("haha");
+                alert("haha");
                 console.log(JSON.stringify(res));
-                setTimeout(function () {
-                    alert("kaishi");
                     var images = {
                         localId: [],
                         serverId: []
@@ -88,7 +86,6 @@ $(function () {
                             alert('已选择 ' + res.localIds.length + ' 张图片');
                         }
                     });
-                }, 200);
             }
         });
         //var file = AV.File.withURL('img11.jpg', localIds);
