@@ -152,13 +152,8 @@ $(function () {
             signature = result.signature;
             timestamp = result.timestamp;
             jsApiList = result.jsApiList;
-            console.log(appId);
-            console.log(jslist);
-            console.log(noncestr);
-            console.log(signature);
-            console.log(timestamp);
             wx.config({
-                debug: true,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                debug:false,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                 appId: appId, // 必填，公众号的唯一标识
                 timestamp: timestamp, // 必填，生成签名的时间戳
                 nonceStr: noncestr, // 必填，生成签名的随机串
@@ -192,22 +187,10 @@ $(function () {
                 callbak();
             }
         });
-        // alert("haha");
 
     }
 
-    //function wximages(saveimgs) {
-    //    wx.chooseImage({
-    //        success: function (res) {
-    //            console.log(res);
-    //            localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-    //            console.log(localIds);
-    //        },fail:function(){
-    //            alert("sb");
-    //        }
-    //    });
-    //    saveimgs();
-    //}
+
 });
 
 
