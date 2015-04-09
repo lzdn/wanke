@@ -91,19 +91,7 @@ $(function () {
                                  for (var i = 0; i < aimgnav.length; i++) {
                                      aimgnav[i].onclick = function () {
                                          var remobeidx = $(this).attr('value');
-                                         console.log(remobeidx);
-                                         var query = new AV.Query('_File');
-                                         query.get(remobeidx, {
-                                             success: function (ofile) {
-                                                 // The object was retrieved successfully.
-                                                 console.log("ofile.id:" + ofile.id);
-                                                 //ofile.remove(ofile);
-                                                 ofile.destroy().then(function () {
-                                                     //删除成功
-                                                     console.log('删除成功');
-                                                 });
-                                             }
-                                         });
+                                         alert(remobeidx);
                                          $(".imgnav-" + remobeidx + "").remove();
                                          var aimgshow = $(".imgnav");
                                          if (aimgshow.length == 0) {
