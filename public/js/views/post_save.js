@@ -94,8 +94,8 @@ $(function () {
                                 alert("haha");
                                 alert(remobeidx);
                                 var aimgshow = $(".imgnav");
-                                alert(aimgshow[0].id);
-                                $("#imgnav-" + remobeidx + "").remove();
+                                var aa=(aimgshow[0].id);
+                                $("#imgnav-" + aa + "").remove();
                                 if (aimgshow.length == 0) {
                                     $("#addimg").hide();
                                 }
