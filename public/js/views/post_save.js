@@ -69,8 +69,8 @@ $(function () {
                 wx.chooseImage({
                     success: function (res) {
                         localIds = res.localIds;
-
-                        var file = AV.File.withURL(""+localIds[0]+"", ""+localIds[0]+"");
+                        alert("开始保存");
+                        var file = AV.File.withURL(localIds[0],localIds[0]);
                         file.save();
                     }
                 });
