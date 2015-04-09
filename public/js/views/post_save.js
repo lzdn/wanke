@@ -64,6 +64,7 @@ $(function () {
 
     $("#smimg").on("click", function () {
         var ofileid = "";
+        var localIds="";
         wx.checkJsApi({
             jsApiList: [
                 'chooseImage',
@@ -77,51 +78,50 @@ $(function () {
                     };
                     wx.chooseImage({
                         success: function (res) {
-                            images.localId = res.localIds;
-                            alert(images.localId);
-                            alert('已选择 ' + res.localIds.length + ' 张图片');
+                            localIds = res.localIds;
+                            alert(localIds);
+                            alert('已选择 ' +localIds.length + ' 张图片');
                         }
                     });
             }
         });
-        //var file = AV.File.withURL('img11.jpg', localIds);
-        //以下保存图片…………………………………………
-        //var file = AV.File.withURL('img11.jpg','imgs/mm1.jpg');
-        //file.save({
-        //    success: function (ofile) {
-        //        ofileid = ofile.id;
-        //        console.log(ofileid);
-        //    }
-        //}).then(function () {
-        //    var postc = new posts();
-        //    var relation = postc.relation("imgs");
-        //    $("<div class=\"imgnav imgnav-" + ofileid + " \" ><a href=\"#\" value=\"" + ofileid + "\" class=\"am-close\">&times;</a><img src=\"imgs/mm1.jpg\" alt=\"#\"/></div>").prependTo("#imgwall");
-        //    $("#addimg").show();
-        //    var aimgnav = $(".am-close");
-        //    for (var i = 0; i < aimgnav.length; i++) {
-        //        aimgnav[i].onclick = function () {
-        //            var remobeidx = $(this).attr('value');
-        //            console.log(remobeidx);
-        //            var query = new AV.Query('_File');
-        //            query.get(remobeidx, {
-        //                success: function (ofile) {
-        //                    // The object was retrieved successfully.
-        //                    console.log("ofile.id:" + ofile.id);
-        //                    //ofile.remove(ofile);
-        //                    ofile.destroy().then(function () {
-        //                        //删除成功
-        //                        console.log('删除成功');
-        //                    });
-        //                }
-        //            });
-        //            $(".imgnav-" + remobeidx + "").remove();
-        //            var aimgshow = $(".imgnav");
-        //            if (aimgshow.length == 0) {
-        //                $("#addimg").hide();
-        //            }
-        //        };
-        //    }
-        //});
+        var file = AV.File.withURL('img11.jpg', localIds);
+       // 以下保存图片…………………………………………
+        file.save({
+            success: function (ofile) {
+                ofileid = ofile.id;
+                console.log(ofileid);
+            }
+        }).then(function () {
+            var postc = new posts();
+            var relation = postc.relation("imgs");
+            $("<div class=\"imgnav imgnav-" + ofileid + " \" ><a href=\"#\" value=\"" + ofileid + "\" class=\"am-close\">&times;</a><img src=\""+ofileid+"\" alt=\"#\"/></div>").prependTo("#imgwall");
+            $("#addimg").show();
+            var aimgnav = $(".am-close");
+            for (var i = 0; i < aimgnav.length; i++) {
+                aimgnav[i].onclick = function () {
+                    var remobeidx = $(this).attr('value');
+                    console.log(remobeidx);
+                    var query = new AV.Query('_File');
+                    query.get(remobeidx, {
+                        success: function (ofile) {
+                            // The object was retrieved successfully.
+                            console.log("ofile.id:" + ofile.id);
+                            //ofile.remove(ofile);
+                            ofile.destroy().then(function () {
+                                //删除成功
+                                console.log('删除成功');
+                            });
+                        }
+                    });
+                    $(".imgnav-" + remobeidx + "").remove();
+                    var aimgshow = $(".imgnav");
+                    if (aimgshow.length == 0) {
+                        $("#addimg").hide();
+                    }
+                };
+            }
+        });
     });
 
     //…………………………保存心情 和 tagkey………………………………
