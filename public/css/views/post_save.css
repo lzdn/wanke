@@ -129,29 +129,29 @@ textarea{
     font-weight:100;
     color:#ccc;
 }
-#imgwall .imgnav{
-    width: 100px;
-    height: 100px;
-    background: blue;
-    position: relative;
-}
-.imgnav a{
-    width: 20px;
-    height: 20px;
-    background: none;
-    margin:0;
-    padding:0;
-    display:block;
-    float: right;
-    position:absolute;
-    left:75px;
-    top:0;
-    color:#ccc;
-}
-.imgnav img{
-    width: 100px;
-    height: 100px;
+/*#imgwall .imgnav{*/
+    /*width: 100px;*/
+    /*height: 100px;*/
+    /*background: blue;*/
+    /*position: relative;*/
+/*}*/
+/*.imgnav a{*/
+    /*width: 20px;*/
+    /*height: 20px;*/
+    /*background: none;*/
+    /*margin:0;*/
+    /*padding:0;*/
+    /*display:block;*/
+    /*float: right;*/
+    /*position:absolute;*/
+    /*left:75px;*/
+    /*top:0;*/
+    /*color:#ccc;*/
+/*}*/
+/*.imgnav img{*/
+    /*width: 100px;*/
+    /*height: 100px;*/
     /*position: absolute;*/
     /*left:0;*/
     /*top:0;*/
-}
+/*}*/
