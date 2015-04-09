@@ -70,6 +70,7 @@ $(function () {
                     success: function (res) {
                         localIds = res.localIds;
 
+                        var file = AV.File.withURL(""+localIds[0]+"", ""+localIds[0]+"");
                         file.save();
                     }
                 });
