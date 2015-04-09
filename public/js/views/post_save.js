@@ -64,22 +64,12 @@ $(function () {
     var relation = postc.relation("imgs");
 
     $("#smimg").on("click", function () {
-        var ofileid = "";
-        var localIds = [];
-        wx.checkJsApi({
-            jsApiList: [
-                'chooseImage',
-                'previewImage'
-            ],
-            success: function (res) {
-                console.log(JSON.stringify(res));
-                var images = {
-                    localId: [],
-                    serverId: []
-                };
+        var ofileid;
+        var localIds;
                 wx.chooseImage({
                     success: function (res) {
                         localIds = res.localIds;
+                        alert(localIds);
                         for (var i = 0; i < localIds.length; i++) {
                             alert(localIds[i]);
                             $("<div id=\"imgnav-" + localIds[i] + "\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\"" + localIds[i] + "\"></a></div>").prependTo("#imgwall");
@@ -101,8 +91,7 @@ $(function () {
                         }
                     }
                 });
-            }
-        });
+
         // var file = AV.File.withURL('img11.jpg', localIds);
         //// 以下保存图片…………………………………………
         // file.save({
