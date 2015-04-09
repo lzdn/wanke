@@ -34,6 +34,12 @@
     line-height: 28px;
     color: #ff8200;
 }
+#usr-sbm-s{
+    float:left;
+}
+#usr-sbm-sub{
+    margin-left:13px;
+}
 #usr-sbm-s:hover,#usr-sbm-sub:hover{
     text-decoration: none;
 }
