@@ -85,15 +85,15 @@ $(function () {
                             for (var i=0; i<localIds.length; i++){
                                 $("<div id=\""+localIds[i]+"\" class=\"imgnav\"><img src=\""+localIds[i]+"\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\""+localIds[i]+"\"></a></div>").prependTo("#imgwall");
                             }
-                            // $("<div class=\"-"+localIds[0]+ "\" ><a href=\"#\" value=\""+localIds[0]+"\ class=\"am-close\">&times;</a><img src=\""+localIds[0]+"\ alt=\"#\"/></div>").prependTo("#imgwall");
                                  $("#addimg").show();
                                  var aimgnav = $(".am-icon-close");
                                  alert(aimgnav.length);
                                  for (var i = 0; i < aimgnav.length; i++) {
                                      aimgnav[i].onclick = function () {
                                          var remobeidx = $(this).attr('value');
-                                         alert("haha")
+                                         alert("haha");
                                          alert(remobeidx);
+                                         console.log(remobeidx);
                                          $("#"+remobeidx+"").remove();
                                          var aimgshow = $(".imgnav");
                                          if (aimgshow.length == 0) {
