@@ -66,13 +66,14 @@ $(function () {
     $("#smimg").on("click", function () {
         var ofileid;
         var localIds;
+        var imgId;
                 wx.chooseImage({
                     success: function (res) {
                         localIds = res.localIds;
                         alert(localIds);
                         for (var i = 0; i < localIds.length; i++) {
                             alert(localIds[i]);
-                            var imgId=localIds[i].split(':')[14];
+                            imgId=localIds[i].substring(20);
                             alert(imgId);
                             $("<div id=\"imgnav-" + imgId + "\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\"" + imgId + "\"></a></div>").prependTo("#imgwall");
                         }
