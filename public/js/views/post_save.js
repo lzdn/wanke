@@ -72,7 +72,9 @@ $(function () {
                         alert(localIds);
                         for (var i = 0; i < localIds.length; i++) {
                             alert(localIds[i]);
-                            $("<div id=\"imgnav-" + localIds[i] + "\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\"" + localIds[i] + "\"></a></div>").prependTo("#imgwall");
+                            var imgId=localIds[i].split(':')[14];
+                            alert(imgId);
+                            $("<div id=\"imgnav-" + imgId + "\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\"" + imgId + "\"></a></div>").prependTo("#imgwall");
                         }
                         $("#addimg").show();
                         var aimgnav = $(".am-icon-close");
