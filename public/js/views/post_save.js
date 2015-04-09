@@ -83,7 +83,7 @@ $(function () {
                             alert(localIds);
                             alert('已选择 ' +localIds.length + ' 张图片');
                            $("<img src=\""+localIds[0]+"\" alt=\"#\"/>").prependTo("#imgwall");
-                            $("<div class=\"imgnav imgnav-"+localIds[0]+"\"><a href=\"\" class=\"am-close\" value=\""+localIds[0]+"\"></a><img src=\""+localIds[0]+"\" alt=\"\"/></div>").prependTo("#imgwall");
+                            $("<div class=\"imgnav imgnav-"+localIds[0]+"\"><img src=\""+localIds[0]+"\" alt=\"\"/><a href=\"\" class=\"am-close\" value=\""+localIds[0]+"\"></a></div>").prependTo("#imgwall");
                             // $("<div class=\"-"+localIds[0]+ "\" ><a href=\"#\" value=\""+localIds[0]+"\ class=\"am-close\">&times;</a><img src=\""+localIds[0]+"\ alt=\"#\"/></div>").prependTo("#imgwall");
                                  $("#addimg").show();
                                  var aimgnav = $(".am-close");

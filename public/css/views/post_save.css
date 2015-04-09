@@ -137,25 +137,21 @@ textarea{
     background: blue;
     position: relative;
 }
-#imgwal .imgnav a{
+#imgwall a{
     width: 20px;
     height: 20px;
-    background: none;
-    margin:0;
-    padding:0;
-    display:block;
-    float: right;
-    position:absolute;
-    left:75px;
-    top:0;
+    display: block;
+    float:right;
     color:#ccc;
+    position: relative;
+    right:0;
+    top:0;
 }
-#imgwal .imgnav img{
+#imgwall img{
     padding:0;
     margin:0;
     width: 100px;
     height: 100px;
     position: absolute;
-    left:0;
-    top:0;
+
 }
