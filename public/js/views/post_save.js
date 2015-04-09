@@ -73,6 +73,7 @@ $(function () {
                         alert(localIds[0]);
                         var file = AV.File.withURL("ssssss",localIds[0]);
                         file.save().then(function(){
+                            alert("haha")
                             var profilePhoto = profile.get("photoFile");
                             alert(profilePhoto.url());
                             //$("profileImg")[0].src = profilePhoto.url();
