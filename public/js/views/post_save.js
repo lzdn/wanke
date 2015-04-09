@@ -8,6 +8,12 @@ $(function () {
     var tags = AV.Object.extend("tag");
     var newtag = 1;
     dataLoad(function () {
+
+        wx.ready(function () {
+           // alert("绑定事件:隐藏菜单");
+            wx.hideOptionMenu();
+        });
+
         var aNav = document.getElementsByClassName("am-btn-extend");
         aNav[0].className = "am-btn-extend am-btn am-round am-btn-primary";
         for (var i = 0; i < aNav.length; i++) {
