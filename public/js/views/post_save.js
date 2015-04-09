@@ -83,7 +83,7 @@ $(function () {
                                 var remobeidx = $(this).attr('value');
                                 alert(remobeidx);
                                 var aimgshow = $(".imgnav");
-                                $("#imgnav-" + remobeidx + "").remove();
+                                $("" + remobeidx + "").remove();
                                 if (aimgshow.length == 0) {
                                     $("#addimg").hide();
                                 }
