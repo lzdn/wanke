@@ -130,6 +130,8 @@ textarea{
     color:#ccc;
 }
 #imgwall .imgnav{
+    padding:0;
+    margin:0;
     width: 100px;
     height: 100px;
     background: blue;
@@ -149,6 +151,8 @@ textarea{
     color:#ccc;
 }
 #imgwal .imgnav img{
+    padding:0;
+    margin:0;
     width: 100px;
     height: 100px;
     position: absolute;
