@@ -80,14 +80,14 @@ $(function () {
                     wx.chooseImage({
                         success: function (res) {
                             localIds = res.localIds;
-                            alert(localIds);
                             alert('已选择 ' +localIds.length + ' 张图片');
                             for (var i=0; i<localIds.length; i++){
                                 $("<div id=\""+localIds[i]+"\" class=\"imgnav\"><img src=\""+localIds[i]+"\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\""+localIds[i]+"\"></a></div>").prependTo("#imgwall");
                             }
                                  $("#addimg").show();
                                  var aimgnav = $(".am-icon-close");
-                                 alert(aimgnav.length);
+                                 var aimgnav2=$(".imgnav");
+                                alert(aimgnav2.id);
                                  for (var i = 0; i < aimgnav.length; i++) {
                                      aimgnav[i].onclick = function () {
                                          var remobeidx = $(this).attr('value');
