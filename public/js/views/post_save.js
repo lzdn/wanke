@@ -72,7 +72,11 @@ $(function () {
                         alert("开始保存");
                         alert(localIds[0]);
                         var file = AV.File.withURL("ssssss",localIds[0]);
-                        file.save();
+                        file.save().then(function(){
+                            var profilePhoto = profile.get("photoFile");
+                            alert(profilePhoto.url());
+                            //$("profileImg")[0].src = profilePhoto.url();
+                        })
                     }
                 });
 
