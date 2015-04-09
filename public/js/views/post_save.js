@@ -83,7 +83,7 @@ $(function () {
                             alert('已选择 ' +localIds.length + ' 张图片');
                             $("<img src=\""+localIds[0]+"\" alt=\"#\"/>").prependTo("#imgwall");
 
-                            $("<div class=\"imgnav imgnav-"+localIds[0]+ "\" ><a href=\"#\" value=\""+localIds[0]+"\ class=\"am-close\">&times;</a><img src=\""+localIds[0]+"\ alt=\"#\"/></div>").prependTo("#imgwall");
+
                                  $("#addimg").show();
                                  var aimgnav = $(".am-close");
                                  for (var i = 0; i < aimgnav.length; i++) {
