@@ -31,6 +31,7 @@
     right:-5px;
 }
 #usr-sbm-s,#usr-sbm-sub{
+    line-height: 28px;
     color: #ff8200;
 }
 #usr-sbm-s:hover,#usr-sbm-sub:hover{
