@@ -82,13 +82,13 @@ $(function () {
                             localIds = res.localIds;
                             alert('已选择 ' +localIds.length + ' 张图片');
                             for (var i=0; i<localIds.length; i++){
-                                $("<div class=\"imgnav imgnav-"+localIds[i]+"\"><img src=\""+localIds[i]+"\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\""+localIds[i]+"\"></a></div>").prependTo("#imgwall");
+                                $("<div id=\""+localIds[i]+"\" class=\"imgnav\"><img src=\""+localIds[i]+"\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\""+localIds[i]+"\"></a></div>").prependTo("#imgwall");
                             }
                                  $("#addimg").show();
                                  var aimgnav = $(".am-icon-close");
                                  for (var i = 0; i < aimgnav.length; i++) {
                                      var aaa = $(".imgnav");
-                                     alert(aaa[i].className);
+                                     alert(aaa[i].id);
                                      aimgnav[i].onclick = function () {
                                          var remobeidx = $(this).attr('value');
                                          alert("haha")
