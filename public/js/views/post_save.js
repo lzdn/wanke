@@ -92,6 +92,7 @@ $(function () {
                                  for (var i = 0; i < aimgnav.length; i++) {
                                      aimgnav[i].onclick = function () {
                                          var remobeidx = $(this).attr('value');
+                                         alert("haha")
                                          alert(remobeidx);
                                          $(".imgnav-" + remobeidx + "").remove();
                                          var aimgshow = $(".imgnav");
