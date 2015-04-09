@@ -83,7 +83,7 @@ $(function () {
                             alert(localIds);
                             alert('已选择 ' +localIds.length + ' 张图片');
                             for (var i=0; i<localIds.length; i++){
-                                $("<div class=\"imgnav imgnav-"+localIds[i]+"\"><img src=\""+localIds[i]+"\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\""+localIds[i]+"\"></a></div>").prependTo("#imgwall");
+                                $("<div id=\""+localIds[i]+"\" class=\"imgnav\"><img src=\""+localIds[i]+"\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\""+localIds[i]+"\"></a></div>").prependTo("#imgwall");
                             }
                             // $("<div class=\"-"+localIds[0]+ "\" ><a href=\"#\" value=\""+localIds[0]+"\ class=\"am-close\">&times;</a><img src=\""+localIds[0]+"\ alt=\"#\"/></div>").prependTo("#imgwall");
                                  $("#addimg").show();
@@ -94,7 +94,7 @@ $(function () {
                                          var remobeidx = $(this).attr('value');
                                          alert("haha")
                                          alert(remobeidx);
-                                         $(".imgnav-" + remobeidx + "").remove();
+                                         $("#"+remobeidx+"").remove();
                                          var aimgshow = $(".imgnav");
                                          if (aimgshow.length == 0) {
                                              $("#addimg").hide();
