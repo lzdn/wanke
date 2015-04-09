@@ -72,21 +72,18 @@ $(function () {
                         localIds = res.localIds;
                         alert(localIds);
                         for (var i = 0; i < localIds.length; i++) {
-                            alert(localIds[i]);
                             imgId=localIds[i].substring(20);
-                            alert(imgId);
                             $("<div id=\"imgnav-" + imgId + "\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\"" + imgId + "\"></a></div>").prependTo("#imgwall");
                         }
                         $("#addimg").show();
                         var aimgnav = $(".am-icon-close");
                         var aaa = $(".imgnav");
                         for (var i = 0; i < aimgnav.length; i++) {
-                            alert(aaa[i].id);
                             aimgnav[i].onclick = function () {
                                 var remobeidx = $(this).attr('value');
                                 alert(remobeidx);
                                 var aimgshow = $(".imgnav");
-                                $("#imgnav-" + aa + "").remove();
+                                $("#imgnav-" + remobeidx + "").remove();
                                 if (aimgshow.length == 0) {
                                     $("#addimg").hide();
                                 }
