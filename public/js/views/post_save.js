@@ -66,29 +66,17 @@ $(function () {
     $("#smimg").on("click", function () {
         var ofileid;
         var localIds;
-        var imgId;
                 wx.chooseImage({
                     success: function (res) {
                         localIds = res.localIds;
-                        alert(localIds);
-                        for (var i = 0; i < localIds.length; i++) {
-                            imgId=localIds[i].substring(20);
-                            $("<div id=\"imgnav-" + imgId + "\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\"" + imgId + "\"></a></div>").prependTo("#imgwall");
-                        }
-                        $("#addimg").show();
-                        var aimgnav = $(".am-icon-close");
-                        var aaa = $(".imgnav");
-                        for (var i = 0; i < aimgnav.length; i++) {
-                            aimgnav[i].onclick = function () {
-                                var remobeidx = $(this).attr('value');
-                                alert(remobeidx);
-                                var aimgshow = $(".imgnav");
-                                $("" + remobeidx + "").remove();
-                                if (aimgshow.length == 0) {
-                                    $("#addimg").hide();
-                                }
-                            }
-                        }
+
+                        var file = AV.File.withURL(localIds[i], localIds[i]);
+                        file.save({
+                                 success: function (ofile) {
+                                     ofileid = ofile.id;
+                                     alert(ofileid);
+                                 }
+                            })
                     }
                 });
 
@@ -198,8 +186,24 @@ $(function () {
 
 
 });
-
-
+//^^^^^^^^^^^^^^^^^^^^备用
+//for (var i = 0; i < localIds.length; i++) {
+//    $("<div id=\"" + localIds[i] + "\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\"" + localIds[i] + "\"></a></div>").prependTo("#imgwall");
+//}
+//$("#addimg").show();
+//var aimgnav = $(".am-icon-close");
+//var aaa = $(".imgnav");
+//for (var i = 0; i < aimgnav.length; i++) {
+//    aimgnav[i].onclick = function () {
+//        var remobeidx = $(this).attr('value');
+//        alert(remobeidx);
+//        var aimgshow = $(".imgnav");
+//        $("" + remobeidx + "").remove();
+//        if (aimgshow.length == 0) {
+//            $("#addimg").hide();
+//        }
+//    }
+//}
 
 
 
