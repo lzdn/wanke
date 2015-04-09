@@ -84,10 +84,11 @@ $(function () {
                             for (var i=0; i<localIds.length; i++){
                                 $("<div class=\"imgnav imgnav-"+localIds[i]+"\"><img src=\""+localIds[i]+"\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\""+localIds[i]+"\"></a></div>").prependTo("#imgwall");
                             }
-                            // $("<div class=\"-"+localIds[0]+ "\" ><a href=\"#\" value=\""+localIds[0]+"\ class=\"am-close\">&times;</a><img src=\""+localIds[0]+"\ alt=\"#\"/></div>").prependTo("#imgwall");
                                  $("#addimg").show();
                                  var aimgnav = $(".am-icon-close");
                                  for (var i = 0; i < aimgnav.length; i++) {
+                                     var aaa = $(".imgnav");
+                                     alert(aaa[i].className);
                                      aimgnav[i].onclick = function () {
                                          var remobeidx = $(this).attr('value');
                                          alert("haha")
