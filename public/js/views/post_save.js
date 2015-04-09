@@ -70,7 +70,8 @@ $(function () {
                     success: function (res) {
                         localIds = res.localIds;
                         alert("开始保存");
-                        var file = AV.File.withURL(localIds[0],localIds[0]);
+                        alert(localIds[0]);
+                        var file = AV.File.withURL("ssssss",localIds[0]);
                         file.save();
                     }
                 });
