@@ -77,7 +77,8 @@ $(function () {
                     };
                     wx.chooseImage({
                         success: function (res) {
-                            console.log(res);
+                            alert(res);
+                            cosole.log(res);
                             images.localId = res.localIds;
                             alert(images.locaIId);
                             alert('已选择 ' + res.localIds.length + ' 张图片');
