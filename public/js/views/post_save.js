@@ -86,8 +86,8 @@ $(function () {
                             }
                                  $("#addimg").show();
                                  var aimgnav = $(".am-icon-close");
+                            var aaa = $(".imgnav");
                                  for (var i = 0; i < aimgnav.length; i++) {
-                                     var aaa = $(".imgnav");
                                      alert(aaa[i].id);
                                      aimgnav[i].onclick = function () {
                                          var remobeidx = $(this).attr('value');
