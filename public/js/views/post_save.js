@@ -65,7 +65,7 @@ $(function () {
 
     $("#smimg").on("click", function () {
         var ofileid = "";
-        var localIds = "";
+        var localIds = [];
         wx.checkJsApi({
             jsApiList: [
                 'chooseImage',
@@ -80,8 +80,8 @@ $(function () {
                 wx.chooseImage({
                     success: function (res) {
                         localIds = res.localIds;
-                        alert('已选择 ' + localIds.length + ' 张图片');
                         for (var i = 0; i < localIds.length; i++) {
+                            alert(localIds[i]);
                             $("<div id=\"imgnav-" + localIds[i] + "\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\"" + localIds[i] + "\"></a></div>").prependTo("#imgwall");
                         }
                         $("#addimg").show();
@@ -91,10 +91,8 @@ $(function () {
                             alert(aaa[i].id);
                             aimgnav[i].onclick = function () {
                                 var remobeidx = $(this).attr('value');
-                                alert("haha");
                                 alert(remobeidx);
                                 var aimgshow = $(".imgnav");
-                                var aa=(aimgshow[0].id);
                                 $("#imgnav-" + aa + "").remove();
                                 if (aimgshow.length == 0) {
                                     $("#addimg").hide();
