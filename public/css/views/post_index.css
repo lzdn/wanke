@@ -5,7 +5,6 @@
 body{
     background:#f3f3f3;
 }
-
 #headerl p{
     display: block;
     height: 100%;
@@ -23,9 +22,6 @@ body{
 .am-icon-extend{
     color: #1E90FF;
 }
-/*.am-icon-extend{*/
-
-/*}*/
 .am-input-exend{
     margin: 10px 0 10px 0;
 }
@@ -126,16 +122,15 @@ body{
     border-radius: 29px;
     position: fixed;
     right:11px;
-    bottom:  90px;
+    bottom:  70px;
 }
-#foots i{
-    /*width: 19px;*/
-    /*height: 24px;*/
-    /*margin:0 auto;*/
-    font-size: 24px;
-    text-align: center;
+#foots div{
+    width: 18px;
+    height: 58px;
+    margin:auto;
+}
+#foots div i{
     line-height: 58px;
-    margin-left: 19px;
 }
 #arrow{
     background: #f9f9f9;
@@ -145,16 +140,16 @@ body{
     border-radius: 29px;
     position: fixed;
     right:11px;
-    bottom:150px;
+    bottom:140px;
 }
-#arrow i{
-    font-size: 24px;
-    text-align: center;
+#arrow div{
+    width: 22px;
+    height: 58px;
+    margin:0 auto;
+}
+#arrow div {
     line-height: 58px;
-    margin-left: 18px;
-    margin-top:-3px;
 }
-
 #load{
     width: 22px;
     height: 22px;

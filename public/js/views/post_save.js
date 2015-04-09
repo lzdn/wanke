@@ -70,7 +70,6 @@ $(function () {
                 'previewImage'
             ],
             success: function (res) {
-                alert("haha");
                 console.log(JSON.stringify(res));
                     var images = {
                         localId: [],
@@ -80,6 +79,7 @@ $(function () {
                         success: function (res) {
                             console.log(res);
                             images.localId = res.localIds;
+                            alert(images.locaIId);
                             alert('已选择 ' + res.localIds.length + ' 张图片');
                         }
                     });

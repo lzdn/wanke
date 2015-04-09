@@ -25,10 +25,10 @@
 
 <div id="content">
     <!--<div class="am-input-group am-input-exend">-->
-        <!--<input type="text" class="am-form-field "placeholder="搜索" >-->
-      <!--<span class="am-input-group-btn">-->
-        <!--<button class="am-btn am-btn-extend" type="button"><span class="am-icon-search am-icon-extend"></button>-->
-      <!--</span>-->
+    <!--<input type="text" class="am-form-field "placeholder="搜索" >-->
+    <!--<span class="am-input-group-btn">-->
+    <!--<button class="am-btn am-btn-extend" type="button"><span class="am-icon-search am-icon-extend"></button>-->
+    <!--</span>-->
     <!--</div>-->
     <script type="text/x-handlebars-template" id="amz-tags">
         {{#each tags}}
@@ -55,31 +55,25 @@
 <div data-am-widget="duoshuo" class="am-duoshuo am-duoshuo-primary" data-ds-short-name="55223dcfe4b0cd5b62664791">
     <div class="ds-thread"></div>
 </div>
-<script type="text/javascript">
-    var duoshuoQuery = {short_name:"sunshuang"};
-    (function() {
-        var ds = document.createElement('script');
-        ds.type = 'text/javascript';ds.async = true;
-        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-        ds.charset = 'UTF-8';
-        (document.getElementsByTagName('head')[0]
-        || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-</script>
+<div id="thread">
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name: "sunshuang"};
+        (function () {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';
+            ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+</div>
 
 
 <!-- <div data-am-widget="duoshuo" class="am-duoshuo am-duoshuo-default" data-ds-short-name="amazeui">
   <div class="ds-thread"></div>
 </div> -->
-
-<div id="arrow">
-    <i class="am-icon am-icon-arrow-up"></i>
-</div>
-<div id="foots">
-    <i class="am-icon am-icon-plus"></i>
-</div>
-
-
 <div data-am-widget="navbar" class="am-navbar am-cf  am-navbar-default"
      id="">
     <ul class="am-navbar-nav am-cf am-avg-sm-4 am-navbar-nav-extend ">
@@ -96,7 +90,7 @@
             </a>
         </li>
         <li>
-            <a  class="users">
+            <a class="users">
                 <i class="am-header-icon am-icon-user am-icon-sm"></i>
                 <span class="am-navbar-label">个人中心</span>
             </a>
@@ -105,24 +99,23 @@
 </div>
 
 
+<!--  {{#each tags}}
+<div class="contents">
+ <p>user name:{{this.name}}</p> <p>user tag:{{this.tag}}</p>
+ <p>usersay:{{this.usersay}}</p>
+  <p>发表时间{{this.time}}</p>
+</div>
+      {{/each}} -->
 
-    <!--  {{#each tags}}
-   <div class="contents">
-     <p>user name:{{this.name}}</p> <p>user tag:{{this.tag}}</p>
-     <p>usersay:{{this.usersay}}</p>
-      <p>发表时间{{this.time}}</p>
-   </div>
-          {{/each}} -->
 
-
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/amazeui.min.js"></script>
-    <script src="assets/js/amazeui.widgets.helper.min.js"></script>
-    <script src="assets/js/handlebars.min.js"></script>
-    <script src="https://leancloud.cn/scripts/lib/av-0.5.0.min.js"></script>
-    <script src="js/views/post_detail.js"></script>
-    <!--[if lte IE 8 ]>
-    <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
-    <![endif]-->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/amazeui.min.js"></script>
+<script src="assets/js/amazeui.widgets.helper.min.js"></script>
+<script src="assets/js/handlebars.min.js"></script>
+<script src="https://leancloud.cn/scripts/lib/av-0.5.0.min.js"></script>
+<script src="js/views/post_detail.js"></script>
+<!--[if lte IE 8 ]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<![endif]-->
 </body>
 </html>

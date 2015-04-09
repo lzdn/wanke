@@ -1,5 +1,5 @@
 (function($) {
-    $("#arrow").hide();
+   $("#arrow").hide();
     var idx= 5 ;
     loading(function(){
         $(".viewmore").on("click",function(){
@@ -7,7 +7,8 @@
             window.location.href="post_detail.html?"+postview+"";
         });
         $(".users").on("click",function(){
-            window.location.href="users.html?sss";
+            alert("haha");
+            window.location.href="users.html";
         });
 
     });
@@ -18,9 +19,10 @@
         var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
         var newheight =window.screen.availHeight;
         if(scrollTop>800){
-            $("#arrow").show();
+            $("#arrow").show().addClass("am-animation-fade");
         }else{
             $("#arrow").hide();
+            $("#arrow").hide().removeClass("am-animation-fade");
         }
         if(scrollTop+newheight+200>=htmlHeight){
             idx+=5;
