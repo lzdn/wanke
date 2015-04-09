@@ -2,24 +2,24 @@
  * Created by amberglasses on 15/3/24.
  */
 $(function () {
-    var localIds=5;
+    var localIds = 5;
     var user = AV.User;
     var posts = AV.Object.extend("post");
     var tags = AV.Object.extend("tag");
     var newtag = 1;
     dataLoad(function () {
         var aNav = document.getElementsByClassName("am-btn-extend");
-            aNav[0].className = "am-btn-extend am-btn am-round am-btn-primary";
-            for (var i = 0; i < aNav.length; i++) {
-                aNav[i].onclick = function () {
-                    for (var j = 0; j < aNav.length; j++) {
-                        aNav[j].className = "am-btn-extend am-btn am-round";
-                        this.className = "am-btn-extend am-btn am-round am-btn-primary";
-                    }
-                    console.log(this);
-                    newtag = ($(this).attr("value"));
-                };
-            }
+        aNav[0].className = "am-btn-extend am-btn am-round am-btn-primary";
+        for (var i = 0; i < aNav.length; i++) {
+            aNav[i].onclick = function () {
+                for (var j = 0; j < aNav.length; j++) {
+                    aNav[j].className = "am-btn-extend am-btn am-round";
+                    this.className = "am-btn-extend am-btn am-round am-btn-primary";
+                }
+                console.log(this);
+                newtag = ($(this).attr("value"));
+            };
+        }
     });
     $("#usr-sbm-sub").css({color: "rgba(68,68,68,3)"});
     $("#doc-ta-1").keydown(function () {
@@ -65,7 +65,7 @@ $(function () {
 
     $("#smimg").on("click", function () {
         var ofileid = "";
-        var localIds="";
+        var localIds = "";
         wx.checkJsApi({
             jsApiList: [
                 'chooseImage',
@@ -73,74 +73,74 @@ $(function () {
             ],
             success: function (res) {
                 console.log(JSON.stringify(res));
-                    var images = {
-                        localId: [],
-                        serverId: []
-                    };
-                    wx.chooseImage({
-                        success: function (res) {
-                            localIds = res.localIds;
-                            alert('已选择 ' +localIds.length + ' 张图片');
-                            for (var i=0; i<localIds.length; i++){
-                                $("<div id=\""+localIds[i]+"\" class=\"imgnav\"><img src=\""+localIds[i]+"\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\""+localIds[i]+"\"></a></div>").prependTo("#imgwall");
-                            }
-                                 $("#addimg").show();
-                                 var aimgnav = $(".am-icon-close");
-                            var aaa = $(".imgnav");
-                                 for (var i = 0; i < aimgnav.length; i++) {
-                                     alert(aaa[i].id);
-                                     aimgnav[i].onclick = function () {
-                                         var remobeidx = $(this).attr('value');
-                                         alert("haha")
-                                         alert(remobeidx);
-                                         $("div").remove("#"+remobeidx+"");
-                                         var aimgshow = $(".imgnav");
-                                         if (aimgshow.length == 0) {
-                                             $("#addimg").hide();
-                                         }
-                                     }
-                                 }
+                var images = {
+                    localId: [],
+                    serverId: []
+                };
+                wx.chooseImage({
+                    success: function (res) {
+                        localIds = res.localIds;
+                        alert('已选择 ' + localIds.length + ' 张图片');
+                        for (var i = 0; i < localIds.length; i++) {
+                            $("<div id=\"" + localIds[i] + "\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\"" + localIds[i] + "\"></a></div>").prependTo("#imgwall");
                         }
-                    });
+                        $("#addimg").show();
+                        var aimgnav = $(".am-icon-close");
+                        var aaa = $(".imgnav");
+                        for (var i = 0; i < aimgnav.length; i++) {
+                            alert(aaa[i].id);
+                            aimgnav[i].onclick = function () {
+                                var remobeidx = $(this).attr('value');
+                                alert("haha")
+                                alert(remobeidx);
+                                $("div").remove("#" + remobeidx + "");
+                                var aimgshow = $(".imgnav");
+                                if (aimgshow.length == 0) {
+                                    $("#addimg").hide();
+                                }
+                            }
+                        }
+                    }
+                });
             }
         });
-       // var file = AV.File.withURL('img11.jpg', localIds);
-       //// 以下保存图片…………………………………………
-       // file.save({
-       //     success: function (ofile) {
-       //         ofileid = ofile.id;
-       //         console.log(ofileid);
-       //     }
-       // }).then(function () {
-       //     var postc = new posts();
-       //     var relation = postc.relation("imgs");
-       //     $("<div class=\"imgnav imgnav-" + ofileid + " \" ><a href=\"#\" value=\"" + ofileid + "\" class=\"am-close\">&times;</a><img src=\""+ofileid+"\" alt=\"#\"/></div>").prependTo("#imgwall");
-       //     $("#addimg").show();
-       //     var aimgnav = $(".am-close");
-       //     for (var i = 0; i < aimgnav.length; i++) {
-       //         aimgnav[i].onclick = function () {
-       //             var remobeidx = $(this).attr('value');
-       //             console.log(remobeidx);
-       //             var query = new AV.Query('_File');
-       //             query.get(remobeidx, {
-       //                 success: function (ofile) {
-       //                     // The object was retrieved successfully.
-       //                     console.log("ofile.id:" + ofile.id);
-       //                     //ofile.remove(ofile);
-       //                     ofile.destroy().then(function () {
-       //                         //删除成功
-       //                         console.log('删除成功');
-       //                     });
-       //                 }
-       //             });
-       //             $(".imgnav-" + remobeidx + "").remove();
-       //             var aimgshow = $(".imgnav");
-       //             if (aimgshow.length == 0) {
-       //                 $("#addimg").hide();
-       //             }
-       //         };
-       //     }
-       // });
+        // var file = AV.File.withURL('img11.jpg', localIds);
+        //// 以下保存图片…………………………………………
+        // file.save({
+        //     success: function (ofile) {
+        //         ofileid = ofile.id;
+        //         console.log(ofileid);
+        //     }
+        // }).then(function () {
+        //     var postc = new posts();
+        //     var relation = postc.relation("imgs");
+        //     $("<div class=\"imgnav imgnav-" + ofileid + " \" ><a href=\"#\" value=\"" + ofileid + "\" class=\"am-close\">&times;</a><img src=\""+ofileid+"\" alt=\"#\"/></div>").prependTo("#imgwall");
+        //     $("#addimg").show();
+        //     var aimgnav = $(".am-close");
+        //     for (var i = 0; i < aimgnav.length; i++) {
+        //         aimgnav[i].onclick = function () {
+        //             var remobeidx = $(this).attr('value');
+        //             console.log(remobeidx);
+        //             var query = new AV.Query('_File');
+        //             query.get(remobeidx, {
+        //                 success: function (ofile) {
+        //                     // The object was retrieved successfully.
+        //                     console.log("ofile.id:" + ofile.id);
+        //                     //ofile.remove(ofile);
+        //                     ofile.destroy().then(function () {
+        //                         //删除成功
+        //                         console.log('删除成功');
+        //                     });
+        //                 }
+        //             });
+        //             $(".imgnav-" + remobeidx + "").remove();
+        //             var aimgshow = $(".imgnav");
+        //             if (aimgshow.length == 0) {
+        //                 $("#addimg").hide();
+        //             }
+        //         };
+        //     }
+        // });
     });
 
     //…………………………保存心情 和 tagkey………………………………
@@ -171,7 +171,7 @@ $(function () {
             timestamp = result.timestamp;
             jsApiList = result.jsApiList;
             wx.config({
-                debug:false,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                debug: false,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                 appId: appId, // 必填，公众号的唯一标识
                 timestamp: timestamp, // 必填，生成签名的时间戳
                 nonceStr: noncestr, // 必填，生成签名的随机串
