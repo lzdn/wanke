@@ -70,13 +70,7 @@ $(function () {
                     success: function (res) {
                         localIds = res.localIds;
 
-                        var file = AV.File.withURL(localIds[i], localIds[i]);
-                        file.save({
-                                 success: function (ofile) {
-                                     ofileid = ofile.id;
-                                     alert(ofileid);
-                                 }
-                            })
+                        file.save();
                     }
                 });
 
