@@ -1,0 +1,30 @@
+#heard{
+    width: 100%;
+    padding-top:40px;
+    padding-bottom: 20px;
+    background:#fff;
+}
+#heard .img{
+    width: 72px;
+    height: 72px;
+    margin:0 auto;
+}
+#heard .tel{
+    width: 127px;
+    height: 35px;
+    margin:0 auto;
+}
+#heard .am-btn-extent{
+    width: 127px;
+    height: 35px;
+}
+#heard p{
+    text-align: center;
+}
+.am-list-extend li{
+    margin-bottom: 10px;
+}
+.am-list-extend p{
+    margin:0;
+    padding-left:15px;
+}
