@@ -30,7 +30,7 @@
     </div>
     <script type="text/x-handlebars-template" id="amz-tags">
         {{#each tags}}
-        <div class="Publish am-animation-fade">
+        <div class="Publish am-animation-fade" value={{this.value}}>
             <div class="title">
                 <div class="show"><img src="assets/i/img/ss1.jpg" class="am-radius"></div>
                 <p class="username">{{this.name}}</p>
@@ -44,7 +44,6 @@
             </div>
             <div class="foot">
                 <span class="time">发布于{{this.time}}前</span>
-                <a class="viewmore" value={{this.value}}>查看更多</a>
             </div>
         </div>
 </div>
@@ -70,7 +69,9 @@
 
 <div id="foots">
     <div>
+        <a href="post_save.html">
         <i class="am-icon am-icon-plus am-icon-sm"></i>
+        </a>
     </div>
 </div>
 

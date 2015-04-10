@@ -2,7 +2,7 @@
    $("#arrow").hide();
     var idx= 5 ;
     loading(function(){
-        $(".viewmore").on("click",function(){
+        $(".Publish").on("click",function(){
             var postview=$(this).attr("value");
             window.location.href="post_detail.html?"+postview+"";
         });
@@ -27,7 +27,7 @@
         if(scrollTop+newheight+200>=htmlHeight){
             idx+=5;
             loading(function(){
-                $(".viewmore").on("click",function(){
+                $(".Publish").on("click",function(){
                     var postview=$(this).attr("value");
                     window.location.href="post_detail.html?"+postview+"";
                 });

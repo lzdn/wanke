@@ -147,7 +147,7 @@ body{
     height: 58px;
     margin:0 auto;
 }
-#arrow a{
+#arrow a,#foots a{
     color:#333;
 }
 #arrow div {
