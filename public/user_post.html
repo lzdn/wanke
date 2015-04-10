@@ -7,7 +7,7 @@
     <meta name="keywords" content="">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>评论更多</title>
+    <title>用户评论</title>
     <link rel="icon" type="image/png" href="assets/i/favicon.png">
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
@@ -19,20 +19,13 @@
     <meta name="msapplication-TileColor" content="#0e90d2">
     <link rel="stylesheet" href="assets/css/amazeui.min.css">
     <link rel="stylesheet" href="css/views/post_index.css">
-    <link rel="stylesheet" href="css/views/post_detail.css">
+    <link rel="stylesheet" href="css/views/user_post.css">
 </head>
 <body>
-
 <div id="content">
-    <!--<div class="am-input-group am-input-exend">-->
-    <!--<input type="text" class="am-form-field "placeholder="搜索" >-->
-    <!--<span class="am-input-group-btn">-->
-    <!--<button class="am-btn am-btn-extend" type="button"><span class="am-icon-search am-icon-extend"></button>-->
-    <!--</span>-->
-    <!--</div>-->
     <script type="text/x-handlebars-template" id="amz-tags">
         {{#each tags}}
-        <div class="Publish">
+        <div id={{this.value}} class="Publish am-animation-fade" value={{this.value}} data-am-modal="{target: '#my-actions'}">
             <div class="title">
                 <div class="show"><img src="assets/i/img/ss1.jpg" class="am-radius"></div>
                 <p class="username">{{this.name}}</p>
@@ -51,28 +44,39 @@
 </div>
 {{/each}}
 </script>
-<div data-am-widget="duoshuo" class="am-duoshuo am-duoshuo-primary" data-ds-short-name="55223dcfe4b0cd5b62664791">
-    <div class="ds-thread"></div>
-</div>
-<div id="thread">
-    <script type="text/javascript">
-        var duoshuoQuery = {short_name: "sunshuang"};
-        (function () {
-            var ds = document.createElement('script');
-            ds.type = 'text/javascript';
-            ds.async = true;
-            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-            ds.charset = 'UTF-8';
-            (document.getElementsByTagName('head')[0]
-            || document.getElementsByTagName('body')[0]).appendChild(ds);
-        })();
-    </script>
+<div id="load">
+    <i class="am-icon-refresh am-icon-spin am-icon-spin-extend am-icon-sm"></i>
 </div>
 
+<div class="am-modal-actions" id="my-actions">
+    <div class="am-modal-actions-group">
+        <ul class="am-list">
+            <li><a href="#" id="dophoto" class="seecontent" data-am-modal-close>查看详情</a></li>
+            <li><a href="#" id="photolibrary" class="destroy" data-am-modal-close am-btn am-disabled>删除</a></li>
+        </ul>
+    </div>
+    <div class="am-modal-actions-group">
+        <button id="escphoto" class="am-btn am-btn-secondary am-btn-block" data-am-modal="{target: '#my-actions'}">取消
+        </button>
+    </div>
+</div>
 
-<!-- <div data-am-widget="duoshuo" class="am-duoshuo am-duoshuo-default" data-ds-short-name="amazeui">
-  <div class="ds-thread"></div>
-</div> -->
+<div  id="arrow" data-am-widget="gotop">
+    <div>
+        <a href="#top">
+            <i  class="am-icon am-icon-arrow-up am-icon-sm"></i>
+        </a>
+    </div>
+</div>
+
+<div id="foots">
+    <div>
+        <a href="post_save.html">
+            <i class="am-icon am-icon-plus am-icon-sm"></i>
+        </a>
+    </div>
+</div>
+
 <div data-am-widget="navbar" class="am-navbar am-cf  am-navbar-default"
      id="">
     <ul class="am-navbar-nav am-cf am-avg-sm-4 am-navbar-nav-extend ">
@@ -89,13 +93,15 @@
             </a>
         </li>
         <li>
-            <a id="users">
+            <a  id="users">
                 <i class="am-header-icon am-icon-user am-icon-sm"></i>
                 <span class="am-navbar-label">个人中心</span>
             </a>
         </li>
     </ul>
 </div>
+
+
 
 
 <!--  {{#each tags}}
@@ -112,7 +118,7 @@
 <script src="assets/js/amazeui.widgets.helper.min.js"></script>
 <script src="assets/js/handlebars.min.js"></script>
 <script src="https://leancloud.cn/scripts/lib/av-0.5.0.min.js"></script>
-<script src="js/views/post_detail.js"></script>
+<script src="js/views/user_post.js"></script>
 <!--[if lte IE 8 ]>
 <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
 <![endif]-->

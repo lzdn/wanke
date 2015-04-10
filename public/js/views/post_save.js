@@ -135,7 +135,7 @@ $(function () {
         postc.save({
             content: aUserval2,
             tagkey: tag,
-            imgs: relation
+           // imgs: relation
         }, {
             success: function (object) {
                 alert("发表成功");
