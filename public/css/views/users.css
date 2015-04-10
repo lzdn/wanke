@@ -32,3 +32,6 @@
 #content .icon-2 {
     float: right;
 }
+#users :hover{
+    cursor:pointer;
+}

@@ -6,8 +6,8 @@
             var postview=$(this).attr("value");
             window.location.href="post_detail.html?"+postview+"";
         });
-        $(".users").on("click",function(){
-            alert("haha");
+        $("#users").on("click",function(){
+            //alert("haha");
             window.location.href="users.html";
         });
 

@@ -156,6 +156,6 @@ body{
     margin:0 auto;
     margin-top:40px;
 }
-.users :hover{
+#users :hover{
      cursor:pointer;
  }

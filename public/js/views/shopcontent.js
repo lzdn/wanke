@@ -2,7 +2,11 @@
 (function($) {
     var shopid=window.location.search.split('?')[1];
     //alert(shopid);
-loading();
+    loading(function(){
+        $("#users").on("click",function(){
+            window.location.href="users.html";
+        });
+    });
 
 
 
@@ -40,7 +44,7 @@ loading();
                 var data = {shops: shops};
                 var html = template(data);
                 $tpl.before(html);
-                //callbak();
+                callbak();
             }
         });
     }

@@ -7,7 +7,7 @@
     <meta name="keywords" content="">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>邻里圈</title>
+    <title>易生活</title>
     <link rel="icon" type="image/png" href="assets/i/favicon.png">
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
@@ -26,7 +26,7 @@
     <li>周边小店</li>
     <script type="text/x-handlebars-template" id="shop">
         {{#each shops}}
-        <li class="shopcontent" value="{{this.id}}"><img class="am-circle" src="assets/i/img/ss1.jpg" width="40" height="40"/><p>{{this.name}}</p><i class="am-icon am-icon-phone am-icon-md" value="{{this.tel}}"></i></li>
+        <li class="shopcontent" value="{{this.id}}"><img class="am-circle" src="assets/i/img/ss1.jpg" width="40" height="40"/><p>{{this.name}}</p><a href="tel:{{this.tel}}" class="am-icon am-icon-phone am-icon-md"></a></li>
         {{/each}}
     </script>
 
@@ -42,19 +42,19 @@
          id="">
         <ul class="am-navbar-nav am-cf am-avg-sm-4 am-navbar-nav-extend ">
             <li>
-                <a href="sms:18601860186?body=约吗？" class="">
+                <a href="shop.html" class="">
                     <i class="am-header-icon am-icon-cutlery am-icon-sm"></i>
                     <span class="am-navbar-label">易生活</span>
                 </a>
             </li>
             <li>
-                <a href="tel:18601860186" class="">
+                <a href="post_index.html" class="">
                     <i class="am-header-icon am-icon-users am-icon-sm"></i>
                     <span class="am-navbar-label">邻里圈</span>
                 </a>
             </li>
             <li>
-                <a class="users">
+                <a id="users">
                     <i class="am-header-icon am-icon-user am-icon-sm"></i>
                     <span class="am-navbar-label">个人中心</span>
                 </a>

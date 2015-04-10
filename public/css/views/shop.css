@@ -12,7 +12,10 @@
     top:10px;
 }
 .am-list-extend .am-icon{
-    color:green;
+    color:rgb(108, 218, 9);
     float:right;
     margin-right:20px;
+}
+#users :hover{
+    cursor:pointer;
 }

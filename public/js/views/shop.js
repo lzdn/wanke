@@ -5,6 +5,10 @@
             var shopid=$(this).attr("value");
             window.location.href="shopcontent.html?"+shopid+"";
         });
+
+        $("#users").on("click",function(){
+            window.location.href="users.html?ss";
+        });
     });
 
     function loading(callbak) {
