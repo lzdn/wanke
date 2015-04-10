@@ -2,6 +2,7 @@
     position: relative;
     padding-left: 20px;
 }
+
 .am-list-extend p{
     margin: 5px 0 0 50px;
     padding:0;
@@ -15,6 +16,9 @@
     color:rgb(108, 218, 9);
     float:right;
     margin-right:20px;
+    position: absolute;
+    top:0;
+    right:0;
 }
 #users :hover{
     cursor:pointer;
