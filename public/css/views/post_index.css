@@ -147,6 +147,9 @@ body{
     height: 58px;
     margin:0 auto;
 }
+#arrow a{
+    color:#333;
+}
 #arrow div {
     line-height: 58px;
 }
