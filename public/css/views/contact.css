@@ -46,7 +46,7 @@
 #content .title{
     width: 315px;
     height: 20px;
-    margin:0 auto;
+    margin:20px auto;
 }
 #content div{
     position:relative;
@@ -60,3 +60,6 @@
     position: absolute;
     left:0;
 }
+/*#content .title{*/
+    /*margin: 20px 0 20px 0;*/
+/*}*/
