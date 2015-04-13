@@ -27,20 +27,20 @@
     {{#each shops}}
     <div id="heard">
         <div class="img"><img class="am-circle" src="assets/i/img/ss1.jpg" width="72" height="72" alt=""/></div>
-        <p>{{this.name}}</p>
+        <p class="am-sans-serif">{{this.name}}</p>
 
         <div class="tel">
-            <a class="am-btn am-btn-success am-btn-extent" href="tel:{{this.tel}}">
-                <i class="am-icon-phone"></i>
+            <a class="am-btn am-btn-success am-btn-extent am-sans-serif" href="tel:{{this.tel}}">
+                <i class="am-icon-phone am-sans-serif"></i>
                 拨打
             </a>
         </div>
     </div>
 
     <ul class="am-list am-list-static am-list-extend">
-        <li class="shopcontent" value=""><p>服务描述：{{service}}</p></li>
-        <li class="shopcontent" value=""><p>店铺地址：{{this.address}}</p></li>
-        <li class="shopcontent" value=""><p>营业时间：{{this.time}}</p></li>
+        <li class="shopcontent" value=""><p class="am-sans-serif">服务描述：{{service}}</p></li>
+        <li class="shopcontent" value=""><p class="am-sans-serif">店铺地址：{{this.address}}</p></li>
+        <li class="shopcontent" value=""><p class="am-sans-serif">营业时间：{{this.time}}</p></li>
         <li class="shopcontent" value=""><p>服务范围：{{this.range}}</p></li>
     </ul>
 

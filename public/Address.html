@@ -51,16 +51,32 @@
         <fieldset>
 
             <div class="am-form-group">
-                <label for="doc-select-1">下拉多选框</label>
+                <label for="doc-select-1">填小区</label>
                 <select id="doc-select-1">
-                    <option value="option1">选项一...</option>
-                    <option value="option2">选项二.....</option>
-                    <option value="option3">选项三........</option>
+                    <script type="text/x-handlebars-template" id="homes">
+                        {{#each homes}}
+                        <option value={{this.id}}>{{this.name}}</option>
+                        {{/each}}
+                    </script>
                 </select>
                 <span class="am-form-caret"></span>
             </div>
 
-
+            <div class="am-form-group">
+                <label for="doc-select-2">楼栋号</label>
+                <select id="doc-select-2">
+                    <script type="text/x-handlebars-template" id="buildings">
+                        {{#each buildings}}
+                        <option class="homeval" value={{this.names}}>{{this.names}}</option>
+                        {{/each}}
+                    </script>
+                </select>
+                <span class="am-form-caret"></span>
+            </div>
+            <div class="am-form-group">
+                <label>门牌号（如1023）</label>
+                <input id="wxnum" type="text" minlength="3"   class="am-form-field" required/>
+            </div>
         </fieldset>
     </form>
 
