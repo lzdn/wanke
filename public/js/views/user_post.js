@@ -10,7 +10,7 @@
              postview = $(this).attr("value");
         });
         $("#users").on("click", function () {
-            window.location.href = "users.html";
+            window.location.href = "user_detail.html";
         });
 
     });
@@ -32,7 +32,7 @@
                     postview = $(this).attr("value");
                 });
                 $("#users").on("click", function () {
-                    window.location.href = "users.html";
+                    window.location.href = "user_detail.html";
                 });
 
             });

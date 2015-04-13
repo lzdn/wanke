@@ -3,7 +3,7 @@
     var postview=window.location.search.split('?')[1];
    // alert(postview);
     $("#users").on("click",function(){
-        window.location.href="users.html?sss";
+        window.location.href="user_detail.html?sss";
     });
     thread_url= "http://localhost:63342/wanke/public/post_detail.html?55223dcfe4b0cd5b62664791";
     thread_key= postview;

@@ -4,7 +4,7 @@
     //alert(shopid);
     loading(function(){
         $("#users").on("click",function(){
-            window.location.href="users.html";
+            window.location.href="user_detail.html";
         });
     });
 

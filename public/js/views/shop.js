@@ -3,11 +3,11 @@
     loading(function(){
         $(".shopcontent").on("click",function(){
             var shopid=$(this).attr("value");
-            window.location.href="shopcontent.html?"+shopid+"";
+            window.location.href="shop_content.html?"+shopid+"";
         });
 
         $("#users").on("click",function(){
-            window.location.href="users.html?ss";
+            window.location.href="user_detail.html?ss";
         });
     });
 

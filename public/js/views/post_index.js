@@ -8,7 +8,7 @@
         });
         $("#users").on("click",function(){
             //alert("haha");
-            window.location.href="users.html";
+            window.location.href="user_detail.html";
         });
 
     });
