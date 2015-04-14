@@ -1,12 +1,7 @@
 (function ($) {
-    var homeval
-
-    function ei(){
-        alert("haha");
-    }
-
     loading(function () {
-        $("#doc-select-1").on("click", function () {
+        var homeval
+        $("#doc-select-1").change(function () {
                           if(homeval!=$(this).val()){
                               homeval=$(this).val();
                               $(".homeval").remove();
