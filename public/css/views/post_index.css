@@ -16,7 +16,7 @@ body{
     /*font-size: 10px;*/
 }
 #content{
-    margin:0 10px 30px 10px;
+    margin:0 0 30px 0;
 }
 
 .am-icon-extend{
@@ -28,9 +28,10 @@ body{
 .Publish{
     background: #fff;
     width: 100%;
-    border:1px solid #ccc;
+    /*border:1px solid #ccc;*/
     padding: 10px;
     margin-bottom: 10px;
+    -webkit-box-shadow:10px 10px 10px rgba(170,170,170,1);
 }
 .title{
     width: 100%;

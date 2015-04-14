@@ -2,8 +2,6 @@
     var homeval
     loading(function () {
         $("#doc-select-1").on("click", function () {
-                      setTimeout(function(){
-                          alert("haha");
                           if(homeval!=$(this).val()){
                               homeval=$(this).val();
                               $(".homeval").remove();
@@ -12,9 +10,7 @@
                               query2.equalTo("objectId", $(this).val());
                               query2.find({
                                   success: function (results) {
-                                      console.log(results);
                                       var oldbuilding = results[0].get("building");
-                                      console.log(oldbuilding);
                                       var buildings = [];
                                       for (var j = 0; j < oldbuilding.length; j++) {
                                           var building = {
@@ -31,7 +27,6 @@
                                   }
                               })
                           }
-                      },20);
 
         })
     });
