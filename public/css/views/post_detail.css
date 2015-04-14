@@ -4,3 +4,12 @@
 #users :hover{
     cursor:pointer;
 }
+#btnname {
+    width: 200px;
+    height: 40px;
+    margin:0 auto;
+}
+#btnname .am-btn{
+    width: 200px;
+    height: 40px;
+}
