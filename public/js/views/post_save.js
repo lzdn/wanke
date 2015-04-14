@@ -10,7 +10,7 @@ $(function () {
     dataLoad(function () {
 
         wx.ready(function () {
-           // alert("绑定事件:隐藏菜单");
+            // alert("绑定事件:隐藏菜单");
             wx.hideOptionMenu();
         });
 
@@ -72,20 +72,30 @@ $(function () {
     $("#smimg").on("click", function () {
         var ofileid;
         var localIds;
-                wx.chooseImage({
-                    success: function (res) {
-                        localIds = res.localIds;
-                        alert("开始保存");
-                        alert(localIds[0]);
-                        var file = AV.File.withURL("ssssss",localIds[0]);
-                        file.save().then(function(){
-                            alert("haha")
-                            var profilePhoto = profile.get("photoFile");
-                            alert(profilePhoto.url());
-                            //$("profileImg")[0].src = profilePhoto.url();
-                        })
+        wx.chooseImage({
+            success: function (res) {
+                localIds = res.localIds;
+                alert(localIds);
+                      wx.uploadImage({
+                      localId: 'localIds', // 需要上传的图片的本地ID，由chooseImage接口获得
+                      isShowProgressTips: 1, // 默认为1，显示进度提示
+                      success: function (res) {
+                        var serverId = res.serverId; // 返回图片的服务器端ID
+                          alert(serverId);
                     }
                 });
+
+                //alert("开始保存");
+                //alert(localIds[0]);
+                //var file = AV.File.withURL("ssssss", localIds[0]);
+                //file.save().then(function () {
+                //    alert("haha")
+                //    var profilePhoto = profile.get("photoFile");
+                //    alert(profilePhoto.url());
+                //    //$("profileImg")[0].src = profilePhoto.url();
+                //})
+            }
+        });
 
         // var file = AV.File.withURL('img11.jpg', localIds);
         //// 以下保存图片…………………………………………
@@ -134,8 +144,8 @@ $(function () {
         var postc = new posts();
         postc.save({
             content: aUserval2,
-            tagkey: tag,
-           // imgs: relation
+            tagkey: tag
+            // imgs: relation
         }, {
             success: function (object) {
                 alert("发表成功");
@@ -153,13 +163,16 @@ $(function () {
             signature = result.signature;
             timestamp = result.timestamp;
             jsApiList = result.jsApiList;
+
             wx.config({
                 debug: false,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                 appId: appId, // 必填，公众号的唯一标识
                 timestamp: timestamp, // 必填，生成签名的时间戳
                 nonceStr: noncestr, // 必填，生成签名的随机串
                 signature: signature,// 必填，签名，见附录1
-                jsApiList: jsApiList// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                jsApiList: ['chooseImage',
+                    'uploadImage',
+                    'previewImage']// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
             });
         });
 
