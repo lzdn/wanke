@@ -2,34 +2,37 @@
     var homeval
     loading(function () {
         $("#doc-select-1").on("click", function () {
-            alert("haha");
-            if(homeval!=$(this).val()){
-                homeval=$(this).val();
-                $(".homeval").remove();
-                var home = AV.Object.extend("home");
-                var query2 = new AV.Query(home);
-                query2.equalTo("objectId", $(this).val());
-                query2.find({
-                    success: function (results) {
-                        console.log(results);
-                        var oldbuilding = results[0].get("building");
-                        console.log(oldbuilding);
-                        var buildings = [];
-                        for (var j = 0; j < oldbuilding.length; j++) {
-                            var building = {
-                                names: oldbuilding[j]
-                            }
-                            buildings.push(building);
-                        }
-                        var $buildings = $('#buildings');
-                        var source2 =$buildings.text();
-                        var template2 = Handlebars.compile(source2);
-                        var data2 = {buildings: buildings};
-                        var html2 = template2(data2);
-                        $buildings.before(html2);
-                    }
-                })
-            }
+                      setTimeout(function(){
+                          alert("haha");
+                          if(homeval!=$(this).val()){
+                              homeval=$(this).val();
+                              $(".homeval").remove();
+                              var home = AV.Object.extend("home");
+                              var query2 = new AV.Query(home);
+                              query2.equalTo("objectId", $(this).val());
+                              query2.find({
+                                  success: function (results) {
+                                      console.log(results);
+                                      var oldbuilding = results[0].get("building");
+                                      console.log(oldbuilding);
+                                      var buildings = [];
+                                      for (var j = 0; j < oldbuilding.length; j++) {
+                                          var building = {
+                                              names: oldbuilding[j]
+                                          }
+                                          buildings.push(building);
+                                      }
+                                      var $buildings = $('#buildings');
+                                      var source2 =$buildings.text();
+                                      var template2 = Handlebars.compile(source2);
+                                      var data2 = {buildings: buildings};
+                                      var html2 = template2(data2);
+                                      $buildings.before(html2);
+                                  }
+                              })
+                          }
+                      },20);
+
         })
     });
     function loading(callbak) {
