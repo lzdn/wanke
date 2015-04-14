@@ -13,3 +13,18 @@
     width: 200px;
     height: 40px;
 }
+#registration{
+    position: relative;
+    margin-top:20px;
+}
+#registration p{
+    position:absolute;
+}
+#headtle{
+    margin-left:55px;
+}#headtle img{
+     width: 30px;
+     height: 29px;
+    margin: 0 0 10px 5px;
+ }
+
