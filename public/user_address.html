@@ -52,7 +52,7 @@
 
             <div class="am-form-group">
                 <label for="doc-select-1">填小区</label>
-                <select id="doc-select-1">
+                <select id="doc-select-1"  onchange="ei();">
                     <script type="text/x-handlebars-template" id="homes">
                         {{#each homes}}
                         <option class="homes" value={{this.id}}>{{this.name}}</option>
@@ -118,7 +118,11 @@
   <p>发表时间{{this.time}}</p>
 </div>
       {{/each}} -->
-
+<script>
+    function ei(){
+        alert("haha")
+    }
+</script>
 
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/amazeui.min.js"></script>

@@ -1,5 +1,10 @@
 (function ($) {
     var homeval
+
+    function ei(){
+        alert("haha");
+    }
+
     loading(function () {
         $("#doc-select-1").on("click", function () {
                           if(homeval!=$(this).val()){
