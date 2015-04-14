@@ -8,9 +8,6 @@
     thread_url= "http://localhost:63342/wanke/public/post_detail.html?55223dcfe4b0cd5b62664791";
     thread_key= postview;
     thread_title = 'post_detail';
-    console.log( thread_url);
-    console.log(thread_key);
-    console.log(thread_title);
     $("<div id=\"ds-thread\" class=\"ds-thread\" data-thread-key=postview+\"\" data-title=\"post_detail\" data-url=\"http://localhost:63342/wanke/public/post_detail.html?55223dcfe4b0cd5b62664791\"></div>"
     ).prependTo("#thread");
 
