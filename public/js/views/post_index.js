@@ -87,21 +87,15 @@
                                     }
                                 }
                             }
-                            // var tagvalue = object.get('tagkey');
-                            var imge    = object.get('imgs')
                             var opost = {
                                 name: username,
                                 usersay:content,
                                 tag: tagvalue,
                                 time:times,
-                                value:avalue
-                                //img: imge
+                                value:avalue,
+                                img: imgs
                             };
                             tags.push(opost);
-                            console.log(opost.name);
-                            console.log(opost.usersay);
-                            console.log(opost.tag);
-                            console.log(opost.time);
                         }
                         var $tpl = $('#amz-tags');
                         var source = $tpl.text();

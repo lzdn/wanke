@@ -42,8 +42,11 @@
             <div class="content "><p class="am-sans-serif">{{this.usersay}}</p></div>
             <div class="images">
                 <div class="h"></div>
-                <img src="assets/i/img/ss1.jpg" class="am-radius">
-                <img src="assets/i/img/ss1.jpg" class="am-radius">
+                {{#if this.img}}
+                {{#each this.img}}
+                <img src={{this.img}} class="am-radius">
+                {{/each}}
+                {{/if}}
             </div>
             <div class="foot">
                 <span class="time am-sans-serif">发布于{{this.time}}前</span>

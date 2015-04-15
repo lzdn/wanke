@@ -74,14 +74,18 @@ $(function () {
         var localIds;
                 wx.chooseImage({
                     success: function (res) {
+                        console.log(res);
+                        alert(res);
+                        alert(res[0]);
+                        var file = new AV.File("myfile.txt", res);
+                        file.save({
+                            success:function(files){
+                                alert(files);
+                            }
+                        })
                         localIds = res.localIds;
                        // alert("开始保存");
                         alert(localIds[0]);
-                        var fso = new ActiveXObject("Scripting.FileSystemObject");
-                        var f = fso.CreateTextFile(localIds[0],true);
-                        alert(f);
-                        var pic = new AV.File("test.png", f);
-                        pic.save();
                         //var file = AV.File.withURL("ssssss",localIds[0]);
                         //file.save().then(function(){
                         //    alert("haha")
