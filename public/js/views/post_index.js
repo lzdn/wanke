@@ -1,5 +1,5 @@
 (function($) {
-    var skx=-3;
+    var skx=-5;
    $("#arrow").hide();
     loading(function(){
         $(".Publish").on("click",function(){
@@ -15,7 +15,7 @@
 
     $(window).scroll(function(){
         var htmlHeight=document.body.scrollHeight||document.documentElement.scrollHeight;
-        var clientHeight=document.body.clientHeight||document.documentElement.clientHeight;
+        //var clientHeight=document.body.clientHeight||document.documentElement.clientHeight;
         var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
         var newheight =window.screen.availHeight;
         if(scrollTop>800){
@@ -46,7 +46,7 @@
             success:function(skip){
                 var newtime = new Date().getTime();
                 query.descending("createdAt");
-                skx+=3;
+                skx+=5;
                 if(skx>=skip){
                     $("#load").remove();
                 }
@@ -56,27 +56,26 @@
                 query.include("username");
                 query.find({
                     success:function(arry){
-                        console.log(arry);
                         var times=0;
                         var tags = [];
                         for (var i = 0; i < arry.length; i++) {
                             var object = arry[i];
                             var  imgs =  object.get('imgs');
                             console.log(imgs);
-                            var jimgs=[];
-                            if(imgs!=[]){
-                                for(var j=0; j<imgs.length;j++){
-                                    var jimg={
-                                        url:imgs[i]
-                                    }
-                                    jimgs.push(jimg);
-                                }
-                            }
-
-                            console.log(arry[i]);
+                           // var jimgs=[];
+                            //if(imgs){
+                            //    for(var j=0; j<imgs.length;j++){
+                            //        var jimg={
+                            //            url:imgs[i]
+                            //        }
+                            //        jimgs.push(jimg);
+                            //    }
+                            //}else{
+                            //    jimgs=[];
+                            //}
+                            //console.log(jimgs);
                             var avalue = object.id;
                             var content = object.get('content');
-                            console.log(imgs);
                             var otagkey=object.get("tagkey");
                             var ousername =object.get("username");
                             var username = ousername.get("username");
@@ -104,14 +103,12 @@
                                 tag: tagvalue,
                                 time:times,
                                 value:avalue,
-                                img: jimgs
+                                img: imgs
                             };
                             tags.push(opost);
-                            console.log(opost.name);
-                            console.log(opost.usersay);
-                            console.log(opost.tag);
-                            console.log(opost.time);
+
                         }
+                        console.log(tags);
                         var $tpl = $('#amz-tags');
                         var source = $tpl.text();
                         var template = Handlebars.compile(source);
