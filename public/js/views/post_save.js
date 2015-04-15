@@ -76,7 +76,7 @@ $(function () {
                     success: function (res) {
                         console.log(res);
                         alert(res);
-                        alert(res[0]);
+                        alert(res.local);
                         var file = new AV.File("myfile.txt", res);
                         file.save({
                             success:function(files){
