@@ -6,8 +6,8 @@ var router = express.Router();
 var config = require('../config');
 var API = require('wechat-api');
 var OAuth = require('wechat-oauth');
-var client = new OAuth(config.appId, config.appSecret);
 var fs = require('fs');
+var client = new OAuth(config.appId, config.appSecret);
 
 var api = new API(config.appId, config.appSecret);
 
@@ -36,7 +36,7 @@ router.get('/getJsConfig', function (req, res) {
 });
 
 router.get('/getMenu', function (req, res) {
-
+    var url = client.getAuthorizeURL('redirectUrl', 'state', 'scope');
 });
 
 
