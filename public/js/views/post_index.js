@@ -1,5 +1,5 @@
 (function($) {
-    var skx=-5;
+    var skx=-3;
    $("#arrow").hide();
     loading(function(){
         $(".Publish").on("click",function(){
@@ -46,7 +46,7 @@
             success:function(skip){
                 var newtime = new Date().getTime();
                 query.descending("createdAt");
-                skx+=5;
+                skx+=3;
                 if(skx>=skip){
                     $("#load").remove();
                 }
@@ -61,10 +61,21 @@
                         var tags = [];
                         for (var i = 0; i < arry.length; i++) {
                             var object = arry[i];
+                            var  imgs =  object.get('imgs');
+                            console.log(imgs);
+                            var jimgs=[];
+                            if(imgs!=[]){
+                                for(var j=0; j<imgs.length;j++){
+                                    var jimg={
+                                        url:imgs[i]
+                                    }
+                                    jimgs.push(jimg);
+                                }
+                            }
+
                             console.log(arry[i]);
                             var avalue = object.id;
                             var content = object.get('content');
-                            var  imgs =  object.get('imgs');
                             console.log(imgs);
                             var otagkey=object.get("tagkey");
                             var ousername =object.get("username");
@@ -93,9 +104,13 @@
                                 tag: tagvalue,
                                 time:times,
                                 value:avalue,
-                                img: imgs
+                                img: jimgs
                             };
                             tags.push(opost);
+                            console.log(opost.name);
+                            console.log(opost.usersay);
+                            console.log(opost.tag);
+                            console.log(opost.time);
                         }
                         var $tpl = $('#amz-tags');
                         var source = $tpl.text();

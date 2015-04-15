@@ -70,27 +70,37 @@ $(function () {
     var relation = postc.relation("imgs");
 
     $("#smimg").on("click", function () {
-        var ofileid;
+        //var ofileid;
         var localIds;
                 wx.chooseImage({
                     success: function (res) {
                         console.log(res);
-                        alert(res);
-                        //for(str in res)
-                        //{
-                        //    alert(str);
-                        //}
-                        alert(res.sourceType);
-                        alert(res.errMsg);
-                        var file = new AV.File("myfile.jpg", res);
-                        file.save({
-                            success:function(files){
-                                alert(files);
-                            }
-                        })
                         localIds = res.localIds;
+                        alert(localIds);
+                        wx.uploadImage({
+                            localId: localIds, // 需要上传的图片的本地ID，由chooseImage接口获得
+                            isShowProgressTips: 1, // 默认为1，显示进度提示
+                            success: function (rese) {
+                                var serverId = rese.serverId; // 返回图片的服务器端ID
+                                alert(serverId);
+                                var file = AV.File.withURL('test.jpg',serverId);
+                                file.save({
+                                    success:function(){
+                                        alert("heihei");
+                                    }
+                                });
+                            }
+                        });
+                        //alert(res);
+                        //alert(res.sourceType);
+                        //alert(res.errMsg);
+                        //var file = new AV.File("myfile.jpg", res);
+                        //file.save({
+                        //    success:function(files){
+                        //        alert(files);
+                        //    }
+                        //})
                        // alert("开始保存");
-                        alert(localIds[0]);
                         //var file = AV.File.withURL("ssssss",localIds[0]);
                         //file.save().then(function(){
                         //    alert("haha")
