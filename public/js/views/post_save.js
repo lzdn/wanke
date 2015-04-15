@@ -10,7 +10,7 @@ $(function () {
     dataLoad(function () {
 
         wx.ready(function () {
-            // alert("绑定事件:隐藏菜单");
+           // alert("绑定事件:隐藏菜单");
             wx.hideOptionMenu();
         });
 
@@ -72,30 +72,25 @@ $(function () {
     $("#smimg").on("click", function () {
         var ofileid;
         var localIds;
-        wx.chooseImage({
-            success: function (res) {
-                localIds = res.localIds;
-                alert(localIds);
-                      wx.uploadImage({
-                      localId: 'localIds', // 需要上传的图片的本地ID，由chooseImage接口获得
-                      isShowProgressTips: 1, // 默认为1，显示进度提示
-                      success: function (res) {
-                        var serverId = res.serverId; // 返回图片的服务器端ID
-                          alert(serverId);
+                wx.chooseImage({
+                    success: function (res) {
+                        localIds = res.localIds;
+                       // alert("开始保存");
+                        alert(localIds[0]);
+                        var fso = new ActiveXObject("Scripting.FileSystemObject");
+                        var f = fso.CreateTextFile(localIds[0],true);
+                        alert(f);
+                        var pic = new AV.File("test.png", f);
+                        pic.save();
+                        //var file = AV.File.withURL("ssssss",localIds[0]);
+                        //file.save().then(function(){
+                        //    alert("haha")
+                        //    var profilePhoto = profile.get("photoFile");
+                        //    alert(profilePhoto.url());
+                        //    //$("profileImg")[0].src = profilePhoto.url();
+                        //})
                     }
                 });
-
-                //alert("开始保存");
-                //alert(localIds[0]);
-                //var file = AV.File.withURL("ssssss", localIds[0]);
-                //file.save().then(function () {
-                //    alert("haha")
-                //    var profilePhoto = profile.get("photoFile");
-                //    alert(profilePhoto.url());
-                //    //$("profileImg")[0].src = profilePhoto.url();
-                //})
-            }
-        });
 
         // var file = AV.File.withURL('img11.jpg', localIds);
         //// 以下保存图片…………………………………………
@@ -145,7 +140,7 @@ $(function () {
         postc.save({
             content: aUserval2,
             tagkey: tag
-            // imgs: relation
+           // imgs: relation
         }, {
             success: function (object) {
                 alert("发表成功");
@@ -170,9 +165,7 @@ $(function () {
                 timestamp: timestamp, // 必填，生成签名的时间戳
                 nonceStr: noncestr, // 必填，生成签名的随机串
                 signature: signature,// 必填，签名，见附录1
-                jsApiList: ['chooseImage',
-                    'uploadImage',
-                    'previewImage']// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                jsApiList: jsApiList// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
             });
         });
 
