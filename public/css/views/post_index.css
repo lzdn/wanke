@@ -79,15 +79,11 @@ body{
 }
 .images{
     width: 160px;
-    height: 160px;
-    background: yellow url(file:///D:/Documents/GitHub/wanke/public/assets/i/img/background.png) repeat;
+    overflow:auto;zoom:1;
+    /*height: 160px;*/
+    /*background: yellow url(file:///D:/Documents/GitHub/wanke/public/assets/i/img/background.png) repeat;*/
 }
-.images .h{
-    height: 160px;
-    background: red;
-    position: relative;
-    float: left;
-}
+
 .images img{
     width: 70px;
     height: 70px;
