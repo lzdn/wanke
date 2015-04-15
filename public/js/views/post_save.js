@@ -83,7 +83,7 @@ $(function () {
                         alert(res.sourceType);
                         alert(res.errMsg);
 
-                        var file = new AV.File("myfile.txt", res);
+                        var file = new AV.File("myfile.txt", res.sourceType);
                         file.save({
                             success:function(files){
                                 alert(files);
