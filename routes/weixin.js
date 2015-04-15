@@ -5,6 +5,8 @@ var express = require('express');
 var router = express.Router();
 var config = require('../config');
 var API = require('wechat-api');
+var OAuth = require('wechat-oauth');
+var client = new OAuth(config.appId, config.appSecret);
 var fs = require('fs');
 
 var api = new API(config.appId, config.appSecret);
@@ -20,7 +22,8 @@ router.get('/getJsConfig', function (req, res) {
         debug: true,
         jsApiList: [
             'chooseImage',
-            'previewImage'],
+            'previewImage',
+            'uploadImage'],
         url: config.authUrl + "/post_save.html"
     };
     console.log(param);
@@ -31,5 +34,10 @@ router.get('/getJsConfig', function (req, res) {
         res.json(result);
     });
 });
+
+router.get('/getMenu', function (req, res) {
+
+});
+
 
 module.exports = router;
