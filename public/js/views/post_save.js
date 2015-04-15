@@ -82,9 +82,7 @@ $(function () {
                         //}
                         alert(res.sourceType);
                         alert(res.errMsg);
-
-                        alert(res.sourceType.album);
-                        var file = new AV.File("myfile.txt", res.sourceType.album);
+                        var file = new AV.File("myfile.jpg", res);
                         file.save({
                             success:function(files){
                                 alert(files);
