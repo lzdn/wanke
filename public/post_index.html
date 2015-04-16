@@ -7,7 +7,7 @@
     <meta name="keywords" content="">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>评论列表</title>
+    <title></title>
     <link rel="icon" type="image/png" href="assets/i/favicon.png">
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
@@ -18,7 +18,6 @@
     <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
     <meta name="msapplication-TileColor" content="#0e90d2">
     <link rel="stylesheet" href="assets/css/amazeui.min.css">
-    <link rel="stylesheet" href="css/comment.css">
     <link rel="stylesheet" href="css/views/post_index.css">
 </head>
 <body>
@@ -31,58 +30,53 @@
         </span>
         </div>
     </div>
-    <script type="text/x-handlebars-template" id="amz-tags">
-        {{#each tags}}
-        <div class="Publish am-animation-fade" value={{this.value}}>
-            <div class="title">
-                <div class="show"><img src="assets/i/img/ss1.jpg" class="am-radius"></div>
-                <p class="username am-sans-serif">{{this.name}}</p>
-                <span class="tag am-sans-serif" >{{tag}}</span>
+    <div id="publish">
+        <script type="text/x-handlebars-template" id="amz-tags">
+            {{#each tags}}
+            <div class="Publish am-animation-fade" value={{this.value}}>
+                <div class="title">
+                    <div class="show"><img src="assets/i/img/ss1.jpg"></div>
+                    <p class="username am-sans-serif">{{this.name}}</p>
+                    <span class="tag am-sans-serif" >{{tag}}</span>
+                </div>
+                <div class="content "><p class="usersay am-sans-serif">{{this.usersay}}</p></div>
+                <div class="images">
+                    {{#if this.img}}
+                    {{#each this.img}}
+                    <img src={{this}} class="am-radius">
+                    {{/each}}
+                    {{/if}}
+                </div>
+                <div class="foot">
+                    <span class="time am-sans-serif">发布于{{this.time}}前</span>
+                </div>
             </div>
-            <div class="content "><p class="am-sans-serif">{{this.usersay}}</p></div>
-            <div class="images">
-                <div class="h"></div>
-                {{#if this.img}}
-                {{#each this.img}}
-                <img src={{this.url}} class="am-radius">
-                {{/each}}
-                {{/if}}
-            </div>
-            <div class="foot">
-                <span class="time am-sans-serif">发布于{{this.time}}前</span>
-            </div>
+            {{/each}}
+        </script>
+        <div id="load">
+            <i class="am-icon-refresh am-icon-spin am-icon-spin-extend am-icon-sm"></i>
         </div>
-</div>
-{{/each}}
-</script>
+    </div>
 
-<div id="load">
-    <i class="am-icon-refresh am-icon-spin am-icon-spin-extend am-icon-sm"></i>
+
 </div>
-<!--<div id="arrow"  class="am-gotop" data-am-widget="gotop">-->
-    <!--<a href="#top" title="回到顶部">-->
-        <!--<div>-->
-            <!--<i class="am-icon am-icon-arrow-up am-icon-sm"></i>-->
-        <!--</div>-->
-    <!--</a>-->
-<!--</div>-->
+
+
 <div  id="arrow" data-am-widget="gotop">
     <div>
-        <a href="#top">
+        <a>
         <i  class="am-icon am-icon-arrow-up am-icon-sm"></i>
         </a>
     </div>
 </div>
-
 <div id="foots">
     <div>
-        <a href="post_save.html">
+        <a>
         <i class="am-icon am-icon-plus am-icon-sm"></i>
         </a>
     </div>
 </div>
-
-    <div data-am-widget="navbar" class="am-navbar am-cf  am-navbar-default"
+    <div data-am-widget="navbar" class="am-navbar am-cf"
          id="">
         <ul class="am-navbar-nav am-cf am-avg-sm-4 am-navbar-nav-extend ">
             <li>
@@ -92,7 +86,7 @@
                 </a>
             </li>
             <li>
-                <a href="post_index.html" class="">
+                <a id="Neighborhood" href="post_index.html" class="">
                     <i class="am-header-icon am-icon-users am-icon-sm"></i>
                     <span class="am-navbar-label">邻里圈</span>
                 </a>
@@ -105,17 +99,6 @@
             </li>
         </ul>
     </div>
-
-
-
-
-    <!--  {{#each tags}}
-   <div class="contents">
-     <p>user name:{{this.name}}</p> <p>user tag:{{this.tag}}</p>
-     <p>usersay:{{this.usersay}}</p>
-      <p>发表时间{{this.time}}</p>
-   </div>
-          {{/each}} -->
 
 
     <script src="assets/js/jquery.min.js"></script>

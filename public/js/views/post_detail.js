@@ -7,6 +7,7 @@
     });
     thread_url= "http://localhost:63342/wanke/public/post_detail.html?55223dcfe4b0cd5b62664791";
     thread_key= postview;
+    console.log(postview);
     thread_title = 'post_detail';
     //$("<div id=\"ds-thread\" class=\"ds-thread\" data-thread-key=postview+\"\" data-title=\"post_detail\" data-url=\"http://localhost:63342/wanke/public/post_detail.html?55223dcfe4b0cd5b62664791\"></div>"
     //).prependTo("#thread");
@@ -18,6 +19,7 @@
     var user = AV.Object.extend("User");
     var query = new AV.Query(post);
     query.include("tagkey");
+    query.include("imgs");
     query.include("username");
     query.equalTo("objectId",postview);
     query.find({
@@ -57,8 +59,8 @@
                 name: username,
                 usersay:content,
                 tag: tagvalue,
-                time:times
-                //img: imge
+                time:times,
+               img: imgs
             };
             tags.push(opost);
             console.log(opost.name);
