@@ -7,7 +7,7 @@
     <meta name="keywords" content="">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>评论列表</title>
+    <title></title>
     <link rel="icon" type="image/png" href="assets/i/favicon.png">
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
@@ -30,33 +30,38 @@
         </span>
         </div>
     </div>
-    <script type="text/x-handlebars-template" id="amz-tags">
-        {{#each tags}}
-        <div class="Publish am-animation-fade" value={{this.value}}>
-            <div class="title">
-                <div class="show"><img src="assets/i/img/ss1.jpg" class="am-radius"></div>
-                <p class="username am-sans-serif">{{this.name}}</p>
-                <span class="tag am-sans-serif" >{{tag}}</span>
+    <div id="publish">
+        <script type="text/x-handlebars-template" id="amz-tags">
+            {{#each tags}}
+            <div class="Publish am-animation-fade" value={{this.value}}>
+                <div class="title">
+                    <div class="show"><img src="assets/i/img/ss1.jpg" class="am-radius"></div>
+                    <p class="username am-sans-serif">{{this.name}}</p>
+                    <span class="tag am-sans-serif" >{{tag}}</span>
+                </div>
+                <div class="content "><p class="am-sans-serif">{{this.usersay}}</p></div>
+                <div class="images">
+                    {{#if this.img}}
+                    {{#each this.img}}
+                    <img src={{this}} class="am-radius">
+                    {{/each}}
+                    {{/if}}
+                </div>
+                <div class="foot">
+                    <span class="time am-sans-serif">发布于{{this.time}}前</span>
+                </div>
             </div>
-            <div class="content "><p class="am-sans-serif">{{this.usersay}}</p></div>
-            <div class="images">
-                {{#if this.img}}
-                {{#each this.img}}
-                <img src={{this}} class="am-radius">
-                {{/each}}
-                {{/if}}
-            </div>
-            <div class="foot">
-                <span class="time am-sans-serif">发布于{{this.time}}前</span>
-            </div>
+            {{/each}}
+        </script>
+        <div id="load">
+            <i class="am-icon-refresh am-icon-spin am-icon-spin-extend am-icon-sm"></i>
         </div>
-</div>
-{{/each}}
-</script>
+    </div>
 
-<div id="load">
-    <i class="am-icon-refresh am-icon-spin am-icon-spin-extend am-icon-sm"></i>
+
 </div>
+
+
 <div  id="arrow" data-am-widget="gotop">
     <div>
         <a>
