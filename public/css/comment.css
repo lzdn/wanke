@@ -81,12 +81,6 @@ body{
     width: 160px;
     overflow:auto;zoom:1;
 }
-.images .h{
-    height: 160px;
-    background: red;
-    position: relative;
-    float: left;
-}
 .images img{
     width: 70px;
     height: 70px;

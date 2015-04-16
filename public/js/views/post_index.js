@@ -10,6 +10,9 @@
             //alert("haha");
             window.location.href="user_detail.html";
         });
+        $("#foots").on("click",function(){
+            window.location.href="post_save.html";
+        })
 
     });
 
@@ -18,7 +21,7 @@
         //var clientHeight=document.body.clientHeight||document.documentElement.clientHeight;
         var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
         var newheight =window.screen.availHeight;
-        if(scrollTop>800){
+        if(scrollTop>400){
             $("#arrow").show().addClass("am-animation-fade");
         }else{
             $("#arrow").hide();
@@ -62,18 +65,6 @@
                             var object = arry[i];
                             var  imgs =  object.get('imgs');
                             console.log(imgs);
-                           // var jimgs=[];
-                            //if(imgs){
-                            //    for(var j=0; j<imgs.length;j++){
-                            //        var jimg={
-                            //            url:imgs[i]
-                            //        }
-                            //        jimgs.push(jimg);
-                            //    }
-                            //}else{
-                            //    jimgs=[];
-                            //}
-                            //console.log(jimgs);
                             var avalue = object.id;
                             var content = object.get('content');
                             var otagkey=object.get("tagkey");
