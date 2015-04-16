@@ -79,9 +79,10 @@ $(".am-input-group-label").on("click",function(){
                     bload=0;
                 }else{
                     $(".Delete").empty();
+                    $(".Publish").remove();
+                    $(".am-icon-spin-extend").remove();
                     $("<p class=\"Delete am-sans-serif\">关于“"+val+"”的查询结果不存在</p>").appendTo($("#field"));
                 }
-
             }
         });
     }else{

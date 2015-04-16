@@ -35,11 +35,11 @@
             {{#each tags}}
             <div class="Publish am-animation-fade" value={{this.value}}>
                 <div class="title">
-                    <div class="show"><img src="assets/i/img/ss1.jpg" class="am-radius"></div>
+                    <div class="show"><img src="assets/i/img/ss1.jpg"></div>
                     <p class="username am-sans-serif">{{this.name}}</p>
                     <span class="tag am-sans-serif" >{{tag}}</span>
                 </div>
-                <div class="content "><p class="am-sans-serif">{{this.usersay}}</p></div>
+                <div class="content "><p class="usersay am-sans-serif">{{this.usersay}}</p></div>
                 <div class="images">
                     {{#if this.img}}
                     {{#each this.img}}
@@ -76,7 +76,7 @@
         </a>
     </div>
 </div>
-    <div data-am-widget="navbar" class="am-navbar am-cf  am-navbar-default"
+    <div data-am-widget="navbar" class="am-navbar am-cf"
          id="">
         <ul class="am-navbar-nav am-cf am-avg-sm-4 am-navbar-nav-extend ">
             <li>
