@@ -50,7 +50,7 @@ router.get('/getJsConfig', function (req, res) {
 
 router.get('/getAuthUrl', function (req, res) {
 
-    var url = client.getAuthorizeURL(config.url + "user_detail.html", 'lijun2015', 'snsapi_userinfo');
+    var url = client.getAuthorizeURL(config.url + "/user_detail.html", 'lijun2015', 'snsapi_userinfo');
 
     res.json({
         authUrl: url
