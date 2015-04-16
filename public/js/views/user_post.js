@@ -6,7 +6,7 @@
 
     $("#arrow").hide();
     loading(function () {
-        $(".Publish").on("click", function () {
+        $(".title").on("click", function () {
              postview = $(this).attr("value");
         });
         $("#users").on("click", function () {
@@ -28,7 +28,7 @@
         }
         if (scrollTop + newheight + 200 >= htmlHeight) {
             loading(function () {
-                $(".Publish").on("click", function () {
+                $(".title").on("click", function () {
                     postview = $(this).attr("value");
                 });
                 $("#users").on("click", function () {
@@ -105,15 +105,14 @@
                                             }
                                         }
                                     }
-                                    // var tagvalue = object.get('tagkey');
                                     var imge = object.get('imgs')
                                     var opost = {
                                         name: username,
                                         usersay: content,
                                         tag: tagvalue,
                                         time: times,
-                                        value: avalue
-                                        //img: imge
+                                        value: avalue,
+                                        img: imgs
                                     };
                                     tags.push(opost);
                                 }

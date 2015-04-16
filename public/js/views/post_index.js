@@ -96,7 +96,7 @@ $(".am-input-group-label").on("click",function(){
 
    $("#arrow").hide();
     loading(function(){
-        $(".Publish").on("click",function(){
+        $(".title").on("click",function(){
             var postview=$(this).attr("value");
             window.location.href="post_detail.html?"+postview+"";
         });
@@ -124,7 +124,7 @@ $(".am-input-group-label").on("click",function(){
         if(scrollTop+newheight+200>=htmlHeight){
             if(bload!=0){
                 loading(function(){
-                    $(".Publish").on("click",function(){
+                    $(".title").on("click",function(){
                         var postview=$(this).attr("value");
                         window.location.href="post_detail.html?"+postview+"";
                     });
