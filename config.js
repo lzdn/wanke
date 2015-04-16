@@ -4,6 +4,6 @@
 module.exports = {
     appId: "wxf44ff09e67caaad3",
     appSecret: "3ccef678e38cf9bb3e5a1f137804210c",
-    authUrl: "http://fuwuhao.dianyingren.com",
+    url: "http://fuwuhao.dianyingren.com",
     token: "dianyingren"
 };
