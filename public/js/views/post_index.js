@@ -144,9 +144,10 @@ $(".am-input-group-label").on("click",function(){
         }
     });
     function loading (callbak){
-
+         console.log("heihei");
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
         $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=post_index", function (result) {
+            console.log(result);
             alert(result);
             appId = result.appId;
             jslist = result.jsApiList;
