@@ -46,6 +46,9 @@ router.get('/', function (req, res, next) {
 router.get('/getJsConfig', function (req, res) {
     console.log(config);
     var page = req.query.page;
+    if(!page){
+        res.json("参数\"page\"不能为空！");
+    }
 
     var param = {
         debug: true,
@@ -66,6 +69,10 @@ router.get('/getJsConfig', function (req, res) {
 
 router.get('/getAuthUrl', function (req, res) {
     var page = req.query.page;
+    if(!page){
+        res.json("参数\"page\"不能为空！");
+    }
+
     var url = client.getAuthorizeURL(config.url + "/" + page + ".html", 'lijun2015', 'snsapi_userinfo');
 
     res.json({
@@ -76,6 +83,9 @@ router.get('/getAuthUrl', function (req, res) {
 router.post('/userSignUp', function (req, res) {
     var code = req.body.code,
         state = req.body.state;
+    if(!code){
+        res.json("参数\"code\"不能为空！");
+    }
 
     client.getAccessToken(code, function (err, result) {
         var accessToken = result.data.access_token;
@@ -101,6 +111,12 @@ router.post('/sendMessage', function (req, res) {
     var openId = req.body.openId,
         postId = req.body.postId,
         text = "";
+    if(!openId){
+        res.json("参数\"openId\"不能为空！");
+    }
+    if(!postId){
+        res.json("参数\"postId\"不能为空！");
+    }
 
     text = "活动提醒<br/>" +
     "<br/>" +
