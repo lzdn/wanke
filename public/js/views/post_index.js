@@ -91,9 +91,7 @@ $(".am-input-group-label").on("click",function(){
         loading();
         bload=1;
     }
-
 });
-
    $("#arrow").hide();
     loading(function(){
         $(".title").on("click",function(){
@@ -108,22 +106,18 @@ $(".am-input-group-label").on("click",function(){
             window.location.href="post_save.html";
         })
         $(".imgpreview").on("click",function(event){
-
-
             //alert($(this).attr("src"));
-            alert($(this).parent().attr("value"));
-
-
-
+            //alert($(this).parent().attr("value"));
+            wx.previewImage({
+                current: $(this).attr("src"), // 当前显示的图片链接
+                urls: $(this).parent().attr("value") // 需要预览的图片链接列表
+            });
             event.stopPropagation();
            // return false;
         });
-
     });
-
     $(window).scroll(function(){
         var htmlHeight=document.body.scrollHeight||document.documentElement.scrollHeight;
-        //var clientHeight=document.body.clientHeight||document.documentElement.clientHeight;
         var scrollTop=document.body.scrollTop||document.documentElement.scrollTop;
         var newheight =window.screen.availHeight;
         if(scrollTop>400){
@@ -155,7 +149,6 @@ $(".am-input-group-label").on("click",function(){
             signature = result.signature;
             timestamp = result.timestamp;
             jsApiList = result.jsApiList;
-
             wx.config({
                 debug: false,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                 appId: appId, // 必填，公众号的唯一标识
@@ -165,15 +158,11 @@ $(".am-input-group-label").on("click",function(){
                 jsApiList: jsApiList// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
             });
         });
-
-
-
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
         //ject.createWithoutData('className',id);
         var post = AV.Object.extend("post");
         var tags = AV.Object.extend("tags");
         var user = AV.Object.extend("User");
-
         var query = new AV.Query(post);
         query.count({
             success:function(skip){
@@ -241,9 +230,6 @@ $(".am-input-group-label").on("click",function(){
                 });
             }
         });
-
-
-
     }
 
 

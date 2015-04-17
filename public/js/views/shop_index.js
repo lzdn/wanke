@@ -25,10 +25,12 @@
                     shopid =object.id;
                     shopname = object.get("shopname");
                     shoptel = object.get("shoptel");
+                    logo= object.get("logo");
                     var shop = {
                         id:shopid,
                         name: shopname,
-                        tel: shoptel
+                        tel: shoptel,
+                        logo:logo
                     };
                     shops.push(shop);
                     console.log(shops);
