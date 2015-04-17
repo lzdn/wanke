@@ -170,7 +170,7 @@ $(function () {
 //………………………………储备函数…………………………………………
     function dataLoad(callbak) {
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
-        $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig", function (result) {
+        $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=post_save", function (result) {
             appId = result.appId;
             jslist = result.jsApiList;
             noncestr = result.nonceStr;

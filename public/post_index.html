@@ -42,25 +42,12 @@
                         <p class="usersay am-sans-serif">{{this.usersay}}</p>
                     </div>
                     <span class="tag am-sans-serif" >{{tag}}</span>
-                <div class="images">
-
-                    <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
-am-avg-md-3 am-avg-lg-4 am-gallery-default" data-am-gallery="{ pureview: true }">
-                        {{#if this.img}}
-                        {{#each this.img}}
-                        <li>
-                            <div class="am-gallery-item">
-                                <a href={{this}} class="">
-                                    <img src={{this}} alt="远方 有一个地方 那里种有我们的梦想" />
-                                </a>
-                            </div>
-                        </li>
-                        {{/each}}
-                        {{/if}}
-                    </ul>
-
-                    <!--<img src={{this}} class="am-radius">-->
-
+                <div class="images" value={{this.img}}>
+                    {{#if this.img}}
+                    {{#each this.img}}
+                    <img src={{this}} class="am-radius imgpreview">
+                    {{/each}}
+                    {{/if}}
                 </div>
                     <span class="time am-sans-serif">发布于{{this.time}}前</span>
                 </div>
