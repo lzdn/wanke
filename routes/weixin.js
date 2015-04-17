@@ -26,46 +26,7 @@ var client = new OAuth(config.appId, config.appSecret, function (openid, callbac
     fs.writeFile(openid + ':access_token.txt', JSON.stringify(token), callback);
 });
 
-var api = new API(config.appId, config.appSecret, function (callback) {
-    // 传入一个获取全局token的方法
-    console.log("1111111111111111111111111111111111");
-
-    var Config = new AV.Object.extend('config');
-    var query = new AV.Query(Config);
-    query.equalTo("type", "access_token");
-    query.find({
-        success: function (results) {
-            // The object was retrieved successfully.
-            console.log("222222222222222222222222");
-
-            callback(null, results[0].get('value'));
-        },
-        error: function (error) {
-            // The object was not retrieved successfully.
-            // error is a AV.Error with an error code and description.
-            callback(error);
-        }
-    });
-}, function (token, callback) {
-    // 请将token存储到全局，跨进程、跨机器级别的全局，比如写到数据库、redis等
-    // 这样才能在cluster模式及多机情况下使用，以下为写入到文件的示例
-    console.log("asdfsdakljfas;dkjfoasjdfpojka;dsdkjf;kadjs;fkj;asdj;lkj");
-    var Config = new AV.Object.extend('config');
-    var config = new Config();
-    config.set("type", "access_token");
-    config.set("value", token);
-    config.save(null, {
-        success: function (result) {
-            // Execute any logic that should take place after the object is saved.
-            callback(null, result);
-        },
-        error: function (result, error) {
-            // Execute any logic that should take place if the save fails.
-            // error is a AV.Error with an error code and description.
-            callback(error, result);
-        }
-    })
-});
+var api = new API(config.appId, config.appSecret);
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
