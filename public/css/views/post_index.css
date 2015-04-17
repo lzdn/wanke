@@ -202,3 +202,8 @@ hr{
     color:rgb(50,137,199);
 }
 
+.am-gallery-item{
+    width: 100px;
+    height: 100px;
+}
+
