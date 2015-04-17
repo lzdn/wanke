@@ -1,4 +1,5 @@
 (function($) {
+    loadwx();
     var skx=-5;
     var bload=1;
     var length
@@ -94,10 +95,10 @@ $(".am-input-group-label").on("click",function(){
 });
    $("#arrow").hide();
     loading(function(){
-        $(".title").on("click",function(){
-            var postview=$(this).attr("value");
-            window.location.href="post_detail.html?"+postview+"";
-        });
+        //$(".title").on("click",function(){
+        //    var postview=$(this).attr("value");
+        //    window.location.href="post_detail.html?"+postview+"";
+        //});
         $("#users").on("click",function(){
             //alert("haha");
             window.location.href="user_detail.html";
@@ -105,15 +106,15 @@ $(".am-input-group-label").on("click",function(){
         $("#foots").on("click",function(){
             window.location.href="post_save.html";
         })
-        $(".imgpreview").on("click",function(event){
-            //alert($(this).attr("src"));
-            //alert($(this).parent().attr("value"));
+        $(".imgpreview").on("click",function(){
+            alert($(this).attr("src"));
+            alert($(this).parent().attr("value"));
             wx.previewImage({
                 current: $(this).attr("src"), // 当前显示的图片链接
                 urls: $(this).parent().attr("value") // 需要预览的图片链接列表
             });
             event.stopPropagation();
-           // return false;
+            //return false;
         });
     });
     $(window).scroll(function(){
@@ -139,25 +140,6 @@ $(".am-input-group-label").on("click",function(){
     });
     function loading (callbak){
          console.log("heihei");
-        var appId, jslist, noncestr, signature, timestamp, jsApiList;
-        $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=post_index", function (result) {
-            console.log(result);
-            alert(result);
-            appId = result.appId;
-            jslist = result.jsApiList;
-            noncestr = result.nonceStr;
-            signature = result.signature;
-            timestamp = result.timestamp;
-            jsApiList = result.jsApiList;
-            wx.config({
-                debug: false,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                appId: appId, // 必填，公众号的唯一标识
-                timestamp: timestamp, // 必填，生成签名的时间戳
-                nonceStr: noncestr, // 必填，生成签名的随机串
-                signature: signature,// 必填，签名，见附录1
-                jsApiList: jsApiList// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-            });
-        });
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
         //ject.createWithoutData('className',id);
         var post = AV.Object.extend("post");
@@ -241,6 +223,27 @@ $(".am-input-group-label").on("click",function(){
                     }
                 });
             }
+        });
+    }
+
+    function loadwx(){
+        var appId, jslist, noncestr, signature, timestamp, jsApiList;
+        $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=post_index", function (result) {
+            console.log(result);
+            appId = result.appId;
+            jslist = result.jsApiList;
+            noncestr = result.nonceStr;
+            signature = result.signature;
+            timestamp = result.timestamp;
+            jsApiList = result.jsApiList;
+            wx.config({
+                debug: false,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: appId, // 必填，公众号的唯一标识
+                timestamp: timestamp, // 必填，生成签名的时间戳
+                nonceStr: noncestr, // 必填，生成签名的随机串
+                signature: signature,// 必填，签名，见附录1
+                jsApiList: jsApiList// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            });
         });
     }
 
