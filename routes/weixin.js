@@ -13,12 +13,21 @@ AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygu
 
 var client = new OAuth(config.appId, config.appSecret, function (openid, callback) {
     // 传入一个根据openid获取对应的全局token的方法
-    //fs.readFile(openid + ':access_token.txt', 'utf8', function (err, txt) {
-    //    if (err) {
-    //        return callback(err);
-    //    }
-    //    callback(null, JSON.parse(txt));
-    //});
+    fs.readFile(openid + ':access_token.txt', 'utf8', function (err, txt) {
+        if (err) {
+            return callback(err);
+        }
+        callback(null, JSON.parse(txt));
+    });
+}, function (openid, token, callback) {
+    // 请将token存储到全局，跨进程、跨机器级别的全局，比如写到数据库、redis等
+    // 这样才能在cluster模式及多机情况下使用，以下为写入到文件的示例
+    // 持久化时请注意，每个openid都对应一个唯一的token!
+    fs.writeFile(openid + ':access_token.txt', JSON.stringify(token), callback);
+});
+
+var api = new API(config.appId, config.appSecret, function (callback) {
+    // 传入一个获取全局token的方法
     var Config = new AV.Object.extend('config');
     var query = new AV.Query(Config);
     query.equalTo("type", "access_token");
@@ -33,11 +42,9 @@ var client = new OAuth(config.appId, config.appSecret, function (openid, callbac
             callback(error);
         }
     });
-}, function (openid, token, callback) {
+}, function (token, callback) {
     // 请将token存储到全局，跨进程、跨机器级别的全局，比如写到数据库、redis等
     // 这样才能在cluster模式及多机情况下使用，以下为写入到文件的示例
-    // 持久化时请注意，每个openid都对应一个唯一的token!
-    //fs.writeFile(openid + ':access_token.txt', JSON.stringify(token), callback);
     var Config = new AV.Object.extend('config');
     var config = new Config();
     config.set("type", "access_token");
@@ -46,24 +53,6 @@ var client = new OAuth(config.appId, config.appSecret, function (openid, callbac
         success: callback,
         error: callback
     })
-});
-
-var api = new API(config.appId, config.appSecret, function (callback) {
-    // 传入一个获取全局token的方法
-    fs.readFile(path.join(__dirname, 'access_token.json'), 'utf8', function (err, txt) {
-        if (err) {
-            return callback(err);
-        }
-        console.log("------------------------------------------------");
-        console.log(txt);
-        console.log("------------------------------------------------");
-        callback(null, JSON.parse(txt));
-    });
-}, function (token, callback) {
-    // 请将token存储到全局，跨进程、跨机器级别的全局，比如写到数据库、redis等
-    // 这样才能在cluster模式及多机情况下使用，以下为写入到文件的示例
-
-    fs.writeFile(path.join(__dirname, 'access_token.json'), JSON.stringify(token), callback);
 });
 
 /* GET users listing. */
