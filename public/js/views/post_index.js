@@ -109,9 +109,11 @@ $(".am-input-group-label").on("click",function(){
         $(".imgpreview").on("click",function(){
             alert($(this).attr("src"));
             alert($(this).parent().attr("value"));
+            var cur= $(this).attr("src");
+            var  url=$(this).parent().attr("value");
             wx.previewImage({
-                current: $(this).attr("src"), // 当前显示的图片链接
-                urls: $(this).parent().attr("value") // 需要预览的图片链接列表
+                current:"http://ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg", // 当前显示的图片链接
+                urls:["http://ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg","http://ac-f7r02mj6.clouddn.com/iMUkwF06UA0cCPn8Apuw8bNCWXRuFVTRuMvpk6da.jpg","http://ac-f7r02mj6.clouddn.com/Ed5toafidotAm10fIPgujDNP9Qgg21ICdLf9EYoG.jpg"] // 需要预览的图片链接列表
             });
             event.stopPropagation();
             //return false;
