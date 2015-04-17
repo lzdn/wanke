@@ -17,6 +17,7 @@
     "serve-favicon": "~2.2.0",
     "wechat": "latest",
     "wechat-api": "latest",
-    "wechat-oauth": "latest"
+    "wechat-oauth": "latest",
+    "avoscloud-sdk": "latest"
   }
 }
