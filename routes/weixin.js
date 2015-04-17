@@ -7,6 +7,7 @@ var config = require('../config');
 var API = require('wechat-api');
 var OAuth = require('wechat-oauth');
 var fs = require('fs');
+var path = require("path");
 var AV = require('avoscloud-sdk').AV;
 AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
 var client = new OAuth(config.appId, config.appSecret, function (openid, callback) {
@@ -26,7 +27,7 @@ var client = new OAuth(config.appId, config.appSecret, function (openid, callbac
 
 var api = new API(config.appId, config.appSecret, function (callback) {
     // 传入一个获取全局token的方法
-    fs.readFile('./access_token.txt', 'utf8', function (err, txt) {
+    fs.readFile(path.join(__dirname,'access_token.txt'), 'utf8', function (err, txt) {
         if (err) {
             return callback(err);
         }
@@ -35,7 +36,7 @@ var api = new API(config.appId, config.appSecret, function (callback) {
 }, function (token, callback) {
     // 请将token存储到全局，跨进程、跨机器级别的全局，比如写到数据库、redis等
     // 这样才能在cluster模式及多机情况下使用，以下为写入到文件的示例
-    fs.writeFile('./access_token.txt', JSON.stringify(token), callback);
+    fs.writeFile(path.join(__dirname,'access_token.txt'), JSON.stringify(token), callback);
 });
 
 /* GET users listing. */
