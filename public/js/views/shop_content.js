@@ -28,6 +28,7 @@
                     servicetime = object.get("servicetime");
                     shopservice = object.get("shopservice");
                     range = object.get("range");
+                    logo=object.get("logo");
                     var shop = {
                         id:shopid,
                         name: shopname,
@@ -35,7 +36,8 @@
                         address:shopaddress,
                         time:servicetime,
                         service:shopservice,
-                        range:range
+                        range:range,
+                        logo:logo
                     };
                     shops.push(shop);
                 var $tpl = $('#shopcontent');
