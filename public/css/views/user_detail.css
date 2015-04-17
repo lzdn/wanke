@@ -32,6 +32,8 @@
 #content .icon-2 {
     float: right;
     color: rgb(206, 206, 206);
+    font-size: 14px;
+    line-height: 30px;
 }
 #users :hover{
     cursor:pointer;
@@ -47,8 +49,15 @@
 }
 #user_address .icon-1{
     color: rgb(229,28,35);
+    font-size:22px;
 }
 #user_contact .icon-1{
     color: rgb(157,225,98);
-    margin:0 28px 0 4px;
+    font-size:21px;
+}
+#user_address , #user_contact{
+    padding:7px 13px 7px 10px;
+}
+#user_address{
+    padding:7px 13px 7px 14px;
 }
