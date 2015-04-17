@@ -81,8 +81,6 @@ router.get('/getJsConfig', function (req, res) {
         console.log('------------------------------');
         console.log(result);
         res.json(result);
-    }, function () {
-
     });
 });
 
