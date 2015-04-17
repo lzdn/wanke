@@ -7,7 +7,7 @@
     <meta name="keywords" content="">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title></title>
+    <title>评论更多</title>
     <link rel="icon" type="image/png" href="assets/i/favicon.png">
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">
@@ -23,7 +23,6 @@
 </head>
 <body>
 
-<div id="content">
     <!--<div class="am-input-group am-input-exend">-->
     <!--<input type="text" class="am-form-field "placeholder="搜索" >-->
     <!--<span class="am-input-group-btn">-->
@@ -32,25 +31,24 @@
     <!--</div>-->
     <script type="text/x-handlebars-template" id="amz-tags">
         {{#each tags}}
-        <div class="Publish">
-            <div class="title">
-                <div class="show"><img src="assets/i/img/ss1.jpg" class="am-radius"></div>
+        <div class="Publish am-animation-fade" value={{this.value}}>
+            <div class="show"><img src="assets/i/img/ss1.jpg"></div>
+            <div class="title" value={{this.value}}>
                 <p class="username am-sans-serif">{{this.name}}</p>
-                <span class="tag am-sans-serif">{{tag}}</span>
-            </div>
-            <div class="content"><p class="am-sans-serif">{{this.usersay}}</p></div>
-            <div id="imgs" class="images">
-                {{#if this.img}}
-                {{#each this.img}}
-                <img src={{this}} class="am-radius">
-                {{/each}}
-                {{/if}}
-            </div>
-            <div class="foot">
+                <div class="content">
+                    <p class="usersay am-sans-serif">{{this.usersay}}</p>
+                </div>
+                <span class="tag am-sans-serif" >{{tag}}</span>
+                <div class="images">
+                    {{#if this.img}}
+                    {{#each this.img}}
+                    <img src={{this}} class="am-radius">
+                    {{/each}}
+                    {{/if}}
+                </div>
                 <span class="time am-sans-serif">发布于{{this.time}}前</span>
             </div>
         </div>
-</div>
 {{/each}}
 </script>
 
@@ -110,7 +108,7 @@
 <!-- <div data-am-widget="duoshuo" class="am-duoshuo am-duoshuo-default" data-ds-short-name="amazeui">
   <div class="ds-thread"></div>
 </div> -->
-<div data-am-widget="navbar" class="am-navbar am-cf  am-navbar-default"
+<div data-am-widget="navbar" class="am-navbar am-cf"
      id="">
     <ul class="am-navbar-nav am-cf am-avg-sm-4 am-navbar-nav-extend ">
         <li>
@@ -120,19 +118,20 @@
             </a>
         </li>
         <li>
-            <a href="post_index.html" class="">
+            <a id="Neighborhood" href="post_index.html" class="">
                 <i class="am-header-icon am-icon-users am-icon-sm"></i>
                 <span class="am-navbar-label">邻里圈</span>
             </a>
         </li>
         <li>
-            <a id="users">
+            <a  id="users">
                 <i class="am-header-icon am-icon-user am-icon-sm"></i>
                 <span class="am-navbar-label">个人中心</span>
             </a>
         </li>
     </ul>
 </div>
+
 
 
 <!--  {{#each tags}}
