@@ -180,10 +180,21 @@ $(".am-input-group-label").on("click",function(){
                     success:function(arry){
                         var times=0;
                         var tags = [];
+                        var imgpattern="";
                         for (var i = 0; i < arry.length; i++) {
                             var object = arry[i];
                             var  imgs =  object.get('imgs');
-                            console.log(imgs);
+                            if(imgs){
+                                if(imgs.length==1){
+                                    imgpattern="imgpatternone"
+                                }
+                                if(imgs.length==2||imgs.length==4){
+                                    imgpattern="imgpatterntwo"
+                                }
+                                if(imgs.length>=3 && imgs.length!=4){
+                                    imgpattern="imgpatternthree"
+                                }
+                            }
                             var avalue = object.id;
                             var content = object.get('content');
                             var otagkey=object.get("tagkey");
@@ -213,7 +224,8 @@ $(".am-input-group-label").on("click",function(){
                                 tag: tagvalue,
                                 time:times,
                                 value:avalue,
-                                img: imgs
+                                img: imgs,
+                                pattern: imgpattern
                             };
                             tags.push(opost);
 

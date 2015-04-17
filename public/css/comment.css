@@ -26,6 +26,10 @@ body{
     padding:5px 5px 15px 5px;
     background: #fff;
 }
+hr{
+    margin:0;
+    color: #f1f1f1;
+}
 .show{
     width: 48px;
     height: 47px;
@@ -46,7 +50,6 @@ body{
 .Publish{
     background: #fff;
     width: 100%;
-    border-top:1px solid #ccc;
     padding: 10px;
 }
 .title{
@@ -90,13 +93,29 @@ body{
 
 
 .images{
-    width: 160px;
     overflow:auto;zoom:1;
 }
-
-.images img{
-    width: 70px;
-    height: 70px;
+.imgpatternone{
+    width: 243px;
+}
+.imgpatternone img{
+    width: 243px;
+}
+.imgpatterntwo{
+    width: 220px;
+}
+.imgpatterntwo img{
+    width: 100px;
+    height: 75px;
+    margin:10px 10px 0 0;
+    float:left;
+}
+.imgpatternthree{
+    width: 270px;
+}
+.imgpatternthree img{
+    width: 80px;
+    height: 80px;
     margin: 10px 10px 0 0;
     float:left;
 }

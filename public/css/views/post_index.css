@@ -93,13 +93,29 @@ hr{
 
 
 .images{
-    width: 160px;
     overflow:auto;zoom:1;
 }
-
-.images img{
-    width: 70px;
-    height: 70px;
+.imgpatternone{
+    width: 243px;
+}
+.imgpatternone img{
+    width: 243px;
+}
+.imgpatterntwo{
+    width: 220px;
+}
+.imgpatterntwo img{
+    width: 100px;
+    height: 75px;
+    margin:10px 10px 0 0;
+    float:left;
+}
+.imgpatternthree{
+    width: 270px;
+}
+.imgpatternthree img{
+    width: 80px;
+    height: 80px;
     margin: 10px 10px 0 0;
     float:left;
 }
