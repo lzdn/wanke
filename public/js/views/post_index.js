@@ -112,8 +112,8 @@ $(".am-input-group-label").on("click",function(){
             var cur= $(this).attr("src");
             var  url=$(this).parent().attr("value");
             wx.previewImage({
-                current:"http://ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg", // 当前显示的图片链接
-                urls:["http://ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg","http://ac-f7r02mj6.clouddn.com/iMUkwF06UA0cCPn8Apuw8bNCWXRuFVTRuMvpk6da.jpg","http://ac-f7r02mj6.clouddn.com/Ed5toafidotAm10fIPgujDNP9Qgg21ICdLf9EYoG.jpg"] // 需要预览的图片链接列表
+                current:cur, // 当前显示的图片链接
+                urls:url // 需要预览的图片链接列表
             });
             event.stopPropagation();
             //return false;
