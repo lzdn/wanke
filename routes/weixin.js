@@ -10,7 +10,7 @@ var fs = require('fs');
 var path = require("path");
 var AV = require('avoscloud-sdk').AV;
 AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
-var Config = new AV.Object.Extend('config');
+var Config = new AV.Object.extend('config');
 
 var client = new OAuth(config.appId, config.appSecret, function (openid, callback) {
     // 传入一个根据openid获取对应的全局token的方法
