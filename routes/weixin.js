@@ -27,7 +27,7 @@ var client = new OAuth(config.appId, config.appSecret, function (openid, callbac
 
 var api = new API(config.appId, config.appSecret, function (callback) {
     // 传入一个获取全局token的方法
-    fs.readFile(path.join(__dirname,'access_token.txt'), 'utf8', function (err, txt) {
+    fs.readFile('access_token.txt', 'utf8', function (err, txt) {
         if (err) {
             return callback(err);
         }
@@ -36,7 +36,7 @@ var api = new API(config.appId, config.appSecret, function (callback) {
 }, function (token, callback) {
     // 请将token存储到全局，跨进程、跨机器级别的全局，比如写到数据库、redis等
     // 这样才能在cluster模式及多机情况下使用，以下为写入到文件的示例
-    fs.writeFile(path.join(__dirname,'access_token.txt'), JSON.stringify(token), callback);
+    fs.writeFile('access_token.txt', JSON.stringify(token), callback);
 });
 
 /* GET users listing. */
@@ -47,7 +47,7 @@ router.get('/', function (req, res, next) {
 router.get('/getJsConfig', function (req, res) {
     console.log(config);
     var page = req.query.page;
-    if(!page){
+    if (!page) {
         res.json("参数\"page\"不能为空！");
     }
 
@@ -70,7 +70,7 @@ router.get('/getJsConfig', function (req, res) {
 
 router.get('/getAuthUrl', function (req, res) {
     var page = req.query.page;
-    if(!page){
+    if (!page) {
         res.json("参数\"page\"不能为空！");
     }
 
@@ -84,7 +84,7 @@ router.get('/getAuthUrl', function (req, res) {
 router.post('/userSignUp', function (req, res) {
     var code = req.body.code,
         state = req.body.state;
-    if(!code){
+    if (!code) {
         res.json("参数\"code\"不能为空！");
     }
 
@@ -112,10 +112,10 @@ router.post('/sendMessage', function (req, res) {
     var openId = req.body.openId,
         postId = req.body.postId,
         text = "";
-    if(!openId){
+    if (!openId) {
         res.json("参数\"openId\"不能为空！");
     }
-    if(!postId){
+    if (!postId) {
         res.json("参数\"postId\"不能为空！");
     }
 
