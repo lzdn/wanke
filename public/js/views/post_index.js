@@ -111,6 +111,8 @@ $(".am-input-group-label").on("click",function(){
             alert($(this).parent().attr("value"));
             var cur= $(this).attr("src");
             var  url=$(this).parent().attr("value");
+            console,log(cur);
+            console.log(url);
             wx.previewImage({
                 current:cur, // 当前显示的图片链接
                 urls:url // 需要预览的图片链接列表
