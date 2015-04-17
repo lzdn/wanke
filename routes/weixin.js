@@ -31,6 +31,9 @@ var api = new API(config.appId, config.appSecret, function (callback) {
         if (err) {
             return callback(err);
         }
+        console.log("------------------------------------------------");
+        console.log(txt);
+        console.log("------------------------------------------------");
         callback(null, JSON.parse(txt));
     });
 }, function (token, callback) {
@@ -65,6 +68,8 @@ router.get('/getJsConfig', function (req, res) {
         console.log('------------------------------');
         console.log(result);
         res.json(result);
+    },function(){
+
     });
 });
 
