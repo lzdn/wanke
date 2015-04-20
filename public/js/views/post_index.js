@@ -106,19 +106,24 @@ $(".am-input-group-label").on("click",function(){
         $("#foots").on("click",function(){
             window.location.href="post_save.html";
         })
+        if($(".imgpreview").attr("value")!=1){
+
+        }
         $(".imgpreview").on("click",function(){
             alert($(this).attr("src"));
             alert($(this).parent().attr("value"));
             var cur= $(this).attr("src");
             var  url=$(this).parent().attr("value");
             var arr=url.split(",");
-            wx.previewImage({
-                current:cur, // 当前显示的图片链接
-                urls:arr // 需要预览的图片链接列表
-            });
-            event.stopPropagation();
-            //return false;
+            //var imgval=$(this).attr("value");
+            //$(this).attr("value","1");
+                wx.previewImage({
+                    current:cur, // 当前显示的图片链接
+                    urls:arr // 需要预览的图片链接列表
+                });
+           // event.stopPropagation();
         });
+        $(".imgpreview").removeClass("imgpreview");
     });
     $(window).scroll(function(){
         var htmlHeight=document.body.scrollHeight||document.documentElement.scrollHeight;
@@ -130,9 +135,6 @@ $(".am-input-group-label").on("click",function(){
                 $("#arrow").hide();
                 $("#arrow").hide().removeClass("am-animation-fade");
             }
-
- //http://ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg,http:/ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg,http:/ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg,http:/ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg,http:/ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg,http:/ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg,http:/ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg,http:/ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg,http:/ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg
-
         if(scrollTop+newheight+200>=htmlHeight){
             if(bload!=0){
                 loading(function(){
@@ -150,9 +152,9 @@ $(".am-input-group-label").on("click",function(){
                             current:cur, // 当前显示的图片链接
                             urls:arr// 需要预览的图片链接列表
                         });
-                        event.stopPropagation();
-                        //return false;
+                        //event.stopPropagation();
                     });
+                    $(".imgpreview").removeClass("imgpreview");
                 });
             }
         }
