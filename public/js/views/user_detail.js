@@ -1,6 +1,7 @@
 (function ($) {
     var postview = window.location.search.split('=')[1];
     var code = postview.split("&")[0];
+    var id=""
 
  loading(function(){
      $("#userpost").on("click", function () {
@@ -12,6 +13,18 @@
      $("#user_contact").on("click", function () {
          window.location.href = "user_contact.html?";
      });
+
+     var query = new AV.Query(files);
+     query.equalTo("username", "a6rpfbylhhgeunael1jmn5f4d");
+     query.find({
+         success: function(results) {
+             alert("haha");
+             alert(results);
+         },
+         error: function(error) {
+             alert("Error: " + error.code + " " + error.message);
+         }
+     });
  });
     function loading(callbak){
         var files = AV.Object.extend("File");
@@ -20,20 +33,7 @@
             var object=res.authData.weixin;
             var name=object.nickname;
             var img =object.headimgurl;
-            var id=object.openid;
-
-            var query = new AV.Query(files);
-            query.equalTo("username", "a6rpfbylhhgeunael1jmn5f4d");
-            query.find({
-                success: function(results) {
-                   alert("haha");
-                    alert(results);
-                },
-                error: function(error) {
-                    alert("Error: " + error.code + " " + error.message);
-                }
-            });
-
+            id=object.openid;
             var user=[
                 {
                     id:id,
