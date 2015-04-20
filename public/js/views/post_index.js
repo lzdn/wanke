@@ -114,7 +114,6 @@ $(".am-input-group-label").on("click",function(){
 
             //alert("haha");
             //window.location.href="user_detail.html";
-            window.location.href="http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=user_detail";
         });
         $("#foots").on("click",function(){
             window.location.href="post_save.html";
