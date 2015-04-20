@@ -100,6 +100,18 @@ $(".am-input-group-label").on("click",function(){
         //    window.location.href="post_detail.html?"+postview+"";
         //});
         $("#users").on("click",function(){
+
+            //git("http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=post_index",function(res){
+            //    alert(res);
+            //    cosole.log(res);
+            //})
+
+            git("http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=user_detail",function(res){
+                alert(res);
+                cosole.log(res);
+                window.location.href=res;
+            })
+
             //alert("haha");
             window.location.href="user_detail.html";
         });
