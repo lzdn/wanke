@@ -36,6 +36,17 @@
  });
     function userloading(callbak){
         $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
+            AV.User._logInWith("weixin", {
+                "authData": res,
+                success: function(user){
+                    alert(AV.User.current());
+                    //返回绑定后的用户
+                    console.dir(user);
+                },
+                error: function(err){
+                    console.dir(err);
+                }
+            })
             var user=[
                 {
                     id:res.openid,
@@ -51,19 +62,19 @@
             var html = template(data);
             $tpl.before(html);
 
-            AV.User._logInWith("weixin", {
-                "authData": res,
-                success: function (user) {
-                    alert(AV.User.current());
-                    //返回绑定后的用户
-                    console.dir(user);
-
-                },
-                error: function (err) {
-                    console.dir(err);
-
-                }
-            });
+            //AV.User._logInWith("weixin", {
+            //    "authData": res,
+            //    success: function (user) {
+            //        alert(AV.User.current());
+            //        //返回绑定后的用户
+            //        console.dir(user);
+            //
+            //    },
+            //    error: function (err) {
+            //        console.dir(err);
+            //
+            //    }
+            //});
 
             callbak();
         });
