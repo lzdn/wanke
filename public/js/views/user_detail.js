@@ -5,10 +5,8 @@
     $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
         alert(res);
         alert(res.authData);
-        alert(res.authData.nickname);
-        alert(res.get("nickname"));
-        alert(res.get("nickname"));
-        alert(res.get("nickname"));
+        var object=res.authData;
+        alert(object.get("nickname"));
     });
 
     $("#userpost").on("click", function () {
