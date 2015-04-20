@@ -103,7 +103,7 @@ $(".am-input-group-label").on("click",function(){
 
             var currentUser = AV.User.current();
             if (currentUser) {
-                alert("已登录")
+                //alert("已登录")
                 alert(currentUser);
             } else {
                 alert("没有登录")

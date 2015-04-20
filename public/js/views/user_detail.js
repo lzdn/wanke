@@ -28,6 +28,7 @@
      query.equalTo("authData",queryobject);  // find all the women
      query.find({
          success: function(users) {
+             alert(users);
              id=users[0].id;
              alert(id);
          }
@@ -36,6 +37,7 @@
     function userloading(callbak){
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
         $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
+            queryobject=res;
             var user=[
                 {
                     id:res.openid,
@@ -43,8 +45,6 @@
                     headUrl:res.headimgurl
                 }
             ]
-            alert("nickname: "+res.nickname);
-
             var $tpl = $('#user');
             var source = $tpl.text();
             var template = Handlebars.compile(source);
@@ -56,15 +56,11 @@
                 "authData": res,
                 success: function(user){
                     //返回绑定后的用户
-                    console.dir(user);
-                    alert("成功！");
-
                     callbak(null,user);
                 },
                 error: function(err){
                     console.dir(err);
                     alert("失败！");
-
                     callbak(err);
                 }
             })
