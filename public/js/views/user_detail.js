@@ -57,8 +57,8 @@
                 success: function(user){
                     //返回绑定后的用户
                     alert(user);
-                    alert(user.get("weixin"));
-                    alert(user.get("weixin").id);
+                    alert(user.weixin+user.get("authData")+user.get("weixin") +user.get("weixin"));
+
                     callbak(null,user);
                 },
                 error: function(err){
