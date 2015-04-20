@@ -106,20 +106,20 @@ $(".am-input-group-label").on("click",function(){
         $("#foots").on("click",function(){
             window.location.href="post_save.html";
         })
-        //$(".imgpreview").on("click",function(){
-        //    alert($(this).attr("src"));
-        //    alert($(this).parent().attr("value"));
-        //    var cur= $(this).attr("src");
-        //    var  url=$(this).parent().attr("value");
-        //    console.log(cur);
-        //    console.log(url);
-        //    wx.previewImage({
-        //        current:cur, // 当前显示的图片链接
-        //        urls:["http://ac-f7r02mj6.clouddn.com/Ed5toafidotAm10fIPgujDNP9Qgg21ICdLf9EYoG.jpg","http://ac-f7r02mj6.clouddn.com/iMUkwF06UA0cCPn8Apuw8bNCWXRuFVTRuMvpk6da.jpg","http://ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg"] // 需要预览的图片链接列表
-        //    });
-        //    event.stopPropagation();
-        //    //return false;
-        //});
+        $(".imgpreview").on("click",function(){
+            alert($(this).attr("src"));
+            alert($(this).parent().attr("value"));
+            var cur= $(this).attr("src");
+            var  url=$(this).parent().attr("value");
+            console.log(cur);
+            console.log(url);
+            wx.previewImage({
+                current:cur, // 当前显示的图片链接
+                urls:["http://ac-f7r02mj6.clouddn.com/Ed5toafidotAm10fIPgujDNP9Qgg21ICdLf9EYoG.jpg","http://ac-f7r02mj6.clouddn.com/iMUkwF06UA0cCPn8Apuw8bNCWXRuFVTRuMvpk6da.jpg","http://ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg"] // 需要预览的图片链接列表
+            });
+            event.stopPropagation();
+            //return false;
+        });
     });
     $(window).scroll(function(){
         var htmlHeight=document.body.scrollHeight||document.documentElement.scrollHeight;
@@ -138,6 +138,20 @@ $(".am-input-group-label").on("click",function(){
                         var postview=$(this).attr("value");
                         window.location.href="post_detail.html?"+postview+"";
                     });
+                    $(".imgpreview").on("click",function(){
+                        alert($(this).attr("src"));
+                        alert($(this).parent().attr("value"));
+                        var cur= $(this).attr("src");
+                        var  url=$(this).parent().attr("value");
+                        console.log(cur);
+                        console.log(url);
+                        wx.previewImage({
+                            current:cur, // 当前显示的图片链接
+                            urls:["http://ac-f7r02mj6.clouddn.com/Ed5toafidotAm10fIPgujDNP9Qgg21ICdLf9EYoG.jpg","http://ac-f7r02mj6.clouddn.com/iMUkwF06UA0cCPn8Apuw8bNCWXRuFVTRuMvpk6da.jpg","http://ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg"] // 需要预览的图片链接列表
+                        });
+                        event.stopPropagation();
+                        //return false;
+                    });
                 });
             }
         }
@@ -146,26 +160,6 @@ $(".am-input-group-label").on("click",function(){
          console.log("heihei");
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
         //ject.createWithoutData('className',id);
-        var   gallery={
-            "options": {
-                "cols": 2,
-                "gallery": true
-            },
-            "content": [
-                {
-                    "img": "http://ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg"
-                },
-                {
-                    "img": "http://ac-f7r02mj6.clouddn.com/iMUkwF06UA0cCPn8Apuw8bNCWXRuFVTRuMvpk6da.jpg"
-                },
-                {
-                    "img": "http://ac-f7r02mj6.clouddn.com/Ed5toafidotAm10fIPgujDNP9Qgg21ICdLf9EYoG.jpg"
-                },
-                {
-                    "img": "http://ac-f7r02mj6.clouddn.com/YLsjzI7Pc0ElMOmuHeqRajXU899KhevYBLCyKfo6.jpg"
-                }
-            ]
-        }
         var post = AV.Object.extend("post");
         var tags = AV.Object.extend("tags");
         var user = AV.Object.extend("User");
@@ -230,7 +224,7 @@ $(".am-input-group-label").on("click",function(){
                                 tag: tagvalue,
                                 time:times,
                                 value:avalue,
-                                img: gallery,
+                                img:imgs,
                                 pattern: imgpattern
                             };
                             tags.push(opost);

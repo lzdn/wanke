@@ -22,31 +22,6 @@
     <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 </head>
 <body>
-<ul data-am-widget="gallery" class="am-gallery sm-block-grid-2
-  md-block-grid-3 lg-block-grid-4 am-gallery-default" data-am-gallery="{ pureview: true }">
-    <li>
-        <div class="am-gallery-item">
-                <img src="http://ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg" alt="远方 有一个地方 那里种有我们的梦想" />
-        </div>
-    </li>
-    <li>
-        <div class="am-gallery-item">
-                <img src="http://ac-f7r02mj6.clouddn.com/iMUkwF06UA0cCPn8Apuw8bNCWXRuFVTRuMvpk6da.jpg" alt="某天 也许会相遇 相遇在这个好地方" />
-        </div>
-    </li>
-    <li>
-        <div class="am-gallery-item">
-                <img src="http://ac-f7r02mj6.clouddn.com/Ed5toafidotAm10fIPgujDNP9Qgg21ICdLf9EYoG.jpg" alt="不要太担心 只因为我相信" />
-        </div>
-    </li>
-    <li>
-        <div class="am-gallery-item">
-                <img src="http://ac-f7r02mj6.clouddn.com/YLsjzI7Pc0ElMOmuHeqRajXU899KhevYBLCyKfo6.jpg" alt="终会走过这条遥远的道路" />
-        </div>
-    </li>
-</ul>
-
-
     <div id="field">
         <div class="am-input-group am-input-exend" >
             <input type="text" class="am-form-field" placeholder="搜索">
@@ -68,27 +43,11 @@
                     </div>
                     <span class="tag am-sans-serif" >{{tag}}</span>
                 <div class="images {{this.pattern}}" value={{this.img}}>
-
-                    {{>gallery this.img}}
-
-                    <!--<ul data-am-widget="gallery" class="am-gallery sm-block-grid-2-->
-  <!--md-block-grid-3 lg-block-grid-4 am-gallery-default" data-am-gallery="{ pureview: true }">-->
-                        <!--{{#if this.img}}-->
-                        <!--{{#each this.img}}-->
-                        <!--<li>-->
-                            <!--<div class="am-gallery-item">-->
-                                <!--<img src={{this}} alt="远方 有一个地方 那里种有我们的梦想" />-->
-                            <!--</div>-->
-                        <!--</li>-->
-                        <!--{{/each}}-->
-                        <!--{{/if}}-->
-                    <!--</ul>-->
-
-                    <!--{{#if this.img}}-->
-                    <!--{{#each this.img}}-->
-                    <!--<img src={{this}} class="imgpreview">-->
-                    <!--{{/each}}-->
-                    <!--{{/if}}-->
+                    {{#if this.img}}
+                    {{#each this.img}}
+                    <img src={{this}} class="imgpreview">
+                    {{/each}}
+                    {{/if}}
                 </div>
                     <span class="time am-sans-serif">发布于{{this.time}}前</span>
                 </div>
