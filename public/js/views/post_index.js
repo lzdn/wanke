@@ -101,9 +101,18 @@ $(".am-input-group-label").on("click",function(){
         //});
         $("#users").on("click",function(){
 
-            $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail",function(res){
-                window.location.href=res.authUrl;
-            })
+            var currentUser = AV.User.current();
+            if (currentUser) {
+                alert("已登录")
+                alert(currentUser);
+            } else {
+                alert("没有登录")
+                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail",function(res){
+                    window.location.href=res.authUrl;
+                })
+            }
+
+
         });
         $("#foots").on("click",function(){
             window.location.href="post_save.html";
