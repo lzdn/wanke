@@ -32,10 +32,10 @@
                     <p class="usersay am-sans-serif">{{this.usersay}}</p>
                 </div>
                 <span class="tag am-sans-serif" >{{tag}}</span>
-                <div class="images {{this.pattern}}">
+                <div class="images {{this.pattern}}" value={{this.img}}>
                     {{#if this.img}}
                     {{#each this.img}}
-                    <img src={{this}} class="am-radius">
+                    <img src={{this}} class="am-radius imgpreview">
                     {{/each}}
                     {{/if}}
                 </div>
