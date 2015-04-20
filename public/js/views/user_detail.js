@@ -1,7 +1,7 @@
 (function ($) {
     var postview = window.location.search.split('?')[1];
-    alert(postview);
-    if(postview.indexOf("=") > 0 ){
+    //alert(postview);
+    if(postview.indexOf("code") > 0 ){
         alert("asdsadasd");
     }else{
         alert("heihei");
