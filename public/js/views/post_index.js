@@ -103,14 +103,10 @@ $(".am-input-group-label").on("click",function(){
 
             var currentUser = AV.User.current();
             if (currentUser) {
-                //alert("已登录")
                 alert(currentUser);
-                alert(currentUser.authData);
-                alert(currentUser.get("authData"));
-                alert(currentUser.get("weixin"));
-                alert(currentUser.weixin);
-                alert(currentUser.authData+currentUser.get("authData")+currentUser.weixin+currentUser.git("weixin"));
-
+                alert(currentUser.id);
+              var object=currentUser.get("authData");
+                alert(object.weixin);
             } else {
                 alert("没有登录")
                 $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail",function(res){
