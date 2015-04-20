@@ -101,15 +101,9 @@ $(".am-input-group-label").on("click",function(){
         //});
         $("#users").on("click",function(){
 
-            //git("http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=post_index",function(res){
-            //    alert(res);
-            //    cosole.log(res);
-            //})
-
             $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail",function(res){
                 alert(res);
                 console.log(res);
-                //window.location.href=res;
             })
 
             //alert("haha");
