@@ -14,7 +14,6 @@
     //}
 
     userloading(function(err,user){
-     AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
      $("#userpost").on("click", function () {
          window.location.href = "user_post.html?";
      });
@@ -35,6 +34,7 @@
      });
  });
     function userloading(callbak){
+        AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
         $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
             var user=[
                 {
@@ -57,11 +57,14 @@
                 success: function(user){
                     //返回绑定后的用户
                     console.dir(user);
+                    alert("成功！");
 
                     callbak(null,user);
                 },
                 error: function(err){
                     console.dir(err);
+                    alert("失败！");
+
                     callbak(err);
                 }
             })
