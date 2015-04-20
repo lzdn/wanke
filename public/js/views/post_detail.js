@@ -24,7 +24,22 @@
             event.stopPropagation();
         });
         $(".imgpreview").removeClass("imgpreview");
-    })
+
+        $("#btnname").on("click",function(){
+            var currentUser = AV.User.current();
+            if (currentUser) {
+               // window.location.href= "user_detail.html?"+currentUser.id+"";
+
+             $(".usercontent").remove();
+                $(" <p class=\"usercontent am-sans-serif\">联系方式：12347865685</p>").prependTo(".Publish");
+            } else {
+                alert("没有登录")
+                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail",function(res){
+                    window.location.href=res.authUrl;
+                })
+            }
+        });
+    });
 
     function loading(callbak) {
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");

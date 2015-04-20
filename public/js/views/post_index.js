@@ -100,7 +100,6 @@ $(".am-input-group-label").on("click",function(){
         //    window.location.href="post_detail.html?"+postview+"";
         //});
         $("#users").on("click",function(){
-
             var currentUser = AV.User.current();
             if (currentUser) {
                 window.location.href= "user_detail.html?"+currentUser.id+"";
@@ -110,8 +109,6 @@ $(".am-input-group-label").on("click",function(){
                     window.location.href=res.authUrl;
                 })
             }
-
-
         });
         $("#foots").on("click",function(){
             window.location.href="post_save.html";
