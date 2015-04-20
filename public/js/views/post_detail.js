@@ -29,9 +29,10 @@
             var currentUser = AV.User.current();
             if (currentUser) {
                // window.location.href= "user_detail.html?"+currentUser.id+"";
-
+             var imgurl=currentUser.get("authData").weixin.headimgurl;
              $(".usercontent").remove();
-                $(" <p class=\"usercontent am-sans-serif\">联系方式：12347865685</p>").prependTo(".Publish");
+                $(" <p class=\"usercontent am-sans-serif\">联系方式：12347865685</p>").prependTo(".userphone");
+                $(" <img src=\""+imgurl+"\" class=\"am-radius\">").prependTo("#headtle");
             } else {
                 alert("没有登录")
                 $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail",function(res){
