@@ -3,7 +3,7 @@
     var postview=window.location.search.split('=')[1];
     var code=postview.split("&")[0];
     alert(code);
-    $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp",code,function(res){
+    $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp",{code:code},function(res){
         alert(res);
         console.log(res);
     });
