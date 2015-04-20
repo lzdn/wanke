@@ -37,18 +37,14 @@
     function userloading(callbak){
         $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
             alert(res);
-            var object=res.authData.weixin;
-            queryobject = res.authData;
-            var name=object.nickname;
-            var img =object.headimgurl;
-            id=object.openid;
             var user=[
                 {
-                    id:id,
-                    name:name,
-                    img:img
+                    id:res.openid,
+                    nickname:res.nickname,
+                    headUrl:res.headimgurl
                 }
             ]
+
             var $tpl = $('#user');
             var source = $tpl.text();
             var template = Handlebars.compile(source);
