@@ -1,40 +1,43 @@
 (function ($) {
     var postview = window.location.search.split('=')[1];
     var code = postview.split("&")[0];
-    alert(code);
-    $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
-        alert(res);
-        var object=res.authData.weixin;
-        var name=object.nickname;
-        var img =object.headimgurl;
-        var id=object.openid;
 
-        var user=[
-            {
-                id:id,
-                name:name,
-                img:img
-            }
-        ]
+ loading(function(){
+     $("#userpost").on("click", function () {
+         window.location.href = "user_post.html?";
+     });
+     $("#user_address").on("click", function () {
+         window.location.href = "user_address.html?";
+     });
+     $("#user_contact").on("click", function () {
+         window.location.href = "user_contact.html?";
+     });
+ });
+    function loading(callbak){
+        $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
+            alert(res);
+            var object=res.authData.weixin;
+            var name=object.nickname;
+            var img =object.headimgurl;
+            var id=object.openid;
 
-        var $tpl = $('#user');
-        var source = $tpl.text();
-        var template = Handlebars.compile(source);
-        var data = {tags: user};
-        var html = template(data);
-        $tpl.before(html);
+            var user=[
+                {
+                    id:id,
+                    name:name,
+                    img:img
+                }
+            ]
 
-    });
-
-    $("#userpost").on("click", function () {
-        window.location.href = "user_post.html?";
-    });
-    $("#user_address").on("click", function () {
-        window.location.href = "user_address.html?";
-    });
-    $("#user_contact").on("click", function () {
-        window.location.href = "user_contact.html?";
-    });
+            var $tpl = $('#user');
+            var source = $tpl.text();
+            var template = Handlebars.compile(source);
+            var data = {tags: user};
+            var html = template(data);
+            $tpl.before(html);
+            callbak();
+        });
+    }
 })(jQuery);
 
 
