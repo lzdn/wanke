@@ -27,6 +27,7 @@
             query.find({
                 success: function(results) {
                    alert("haha");
+                    alert(results);
                 },
                 error: function(error) {
                     alert("Error: " + error.code + " " + error.message);
