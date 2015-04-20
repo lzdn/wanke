@@ -5,7 +5,6 @@
 
  loading(function(){
      AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
-     var files = AV.Object.extend("File");
      $("#userpost").on("click", function () {
          window.location.href = "user_post.html?";
      });
@@ -16,22 +15,16 @@
          window.location.href = "user_contact.html?";
      });
 
-     var query = new AV.Query(files);
-     query.equalTo("username", "a6rpfbylhhgeunael1jmn5f4d");
+     var query = new AV.Query(AV.User);
+     query.equalTo("username",id);  // find all the women
      query.find({
-         success: function(results) {
-             alert("haha");
-             alert(results);
-         },
-         error: function(error) {
-             alert("Error: " + error.code + " " + error.message);
+         success: function(women) {
+             alert(women);
          }
      });
  });
     function loading(callbak){
-        var files = AV.Object.extend("File");
         $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
-            alert(res);
             var object=res.authData.weixin;
             var name=object.nickname;
             var img =object.headimgurl;
