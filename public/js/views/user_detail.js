@@ -1,6 +1,7 @@
 (function ($) {
     var postview = window.location.search.split('=')[1];
     var code = postview.split("&")[0];
+    alert(code);
     var id=""
     var queryobject
 
@@ -35,6 +36,7 @@
  });
     function userloading(callbak){
         $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
+            alert(res);
             var object=res.authData.weixin;
             queryobject = res.authData;
             var name=object.nickname;
@@ -56,6 +58,7 @@
             AV.User._logInWith("weixin", {
                 "authData": res,
                 success: function (user) {
+                    alert(user);
                     //返回绑定后的用户
                     console.dir(user);
 
