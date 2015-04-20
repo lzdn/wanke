@@ -4,6 +4,8 @@
     var id=""
 
  loading(function(){
+     AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
+     var files = AV.Object.extend("File");
      $("#userpost").on("click", function () {
          window.location.href = "user_post.html?";
      });
