@@ -25,6 +25,7 @@
 <div id="content">
     <script type="text/x-handlebars-template" id="amz-tags">
         {{#each tags}}
+        <hr data-am-widget="divider" style="" class="am-divider"/>
         <div id={{this.value}} class="Publish am-animation-fade" value={{this.value}}>
             <div class="show"><img src="assets/i/img/ss1.jpg"></div>
             <div class="title" value={{this.value}} data-am-modal="{target: '#my-actions'}">

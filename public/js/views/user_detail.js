@@ -14,12 +14,24 @@
      });
  });
     function loading(callbak){
+        var files = AV.Object.extend("File");
         $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
             alert(res);
             var object=res.authData.weixin;
             var name=object.nickname;
             var img =object.headimgurl;
             var id=object.openid;
+
+            var query = new AV.Query(files);
+            query.equalTo("username", "a6rpfbylhhgeunael1jmn5f4d");
+            query.find({
+                success: function(results) {
+                   alert("haha");
+                },
+                error: function(error) {
+                    alert("Error: " + error.code + " " + error.message);
+                }
+            });
 
             var user=[
                 {
