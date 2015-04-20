@@ -109,7 +109,7 @@ $(".am-input-group-label").on("click",function(){
             $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=user_detail",function(res){
                 alert(res);
                 console.log(res);
-                window.location.href=res;
+                //window.location.href=res;
             })
 
             //alert("haha");
@@ -254,7 +254,6 @@ $(".am-input-group-label").on("click",function(){
     function loadwx(){
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
         $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=post_index", function (result) {
-            console.log(result);
             appId = result.appId;
             jslist = result.jsApiList;
             noncestr = result.nonceStr;
