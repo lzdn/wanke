@@ -81,18 +81,11 @@ router.post('/userSignUp', function (req, res) {
         var accessToken = result.data.access_token;
         var openid = result.data.openid;
         client.getUser(openid, function (err, result) {
-            AV.User._logInWith("weixin", {
-                "authData": result,
-                success: function (user) {
-                    //返回绑定后的用户
-                    console.dir(user);
-                    res.json(user);
-                },
-                error: function (err) {
-                    console.dir(err);
-                    res.json(error);
-                }
-            });
+            if (err) {
+                res.json(err);
+            }
+
+            res.json(result);
         });
     });
 });
@@ -124,6 +117,27 @@ router.post('/sendMessage', function (req, res) {
         }
 
         res.json("发送成功");
+    });
+});
+
+router.post('/uploadImage', function (req, res) {
+    var imageUrl = req.body.imageUrl;
+    if (!imageUrl) {
+        res.json("参数\"openId\"不能为空！");
+    }
+
+    var now = new Date();
+    var file = AV.File.withURL(now.getTime() + ".png", 'https://leancloud.cn/docs/images/permission.png');
+    file.save(null, {
+        success: function (file) {
+            // Execute any logic that should take place after the object is saved.
+            res.json({fileId: file.id});
+        },
+        error: function (file, error) {
+            // Execute any logic that should take place if the save fails.
+            // error is a AV.Error with an error code and description.
+            res.json({error: error.message});
+        }
     });
 });
 
