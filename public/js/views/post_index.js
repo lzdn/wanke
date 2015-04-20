@@ -105,11 +105,11 @@ $(".am-input-group-label").on("click",function(){
             if (currentUser) {
                 //alert("已登录")
                 alert(currentUser);
-                //alert(currentUser.authData+currentUser.get("authData")+currentUser.weixin+currentUser.git("weixin"));
-                for(var s in currentUser){
-                    alert(obj[s])
-                }
-
+                alert(currentUser.authData);
+                alert(currentUser.get("authData"));
+                alert(currentUser.get("weixin"));
+                alert(currentUser.weixin);
+                alert(currentUser.authData+currentUser.get("authData")+currentUser.weixin+currentUser.git("weixin"));
 
             } else {
                 alert("没有登录")
