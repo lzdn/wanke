@@ -9,19 +9,7 @@
         code = userlog.split("&")[0];
         alert(code);
         id=""
-    }else{
-        alert("heihei");
     }
-
-
-
-    //var currentUser = AV.User.current();
-    //if (currentUser) {
-    //    alert(currentUser);
-    //} else {
-    //    userloading();
-    //}
-
     userloading(function(err,user){
      $("#userpost").on("click", function () {
          window.location.href = "user_post.html?";
@@ -37,9 +25,7 @@
      query.equalTo("authData",queryobject);  // find all the women
      query.find({
          success: function(users) {
-             alert(users);
              id=users[0].id;
-             alert(id);
          }
      });
  });
@@ -66,13 +52,11 @@
                     "authData": res,
                     success: function(user){
                         //返回绑定后的用户
-                        alert(user);
                         queryobject=user.get("authData");
                         callbak(null,user);
                     },
                     error: function(err){
                         console.dir(err);
-                        alert("失败！");
                         callbak(err);
                     }
                 })
@@ -83,9 +67,6 @@
             query.find({
                 success: function(user) {
                     var object= user[0].get("authData");
-                    alert(object.weixin);
-                    alert(object.weixin.nickname);
-                    alert(object.weixin.headimgurl);
                     var user=[
                         {
                             nickname:object.weixin.nickname,
@@ -98,6 +79,7 @@
                     var data = {tags: user};
                     var html = template(data);
                     $tpl.before(html);
+                    callbak();
                 }
             });
         }
