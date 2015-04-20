@@ -25,7 +25,7 @@
      });
 
      var query = new AV.Query(AV.User);
-     query.equalTo("authData",queryobject);  // find all the women
+     query.equalTo("authData",user.authData);  // find all the women
      query.find({
          success: function(users) {
              alert(users);
