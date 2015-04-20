@@ -47,13 +47,25 @@
                     img:img
                 }
             ]
-
             var $tpl = $('#user');
             var source = $tpl.text();
             var template = Handlebars.compile(source);
             var data = {tags: user};
             var html = template(data);
             $tpl.before(html);
+            AV.User._logInWith("weixin", {
+                "authData": res,
+                success: function (user) {
+                    //返回绑定后的用户
+                    console.dir(user);
+
+                },
+                error: function (err) {
+                    console.dir(err);
+
+                }
+            });
+
             callbak();
         });
     }
