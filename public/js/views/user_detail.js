@@ -1,10 +1,11 @@
 
 (function($) {
-    var postview=window.location.search.split('?')[1];
+    var postview=window.location.search.split('?')[6];
     alert(postview);
     var code=postview.split("&");
     alert(code);
-    //alert(a.substring(index1,index2));
+    var ss=code.substring([1],"&");
+    alert(ss);
 
 
     $("#userpost").on("click",function(){
