@@ -113,7 +113,7 @@ $(".am-input-group-label").on("click",function(){
             })
 
             //alert("haha");
-            window.location.href="user_detail.html";
+            //window.location.href="user_detail.html";
         });
         $("#foots").on("click",function(){
             window.location.href="post_save.html";
