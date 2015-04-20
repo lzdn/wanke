@@ -1,12 +1,13 @@
 (function ($) {
+    var code,id,queryobject;
     var postview = window.location.search.split('?')[1];
     alert(postview);
     if(postview.indexof("=") >=0){
         var userlog = window.location.search.split('=')[1];
-        var code = userlog.split("&")[0];
+        code = userlog.split("&")[0];
         alert(code);
-        var id=""
-        var queryobject
+        id=""
+        queryobject
     }else{
         alert("已经登录");
     }
