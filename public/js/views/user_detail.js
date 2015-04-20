@@ -1,6 +1,6 @@
 
 (function($) {
-    var postview=window.location.search.split('?')[6];
+    var postview=window.location.search.split('?')[1];
     alert(postview);
     var code=postview.split("&");
     alert(code);
