@@ -36,7 +36,6 @@
  });
     function userloading(callbak){
         $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
-            alert(res);
             var user=[
                 {
                     id:res.openid,
@@ -51,10 +50,11 @@
             var data = {tags: user};
             var html = template(data);
             $tpl.before(html);
+
             AV.User._logInWith("weixin", {
                 "authData": res,
                 success: function (user) {
-                    alert(user);
+                    alert(AV.User.current());
                     //返回绑定后的用户
                     console.dir(user);
 
