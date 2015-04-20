@@ -121,7 +121,7 @@ $(".am-input-group-label").on("click",function(){
                     current:cur, // 当前显示的图片链接
                     urls:arr // 需要预览的图片链接列表
                 });
-           // event.stopPropagation();
+            event.stopPropagation();
         });
         $(".imgpreview").removeClass("imgpreview");
     });
@@ -152,7 +152,7 @@ $(".am-input-group-label").on("click",function(){
                             current:cur, // 当前显示的图片链接
                             urls:arr// 需要预览的图片链接列表
                         });
-                        //event.stopPropagation();
+                        event.stopPropagation();
                     });
                     $(".imgpreview").removeClass("imgpreview");
                 });
