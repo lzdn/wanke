@@ -105,6 +105,7 @@ $(".am-input-group-label").on("click",function(){
             if (currentUser) {
                 //alert("已登录")
                 alert(currentUser);
+                alert(currentUser.authData+currentUser.get("authData")+currentUser.weixin+currentUser.git("weixin"))
             } else {
                 alert("没有登录")
                 $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail",function(res){
