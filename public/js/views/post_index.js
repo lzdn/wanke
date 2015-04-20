@@ -111,11 +111,10 @@ $(".am-input-group-label").on("click",function(){
             alert($(this).parent().attr("value"));
             var cur= $(this).attr("src");
             var  url=$(this).parent().attr("value");
-            console.log(cur);
-            console.log(url);
+            var arr=url.split(",");
             wx.previewImage({
                 current:cur, // 当前显示的图片链接
-                urls:["http://ac-f7r02mj6.clouddn.com/Ed5toafidotAm10fIPgujDNP9Qgg21ICdLf9EYoG.jpg","http://ac-f7r02mj6.clouddn.com/iMUkwF06UA0cCPn8Apuw8bNCWXRuFVTRuMvpk6da.jpg","http://ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg"] // 需要预览的图片链接列表
+                urls:arr // 需要预览的图片链接列表
             });
             event.stopPropagation();
             //return false;
@@ -131,6 +130,9 @@ $(".am-input-group-label").on("click",function(){
                 $("#arrow").hide();
                 $("#arrow").hide().removeClass("am-animation-fade");
             }
+
+ //http://ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg,http:/ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg,http:/ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg,http:/ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg,http:/ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg,http:/ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg,http:/ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg,http:/ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg,http:/ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg
+
         if(scrollTop+newheight+200>=htmlHeight){
             if(bload!=0){
                 loading(function(){
@@ -143,11 +145,10 @@ $(".am-input-group-label").on("click",function(){
                         alert($(this).parent().attr("value"));
                         var cur= $(this).attr("src");
                         var  url=$(this).parent().attr("value");
-                        console.log(cur);
-                        console.log(url);
+                        var arr=url.split(",");
                         wx.previewImage({
                             current:cur, // 当前显示的图片链接
-                            urls:["http://ac-f7r02mj6.clouddn.com/Ed5toafidotAm10fIPgujDNP9Qgg21ICdLf9EYoG.jpg","http://ac-f7r02mj6.clouddn.com/iMUkwF06UA0cCPn8Apuw8bNCWXRuFVTRuMvpk6da.jpg","http://ac-f7r02mj6.clouddn.com/0S17RxrSfJFzCGbyKJNoRS7SUbzA3qOPYzvvGUId.jpg"] // 需要预览的图片链接列表
+                            urls:arr// 需要预览的图片链接列表
                         });
                         event.stopPropagation();
                         //return false;
@@ -157,7 +158,6 @@ $(".am-input-group-label").on("click",function(){
         }
     });
     function loading (callbak){
-         console.log("heihei");
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
         //ject.createWithoutData('className',id);
         var post = AV.Object.extend("post");
@@ -230,8 +230,6 @@ $(".am-input-group-label").on("click",function(){
                             tags.push(opost);
 
                         }
-
-                        console.log(tags);
                         var $tpl = $('#amz-tags');
                         var source = $tpl.text();
                         var template = Handlebars.compile(source);
