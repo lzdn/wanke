@@ -1,7 +1,7 @@
 
 (function($) {
     var postview=window.location.search.split('?')[1];
-    var number=""
+    var number="";
    // alert(postview);
     loadwx();
     loading(function(){
@@ -77,7 +77,7 @@
                 }
                 var otagkey = object.get("tagkey");
                 var ousername = object.get("username");
-                number=object("mobilePhoneNumber");
+                number=object.get("mobilePhoneNumber");
                 var username = ousername.get("username");
                 var tagvalue = otagkey.get("tagtitle");
                 var oldtime = object.createdAt.getTime();
