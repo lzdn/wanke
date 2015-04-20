@@ -1,16 +1,18 @@
 (function ($) {
+    var code="";
+    var userlog,id,queryobject
     var postview = window.location.search.split('?')[1];
     alert(postview);
     if(postview.indexOf("=") > 0 ){
         alert("asdsadasd");
+        userlog = window.location.search.split('=')[1];
+        code = userlog.split("&")[0];
+        alert(code);
+        id=""
     }else{
         alert("heihei");
     }
-    var userlog = window.location.search.split('=')[1];
-    var code = userlog.split("&")[0];
-    alert(code);
-    var id=""
-    var queryobject
+
 
 
     //var currentUser = AV.User.current();
@@ -43,37 +45,42 @@
  });
     function userloading(callbak){
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
-        $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
-            queryobject=res;
-            var user=[
-                {
-                    id:res.openid,
-                    nickname:res.nickname,
-                    headUrl:res.headimgurl
-                }
-            ]
-            var $tpl = $('#user');
-            var source = $tpl.text();
-            var template = Handlebars.compile(source);
-            var data = {tags: user};
-            var html = template(data);
-            $tpl.before(html);
+        if(code!=""){
+            $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
+                queryobject=res;
+                var user=[
+                    {
+                        id:res.openid,
+                        nickname:res.nickname,
+                        headUrl:res.headimgurl
+                    }
+                ]
+                var $tpl = $('#user');
+                var source = $tpl.text();
+                var template = Handlebars.compile(source);
+                var data = {tags: user};
+                var html = template(data);
+                $tpl.before(html);
 
-            AV.User._logInWith("weixin", {
-                "authData": res,
-                success: function(user){
-                    //返回绑定后的用户
-                    alert(user);
-                    queryobject=user.get("authData");
-                    callbak(null,user);
-                },
-                error: function(err){
-                    console.dir(err);
-                    alert("失败！");
-                    callbak(err);
-                }
-            })
-        });
+                AV.User._logInWith("weixin", {
+                    "authData": res,
+                    success: function(user){
+                        //返回绑定后的用户
+                        alert(user);
+                        queryobject=user.get("authData");
+                        callbak(null,user);
+                    },
+                    error: function(err){
+                        console.dir(err);
+                        alert("失败！");
+                        callbak(err);
+                    }
+                })
+            });
+        }else{
+            alert("不需要登录")
+        }
+
     }
 })(jQuery);
 
