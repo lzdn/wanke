@@ -4,7 +4,7 @@
     alert(postview);
     var code=postview.split("&");
     alert(code);
-    var ss=postview.substring("=","&");
+    var ss=postview.substring("="[1],"&");
     alert(ss);
 
 
