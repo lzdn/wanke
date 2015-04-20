@@ -6,7 +6,7 @@
         alert(res);
         var object=res.get("weixin");
         alert(object);
-        alert(object.get("nickname"));
+        alert(object.nickname);
     });
 
     $("#userpost").on("click", function () {
