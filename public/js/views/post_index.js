@@ -106,7 +106,7 @@ $(".am-input-group-label").on("click",function(){
             //    cosole.log(res);
             //})
 
-            $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=user_detail",function(res){
+            $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail",function(res){
                 alert(res);
                 console.log(res);
                 //window.location.href=res;
