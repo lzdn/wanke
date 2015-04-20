@@ -33,7 +33,7 @@
              var imgurl=currentUser.get("authData").weixin.headimgurl;
              $(".usercontent").remove();
                 $(" <p class=\"usercontent am-sans-serif\">联系方式："+number+"</p>").prependTo(".userphone");
-                $(" <img src=\""+imgurl+"\" class=\"am-radius\">").prependTo("#headtle");
+                $(" <img src=\""+imgurl+"\" class=\"am-radius\">").appendTo("#headtle");
             } else {
                 alert("没有登录")
                 $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail",function(res){
@@ -77,7 +77,7 @@
                 }
                 var otagkey = object.get("tagkey");
                 var ousername = object.get("username");
-                number=object.get("mobilePhoneNumber");
+                number=ousername.get("mobilePhoneNumber");
                 var username = ousername.get("username");
                 var tagvalue = otagkey.get("tagtitle");
                 var oldtime = object.createdAt.getTime();
@@ -98,7 +98,6 @@
                     }
                 }
                 // var tagvalue = object.get('tagkey');
-                var imge = object.get('imgs')
                 var opost = {
                     name: username,
                     usersay: content,
