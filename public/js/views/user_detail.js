@@ -2,7 +2,8 @@
     var code,id,queryobject;
     var postview = window.location.search.split('?')[1];
     alert(postview);
-    if(postview.indexof("=") >=0){
+    var b = "="
+    if(postview.indexof(b) >=0){
         var userlog = window.location.search.split('=')[1];
         code = userlog.split("&")[0];
         alert(code);
