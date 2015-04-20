@@ -106,9 +106,6 @@ $(".am-input-group-label").on("click",function(){
                 console.log(res);
                 window.location.href=res.authUrl;
             })
-
-            //alert("haha");
-            //window.location.href="user_detail.html";
         });
         $("#foots").on("click",function(){
             window.location.href="post_save.html";

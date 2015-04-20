@@ -1,7 +1,9 @@
 
 (function($) {
     var postview=window.location.search.split('?')[1];
-    //alert(postview);
+    alert(postview);
+    var code=postview.split("&");
+    alert(code);
 
     $("#userpost").on("click",function(){
         window.location.href="user_post.html?";
