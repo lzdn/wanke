@@ -26,17 +26,20 @@
 
 <script type="text/x-handlebars-template" id="user">
     {{#each tags}}
-    <div id="userheard"><img src={{this.img}} class="am-circle"/></div>
-    <div id="username"><p class="am-sans-serif">{{this.name}}</p></div>
+    <div class="am-animation-fade">
+        <div id="userheard"><img src={{this.img}} class="am-circle"/></div>
+        <div id="username"><p class="am-sans-serif">{{this.name}}</p></div>
+        <div id="content">
+            <ul class="am-list  am-list-static am-list-border">
+                <li id="userpost"><i class="am-icon am-icon-users icon-1 am-icon-sm"></i>个人动态<i class="am-icon am-icon-chevron-right icon-2 am-icon-sm"></i></li>
+                <li id="user_address"><i class="am-icon am-icon-map-marker icon-1 am-icon-sm" ></i>更改小区 <i class="am-icon am-icon-chevron-right icon-2 am-icon-sm"></i></li>
+                <li id="user_contact"><i class="am-icon am-icon-phone icon-1 am-icon-sm"></i>联系方式 <i class="am-icon am-icon-chevron-right icon-2 am-icon-sm"></i></li>
+            </ul>
+        </div>
+    </div>
     {{/each}}
 </script>
-<div id="content">
-    <ul class="am-list  am-list-static am-list-border">
-        <li id="userpost"><i class="am-icon am-icon-users icon-1 am-icon-sm"></i>个人动态<i class="am-icon am-icon-chevron-right icon-2 am-icon-sm"></i></li>
-        <li id="user_address"><i class="am-icon am-icon-map-marker icon-1 am-icon-sm" ></i>更改小区 <i class="am-icon am-icon-chevron-right icon-2 am-icon-sm"></i></li>
-        <li id="user_contact"><i class="am-icon am-icon-phone icon-1 am-icon-sm"></i>联系方式 <i class="am-icon am-icon-chevron-right icon-2 am-icon-sm"></i></li>
-    </ul>
-</div>
+
 
 
 
