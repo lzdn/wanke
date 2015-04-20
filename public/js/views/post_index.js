@@ -110,13 +110,9 @@ $(".am-input-group-label").on("click",function(){
 
         }
         $(".imgpreview").on("click",function(){
-            alert($(this).attr("src"));
-            alert($(this).parent().attr("value"));
             var cur= $(this).attr("src");
             var  url=$(this).parent().attr("value");
             var arr=url.split(",");
-            //var imgval=$(this).attr("value");
-            //$(this).attr("value","1");
                 wx.previewImage({
                     current:cur, // 当前显示的图片链接
                     urls:arr // 需要预览的图片链接列表
@@ -143,8 +139,6 @@ $(".am-input-group-label").on("click",function(){
                         window.location.href="post_detail.html?"+postview+"";
                     });
                     $(".imgpreview").on("click",function(){
-                        alert($(this).attr("src"));
-                        alert($(this).parent().attr("value"));
                         var cur= $(this).attr("src");
                         var  url=$(this).parent().attr("value");
                         var arr=url.split(",");
