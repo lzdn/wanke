@@ -4,7 +4,7 @@
     alert(code);
     $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
         alert(res);
-        var object=res.get("authData");
+        var object=res.authData;
         alert(object);
         alert(object.weixin);
         var object2 = object.weixin;
