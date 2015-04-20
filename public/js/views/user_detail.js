@@ -25,7 +25,7 @@
      });
 
      var query = new AV.Query(AV.User);
-     query.equalTo("authData",user.authData);  // find all the women
+     query.equalTo("authData",queryobject);  // find all the women
      query.find({
          success: function(users) {
              alert(users);
@@ -57,8 +57,7 @@
                 success: function(user){
                     //返回绑定后的用户
                     alert(user);
-                    alert(user.weixin+user.get("authData")+user.get("weixin") +user.get("weixin"));
-
+                    queryobject=user.get("authData");
                     callbak(null,user);
                 },
                 error: function(err){
