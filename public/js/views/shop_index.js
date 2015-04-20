@@ -7,7 +7,15 @@
         });
 
         $("#users").on("click",function(){
-            window.location.href="user_detail.html?ss";
+            var currentUser = AV.User.current();
+            if (currentUser) {
+                window.location.href= "user_detail.html?"+currentUser.id+"";
+            } else {
+                alert("没有登录")
+                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail",function(res){
+                    window.location.href=res.authUrl;
+                })
+            }
         });
     });
 

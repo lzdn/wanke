@@ -2,9 +2,7 @@
     var code="";
     var userlog,id,queryobject
     var postview = window.location.search.split('?')[1];
-    alert(postview);
     if(postview.indexOf("=") > 0 ){
-        alert("asdsadasd");
         userlog = window.location.search.split('=')[1];
         code = userlog.split("&")[0];
         alert(code);
@@ -87,29 +85,3 @@
     }
 })(jQuery);
 
-
-//{
-//    "weixin"
-//:
-//    {
-//        "sex"
-//    :
-//        1, "nickname"
-//    :
-//        "动名词", "city"
-//    :
-//        "Mudanjiang", "headimgurl"
-//    :
-//        "http://wx.qlogo.cn/mmopen/PiajxSqBRaEJgfrRe3VDiaNqFHsR4dBj8Z5rWgsr0icBXAiaY1DmjoNBg85PILc6WQw1sgACOUsGNibYp2QW5KgeRpw/0", "openid"
-//    :
-//        "omoCDjmkB3VOX-C8SX5-AfE6GmHU", "language"
-//    :
-//        "zh_CN", "province"
-//    :
-//        "Heilongjiang", "country"
-//    :
-//        "China", "privilege"
-//    :
-//        []
-//    }
-//}
