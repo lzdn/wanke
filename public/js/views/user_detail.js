@@ -4,10 +4,11 @@
     alert(code);
     $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
         alert(res);
-        for(str in x)
-        {
-            alert(str);
-        }
+        alert(res.authData);
+        alert(res.authData.nickname);
+        alert(res.get("nickname"));
+        alert(res.get("nickname"));
+        alert(res.get("nickname"));
     });
 
     $("#userpost").on("click", function () {
