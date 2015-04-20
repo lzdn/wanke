@@ -78,7 +78,28 @@
                 })
             });
         }else{
-            alert("不需要登录")
+            var query = new AV.Query(AV.User);
+            query.equalTo("objectId",postview);  // find all the women
+            query.find({
+                success: function(user) {
+                    var object= user[0].get("authData");
+                    alert(object.weixin);
+                    alert(object.weixin.nickname);
+                    alert(object.weixin.headimgurl);
+                    var user=[
+                        {
+                            nickname:object.weixin.nickname,
+                            headUrl:object.weixin.headimgurl
+                        }
+                    ]
+                    var $tpl = $('#user');
+                    var source = $tpl.text();
+                    var template = Handlebars.compile(source);
+                    var data = {tags: user};
+                    var html = template(data);
+                    $tpl.before(html);
+                }
+            });
         }
 
     }
