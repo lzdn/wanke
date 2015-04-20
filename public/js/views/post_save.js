@@ -2,7 +2,7 @@
  * Created by amberglasses on 15/3/24.
  */
 $(function () {
-    var localIds = 5;
+    var localIds;
     var user = AV.User;
     var posts = AV.Object.extend("post");
     var tags = AV.Object.extend("tag");
@@ -71,7 +71,7 @@ $(function () {
 
     $("#smimg").on("click", function () {
         //var ofileid;
-        var localIds;
+        //var localIds;
                 wx.chooseImage({
                     success: function (res) {
                         console.log(res);
