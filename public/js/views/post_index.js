@@ -102,8 +102,6 @@ $(".am-input-group-label").on("click",function(){
         $("#users").on("click",function(){
 
             $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail",function(res){
-                alert(res);
-                console.log(res);
                 window.location.href=res.authUrl;
             })
         });

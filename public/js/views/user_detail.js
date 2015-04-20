@@ -1,7 +1,8 @@
 
 (function($) {
     var postview=window.location.search;
-    var index1=postview.indexOf("?");
+    alert(postview);
+    var index1=postview.indexOf("=")[1];
     var index2=postview.indexOf("&");
     alert(postview.substring(index1,index2));
 
