@@ -13,7 +13,7 @@
     //    userloading();
     //}
 
-    userloading(function(){
+    userloading(function(err,user){
      AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
      $("#userpost").on("click", function () {
          window.location.href = "user_post.html?";
@@ -43,6 +43,7 @@
                     headUrl:res.headimgurl
                 }
             ]
+            alert("nickname: "+res.nickname);
 
             var $tpl = $('#user');
             var source = $tpl.text();
@@ -53,19 +54,17 @@
 
             AV.User._logInWith("weixin", {
                 "authData": res,
-                success: function (user) {
-                    alert(AV.User.current());
+                success: function(user){
                     //返回绑定后的用户
                     console.dir(user);
 
+                    callbak(null,user);
                 },
-                error: function (err) {
+                error: function(err){
                     console.dir(err);
-
+                    callbak(err);
                 }
-            });
-
-            callbak();
+            })
         });
     }
 })(jQuery);
