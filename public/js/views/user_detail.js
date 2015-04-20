@@ -1,6 +1,8 @@
 (function ($) {
-    var postview = window.location.search.split('=')[1];
-    var code = postview.split("&")[0];
+    var postview = window.location.search.split('?')[1];
+    alert(postview);
+    var userlog = window.location.search.split('=')[1];
+    var code = userlog.split("&")[0];
     alert(code);
     var id=""
     var queryobject
