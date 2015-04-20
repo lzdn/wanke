@@ -45,17 +45,17 @@
                 $("#users").on("click", function () {
                     window.location.href = "user_detail.html";
                 });
-                //$(".imgpreview").on("click",function(){
-                //    var cur= $(this).attr("src");
-                //    var  url=$(this).parent().attr("value");
-                //    var arr=url.split(",");
-                //    wx.previewImage({
-                //        current:cur, // 当前显示的图片链接
-                //        urls:arr// 需要预览的图片链接列表
-                //    });
-                //    event.stopPropagation();
-                //});
-                //$(".imgpreview").removeClass("imgpreview");
+                $(".imgpreview").on("click",function(){
+                    var cur= $(this).attr("src");
+                    var  url=$(this).parent().attr("value");
+                    var arr=url.split(",");
+                    wx.previewImage({
+                        current:cur, // 当前显示的图片链接
+                        urls:arr// 需要预览的图片链接列表
+                    });
+                    event.stopPropagation();
+                });
+                $(".imgpreview").removeClass("imgpreview");
 
             });
         }
