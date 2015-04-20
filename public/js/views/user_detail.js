@@ -5,9 +5,25 @@
     $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
         alert(res);
         var object=res.authData.weixin;
-        alert(object.weixin);
-       // var object2 = object.weixin;
-        alert(object.nickname);
+        var name=object.nickname;
+        var img =object.headimgurl;
+        var id=object.openid;
+
+        var user=[
+            {
+                id:id,
+                name:name,
+                img:img
+            }
+        ]
+
+        var $tpl = $('#user');
+        var source = $tpl.text();
+        var template = Handlebars.compile(source);
+        var data = {tags: user};
+        var html = template(data);
+        $tpl.before(html);
+
     });
 
     $("#userpost").on("click", function () {
