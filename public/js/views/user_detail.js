@@ -4,7 +4,7 @@
     alert(code);
     $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
         alert(res);
-        var object=res.weixin;
+        var object=res.get("weixin");
         alert(object);
         alert(object.get("nickname"));
     });
