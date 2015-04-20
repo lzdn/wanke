@@ -56,6 +56,9 @@
                 "authData": res,
                 success: function(user){
                     //返回绑定后的用户
+                    alert(user);
+                    alert(user.authData);
+                    alert(user.authData.id);
                     callbak(null,user);
                 },
                 error: function(err){
