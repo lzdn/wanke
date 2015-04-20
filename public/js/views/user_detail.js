@@ -1,17 +1,16 @@
 (function ($) {
-    var code,id,queryobject;
     var postview = window.location.search.split('?')[1];
     alert(postview);
-    var b = "code"
-    if(postview.indexof(b) >=0){
-        var userlog = window.location.search.split('=')[1];
-        code = userlog.split("&")[0];
-        alert(code);
-        id=""
+    if(postview.indexOf("=") > 0 ){
+        alert("asdsadasd");
     }else{
-        alert("已经登录");
+        alert("heihei");
     }
-
+    var userlog = window.location.search.split('=')[1];
+    var code = userlog.split("&")[0];
+    alert(code);
+    var id=""
+    var queryobject
 
 
     //var currentUser = AV.User.current();
