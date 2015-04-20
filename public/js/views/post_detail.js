@@ -1,6 +1,7 @@
 
 (function($) {
     var postview=window.location.search.split('?')[1];
+    var number=""
    // alert(postview);
     loadwx();
     loading(function(){
@@ -31,7 +32,7 @@
                // window.location.href= "user_detail.html?"+currentUser.id+"";
              var imgurl=currentUser.get("authData").weixin.headimgurl;
              $(".usercontent").remove();
-                $(" <p class=\"usercontent am-sans-serif\">联系方式：12347865685</p>").prependTo(".userphone");
+                $(" <p class=\"usercontent am-sans-serif\">联系方式："+number+"</p>").prependTo(".userphone");
                 $(" <img src=\""+imgurl+"\" class=\"am-radius\">").prependTo("#headtle");
             } else {
                 alert("没有登录")
@@ -76,6 +77,7 @@
                 }
                 var otagkey = object.get("tagkey");
                 var ousername = object.get("username");
+                number=object("mobilePhoneNumber");
                 var username = ousername.get("username");
                 var tagvalue = otagkey.get("tagtitle");
                 var oldtime = object.createdAt.getTime();
