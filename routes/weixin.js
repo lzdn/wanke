@@ -123,7 +123,7 @@ router.post('/sendMessage', function (req, res) {
 router.post('/uploadImage', function (req, res) {
     var serverId = req.body.serverId;
     if (!serverId) {
-        res.json("参数\"openId\"不能为空！");
+        res.json("参数\"serverId\"不能为空！");
     }
 
     api.getMedia(serverId, function (err, result, res) {
