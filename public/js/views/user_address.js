@@ -127,8 +127,10 @@
                 query.equalTo("objectId", postview);  // find all the women
                 query.find({
                     success: function(user) {
-                        starthomename=user.get("building");
-                        startbuilding=user.get("floorname");
+                        starthomename=user[0].get("buliding");
+                        startbuilding=user[0].get("floorname");
+                        alert(starthomename);
+                        alert(startbuilding);
                     }
                 });
                 callbak();
