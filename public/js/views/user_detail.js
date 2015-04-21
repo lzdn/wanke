@@ -33,7 +33,7 @@
         //    });
         //});
 
-        $('#my-confirm').find('[data-am-modal-confirm]').on('click', function () {
+        $('#confirm-logout').on('click', function () {
             AV.User.logOut();
             var currentUser = AV.User.current();
             window.location.href = "post_index.html?id=" + currentUser.id + "";
