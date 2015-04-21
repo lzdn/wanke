@@ -192,7 +192,7 @@
                 query.find({
                     success: function (arry) {
                         var times = 0;
-                        var tags = [];
+                        var posts = [];
                         var imgpattern = "";
                         for (var i = 0; i < arry.length; i++) {
                             var object = arry[i];
@@ -232,7 +232,7 @@
                                 }
                             }
                             var opost = {
-                                //  name: username,
+                                name: username,
                                 usersay: content,
                                 tag: tagvalue,
                                 time: times,
@@ -240,13 +240,13 @@
                                 img: imgs,
                                 pattern: imgpattern
                             };
-                            tags.push(opost);
+                            posts.push(opost);
 
                         }
                         var $tpl = $('#amz-tags');
                         var source = $tpl.text();
                         var template = Handlebars.compile(source);
-                        var data = {tags: tags};
+                        var data = {posts: posts};
                         var html = template(data);
                         $tpl.before(html);
                         callbak();
@@ -275,8 +275,6 @@
             });
         });
     }
-
-
 })(jQuery);
 
 
