@@ -1,3 +1,4 @@
+
 $(function () {
     var saveurl = window.location.href;
     alert(saveurl);
@@ -6,14 +7,14 @@ $(function () {
     var posts = AV.Object.extend("post");
     var tags = AV.Object.extend("tag");
     var newtag = 1;
-    var code = "";
-    var userlog, userid, queryobject, nickname
+    var code="";
+    var userlog,userid,queryobject,nickname
     var postview = window.location.search.split('?')[1];
-    if (postview.indexOf("=") > 0) {
+    if(postview.indexOf("=") > 0 ){
         userlog = window.location.search.split('=')[1];
         code = userlog.split("&")[0];
         alert(code);
-        id = ""
+        id=""
     }
     dataLoad(function () {
 
@@ -80,65 +81,43 @@ $(function () {
     $("#smimg").on("click", function () {
         //var ofileid;
         //var localIds;
-        wx.chooseImage({
-            success: function (res) {
-                console.log(res);
-                localIds = res.localIds;
-                alert(localIds);
-                for (var i = 0; i < localIds.length; i++) {
-                    $("<div id=\"" + localIds[i] + "\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a class=\"am-icon-close\" value=\"" + localIds[i] + "\"></a></div>").prependTo("#imgwall");
-                    wx.uploadImage({
-                        localId: "" + localIds[i] + "",
-                        isShowProgressTips: 1, // 默认为1，显示进度提示
-                        success: function (res) {
-                            var serverId = res.serverId; // 返回图片的服务器端ID
-                            $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverId: serverId}, function (imgid) {
-                                alert(imgid);
-                                relation.add(imgid);
-                                var url;
-                                var file = AV.Object.extend("File");
-                                var query = new AV.Query(file);
-                                query.equalTo("objectId", imgid);
-                                query.find({
-                                    success: function (img) {
-                                        url = img[0].get("url");
-                                    }
-                                }).then(function () {
-                                    $("#addimg").show();
-                                    $("<div id=\"" + url + "\" class=\"imgnav\"><img src=\"" + url + "\" alt=\"\"/><a class=\"am-icon-close " + url + "\" value=\"" + url + "\"></a></div>").prependTo("#imgwall");
-                                    $("." + url + "").on("click", function () {
-                                        $("#"+url+"").remove();
-                                        if (aimgshow.length == 0) {
-                                           $("#addimg").hide();
-                                            relation.remove(imgid);
-                                         }
+                wx.chooseImage({
+                    success: function (res) {
+                        console.log(res);
+                        localIds = res.localIds;
+                        alert(localIds);
+                            $("<div id=\"" + localIds[0] + "\" class=\"imgnav\"><img src=\"" + localIds[0] + "\" alt=\"\"/><a  class=\"am-icon-close\" value=\"" + localIds[0] + "\"></a></div>").prependTo("#imgwall");
+                            wx.uploadImage({
+                                localId:""+localIds[0]+"",
+                                isShowProgressTips: 1, // 默认为1，显示进度提示
+                                success: function (res) {
+                                    var serverId = res.serverId; // 返回图片的服务器端ID
+                                    $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage",{serverId:serverId},function(imgid){
+                                        alert(imgid);
+                                        relation.add(imgid);
                                     });
-                                });
-
+                                }
                             });
-                        }
-                    });
-                }
 
-                //alert(res);
-                //alert(res.sourceType);
-                //alert(res.errMsg);
-                //var file = new AV.File("myfile.jpg", res);
-                //file.save({
-                //    success:function(files){
-                //        alert(files);
-                //    }
-                //})
-                // alert("开始保存");
-                //var file = AV.File.withURL("ssssss",localIds[0]);
-                //file.save().then(function(){
-                //    alert("haha")
-                //    var profilePhoto = profile.get("photoFile");
-                //    alert(profilePhoto.url());
-                //    //$("profileImg")[0].src = profilePhoto.url();
-                //})
-            }
-        });
+                        //alert(res);
+                        //alert(res.sourceType);
+                        //alert(res.errMsg);
+                        //var file = new AV.File("myfile.jpg", res);
+                        //file.save({
+                        //    success:function(files){
+                        //        alert(files);
+                        //    }
+                        //})
+                       // alert("开始保存");
+                        //var file = AV.File.withURL("ssssss",localIds[0]);
+                        //file.save().then(function(){
+                        //    alert("haha")
+                        //    var profilePhoto = profile.get("photoFile");
+                        //    alert(profilePhoto.url());
+                        //    //$("profileImg")[0].src = profilePhoto.url();
+                        //})
+                    }
+                });
 
         // var file = AV.File.withURL('img11.jpg', localIds);
         //// 以下保存图片…………………………………………
@@ -189,7 +168,7 @@ $(function () {
             content: aUserval2,
             tagkey: tag,
             //imgs: relation,
-            username: userid
+            username:userid
         }, {
             success: function (object) {
                 alert("发表成功");
@@ -200,7 +179,7 @@ $(function () {
 //………………………………储备函数…………………………………………
     function dataLoad(callbak) {
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
-        $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig?url=" + saveurl + "", function (result) {
+        $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig?url="+saveurl+"", function (result) {
             console.log(result);
             appId = result.appId;
             jslist = result.jsApiList;
@@ -244,19 +223,19 @@ $(function () {
                 callbak();
             }
         });
-        if (code != "") {
+        if(code!=""){
             $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
-                queryobject = res;
-                nickname = res.nickname;
+                queryobject=res;
+                nickname=res.nickname;
                 AV.User._logInWith("weixin", {
                     "authData": res,
-                    success: function (user) {
-                        userid = user.id;
+                    success: function(user){
+                        userid=user.id;
                         alert(userid);
-                        queryobject = user.get("authData");
+                        queryobject=user.get("authData");
                         var query = new AV.Query(AV.User);
                         query.get(userid, {
-                            success: function (user) {
+                            success: function(user) {
                                 user.set('nickname', nickname);
                                 user.save()
                             }
@@ -264,12 +243,12 @@ $(function () {
                     }
                 })
             });
-        } else {
+        }else{
             var query = new AV.Query(AV.User);
-            query.equalTo("objectId", postview);  // find all the women
+            query.equalTo("objectId",postview);  // find all the women
             query.find({
-                success: function (user) {
-                    userid = user[0].id;
+                success: function(user) {
+                    userid= user[0].id;
                     alert(userid);
                 }
             });
