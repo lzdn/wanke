@@ -168,11 +168,12 @@ $(function () {
         var tag = new tags();
         tag.id = newtag;
         var postc = new posts();
+        var user = AV.User.current();
         postc.save({
             content: aUserval2,
-            tagkey: tag
+            tagkey: tag,
             //imgs: relation,
-           // username: userid
+            username: user
         }, {
             success: function (object) {
                 alert("发表成功");
