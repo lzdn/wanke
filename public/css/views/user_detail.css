@@ -64,3 +64,8 @@
 #user_address  .icon-2{
     line-height: 37px;
 }
+.am-btn-block{
+    margin: 0 10px 0 10px;
+    background: #fff;
+    color:red;
+}

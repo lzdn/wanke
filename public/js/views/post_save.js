@@ -9,10 +9,10 @@ $(function () {
     var newtag = 1;
     dataLoad(function () {
 
-        wx.ready(function () {
-           // alert("绑定事件:隐藏菜单");
-            wx.hideOptionMenu();
-        });
+        //wx.ready(function () {
+        //   // alert("绑定事件:隐藏菜单");
+        //    wx.hideOptionMenu();
+        //});
 
         var aNav = document.getElementsByClassName("am-btn-extend");
         aNav[0].className = "am-btn-extend am-btn am-round am-btn-primary";
@@ -77,20 +77,35 @@ $(function () {
                         console.log(res);
                         localIds = res.localIds;
                         alert(localIds);
-                        $("<div id=\"" + localIds[0] + "\" class=\"imgnav\"><img src=\"" + localIds[0] + "\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\"" + localIds[0] + "\"></a></div>").prependTo("#imgwall");
-                        wx.uploadImage({
-                            localId:""+localIds+"",
-                            //localId:"weixin://resourceid/21821bc3d47a8cf29d25ea940a3b7afa", // 需要上传的图片的本地ID，由chooseImage接口获得
-                            isShowProgressTips: 1, // 默认为1，显示进度提示
-                            success: function (res) {
-                                var serverId = res.serverId; // 返回图片的服务器端ID
-                                alert(serverId);
-                               // $("<div id=\"" + serverId[0] + "\" class=\"imgnav\"><img src=\"" + serverId[0] + "\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\"" + serverId[0] + "\"></a></div>").prependTo("#imgwall");
-                                    $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage",{serverId:serverId},function(imgid){
-                                       alert(imgid);
-                                });
+                        for(var i=0; i<localIds.length;i++){
+                            $("<div class=\"" + localIds[i] + "\" ><a value=\"" + localIds[i] + "\" class=\"am-close\">&times;</a><img src=\"" + localIds[i] + "\" alt=\"#\"/></div>").prependTo("#imgwall");
+                            var aimgnav = $(".am-close");
+                            $("#addimg").show();
+                            for (var j = 0; j < aimgnav.length; j++) {
+                                aimgnav[j].onclick = function () {
+                                    var remobeidx = $(this).attr('value');
+                                    $(".imgnav-" + remobeidx + "").remove();
+                                    var aimgshow = $(".imgnav");
+                                    if (aimgshow.length == 0) {
+                                        $("#addimg").hide();
+                                    }
+                                };
                             }
-                        });
+                            wx.uploadImage({
+                                localId:""+localIds+"",
+                                //localId:"weixin://resourceid/21821bc3d47a8cf29d25ea940a3b7afa", // 需要上传的图片的本地ID，由chooseImage接口获得
+                                isShowProgressTips: 1, // 默认为1，显示进度提示
+                                success: function (res) {
+                                    var serverId = res.serverId; // 返回图片的服务器端ID
+                                    alert(serverId);
+                                    // $("<div id=\"" + serverId[0] + "\" class=\"imgnav\"><img src=\"" + serverId[0] + "\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\"" + serverId[0] + "\"></a></div>").prependTo("#imgwall");
+                                    $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage",{serverId:serverId},function(imgid){
+                                        alert(imgid);
+                                    });
+                                }
+                            });
+                        }
+
                         //alert(res);
                         //alert(res.sourceType);
                         //alert(res.errMsg);

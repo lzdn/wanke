@@ -1,6 +1,6 @@
 (function ($) {
     var code="";
-    var userlog,userid,queryobject
+    var userlog,userid,queryobject,nickname
     var postview = window.location.search.split('?')[1];
     if(postview.indexOf("=") > 0 ){
         userlog = window.location.search.split('=')[1];
@@ -27,11 +27,19 @@
          }
      });
  });
+
+    $("#esc").on("click",function(){
+        AV.User.logOut();
+        var currentUser = AV.User.current();
+        window.location.href="post_index.html?"+userid+"";
+    })
+
     function userloading(callbak){
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
         if(code!=""){
             $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
                 queryobject=res;
+                nickname=res.nickname;
                 var user=[
                     {
                         id:res.openid,
@@ -49,9 +57,15 @@
                 AV.User._logInWith("weixin", {
                     "authData": res,
                     success: function(user){
-                        //返回绑定后的用户
                         userid=user.id;
                         queryobject=user.get("authData");
+                        var query = new AV.Query(AV.User);
+                        query.get(userid, {
+                            success: function(user) {
+                                user.set('nickname', nickname);
+                                user.save()
+                            }
+                        });
                         callbak(null,user);
                     },
                     error: function(err){
