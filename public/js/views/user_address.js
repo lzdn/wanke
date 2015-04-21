@@ -36,7 +36,6 @@
         })
 
         $("#usr-sbm-sub").on("click",function(){
-            alert("haha");
             var home = AV.Object.extend("home");
             var query = new AV.Query(home);
             query.equalTo("objectId", $("#doc-select-1").val());
@@ -45,13 +44,9 @@
                     buliding= results[0].get("homename");
                     var floorname=$("#doc-select-2").val();
                     var housenumber=$("#wxnum").val();
-                    alert(buliding);
-                    alert(floorname);
-                    alert(housenumber);
                     var query = new AV.Query(AV.User);
                     query.get(postview, {
                         success: function(user) {
-                            alert("chaxunchengg");
                             user.set('buliding', buliding);
                             user.set('floorname', floorname);
                             user.set('housenumber', housenumber);
