@@ -1,90 +1,90 @@
 (function ($) {
-    var code="";
-    var userlog,userid,queryobject,nickname
+    var code = "";
+    var userlog, userid, queryobject, nickname;
     var postview = window.location.search.split('?')[1];
-    if(postview.indexOf("=") > 0 ){
+    if (postview.indexOf("=") > 0) {
         userlog = window.location.search.split('=')[1];
         code = userlog.split("&")[0];
         alert(code);
-        id=""
+        id = ""
     }
-    userloading(function(err,user){
-     $("#userpost").on("click", function () {
-         window.location.href = "user_post.html?"+userid+"";
-     });
-     $("#user_address").on("click", function () {
-         window.location.href = "user_address.html?"+userid+"";
-     });
-     $("#user_contact").on("click", function () {
-         window.location.href = "user_contact.html?"+userid+"";
-     });
+    userloading(function (err, user) {
+        $("#userpost").on("click", function () {
+            window.location.href = "user_post.html?" + userid + "";
+        });
+        $("#user_address").on("click", function () {
+            window.location.href = "user_address.html?" + userid + "";
+        });
+        $("#user_contact").on("click", function () {
+            window.location.href = "user_contact.html?" + userid + "";
+        });
 
-     var query = new AV.Query(AV.User);
-     query.equalTo("authData",queryobject);  // find all the women
-     query.find({
-         success: function(users) {
-             id=users[0].id;
-         }
-     });
- });
+        var query = new AV.Query(AV.User);
+        query.equalTo("authData", queryobject);  // find all the women
+        query.find({
+            success: function (users) {
+                id = users[0].id;
+            }
+        });
+    });
 
-    $("#esc").on("click",function(){
+    $('my-confirm').on('onConfirm', function () {
         AV.User.logOut();
         var currentUser = AV.User.current();
-        window.location.href="post_index.html?"+userid+"";
-    })
+        window.location.href = "post_index.html?" + userid + "";
+    });
 
-    function userloading(callbak){
+    function userloading(callbak) {
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
-        if(code!=""){
+        if (code != "") {
             $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
-                queryobject=res;
-                nickname=res.nickname;
-                var user=[
+                queryobject = res;
+                nickname = res.nickname;
+                var user = [
                     {
-                        id:res.openid,
-                        nickname:res.nickname,
-                        headUrl:res.headimgurl
+                        id: res.openid,
+                        nickname: res.nickname,
+                        headUrl: res.headimgurl
                     }
-                ]
+                ];
                 var $tpl = $('#user');
                 var source = $tpl.text();
                 var template = Handlebars.compile(source);
-                var data = {tags: user};
+                var data = {user: user};
                 var html = template(data);
                 $tpl.before(html);
 
                 AV.User._logInWith("weixin", {
                     "authData": res,
-                    success: function(user){
-                        userid=user.id;
-                        queryobject=user.get("authData");
+                    success: function (user) {
+                        userid = user.id;
+                        queryobject = user.get("authData");
                         var query = new AV.Query(AV.User);
                         query.get(userid, {
-                            success: function(user) {
+                            success: function (user) {
                                 user.set('nickname', nickname);
                                 user.save()
                             }
                         });
-                        callbak(null,user);
+                        callbak(null, user);
                     },
-                    error: function(err){
+                    error: function (err) {
                         console.dir(err);
                         callbak(err);
                     }
                 })
             });
-        }else{
+        } else {
             var query = new AV.Query(AV.User);
-            query.equalTo("objectId",postview);  // find all the women
+            query.equalTo("objectId", postview);  // find all the women
             query.find({
-                success: function(user) {
-                    var object= user[0].get("authData");
-                    userid= user[0].id;
-                    var user=[
+                success: function (user) {
+                    var object = user[0].get("authData");
+                    userid = user[0].id;
+                    var user = [
                         {
-                            nickname:object.weixin.nickname,
-                            headUrl:object.weixin.headimgurl
+                            nickname: object.weixin.nickname,
+                            headUrl: object.weixin.headimgurl
                         }
                     ]
                     var $tpl = $('#user');
