@@ -1,6 +1,6 @@
 (function ($) {
     var code="";
-    var userlog,id,queryobject
+    var userlog,userid,queryobject
     var postview = window.location.search.split('?')[1];
     if(postview.indexOf("=") > 0 ){
         userlog = window.location.search.split('=')[1];
@@ -10,13 +10,13 @@
     }
     userloading(function(err,user){
      $("#userpost").on("click", function () {
-         window.location.href = "user_post.html?";
+         window.location.href = "user_post.html?"+userid+"";
      });
      $("#user_address").on("click", function () {
-         window.location.href = "user_address.html?";
+         window.location.href = "user_address.html?"+userid+"";
      });
      $("#user_contact").on("click", function () {
-         window.location.href = "user_contact.html?";
+         window.location.href = "user_contact.html?"+userid+"";
      });
 
      var query = new AV.Query(AV.User);
@@ -50,6 +50,7 @@
                     "authData": res,
                     success: function(user){
                         //返回绑定后的用户
+                        userid=user.id;
                         queryobject=user.get("authData");
                         callbak(null,user);
                     },
@@ -65,6 +66,7 @@
             query.find({
                 success: function(user) {
                     var object= user[0].get("authData");
+                    userid= user[0].id;
                     var user=[
                         {
                             nickname:object.weixin.nickname,
