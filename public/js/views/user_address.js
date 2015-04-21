@@ -1,4 +1,5 @@
 (function ($) {
+    var postview = window.location.search.split('?')[1];
     loading(function () {
         var homeval
         $("#doc-select-1").change(function () {
@@ -28,6 +29,13 @@
                               })
                           }
 
+        })
+
+        $("usr-sbm-sub").on("click",function(){
+           var buliding =$("#doc-select-1").val();
+           var floorname=$("#doc-select-2").val();
+            var floorname=$("#wxnum").val();
+            alert(buliding+floorname+floorname);
         })
     });
     function loading(callbak) {
