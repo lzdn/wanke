@@ -1,6 +1,5 @@
 $(function () {
     var saveurl = window.location.href;
-    alert(saveurl);
     var user = AV.User;
     var posts = AV.Object.extend("post");
     var tags = AV.Object.extend("tag");
@@ -92,7 +91,7 @@ $(function () {
                             var serverId = img.serverId; // 返回图片的服务器端ID
                             alert(serverId)
                             $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverId:""+serverId+""}, function (imgid) {
-                                alert(imgid);
+                                alert("haha");
                                 // relation.add(imgid);
                             });
                         }
