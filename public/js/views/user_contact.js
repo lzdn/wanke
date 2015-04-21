@@ -1,8 +1,6 @@
 (function ($) {
     var postview = window.location.search.split('?id=')[1];
     load(function () {
-        alert("dfadfs");
-
         var phonenum = "";
         var bnum = 0;
         $("#haederleft").on("click", function () {
@@ -69,8 +67,6 @@
                         // error is a AV.Error with an error code and description.
                     }
                 });
-
-
             } else {
                 //alert("sb");
                 $("<div class=\"am-alert am-alert-danger\" data-am-alert>\
@@ -88,7 +84,7 @@ function load(callback) {
     var query = new AV.Query(AV.User);
     query.get(id, {
         success: function (user) {
-            $('#phonenum').value = user.get("mobilePhoneNumber");
+            $('#phonenum').attr("value", user.get("mobilePhoneNumber"));
             callback(null);
         },
         error: function (object, error) {
