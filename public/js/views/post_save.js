@@ -1,4 +1,3 @@
-
 $(function () {
     var saveurl = window.location.href;
     alert(saveurl);
@@ -7,14 +6,14 @@ $(function () {
     var posts = AV.Object.extend("post");
     var tags = AV.Object.extend("tag");
     var newtag = 1;
-    var code="";
-    var userlog,userid,queryobject,nickname
+    var code = "";
+    var userlog, userid, queryobject, nickname
     var postview = window.location.search.split('?')[1];
-    if(postview.indexOf("=") > 0 ){
+    if (postview.indexOf("=") > 0) {
         userlog = window.location.search.split('=')[1];
         code = userlog.split("&")[0];
         alert(code);
-        id=""
+        id = ""
     }
     dataLoad(function () {
 
@@ -81,27 +80,47 @@ $(function () {
     $("#smimg").on("click", function () {
         //var ofileid;
         //var localIds;
-                wx.chooseImage({
-                    success: function (res) {
-                        console.log(res);
-                        localIds = res.localIds;
-                        alert(localIds);
-                            $("<div id=\"" + localIds[0] + "\" class=\"imgnav\"><img src=\"" + localIds[0] + "\" alt=\"\"/><a  class=\"am-icon-close\" value=\"" + localIds[0] + "\"></a></div>").prependTo("#imgwall");
-                            wx.uploadImage({
-                                localId:""+localIds[0]+"",
-                                isShowProgressTips: 1, // 默认为1，显示进度提示
-                                success: function (res) {
-                                    var serverId = res.serverId; // 返回图片的服务器端ID
-                                    alert(serverId)
-                                    alert(serverId[0]);
-                                    $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage",{serverId:""+serverId+""},function(imgid){
-                                        alert(imgid);
-                                        relation.add(imgid);
-                                    });
-                                }
-                            });
+
+        wx.chooseImage({
+            success: function (res) {
+                localIds = res.localIds;
+                alert(localIds);
+                $("<div id=\"" + localIds[0] + "\" class=\"imgnav\"><img src=\"" + localIds[0] + "\" alt=\"\"/><a  class=\"am-icon-close\" value=\"" + localIds[0] + "\"></a></div>").prependTo("#imgwall");
+                wx.uploadImage({
+                    localId: "" + localIds[0] + "",
+                    isShowProgressTips: 1,
+                    success: function (img) {
+                        var serverId = img.serverId; // 返回图片的服务器端ID
+                        alert(serverId);
+                        $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverId: serverId}, function (imgid) {
+                            alert(imgid);
+                           // relation.add(imgid);
+                        });
                     }
-                });
+                })
+            }
+        });
+
+        //        wx.chooseImage({
+        //            success: function (res) {
+        //                console.log(res);
+        //                localIds = res.localIds;
+        //                alert(localIds);
+        //                    $("<div id=\"" + localIds[0] + "\" class=\"imgnav\"><img src=\"" + localIds[0] + "\" alt=\"\"/><a  class=\"am-icon-close\" value=\"" + localIds[0] + "\"></a></div>").prependTo("#imgwall");
+        //                    wx.uploadImage({
+        //                        localId:""+localIds[0]+"",
+        //                        isShowProgressTips: 1, // 默认为1，显示进度提示
+        //                        success: function (res) {
+        //                            var serverId = res.serverId; // 返回图片的服务器端ID
+        //                            alert(serverId);
+        //                            $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage",{serverId:serverId},function(imgid){
+        //                                alert(imgid);
+        //                                relation.add(imgid);
+        //                            });
+        //                        }
+        //                    });
+        //            }
+        //        });
 
         // var file = AV.File.withURL('img11.jpg', localIds);
         //// 以下保存图片…………………………………………
@@ -152,7 +171,7 @@ $(function () {
             content: aUserval2,
             tagkey: tag,
             //imgs: relation,
-            username:userid
+            username: userid
         }, {
             success: function (object) {
                 alert("发表成功");
@@ -163,7 +182,7 @@ $(function () {
 //………………………………储备函数…………………………………………
     function dataLoad(callbak) {
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
-        $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig",{url:""+saveurl+""}, function (result) {
+        $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + saveurl + ""}, function (result) {
             console.log(result);
             appId = result.appId;
             jslist = result.jsApiList;
@@ -207,19 +226,19 @@ $(function () {
                 callbak();
             }
         });
-        if(code!=""){
+        if (code != "") {
             $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
-                queryobject=res;
-                nickname=res.nickname;
+                queryobject = res;
+                nickname = res.nickname;
                 AV.User._logInWith("weixin", {
                     "authData": res,
-                    success: function(user){
-                        userid=user.id;
+                    success: function (user) {
+                        userid = user.id;
                         alert(userid);
-                        queryobject=user.get("authData");
+                        queryobject = user.get("authData");
                         var query = new AV.Query(AV.User);
                         query.get(userid, {
-                            success: function(user) {
+                            success: function (user) {
                                 user.set('nickname', nickname);
                                 user.save()
                             }
@@ -227,12 +246,12 @@ $(function () {
                     }
                 })
             });
-        }else{
+        } else {
             var query = new AV.Query(AV.User);
-            query.equalTo("objectId",postview);  // find all the women
+            query.equalTo("objectId", postview);  // find all the women
             query.find({
-                success: function(user) {
-                    userid= user[0].id;
+                success: function (user) {
+                    userid = user[0].id;
                     alert(userid);
                 }
             });
