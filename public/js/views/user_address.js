@@ -1,7 +1,8 @@
 (function ($) {
     var postview = window.location.search.split('?')[1];
     loading(function () {
-        var homeval
+        var buliding;
+        var homeval;
         $("#doc-select-1").change(function () {
                           if(homeval!=$(this).val()){
                               homeval=$(this).val();
@@ -31,14 +32,37 @@
 
         })
 
-        $("usr-sbm-sub").on("click",function(){
+        $("#usr-sbm-sub").on("click",function(){
             alert("haha");
-           var buliding =$("#doc-select-1").val();
-           var floorname=$("#doc-select-2").val();
-            var housenumber=$("#wxnum").val();
-            alert(buliding);
-            alert(floorname);
-            alert(housenumber);
+            var home = AV.Object.extend("home");
+            var query = new AV.Query(home);
+            query.equalTo("objectId", $("#doc-select-1").val());
+            query.find({
+                success: function (results) {
+                    buliding= results[0].get("homename");
+                    var floorname=$("#doc-select-2").val();
+                    var housenumber=$("#wxnum").val();
+                    alert(buliding);
+                    alert(floorname);
+                    alert(housenumber);
+                    var user = new AV.Query(AV.User);
+                    user.equalTo("objectId","5534d1dbe4b0825685f399cf");  // find all the women
+                    user.find({
+                        success: function(users) {
+                            users.set('buliding', buliding);
+                            users.set('floorname', floorname);
+                            users.set('housenumber', housenumber);
+                            users.save({
+                                success:function(res){
+                                    alert("haha");
+                                }
+                            });
+                            // Do stuff
+                        }
+                    });
+                }
+            })
+
         })
     });
     function loading(callbak) {
