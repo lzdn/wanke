@@ -4,7 +4,7 @@
         var phonenum = "";
         var bnum = 0;
         $("#haederleft").on("click", function () {
-            window.location.href = "user_detail.html?id=" + postview + "";
+            window.location.href = "user_detail.html";
         });
 
         $('#phonenum').keydown(function () {

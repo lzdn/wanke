@@ -19,7 +19,7 @@
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
         var code = "";
         var userlog, userid, queryobject, nickname;
-        var postview = window.location.search.split('?id=')[1];
+        var postview = window.location.search.split('?')[1];
         if (postview.indexOf("=") > 0) {
             userlog = window.location.search.split('=')[1];
             code = userlog.split("&")[0];
@@ -53,27 +53,21 @@
                 })
             });
         } else {
-            var query = new AV.Query(AV.User);
-            query.equalTo("objectId", postview);  // find all the women
-            query.find({
-                success: function (user) {
-                    var authData = user[0].get("authData");
-                    //userid = user[0].id;
-                    var $tpl = $('#user');
-                    var source = $tpl.text();
-                    var template = Handlebars.compile(source);
-                    var data = {
-                        user: {
-                            openid: authData.weixin.openid,
-                            nickname: authData.weixin.nickname,
-                            headUrl: authData.weixin.headimgurl
-                        }
-                    };
-                    var html = template(data);
-                    $tpl.before(html);
-                    callbak(null, user[0]);
+            var currentUser = AV.User.current();
+            var authData = currentUser.get("authData");
+            var $tpl = $('#user');
+            var source = $tpl.text();
+            var template = Handlebars.compile(source);
+            var data = {
+                user: {
+                    openid: authData.weixin.openid,
+                    nickname: authData.weixin.nickname,
+                    headUrl: authData.weixin.headimgurl
                 }
-            });
+            };
+            var html = template(data);
+            $tpl.before(html);
+            callbak(null, currentUser);
         }
     }
 })(jQuery);
