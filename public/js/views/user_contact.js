@@ -19,7 +19,7 @@
                 }
             }, 10);
         });
-        $("#content").keydown(function () {
+        $("#phone").keydown(function () {
             setTimeout(function () {
                 if ($('#phonenum').val() != "") {
                     $("#usr-sbm-sub").removeClass("am-disabled");
@@ -29,26 +29,6 @@
                 }
             }, 20);
         });
-        //$("#content").keydown(function () {
-        //    setTimeout(function () {
-        //            if ($("#wxnum").val() + $('#phonenum').val() != "") {
-        //                $("#usr-sbm-sub").removeClass("am-disabled");
-        //
-        //            } else {
-        //                $("#usr-sbm-sub").addClass("am-disabled");
-        //            }
-        //    }, 20);
-        //});
-        //$('#phonenum').blur(function(){
-        //    if($('#phonenum').val() && /^1[3|4|5|8]\d{9}$/.test($('#phonenum').val())){
-        //
-        //    } else{
-        //        if($("#phonenum").val()!=""){
-        //            bnum = 0;
-        //            //alert("请输入正确手机号");
-        //        }
-        //    }
-        //});
 
         $("#usr-sbm-sub").on("click", function () {
             phonenum = $("#phonenum").val();
