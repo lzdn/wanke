@@ -91,31 +91,13 @@ $(function () {
                                 localId:""+localIds[0]+"",
                                 isShowProgressTips: 1, // 默认为1，显示进度提示
                                 success: function (res) {
-                                    var serverId = res.serverId; // 返回图片的服务器端ID
+                                    var serverId = res[0].serverId; // 返回图片的服务器端ID
                                     $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage",{serverId:serverId},function(imgid){
                                         alert(imgid);
                                         relation.add(imgid);
                                     });
                                 }
                             });
-
-                        //alert(res);
-                        //alert(res.sourceType);
-                        //alert(res.errMsg);
-                        //var file = new AV.File("myfile.jpg", res);
-                        //file.save({
-                        //    success:function(files){
-                        //        alert(files);
-                        //    }
-                        //})
-                       // alert("开始保存");
-                        //var file = AV.File.withURL("ssssss",localIds[0]);
-                        //file.save().then(function(){
-                        //    alert("haha")
-                        //    var profilePhoto = profile.get("photoFile");
-                        //    alert(profilePhoto.url());
-                        //    //$("profileImg")[0].src = profilePhoto.url();
-                        //})
                     }
                 });
 
