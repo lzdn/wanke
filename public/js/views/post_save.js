@@ -85,6 +85,7 @@ $(function () {
                             success: function (res) {
                                 var serverId = res.serverId; // 返回图片的服务器端ID
                                 alert(serverId);
+                                alert(serverId[0]);
                                // $("<div id=\"" + serverId[0] + "\" class=\"imgnav\"><img src=\"" + serverId[0] + "\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\"" + serverId[0] + "\"></a></div>").prependTo("#imgwall");
                                     $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage",{serverId:serverId},function(imgid){
                                        alert(imgid);
