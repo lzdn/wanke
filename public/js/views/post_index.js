@@ -212,7 +212,8 @@
                             var content = object.get('content');
                             var otagkey = object.get("tagkey");
                             var ousername = object.get("username");
-                            // var username = ousername.get("username");
+                            console.log(ousername);
+                            var username = ousername.get("nickname");
                             var tagvalue = otagkey.get("tagtitle");
                             var oldtime = object.createdAt.getTime();
                             var publishtime = newtime - oldtime;
