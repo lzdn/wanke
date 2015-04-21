@@ -106,6 +106,7 @@
                 window.location.href = "user_detail.html?" + currentUser.id + "";
             } else {
                 $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl", function (res) {
+                    alert(res.authUrl);
                     window.location.href = res.authUrl;
                 })
             }
