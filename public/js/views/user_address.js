@@ -1,24 +1,20 @@
 (function ($) {
-    var postview = window.location.search.split('=')[1];
-    alert(postview)
-    var starthomename;
-    var startbuilding;
     loading(function () {
         var buliding;
         var homeval;
-        alert(starthomename);
-        alert(startbuilding);
-       if(starthomename){
-           $("option[value$=\""+starthomename+"\"]").attr("selected",true);
-           $("option[value$=\""+startbuilding+"\"]").attr("selected",true);
-       }
-        $("#haederleft").on("click",function(){
-            window.location.href= "user_detail.html?id="+postview+"";
+        //alert(starthomename);
+        //alert(startbuilding);
+        //if (starthomename) {
+        //    $("option[value$=\"" + starthomename + "\"]").attr("selected", true);
+        //    $("option[value$=\"" + startbuilding + "\"]").attr("selected", true);
+        //}
+        $("#haederleft").on("click", function () {
+            window.location.href = "user_detail.html?code=";
         });
         $("#doc-select-1").change(function () {
             $("#usr-sbm-sub").removeClass("am-disabled");
-            if(homeval!=$(this).val()){
-                homeval=$(this).val();
+            if (homeval != $(this).val()) {
+                homeval = $(this).val();
                 $(".homeval").remove();
                 var home = AV.Object.extend("home");
                 var query2 = new AV.Query(home);
@@ -34,7 +30,7 @@
                             buildings.push(building);
                         }
                         var $buildings = $('#buildings');
-                        var source2 =$buildings.text();
+                        var source2 = $buildings.text();
                         var template2 = Handlebars.compile(source2);
                         var data2 = {buildings: buildings};
                         var html2 = template2(data2);
@@ -45,26 +41,26 @@
 
         })
 
-        $("#usr-sbm-sub").on("click",function(){
+        $("#usr-sbm-sub").on("click", function () {
             var home = AV.Object.extend("home");
             var query = new AV.Query(home);
             query.equalTo("objectId", $("#doc-select-1").val());
             query.find({
                 success: function (results) {
-                    buliding= results[0].get("homename");
-                    var floorname=$("#doc-select-2").val();
-                    var housenumber=$("#wxnum").val();
+                    buliding = results[0].get("homename");
+                    var floorname = $("#doc-select-2").val();
+                    var housenumber = $("#wxnum").val();
                     var query = new AV.Query(AV.User);
                     query.get(postview, {
-                        success: function(user) {
+                        success: function (user) {
                             user.set('buliding', buliding);
                             user.set('floorname', floorname);
                             user.set('housenumber', housenumber);
-                            user.save().then(function(){
-                                window.location.href= "user_detail.html?"+postview+"";
+                            user.save().then(function () {
+                                window.location.href = "user_detail.html?" + postview + "";
                             });
                         },
-                        error: function(object, error) {
+                        error: function (object, error) {
                             console.log(object);
                             // The object was not retrieved successfully.
                             // error is a AV.Error with an error code and description.
@@ -76,6 +72,9 @@
         })
     });
     function loading(callbak) {
+        var postview = window.location.search.split('=')[1];
+        //alert(postview)
+        var starthomename, startbuilding, housenumber;
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
         //ject.createWithoutData('className',id);
         var home = AV.Object.extend("home");
@@ -93,7 +92,7 @@
                     var home = {
                         name: homename,
                         id: homeid
-                    }
+                    };
                     homes.push(home);
                 }
                 var $tpl = $('#homes');
@@ -105,7 +104,7 @@
 
                 var home = AV.Object.extend("home");
                 var query2 = new AV.Query(home);
-                query2.equalTo("objectId",homeval);
+                query2.equalTo("objectId", homeval);
                 query2.find({
                     success: function (results) {
                         console.log(results);
@@ -119,21 +118,25 @@
                             buildings.push(building);
                         }
                         var $buildings = $('#buildings');
-                        var source2 =$buildings.text();
+                        var source2 = $buildings.text();
                         var template2 = Handlebars.compile(source2);
                         var data2 = {buildings: buildings};
                         var html2 = template2(data2);
                         $buildings.before(html2);
                     }
-                })
+                });
                 var query = new AV.Query(AV.User);
                 query.equalTo("objectId", postview);  // find all the women
                 query.find({
-                    success: function(user) {
-                        starthomename=user[0].get("buliding");
-                        startbuilding=user[0].get("floorname");
-                        alert(starthomename);
-                        alert(startbuilding);
+                    success: function (user) {
+                        starthomename = user[0].get("buliding");
+                        startbuilding = user[0].get("floorname");
+                        housenumber = user[0].get("housenumber");
+                        $('#homes').val(user[0].get("buliding"));
+                        $('#buildings').val(user[0].get("floorname"));
+                        $('#wxnum').val(user[0].get("housenumber"));
+                        //alert(starthomename);
+                        //alert(startbuilding);
                         callbak();
                     }
                 });
