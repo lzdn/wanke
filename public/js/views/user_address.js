@@ -1,10 +1,13 @@
 (function ($) {
     var postview = window.location.search.split('=')[1];
+    alert(postview)
     var starthomename;
     var startbuilding;
     loading(function () {
         var buliding;
         var homeval;
+        alert(starthomename);
+        alert(startbuilding);
        if(starthomename){
            $("option[value$=\""+starthomename+"\"]").attr("selected",true);
            $("option[value$=\""+startbuilding+"\"]").attr("selected",true);
@@ -131,9 +134,10 @@
                         startbuilding=user[0].get("floorname");
                         alert(starthomename);
                         alert(startbuilding);
+                        callbak();
                     }
                 });
-                callbak();
+
             }
         });
 
