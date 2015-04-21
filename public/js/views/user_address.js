@@ -45,19 +45,22 @@
                     alert(buliding);
                     alert(floorname);
                     alert(housenumber);
-                    var user = new AV.Query(AV.User);
-                    user.equalTo("objectId","5534d1dbe4b0825685f399cf");  // find all the women
-                    user.find({
-                        success: function(users) {
-                            users.set('buliding', buliding);
-                            users.set('floorname', floorname);
-                            users.set('housenumber', housenumber);
-                            users.save(null, {
-                                success:function(res){
-                                    alert("haha");
+                    var query = new AV.Query(AV.User);
+                    query.get(postview, {
+                        success: function(gameScore) {
+                            gameScore.set('buliding',buliding);
+                            gameScore.set('floorname',floorname);
+                            gameScore.set('housenumber', housenumber);
+                            gameScore.save({
+                                success:function(){
+                                    alert("存储成功")
                                 }
                             });
-                            // Do stuff
+                        },
+                        error: function(object, error) {
+                            console.log(object);
+                            // The object was not retrieved successfully.
+                            // error is a AV.Error with an error code and description.
                         }
                     });
                 }
