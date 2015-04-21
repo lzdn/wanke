@@ -33,9 +33,9 @@ router.get('/', function (req, res, next) {
     res.send('respond with a resource');
 });
 
-router.get('/getJsConfig', function (req, res) {
+router.post('/getJsConfig', function (req, res) {
     console.log(config);
-    var url = req.query.url;
+    var url = req.body.url;
     if (!url) {
         res.json("参数\"page\"不能为空！");
     }
