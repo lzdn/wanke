@@ -43,23 +43,7 @@
     position:relative;
 }
 
-#content .title{
-    width: 315px;
-    height: 20px;
-    margin:20px auto;
-}
-#content div{
-    position:relative;
-}
-#content p{
-    padding:0;
-    margin:0;
-    font-size: 15px;
+.am-vertical-align-extend{
+    display: block;
     text-align: center;
-    line-height: 20px;
-    position: absolute;
-    left:0;
 }
-/*#content .title{*/
-    /*margin: 20px 0 20px 0;*/
-/*}*/
