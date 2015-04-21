@@ -1,11 +1,9 @@
 $(function () {
     var saveurl = window.location.href;
-    alert(saveurl);
     var user = AV.User;
     var posts = AV.Object.extend("post");
     var tags = AV.Object.extend("tag");
     var newtag = 1;
-    var  isFirst = 0;
     var code = "";
     var userlog, userid, queryobject, nickname
     var postview = window.location.search.split('?')[1];
@@ -85,26 +83,20 @@ $(function () {
             success: function (res) {
                var  localIds = res.localIds;
                 alert(localIds);
-
-                $("<div id=\"" + localIds[0] + "\" class=\"imgnav\"><img src=\"" + localIds[0] + "\" alt=\"\"/><a  class=\"am-icon-close\" value=\"" + localIds[0] + "\"></a></div>").prependTo("#imgwall");
-                //isFirst=0;
-                if(isFirst=0){
+                $("<div id=\"" + localIds + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a  class=\"am-icon-close\" value=\"" + localIds + "\"></a></div>").prependTo("#imgwall");
                     wx.uploadImage({
-                        localId: "" + localIds[0] + "",
+                        localId: "" + localIds + "",
                         isShowProgressTips: 1,
                         success: function (img) {
                             var serverId = img.serverId; // 返回图片的服务器端ID
                             alert(serverId)
-                            $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverId: ""+serverId+""}, function (imgid) {
-                                alert(imgid);
+                            $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverId:""+serverId+""}, function (imgid) {
+                                alert("haha");
                                 // relation.add(imgid);
                             });
                         }
                     });
-                    isFirst=1;
                 }
-
-            }
         });
 
 
