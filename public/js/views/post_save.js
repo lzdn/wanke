@@ -90,7 +90,10 @@ $(function () {
                     localId: "" + localIds[0] + "",
                     isShowProgressTips: 1,
                     success: function (img) {
-                        var serverId = img.serverId; // 返回图片的服务器端ID
+                        var serverId = img[0].serverId; // 返回图片的服务器端ID
+                        alert(img);
+                        alert(img[0]);
+                          alert(serverId)
                         $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverId: ""+serverId+""}, function (imgid) {
                             alert(imgid);
                             // relation.add(imgid);
