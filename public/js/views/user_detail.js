@@ -59,15 +59,14 @@
                 success: function (user) {
                     var authData = user[0].get("authData");
                     //userid = user[0].id;
-                    var user = {
-                        openid: authData.weixin.openid,
-                        nickname: authData.weixin.nickname,
-                        headUrl: authData.weixin.headimgurl
-                    };
                     var $tpl = $('#user');
                     var source = $tpl.text();
                     var template = Handlebars.compile(source);
-                    var data = {user: user};
+                    var data = {user: {
+                        openid: authData.weixin.openid,
+                        nickname: authData.weixin.nickname,
+                        headUrl: authData.weixin.headimgurl
+                    }};
                     var html = template(data);
                     $tpl.before(html);
                     callbak(null, user[0]);
