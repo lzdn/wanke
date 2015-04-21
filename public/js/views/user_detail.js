@@ -22,13 +22,13 @@
         $("#user_logout").on("onclick",function(){
             $('#my-confirm').modal({
                 relatedTarget: this,
-                onConfirm: function (options) {
+                onConfirm: function(options) {
                     AV.User.logOut();
                     var currentUser = AV.User.current();
                     window.location.href = "post_index.html?id=" + currentUser.id + "";
                 },
-                onCancel: function () {
-
+                onCancel: function() {
+                    alert('算求，不弄了');
                 }
             });
         });
