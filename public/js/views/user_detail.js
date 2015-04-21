@@ -10,13 +10,13 @@
     }
     userloading(function (err, user) {
         $("#userpost").on("click", function () {
-            window.location.href = "user_post.html?" + userid + "";
+            window.location.href = "user_post.html?id=" + user.id + "";
         });
         $("#user_address").on("click", function () {
-            window.location.href = "user_address.html?" + userid + "";
+            window.location.href = "user_address.html?id=" + user.id + "";
         });
         $("#user_contact").on("click", function () {
-            window.location.href = "user_contact.html?" + userid + "";
+            window.location.href = "user_contact.html?id=" + user.id + "";
         });
 
         var query = new AV.Query(AV.User);
@@ -31,7 +31,7 @@
     $('my-confirm').on('onConfirm', function () {
         AV.User.logOut();
         var currentUser = AV.User.current();
-        window.location.href = "post_index.html?" + userid + "";
+        window.location.href = "post_index.html?id=" + currentUser.id + "";
     });
 
     function userloading(callbak) {
@@ -39,14 +39,11 @@
         if (code != "") {
             $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
-                nickname = res.nickname;
-                var user = [
-                    {
-                        id: res.openid,
-                        nickname: res.nickname,
-                        headUrl: res.headimgurl
-                    }
-                ];
+                var user = {
+                    openid: res.openid,
+                    nickname: res.nickname,
+                    headUrl: res.headimgurl
+                };
                 var $tpl = $('#user');
                 var source = $tpl.text();
                 var template = Handlebars.compile(source);
@@ -57,15 +54,6 @@
                 AV.User._logInWith("weixin", {
                     "authData": res,
                     success: function (user) {
-                        userid = user.id;
-                        queryobject = user.get("authData");
-                        var query = new AV.Query(AV.User);
-                        query.get(userid, {
-                            success: function (user) {
-                                user.set('nickname', nickname);
-                                user.save()
-                            }
-                        });
                         callbak(null, user);
                     },
                     error: function (err) {
@@ -79,21 +67,20 @@
             query.equalTo("objectId", postview);  // find all the women
             query.find({
                 success: function (user) {
-                    var object = user[0].get("authData");
+                    var authData = user[0].get("authData");
                     userid = user[0].id;
-                    var user = [
-                        {
-                            nickname: object.weixin.nickname,
-                            headUrl: object.weixin.headimgurl
-                        }
-                    ]
+                    var user = {
+                        openid: authData.weixin.openid,
+                        nickname: authData.weixin.nickname,
+                        headUrl: authData.weixin.headimgurl
+                    };
                     var $tpl = $('#user');
                     var source = $tpl.text();
                     var template = Handlebars.compile(source);
-                    var data = {tags: user};
+                    var data = {user: user};
                     var html = template(data);
                     $tpl.before(html);
-                    callbak();
+                    callbak(null, user[0]);
                 }
             });
         }
