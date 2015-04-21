@@ -111,6 +111,14 @@ $(".am-input-group-label").on("click",function(){
             }
         });
         $("#foots").on("click",function(){
+            var currentUser = AV.User.current();
+            if (currentUser) {
+                window.location.href= "user_detail.html?"+currentUser.id+"";
+            } else {
+                alert("没有登录")
+                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=post_save",function(res){
+                })
+            }
             window.location.href="post_save.html";
         })
         if($(".imgpreview").attr("value")!=1){
