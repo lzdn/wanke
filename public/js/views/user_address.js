@@ -47,24 +47,16 @@
                     alert(housenumber);
                     var query = new AV.Query(AV.User);
                     query.get(postview, {
-                        success: function(gameScore) {
-                            alert("查询成功");
-                            gameScore.set('buliding',buliding);
-                            gameScore.set('floorname',floorname);
-                            gameScore.set('housenumber', housenumber);
-                            gameScore.save({
-                                success:function(){
-                                    alert("存储成功")
-                                },
-                                error:function(object,error){
-                                    alert(object);
-                                    alert(error);
-                                }
-                            });
+                        success: function(user) {
+                            alert("chaxunchengg");
+                            user.set('buliding', buliding);
+                            user.set('floorname', floorname);
+                            user.set('housenumber', housenumber);
+                            user.save();
+                            // The object was retrieved successfully.
                         },
                         error: function(object, error) {
                             console.log(object);
-                            alert(error);
                             // The object was not retrieved successfully.
                             // error is a AV.Error with an error code and description.
                         }
