@@ -1,5 +1,6 @@
 
 $(function () {
+    var saveurl = window.location.search
     var localIds;
     var user = AV.User;
     var posts = AV.Object.extend("post");
@@ -182,7 +183,7 @@ $(function () {
 //………………………………储备函数…………………………………………
     function dataLoad(callbak) {
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
-        $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=post_save", function (result) {
+        $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=post_save",{page:saveurl}, function (result) {
             console.log(result);
             appId = result.appId;
             jslist = result.jsApiList;
