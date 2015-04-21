@@ -46,7 +46,7 @@ router.get('/getJsConfig', function (req, res) {
             'chooseImage',
             'previewImage',
             'uploadImage'],
-        url: config.url + "/" + page + ".html"
+        url: config.url + "/" + page
     };
     console.log(param);
     api.getJsConfig(param, function (err, result) {
