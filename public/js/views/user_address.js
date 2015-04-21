@@ -48,17 +48,19 @@
                     var query = new AV.Query(AV.User);
                     query.get(postview, {
                         success: function(gameScore) {
-                            gameScore.set('buliding',buliding);
-                            gameScore.set('floorname',floorname);
-                            gameScore.set('housenumber', housenumber);
-                            gameScore.save({
-                                success:function(){
-                                    alert("存储成功")
-                                }
-                            });
+                            alert("查询成功");
+                            //gameScore.set('buliding',buliding);
+                            //gameScore.set('floorname',floorname);
+                            //gameScore.set('housenumber', housenumber);
+                            //gameScore.save({
+                            //    success:function(){
+                            //        alert("存储成功")
+                            //    }
+                            //});
                         },
                         error: function(object, error) {
                             console.log(object);
+                            alert(error);
                             // The object was not retrieved successfully.
                             // error is a AV.Error with an error code and description.
                         }
