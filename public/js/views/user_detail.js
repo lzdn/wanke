@@ -19,18 +19,27 @@
         $("#user_contact").on("click", function () {
             window.location.href = "user_contact.html?id=" + user.id + "";
         });
-        $("#user_logout").on("onclick",function(){
-            $('#my-confirm').modal({
-                relatedTarget: this,
-                onConfirm: function(options) {
-                    AV.User.logOut();
-                    var currentUser = AV.User.current();
-                    window.location.href = "post_index.html?id=" + currentUser.id + "";
-                },
-                onCancel: function() {
-                    alert('算求，不弄了');
-                }
-            });
+        //$("#user_logout").on("onclick",function(){
+        //    $('#my-confirm').modal({
+        //        relatedTarget: this,
+        //        onConfirm: function(options) {
+        //            AV.User.logOut();
+        //            var currentUser = AV.User.current();
+        //            window.location.href = "post_index.html?id=" + currentUser.id + "";
+        //        },
+        //        onCancel: function() {
+        //            alert('算求，不弄了');
+        //        }
+        //    });
+        //});
+
+        var $confirm = $('#your-confirm');
+        var $confirmBtn = $confirm.find('[data-am-modal-confirm]');
+        var $cancelBtn = $confirm.find('[data-am-modal-cancel]');
+        $confirmBtn.off('click.confirm.modal.amui').on('click', function() {
+            AV.User.logOut();
+            var currentUser = AV.User.current();
+            window.location.href = "post_index.html?id=" + currentUser.id + "";
         });
 
         //var query = new AV.Query(AV.User);
