@@ -175,8 +175,7 @@ $(".am-input-group-label").on("click",function(){
     function loading (callbak){
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
         //ject.createWithoutData('className',id);
-        AV.User.logOut();
-        var currentUser = AV.User.current();
+
         var post = AV.Object.extend("post");
         var tags = AV.Object.extend("tags");
         var user = AV.Object.extend("User");
