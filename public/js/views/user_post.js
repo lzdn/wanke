@@ -102,6 +102,7 @@
                                 var imgpattern="";
                                 for (var i = 0; i < arry.length; i++) {
                                     var object = arry[i];
+                                    console.log(object);
                                     var avalue = object.id;
                                     var content = object.get('content');
                                     var imgs = object.get('imgs');
@@ -117,8 +118,12 @@
                                         }
                                     }
                                     var otagkey = object.get("tagkey");
-                                    var ousername = object.get("username");
-                                    var username = ousername.get("username");
+                                    var ousername = object.get("username").attributes.authData.weixin;
+                                    console.log(ousername);
+                                    console.log(ousername.nickname);
+                                    var username = ousername.nickname;
+                                    var headimgurl=ousername.headimgurl;
+                                    console.log(headimgurl);
                                     var tagvalue = otagkey.get("tagtitle");
                                     var oldtime = object.createdAt.getTime();
                                     var publishtime = newtime - oldtime;
@@ -140,6 +145,7 @@
                                     var imge = object.get('imgs')
                                     var opost = {
                                         name: username,
+                                        titleimg:headimgurl,
                                         usersay: content,
                                         tag: tagvalue,
                                         time: times,
@@ -149,7 +155,7 @@
                                     };
                                     tags.push(opost);
                                 }
-                                var $tpl = $('#amz-tags');
+                                var $tpl = $('#usercontent');
                                 var source = $tpl.text();
                                 var template = Handlebars.compile(source);
                                 var data = {tags: tags};

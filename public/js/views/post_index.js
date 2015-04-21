@@ -249,7 +249,8 @@
                             posts.push(opost);
 
                         }
-                        var $tpl = $('#amz-tags');
+                        console.log(posts);
+                        var $tpl = $('#usercontent');
                         var source = $tpl.text();
                         var template = Handlebars.compile(source);
                         var data = {posts: posts};
