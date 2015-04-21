@@ -1,18 +1,25 @@
-/**
- * Created by amberglasses on 15/3/24.
- */
+
 $(function () {
     var localIds;
     var user = AV.User;
     var posts = AV.Object.extend("post");
     var tags = AV.Object.extend("tag");
     var newtag = 1;
+    var code="";
+    var userlog,userid,queryobject,nickname
+    var postview = window.location.search.split('?')[1];
+    if(postview.indexOf("=") > 0 ){
+        userlog = window.location.search.split('=')[1];
+        code = userlog.split("&")[0];
+        alert(code);
+        id=""
+    }
     dataLoad(function () {
 
-        //wx.ready(function () {
-        //   // alert("绑定事件:隐藏菜单");
-        //    wx.hideOptionMenu();
-        //});
+        wx.ready(function () {
+           // alert("绑定事件:隐藏菜单");
+            wx.hideOptionMenu();
+        });
 
         var aNav = document.getElementsByClassName("am-btn-extend");
         aNav[0].className = "am-btn-extend am-btn am-round am-btn-primary";
@@ -77,35 +84,20 @@ $(function () {
                         console.log(res);
                         localIds = res.localIds;
                         alert(localIds);
-                        for(var i=0; i<localIds.length;i++){
-                            $("<div class=\"" + localIds[i] + "\" ><a value=\"" + localIds[i] + "\" class=\"am-close\">&times;</a><img src=\"" + localIds[i] + "\" alt=\"#\"/></div>").prependTo("#imgwall");
-                            var aimgnav = $(".am-close");
-                            $("#addimg").show();
-                            for (var j = 0; j < aimgnav.length; j++) {
-                                aimgnav[j].onclick = function () {
-                                    var remobeidx = $(this).attr('value');
-                                    $(".imgnav-" + remobeidx + "").remove();
-                                    var aimgshow = $(".imgnav");
-                                    if (aimgshow.length == 0) {
-                                        $("#addimg").hide();
-                                    }
-                                };
-                            }
-                            wx.uploadImage({
-                                localId:""+localIds+"",
-                                //localId:"weixin://resourceid/21821bc3d47a8cf29d25ea940a3b7afa", // 需要上传的图片的本地ID，由chooseImage接口获得
-                                isShowProgressTips: 1, // 默认为1，显示进度提示
-                                success: function (res) {
-                                    var serverId = res.serverId; // 返回图片的服务器端ID
-                                    alert(serverId);
-                                    // $("<div id=\"" + serverId[0] + "\" class=\"imgnav\"><img src=\"" + serverId[0] + "\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\"" + serverId[0] + "\"></a></div>").prependTo("#imgwall");
+                        $("<div id=\"" + localIds[0] + "\" class=\"imgnav\"><img src=\"" + localIds[0] + "\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\"" + localIds[0] + "\"></a></div>").prependTo("#imgwall");
+                        wx.uploadImage({
+                            localId:""+localIds+"",
+                            isShowProgressTips: 1, // 默认为1，显示进度提示
+                            success: function (res) {
+                                var serverId = res.serverId; // 返回图片的服务器端ID
+                               // $("<div id=\"" + serverId[0] + "\" class=\"imgnav\"><img src=\"" + serverId[0] + "\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\"" + serverId[0] + "\"></a></div>").prependTo("#imgwall");
                                     $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage",{serverId:serverId},function(imgid){
-                                        alert(imgid);
-                                    });
-                                }
-                            });
-                        }
+                                       alert(imgid);
+                                });
 
+
+                            }
+                        });
                         //alert(res);
                         //alert(res.sourceType);
                         //alert(res.errMsg);
@@ -205,6 +197,8 @@ $(function () {
         });
 
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
+
+
         var tags = AV.Object.extend("tag");
         var query = new AV.Query(tags);
         query.find({
@@ -229,6 +223,36 @@ $(function () {
                 callbak();
             }
         });
+        if(code!=""){
+            $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
+                queryobject=res;
+                nickname=res.nickname;
+                AV.User._logInWith("weixin", {
+                    "authData": res,
+                    success: function(user){
+                        userid=user.id;
+                        alert(userid);
+                        queryobject=user.get("authData");
+                        var query = new AV.Query(AV.User);
+                        query.get(userid, {
+                            success: function(user) {
+                                user.set('nickname', nickname);
+                                user.save()
+                            }
+                        });
+                    }
+                })
+            });
+        }else{
+            var query = new AV.Query(AV.User);
+            query.equalTo("objectId",postview);  // find all the women
+            query.find({
+                success: function(user) {
+                    userid= user[0].id;
+                    alert(userid);
+                }
+            });
+        }
 
     }
 
