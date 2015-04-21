@@ -34,8 +34,7 @@
 
         $('#confirm-logout').on('click', function () {
             AV.User.logOut();
-            var currentUser = AV.User.current();
-            window.location.href = "post_index.html?id=" + currentUser.id + "";
+            window.location.href = "post_index.html";
         });
 
         //var query = new AV.Query(AV.User);
