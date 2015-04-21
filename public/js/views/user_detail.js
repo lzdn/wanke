@@ -10,7 +10,7 @@
     }
     userloading(function (err, user) {
 
-        $("#userpost").on("click", function () {
+        $("#user_post").on("click", function () {
             window.location.href = "user_post.html?id=" + user.id + "";
         });
         $("#user_address").on("click", function () {
@@ -24,7 +24,6 @@
             var currentUser = AV.User.current();
             window.location.href = "post_index.html?id=" + currentUser.id + "";
         });
-
 
         var query = new AV.Query(AV.User);
         query.equalTo("authData", queryobject);  // find all the women
