@@ -3,6 +3,9 @@
     loading(function () {
         var buliding;
         var homeval;
+        $("#haederleft").on("click",function(){
+                window.location.href= "user_detail.html?"+postview+"";
+        });
         $("#doc-select-1").change(function () {
                           if(homeval!=$(this).val()){
                               homeval=$(this).val();
@@ -52,7 +55,9 @@
                             user.set('buliding', buliding);
                             user.set('floorname', floorname);
                             user.set('housenumber', housenumber);
-                            user.save();
+                            user.save().then(function(){
+                                window.location.href= "user_detail.html?"+postview+"";
+                            });
                         },
                         error: function(object, error) {
                             console.log(object);
