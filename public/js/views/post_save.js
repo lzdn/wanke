@@ -85,10 +85,9 @@ $(function () {
                 console.log(res);
                 localIds = res.localIds;
                 alert(localIds);
-                for (var i = 0; i < localIds.length; i++) {
-                    $("<div id=\"" + localIds[i] + "\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a class=\"am-icon-close\" value=\"" + localIds[i] + "\"></a></div>").prependTo("#imgwall");
+                    //$("<div id=\"" + localIds[i] + "\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a class=\"am-icon-close\" value=\"" + localIds[i] + "\"></a></div>").prependTo("#imgwall");
                     wx.uploadImage({
-                        localId: "" + localIds[i] + "",
+                        localId: "" + localIds[0] + "",
                         isShowProgressTips: 1, // 默认为1，显示进度提示
                         success: function (res) {
                             var serverId = res.serverId; // 返回图片的服务器端ID
@@ -118,7 +117,6 @@ $(function () {
                             });
                         }
                     });
-                }
 
                 //alert(res);
                 //alert(res.sourceType);
