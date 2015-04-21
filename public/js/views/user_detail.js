@@ -19,11 +19,17 @@
         $("#user_contact").on("click", function () {
             window.location.href = "user_contact.html?id=" + user.id + "";
         });
-        $('#my-confirm').on('onConfirm', function () {
-            alert("oaskdjfklj");
-            AV.User.logOut();
-            var currentUser = AV.User.current();
-            window.location.href = "post_index.html?id=" + currentUser.id + "";
+
+        $('#my-confirm').modal({
+            relatedTarget: this,
+            onConfirm: function (options) {
+                AV.User.logOut();
+                var currentUser = AV.User.current();
+                window.location.href = "post_index.html?id=" + currentUser.id + "";
+            },
+            onCancel: function () {
+
+            }
         });
 
         //var query = new AV.Query(AV.User);
