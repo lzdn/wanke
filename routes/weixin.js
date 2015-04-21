@@ -78,7 +78,7 @@ router.post('/userSignUp', function (req, res) {
     }
 
     client.getAccessToken(code, function (err, result) {
-        var accessToken = result.data.access_token;
+        //var accessToken = result.data.access_token;
         var openid = result.data.openid;
         client.getUser(openid, function (err, result) {
             if (err) {
