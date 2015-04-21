@@ -20,18 +20,19 @@
             window.location.href = "user_contact.html?id=" + user.id + "";
         });
         $('#my-confirm').on('onConfirm', function () {
+            alert("oaskdjfklj");
             AV.User.logOut();
             var currentUser = AV.User.current();
             window.location.href = "post_index.html?id=" + currentUser.id + "";
         });
 
-        var query = new AV.Query(AV.User);
-        query.equalTo("authData", queryobject);  // find all the women
-        query.find({
-            success: function (users) {
-                id = users[0].id;
-            }
-        });
+        //var query = new AV.Query(AV.User);
+        //query.equalTo("authData", queryobject);  // find all the women
+        //query.find({
+        //    success: function (users) {
+        //        id = users[0].id;
+        //    }
+        //});
     });
 
     function userloading(callbak) {
@@ -68,7 +69,7 @@
             query.find({
                 success: function (user) {
                     var authData = user[0].get("authData");
-                    userid = user[0].id;
+                    //userid = user[0].id;
                     var user = {
                         openid: authData.weixin.openid,
                         nickname: authData.weixin.nickname,
@@ -84,7 +85,6 @@
                 }
             });
         }
-
     }
 })(jQuery);
 
