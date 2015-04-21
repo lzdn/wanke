@@ -9,6 +9,7 @@
         id = ""
     }
     userloading(function (err, user) {
+
         $("#userpost").on("click", function () {
             window.location.href = "user_post.html?id=" + user.id + "";
         });
@@ -18,6 +19,12 @@
         $("#user_contact").on("click", function () {
             window.location.href = "user_contact.html?id=" + user.id + "";
         });
+        $('#my-confirm').on('onConfirm', function () {
+            AV.User.logOut();
+            var currentUser = AV.User.current();
+            window.location.href = "post_index.html?id=" + currentUser.id + "";
+        });
+
 
         var query = new AV.Query(AV.User);
         query.equalTo("authData", queryobject);  // find all the women
@@ -26,12 +33,6 @@
                 id = users[0].id;
             }
         });
-    });
-
-    $('my-confirm').on('onConfirm', function () {
-        AV.User.logOut();
-        var currentUser = AV.User.current();
-        window.location.href = "post_index.html?id=" + currentUser.id + "";
     });
 
     function userloading(callbak) {
