@@ -117,6 +117,7 @@ $(".am-input-group-label").on("click",function(){
             } else {
                 alert("没有登录");
                 $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=post_save",function(res){
+                    alert(res);
                     window.location.href=res.authUrl;
                 })
             }
