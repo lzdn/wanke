@@ -32,10 +32,13 @@
         })
 
         $("usr-sbm-sub").on("click",function(){
+            alert("haha");
            var buliding =$("#doc-select-1").val();
            var floorname=$("#doc-select-2").val();
-            var floorname=$("#wxnum").val();
-            alert(buliding+floorname+floorname);
+            var housenumber=$("#wxnum").val();
+            alert(buliding);
+            alert(floorname);
+            alert(housenumber);
         })
     });
     function loading(callbak) {
