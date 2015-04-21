@@ -2,7 +2,8 @@
     AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
     var postview = window.location.search.split('?id=')[1];
     var id = window.location.search.split('?id=')[1];
-    var phonenum=""
+    alert(id);
+    var phonenum="";
     var bnum = 0;
     $("#haederleft").on("click",function(){
         window.location.href= "user_detail.html?"+postview+"";
