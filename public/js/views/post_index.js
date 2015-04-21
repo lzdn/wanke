@@ -1,4 +1,5 @@
 (function ($) {
+    var saveurl = window.location.href;
     loadwx();
     var skx = -5;
     var bload = 1;
@@ -265,7 +266,7 @@
 
     function loadwx() {
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
-        $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=post_index", function (result) {
+        $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + saveurl + ""}, function (result) {
             appId = result.appId;
             jslist = result.jsApiList;
             noncestr = result.nonceStr;
