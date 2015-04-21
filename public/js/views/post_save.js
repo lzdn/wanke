@@ -89,8 +89,6 @@ $(function () {
                                     $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage",{serverId:serverId},function(imgid){
                                        alert(imgid);
                                 });
-
-
                             }
                         });
                         //alert(res);
