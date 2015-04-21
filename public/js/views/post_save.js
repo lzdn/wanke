@@ -169,8 +169,9 @@ $(function () {
         var postc = new posts();
         postc.save({
             content: aUserval2,
-            tagkey: tag
-           // imgs: relation
+            tagkey: tag,
+            //imgs: relation,
+            username:userid
         }, {
             success: function (object) {
                 alert("发表成功");
