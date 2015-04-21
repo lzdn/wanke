@@ -121,23 +121,25 @@ router.post('/sendMessage', function (req, res) {
 });
 
 router.post('/uploadImage', function (req, res) {
-    var imageUrl = req.body.imageUrl;
-    if (!imageUrl) {
+    var serverId = req.body.serverId;
+    if (!serverId) {
         res.json("参数\"openId\"不能为空！");
     }
 
-    var now = new Date();
-    var file = AV.File.withURL(now.getTime() + ".png", 'https://leancloud.cn/docs/images/permission.png');
-    file.save(null, {
-        success: function (file) {
-            // Execute any logic that should take place after the object is saved.
-            res.json({fileId: file.id});
-        },
-        error: function (file, error) {
-            // Execute any logic that should take place if the save fails.
-            // error is a AV.Error with an error code and description.
-            res.json({error: error.message});
-        }
+    api.getMedia(serverId, function (err, result, res) {
+        var now = new Date();
+        var file = AV.File(now.getTime() + ".png", result);
+        file.save(null, {
+            success: function (file) {
+                // Execute any logic that should take place after the object is saved.
+                res.json({fileId: file.id});
+            },
+            error: function (file, error) {
+                // Execute any logic that should take place if the save fails.
+                // error is a AV.Error with an error code and description.
+                res.json({error: error.message});
+            }
+        });
     });
 });
 
