@@ -1,12 +1,19 @@
 (function ($) {
-    var postview = window.location.search.split('?')[1];
+    var postview = window.location.search.split('=')[1];
+    var starthomename;
+    var startbuilding;
     loading(function () {
         var buliding;
         var homeval;
+       if(starthomename){
+           $("option[value$=\""+starthomename+"\"]").attr("selected",true);
+           $("option[value$=\""+startbuilding+"\"]").attr("selected",true);
+       }
         $("#haederleft").on("click",function(){
-            window.location.href= "user_detail.html?"+postview+"";
+            window.location.href= "user_detail.html?id="+postview+"";
         });
         $("#doc-select-1").change(function () {
+            $("#usr-sbm-sub").removeClass("am-disabled");
             if(homeval!=$(this).val()){
                 homeval=$(this).val();
                 $(".homeval").remove();
@@ -116,6 +123,14 @@
                         $buildings.before(html2);
                     }
                 })
+                var query = new AV.Query(AV.User);
+                query.equalTo("objectId", postview);  // find all the women
+                query.find({
+                    success: function(user) {
+                        starthomename=user.get("building");
+                        startbuilding=user.get("floorname");
+                    }
+                });
                 callbak();
             }
         });

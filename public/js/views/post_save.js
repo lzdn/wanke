@@ -85,13 +85,13 @@ $(function () {
                 alert(localIds);
                 $("<div id=\"" + localIds + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a  class=\"am-icon-close\" value=\"" + localIds + "\"></a></div>").prependTo("#imgwall");
                     wx.uploadImage({
-                        localId: "" + localIds + "",
+                        localId: "" + localIds[0] + "",
                         isShowProgressTips: 1,
                         success: function (img) {
                             var serverId = img.serverId; // 返回图片的服务器端ID
                             alert(serverId)
                             $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverId:""+serverId+""}, function (imgid) {
-                                alert("haha");
+                                alert(imgid);
                                 // relation.add(imgid);
                             });
                         }
