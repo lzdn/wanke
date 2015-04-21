@@ -53,7 +53,6 @@
                             user.set('floorname', floorname);
                             user.set('housenumber', housenumber);
                             user.save();
-                            // The object was retrieved successfully.
                         },
                         error: function(object, error) {
                             console.log(object);
