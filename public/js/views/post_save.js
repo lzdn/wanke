@@ -16,10 +16,10 @@ $(function () {
     }
     dataLoad(function () {
 
-        wx.ready(function () {
-           // alert("绑定事件:隐藏菜单");
-            wx.hideOptionMenu();
-        });
+        //wx.ready(function () {
+        //   // alert("绑定事件:隐藏菜单");
+        //    wx.hideOptionMenu();
+        //});
 
         var aNav = document.getElementsByClassName("am-btn-extend");
         aNav[0].className = "am-btn-extend am-btn am-round am-btn-primary";
@@ -84,20 +84,24 @@ $(function () {
                         console.log(res);
                         localIds = res.localIds;
                         alert(localIds);
-                        $("<div id=\"" + localIds[0] + "\" class=\"imgnav\"><img src=\"" + localIds[0] + "\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\"" + localIds[0] + "\"></a></div>").prependTo("#imgwall");
-                        wx.uploadImage({
-                            localId:""+localIds+"",
-                            isShowProgressTips: 1, // 默认为1，显示进度提示
-                            success: function (res) {
-                                var serverId = res.serverId; // 返回图片的服务器端ID
-                               // $("<div id=\"" + serverId[0] + "\" class=\"imgnav\"><img src=\"" + serverId[0] + "\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\"" + serverId[0] + "\"></a></div>").prependTo("#imgwall");
+                        for(var i=0;i<localIds.length;i++){
+                            $("<div id=\"" + localIds[i] + "\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\"" + localIds[i] + "\"></a></div>").prependTo("#imgwall");
+                            wx.uploadImage({
+                                localId:""+localIds[i]+"",
+                                isShowProgressTips: 1, // 默认为1，显示进度提示
+                                success: function (res) {
+                                    var serverId = res.serverId; // 返回图片的服务器端ID
                                     $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage",{serverId:serverId},function(imgid){
-                                       alert(imgid);
-                                });
+                                        alert(imgid);
+                                        relation.add(imgid);
+                                        var file = AV.Object.extend("File");
+                                        var query = new AV.Query(file);
+                                        query.equalTo("objectId",imgid);
+                                    });
+                                }
+                            });
+                        }
 
-
-                            }
-                        });
                         //alert(res);
                         //alert(res.sourceType);
                         //alert(res.errMsg);
@@ -197,8 +201,6 @@ $(function () {
         });
 
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
-
-
         var tags = AV.Object.extend("tag");
         var query = new AV.Query(tags);
         query.find({
