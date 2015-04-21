@@ -35,8 +35,8 @@ router.get('/', function (req, res, next) {
 
 router.get('/getJsConfig', function (req, res) {
     console.log(config);
-    var page = req.query.page;
-    if (!page) {
+    var url = req.query.url;
+    if (!url) {
         res.json("参数\"page\"不能为空！");
     }
 
@@ -46,7 +46,7 @@ router.get('/getJsConfig', function (req, res) {
             'chooseImage',
             'previewImage',
             'uploadImage'],
-        url: config.url + "/" + page
+        url: url
     };
     console.log(param);
     api.getJsConfig(param, function (err, result) {
