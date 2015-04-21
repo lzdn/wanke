@@ -29,7 +29,7 @@
                             query.equalTo("objectId", select[i].id);
                             query.find({
                                 success: function (sele) {
-                                    var tags = [];
+                                    var posts = [];
                                     var object = sele[0];
                                     console.log(object);
                                     var newtime = new Date().getTime();
@@ -38,8 +38,9 @@
                                     var avalue = object.id;
                                     var content = object.get('content');
                                     var otagkey = object.get("tagkey");
-                                    var ousername = object.get("username");
-                                    var username = ousername.get("username");
+                                    var ousername = object.get("username").attributes.authData.weixin;
+                                    var username = ousername.nickname;
+                                    var headimgurl=ousername.headimgurl;
                                     var tagvalue = otagkey.get("tagtitle");
                                     var oldtime = object.createdAt.getTime();
                                     var publishtime = newtime - oldtime;
@@ -61,17 +62,18 @@
                                     var osele = {
                                         name: username,
                                         usersay: content,
+                                        titleimg:headimgurl,
                                         tag: tagvalue,
                                         time: times,
                                         value: avalue,
                                         img: imgs
                                     };
-                                    tags.push(osele);
+                                    posts.push(osele);
                                     console.log(tags);
-                                    var $tpl = $('#amz-tags');
+                                    var $tpl = $('#usercontent');
                                     var source = $tpl.text();
                                     var template = Handlebars.compile(source);
-                                    var data = {tags: tags};
+                                    var data = {posts: posts};
                                     var html = template(data);
                                     $tpl.before(html);
                                 }
@@ -214,11 +216,8 @@
                             var content = object.get('content');
                             var otagkey = object.get("tagkey");
                             var ousername = object.get("username").attributes.authData.weixin;
-                            console.log(ousername);
-                            console.log(ousername.nickname);
                             var username = ousername.nickname;
                             var headimgurl=ousername.headimgurl;
-                            console.log(headimgurl);
                             var tagvalue = otagkey.get("tagtitle");
                             var oldtime = object.createdAt.getTime();
                             var publishtime = newtime - oldtime;
