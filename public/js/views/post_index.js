@@ -216,7 +216,7 @@ $(".am-input-group-label").on("click",function(){
                             var content = object.get('content');
                             var otagkey=object.get("tagkey");
                             var ousername =object.get("username");
-                            var username = ousername.get("username");
+                           // var username = ousername.get("username");
                             var tagvalue=otagkey.get("tagtitle");
                             var oldtime= object.createdAt.getTime();
                             var publishtime = newtime - oldtime;
@@ -236,7 +236,7 @@ $(".am-input-group-label").on("click",function(){
                                 }
                             }
                             var opost = {
-                                name: username,
+                              //  name: username,
                                 usersay:content,
                                 tag: tagvalue,
                                 time:times,
