@@ -94,7 +94,7 @@ $(function () {
                                     var serverId = res.serverId; // 返回图片的服务器端ID
                                     alert(serverId)
                                     alert(serverId[0]);
-                                    $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage",{serverId:serverId[0]},function(imgid){
+                                    $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage",{serverId:""+serverId+""},function(imgid){
                                         alert(imgid);
                                         relation.add(imgid);
                                     });
