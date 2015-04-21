@@ -12,7 +12,7 @@
                 window.location.href= "user_detail.html?"+currentUser.id+"";
             } else {
                 alert("没有登录")
-                $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail",function(res){
+                $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl", function (res) {
                     window.location.href=res.authUrl;
                 })
             }

@@ -105,7 +105,7 @@
             if (currentUser) {
                 window.location.href = "user_detail.html?" + currentUser.id + "";
             } else {
-                $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail", function (res) {
+                $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl", function (res) {
                     window.location.href = res.authUrl;
                 })
             }
