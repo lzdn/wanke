@@ -94,7 +94,7 @@ $(function () {
                                     var serverId = res.serverId; // 返回图片的服务器端ID
                                     alert(serverId)
                                     alert(serverId[0]);
-                                    $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage",{serverId:serverId[0]},function(imgid){
+                                    $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage",{serverId:""+serverId+""},function(imgid){
                                         alert(imgid);
                                         relation.add(imgid);
                                     });
@@ -163,7 +163,7 @@ $(function () {
 //………………………………储备函数…………………………………………
     function dataLoad(callbak) {
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
-        $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig?url="+saveurl+"", function (result) {
+        $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig",{url:""+saveurl+""}, function (result) {
             console.log(result);
             appId = result.appId;
             jslist = result.jsApiList;
