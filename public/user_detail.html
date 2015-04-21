@@ -34,13 +34,12 @@
                 <li id="userpost"><i class="am-icon am-icon-users icon-1 am-icon-sm"></i>个人动态<i class="am-icon am-icon-chevron-right icon-2 am-icon-sm"></i></li>
                 <li id="user_address"><i class="am-icon am-icon-map-marker icon-1 am-icon-sm" ></i>更改小区 <i class="am-icon am-icon-chevron-right icon-2 am-icon-sm"></i></li>
                 <li id="user_contact"><i class="am-icon am-icon-phone icon-1 am-icon-sm"></i>联系方式 <i class="am-icon am-icon-chevron-right icon-2 am-icon-sm"></i></li>
-                <li data-am-modal="{target: '#my-alert'}" ><i class="am-icon am-icon-phone icon-1 am-icon-sm"></i>退出登录<i class="am-icon am-icon-chevron-right icon-2 am-icon-sm"></i></li>
             </ul>
         </div>
     </div>
     {{/each}}
 </script>
-
+<button type="button" class="am-btn am-btn-warning am-btn-block" data-am-modal="{target: '#my-alert'}">块级显示的按钮</button>
 <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
     <div class="am-modal-dialog">
         <div class="am-modal-hd"></div>
