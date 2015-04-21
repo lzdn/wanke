@@ -5,7 +5,7 @@
     var length
     $(".am-input-group-label").on("click", function () {
         var val = $(".am-form-field").val();
-        if (val != "") {
+        if (val != ""){
             $(".Delete").empty();
             AV.Query.doCloudQuery("select * from post where (content like \"" + val + "\")", {
                 success: function (result) {
