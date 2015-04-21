@@ -5,7 +5,7 @@
     var length
     $(".am-input-group-label").on("click", function () {
         var val = $(".am-form-field").val();
-        if (val != ""){
+        if (val != "") {
             $(".Delete").empty();
             AV.Query.doCloudQuery("select * from post where (content like \"" + val + "\")", {
                 success: function (result) {
@@ -105,8 +105,7 @@
             if (currentUser) {
                 window.location.href = "user_detail.html?" + currentUser.id + "";
             } else {
-                $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl", function (res) {
-                    alert(res.authUrl);
+                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail", function (res) {
                     window.location.href = res.authUrl;
                 })
             }
@@ -117,7 +116,7 @@
             if (currentUser) {
                 window.location.href = "post_save.html?" + currentUser.id + "";
             } else {
-                $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=post_save", function (res) {
+                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=post_save", function (res) {
                     alert(res);
                     window.location.href = res.authUrl;
                 })

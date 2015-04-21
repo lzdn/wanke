@@ -4,34 +4,34 @@
         var buliding;
         var homeval;
         $("#haederleft").on("click",function(){
-                window.location.href= "user_detail.html?"+postview+"";
+            window.location.href= "user_detail.html?"+postview+"";
         });
         $("#doc-select-1").change(function () {
-                          if(homeval!=$(this).val()){
-                              homeval=$(this).val();
-                              $(".homeval").remove();
-                              var home = AV.Object.extend("home");
-                              var query2 = new AV.Query(home);
-                              query2.equalTo("objectId", $(this).val());
-                              query2.find({
-                                  success: function (results) {
-                                      var oldbuilding = results[0].get("building");
-                                      var buildings = [];
-                                      for (var j = 0; j < oldbuilding.length; j++) {
-                                          var building = {
-                                              names: oldbuilding[j]
-                                          }
-                                          buildings.push(building);
-                                      }
-                                      var $buildings = $('#buildings');
-                                      var source2 =$buildings.text();
-                                      var template2 = Handlebars.compile(source2);
-                                      var data2 = {buildings: buildings};
-                                      var html2 = template2(data2);
-                                      $buildings.before(html2);
-                                  }
-                              })
-                          }
+            if(homeval!=$(this).val()){
+                homeval=$(this).val();
+                $(".homeval").remove();
+                var home = AV.Object.extend("home");
+                var query2 = new AV.Query(home);
+                query2.equalTo("objectId", $(this).val());
+                query2.find({
+                    success: function (results) {
+                        var oldbuilding = results[0].get("building");
+                        var buildings = [];
+                        for (var j = 0; j < oldbuilding.length; j++) {
+                            var building = {
+                                names: oldbuilding[j]
+                            }
+                            buildings.push(building);
+                        }
+                        var $buildings = $('#buildings');
+                        var source2 =$buildings.text();
+                        var template2 = Handlebars.compile(source2);
+                        var data2 = {buildings: buildings};
+                        var html2 = template2(data2);
+                        $buildings.before(html2);
+                    }
+                })
+            }
 
         })
 
