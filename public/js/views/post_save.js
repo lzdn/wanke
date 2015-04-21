@@ -86,7 +86,7 @@ $(function () {
                         console.log(res);
                         localIds = res.localIds;
                         alert(localIds);
-                            $("<div id=\"" + localIds[0] + "\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a  class=\"am-icon-close\" value=\"" + localIds[i] + "\"></a></div>").prependTo("#imgwall");
+                            $("<div id=\"" + localIds[0] + "\" class=\"imgnav\"><img src=\"" + localIds[0] + "\" alt=\"\"/><a  class=\"am-icon-close\" value=\"" + localIds[0] + "\"></a></div>").prependTo("#imgwall");
                             wx.uploadImage({
                                 localId:""+localIds[0]+"",
                                 isShowProgressTips: 1, // 默认为1，显示进度提示
