@@ -1,4 +1,5 @@
 (function ($) {
+    AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
     var code = "";
     var userlog, userid, queryobject, nickname;
     var postview = window.location.search.split('?')[1];
@@ -18,36 +19,13 @@
         $("#user_contact").on("click", function () {
             window.location.href = "user_contact.html?id=" + user.id + "";
         });
-        //$("#user_logout").on("onclick",function(){
-        //    $('#my-confirm').modal({
-        //        relatedTarget: this,
-        //        onConfirm: function(options) {
-        //            AV.User.logOut();
-        //            var currentUser = AV.User.current();
-        //            window.location.href = "post_index.html?id=" + currentUser.id + "";
-        //        },
-        //        onCancel: function() {
-        //            alert('算求，不弄了');
-        //        }
-        //    });
-        //});
-
         $('#confirm-logout').on('click', function () {
             AV.User.logOut();
             window.location.href = "post_index.html";
         });
-
-        //var query = new AV.Query(AV.User);
-        //query.equalTo("authData", queryobject);  // find all the women
-        //query.find({
-        //    success: function (users) {
-        //        id = users[0].id;
-        //    }
-        //});
     });
 
     function userloading(callbak) {
-        AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
         if (code != "") {
             $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;

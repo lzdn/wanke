@@ -1,6 +1,7 @@
 (function ($) {
     AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
-    var postview = window.location.search.split('?')[1];
+    var postview = window.location.search.split('?id=')[1];
+    var id = window.location.search.split('?id=')[1];
     var phonenum=""
     var bnum = 0;
     $("#haederleft").on("click",function(){
@@ -81,6 +82,14 @@
 
 })(jQuery);
 
+function load(callback){
+    var query = new AV.Query(AV.User);
+    query.find(id,{
+        success:function(err,user){
+            $('#phonenum').value = user.get("mobilePhoneNumber")
+        },
+        error:function(err){
 
-
-
+        }
+    })
+}
