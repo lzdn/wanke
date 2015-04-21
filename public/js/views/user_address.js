@@ -52,7 +52,7 @@
                             users.set('buliding', buliding);
                             users.set('floorname', floorname);
                             users.set('housenumber', housenumber);
-                            users.save({
+                            users.save(null, {
                                 success:function(res){
                                     alert("haha");
                                 }
