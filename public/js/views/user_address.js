@@ -132,8 +132,8 @@
                         starthomename = user[0].get("buliding");
                         startbuilding = user[0].get("floorname");
                         housenumber = user[0].get("housenumber");
-                        $('#homes').val(user[0].get("buliding"));
-                        $('#buildings').val(user[0].get("floorname"));
+                        $("#homes option[text='" + user[0].get("buliding") + "']").attr("selected", true);
+                        $("#buildings option[text='" + user[0].get("floorname") + "']").attr("selected", true);
                         $('#wxnum').val(user[0].get("housenumber"));
                         //alert(starthomename);
                         //alert(startbuilding);
