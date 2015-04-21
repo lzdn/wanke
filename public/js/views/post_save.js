@@ -95,9 +95,6 @@ $(function () {
                                     $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage",{serverId:serverId},function(imgid){
                                         alert(imgid);
                                         relation.add(imgid);
-                                        var file = AV.Object.extend("File");
-                                        var query = new AV.Query(file);
-                                        query.equalTo("objectId",imgid);
                                     });
                                 }
                             });
