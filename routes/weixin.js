@@ -122,6 +122,7 @@ router.post('/sendMessage', function (req, res) {
 
 router.post('/uploadImage', function (req, res) {
     var serverId = req.body.serverId;
+    console.log("req.body" + req.body);
     if (!serverId) {
         res.json("参数\"serverId\"不能为空！");
     }
