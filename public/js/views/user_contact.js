@@ -1,8 +1,8 @@
 (function ($) {
-    AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
     var postview = window.location.search.split('?id=')[1];
-    var id = window.location.search.split('?id=')[1];
-    load(function(){
+    load(function () {
+        alert("dfadfs");
+
         var phonenum = "";
         var bnum = 0;
         $("#haederleft").on("click", function () {
@@ -83,14 +83,16 @@
 })(jQuery);
 
 function load(callback) {
+    var id = window.location.search.split('?id=')[1];
+    AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
     var query = new AV.Query(AV.User);
-    query.find(id, {
-        success: function (err, user) {
+    query.get(id, {
+        success: function (user) {
             $('#phonenum').value = user.get("mobilePhoneNumber");
             callback(null);
         },
-        error: function (err) {
-            callback(err);
+        error: function (object, error) {
+            callback(error);
         }
     })
 }
