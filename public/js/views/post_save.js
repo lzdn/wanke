@@ -1,6 +1,7 @@
 
 $(function () {
-    var saveurl = window.location.search
+    var saveurl = window.location.href;
+    alert(saveurl);
     var localIds;
     var user = AV.User;
     var posts = AV.Object.extend("post");
