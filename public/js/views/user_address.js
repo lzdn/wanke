@@ -49,14 +49,18 @@
                     query.get(postview, {
                         success: function(gameScore) {
                             alert("查询成功");
-                            //gameScore.set('buliding',buliding);
-                            //gameScore.set('floorname',floorname);
-                            //gameScore.set('housenumber', housenumber);
-                            //gameScore.save({
-                            //    success:function(){
-                            //        alert("存储成功")
-                            //    }
-                            //});
+                            gameScore.set('buliding',buliding);
+                            gameScore.set('floorname',floorname);
+                            gameScore.set('housenumber', housenumber);
+                            gameScore.save({
+                                success:function(){
+                                    alert("存储成功")
+                                },
+                                error:function(object,error){
+                                    alert(object);
+                                    alert(error);
+                                }
+                            });
                         },
                         error: function(object, error) {
                             console.log(object);
