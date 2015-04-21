@@ -9,7 +9,7 @@
         id = ""
     }
     userloading(function (err, user) {
-
+        alert("kl;j;j;lkj;lkj;ljk");
         $("#user_post").on("click", function () {
             window.location.href = "user_post.html?id=" + user.id + "";
         });
