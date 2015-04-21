@@ -86,21 +86,25 @@ $(function () {
                 localIds = res.localIds;
                 alert(localIds);
                 $("<div id=\"" + localIds[0] + "\" class=\"imgnav\"><img src=\"" + localIds[0] + "\" alt=\"\"/><a  class=\"am-icon-close\" value=\"" + localIds[0] + "\"></a></div>").prependTo("#imgwall");
-                wx.uploadImage({
-                    localId: "" + localIds[0] + "",
-                    isShowProgressTips: 1,
-                    success: function (img) {
-                        var serverId = img.serverId; // 返回图片的服务器端ID
-                        alert(serverId);
-                        alert(""+serverId+"");
-                        $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverId: ""+serverId+""}, function (imgid) {
-                            alert(imgid);
-                           // relation.add(imgid);
-                        });
-                    }
-                })
             }
+        }).then(function(){
+            wx.uploadImage({
+                localId: "" + localIds[0] + "",
+                isShowProgressTips: 1,
+                success: function (img) {
+                    var serverId = img.serverId; // 返回图片的服务器端ID
+                    alert(serverId);
+                    alert(""+serverId+"");
+                    $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverId: ""+serverId+""}, function (imgid) {
+                        alert(imgid);
+                        // relation.add(imgid);
+                    });
+                }
+            })
         });
+
+
+
 
         //        wx.chooseImage({
         //            success: function (res) {
