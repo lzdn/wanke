@@ -171,7 +171,7 @@
             var currentUser = AV.User.current();
             alert(currentUser);
             if (currentUser) {
-                window.location.href = "post_save.html?id=" + currentUser.id + "";
+                window.location.href = "post_save.html?code=";
             } else {
                 $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=post_save", function (res) {
                     window.location.href = res.authUrl;

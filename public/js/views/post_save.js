@@ -7,8 +7,7 @@ $(function () {
     var code = "";
     var serverIds=[];
     var userlog, userid, queryobject, nickname
-    var postview = window.location.search.split('=')[1];
-    if (saveurl.indexOf("=") > 0) {
+    if (saveurl.indexOf("=") > 1) {
         userlog = window.location.search.split('=')[1];
         code = userlog.split("&")[0];
         alert(code);
