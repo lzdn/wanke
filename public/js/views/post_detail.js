@@ -37,7 +37,7 @@
             var currentUser = AV.User.current();
             if (currentUser) {
                 usersid=currentUser.id
-                        phonenumber=currentUser.mobilePhoneNumber;
+                        phonenumber=currentUser.get("mobilePhoneNumber");
                 alert(phonenumber);
                 if (phonenumber) {
                     // window.location.href= "user_detail.html?"+currentUser.id+"";
