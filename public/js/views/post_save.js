@@ -87,14 +87,14 @@ $(function () {
                 var  localIds = res.localIds;
                 $("#addimg").hide();
                 for(var i=0;i<localIds.length;i++){
-                    $("<div id=\"" + localIds[i] + "\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a  class=\"am-icon-close "+ localIds[i] +"\"></a></div>").prependTo("#imgwall");
                     wx.uploadImage({
                         localId:localIds[i]+"",
                         isShowProgressTips: 1,
                         success: function (img) {
-                            alert("haha");
                             var serverId = img.serverId; // 返回图片的服务器端ID
-                            alert(serverId)
+                            $("<div id=\"" + serverId + "\" class=\"imgnav\"><img src=\"" + serverId + "\" alt=\"\"/><a  class=\"am-icon-close "+ serverId +"\"></a></div>").prependTo("#imgwall");
+
+                           // alert(serverId)
                             //$.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverId:""+serverId+""}, function (imgid) {
                             //    alert(imgid);
                             //    // relation.add(imgid);
