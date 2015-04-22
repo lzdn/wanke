@@ -209,6 +209,7 @@ $(function () {
         query.find({
             success: function (results) {
                 var tags = [];
+                newtag=results[0];
                 for (var i = 0; i < results.length; i++) {
                     var object = results[i];
                     var tagid = object.id;

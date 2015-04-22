@@ -1,6 +1,5 @@
 
 (function($) {
-    var postview=window.location.search.split('=')[1];
     var number="";
     var code = "";
     var userlog, userid, queryobject, nickname, phonenumber
