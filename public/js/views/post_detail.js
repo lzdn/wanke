@@ -31,7 +31,8 @@
             if (currentUser) {
                  // find all the women
                         var phonenumber=currentUser.get("mobilePhoneNumber");
-                        if(phonenumber){
+                alert(phonenumber);
+                        if(phonenumber!=""){
                             // window.location.href= "user_detail.html?"+currentUser.id+"";
                             var imgurl=currentUser.get("authData").weixin.headimgurl;
                             $(".usercontent").remove();
