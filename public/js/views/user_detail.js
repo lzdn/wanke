@@ -29,7 +29,6 @@
         if (code != "") {
             $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
-                alert(res.headimgurl)
                 var user = {
                     openid: res.openid,
                     nickname: res.nickname,
@@ -60,6 +59,9 @@
             var source = $tpl.text();
             var template = Handlebars.compile(source);
             alert(authData.weixin.headimgurl);
+            alert(authData.get("weixin").headimgurl);
+            alert(authData.weixin.get("headimgurl"));
+            alert(currentUser.id)
             var data = {
                 user: {
                     openid: authData.weixin.openid,
