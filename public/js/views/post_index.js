@@ -10,7 +10,23 @@
                 $(".Publish").remove();
                // $(".am-icon-spin-extend").remove();
                 skx = -5;
-                loading(clickevent());
+                loading(function(){
+                    $(".Publish").on("click", function () {
+                        var postview = $(this).attr("value");
+                        window.location.href = "post_detail.html?id=" + postview + "";
+                    });
+                    $(".imgpreview").on("click", function () {
+                        var cur = $(this).attr("src");
+                        var url = $(this).parent().attr("value");
+                        var arr = url.split(",");
+                        wx.previewImage({
+                            current: cur, // 当前显示的图片链接
+                            urls: arr// 需要预览的图片链接列表
+                        });
+                        event.stopPropagation();
+                    });
+                    $(".imgpreview").removeClass("imgpreview");
+                });
                 bload = 1;
             }
         },20);
@@ -111,6 +127,21 @@
         //    var postview=$(this).attr("value");
         //    window.location.href="post_detail.html?"+postview+"";
         //});
+        $(".Publish").on("click", function () {
+            var postview = $(this).attr("value");
+            window.location.href = "post_detail.html?id=" + postview + "";
+        });
+        $(".imgpreview").on("click", function () {
+            var cur = $(this).attr("src");
+            var url = $(this).parent().attr("value");
+            var arr = url.split(",");
+            wx.previewImage({
+                current: cur, // 当前显示的图片链接
+                urls: arr// 需要预览的图片链接列表
+            });
+            event.stopPropagation();
+        });
+        $(".imgpreview").removeClass("imgpreview");
         $("#users").on("click", function () {
             var currentUser = AV.User.current();
             if (currentUser) {
@@ -177,7 +208,7 @@
                 loading(function () {
                     $(".Publish").on("click", function () {
                         var postview = $(this).attr("value");
-                        window.location.href = "post_detail.html?" + postview + "";
+                        window.location.href = "post_detail.html?id=" + postview + "";
                     });
                     $(".imgpreview").on("click", function () {
                         var cur = $(this).attr("src");

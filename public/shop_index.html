@@ -22,14 +22,16 @@
     <link rel="stylesheet" href="css/views/shop_index.css">
 </head>
 <body>
+<div class="am-animation-fade">
 <ul class="am-list am-list-static am-list-extend">
     <li>周边小店</li>
-    <script type="text/x-handlebars-template" id="shop">
-        {{#each shops}}
-        <li><div  class="shopcontent" value="{{this.id}}"><img class="am-circle" src={{this.logo}} width="40" height="40"/><p class="am-sans-serif">{{this.name}}</p></div><a href="tel:{{this.tel}}" class="am-icon am-icon-phone am-icon-md"></a></li>
-        {{/each}}
-    </script>
+        <script type="text/x-handlebars-template" id="shop">
+            {{#each shops}}
+            <li><div  class="shopcontent" value="{{this.id}}"><img class="am-circle" src={{this.logo}} width="40" height="40"/><p class="am-sans-serif">{{this.name}}</p></div><a href="tel:{{this.tel}}" class="am-icon am-icon-phone am-icon-md"></a></li>
+            {{/each}}
+        </script>
 </ul>
+</div>
 
 <div data-am-widget="navbar" class="am-navbar am-cf" id="">
     <ul class="am-navbar-nav am-cf am-avg-sm-4 am-navbar-nav-extend ">
