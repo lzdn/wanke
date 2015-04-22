@@ -62,22 +62,22 @@
                         var post = AV.Object.extend("post");
                         var query = new AV.Query(post);
                         query.equalTo("objectId",postview);
-                        query.find({
-                            success:function(post){
-                                var relation = post.relation("likes");
-                                relation.add({id:usersid,url:imgurl,phonenumber:phonenumber});
-                                post.save();
-                            }
-                        })
-                        //query.get(postview, {
-                        //    success: function(post) {
-                        //        post.set("relation",[{usersid:usersid,phonenumber:phonenumber}]);
+                        //query.find({
+                        //    success:function(post){
+                        //        var relation = post.relation("likes");
+                        //        relation.add({id:usersid,url:imgurl,phonenumber:phonenumber});
                         //        post.save();
-                        //    },
-                        //    error: function(object, error) {
-                        //        console.log(object);
                         //    }
-                        //});
+                        //})
+                        query.get(postview, {
+                            success: function(post) {
+                                post.add("relation",{id:usersid,url:imgurl,phonenumber:phonenumber});
+                                post.save();
+                            },
+                            error: function(object, error) {
+                                console.log(object);
+                            }
+                        });
                     } else {
                         $('#my-prompt').modal({
                             // relatedTarget: this,
