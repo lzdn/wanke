@@ -98,6 +98,11 @@ $(function () {
     function savecontent() {
         alert(serverIds.length);
         alert(serverIds);
+        alert(userid);
+        $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverIds:serverIds,userId:userid}, function (imgid) {
+                alert(imgid);
+                // relation.add(imgid);
+            });
         //var aUserval2 = $("#doc-ta-1").val();
         //var tag = new tags();
         //tag.id = newtag;
