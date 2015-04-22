@@ -98,8 +98,9 @@ $(function () {
     function savecontent() {
         alert(serverIds.length);
         alert(serverIds);
-        alert(userid);
-        $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverIds:serverIds,userId:userid}, function (imgid) {
+        var userids = AV.User.current();
+        alert(userids.id);
+        $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverIds:serverIds,userId:userids.id}, function (imgid) {
                 alert(imgid);
                 // relation.add(imgid);
             });
