@@ -175,11 +175,6 @@
                     pattern: imgpattern
                 };
                 tags.push(opost);
-                console.log(opost.name);
-                console.log(opost.usersay);
-                console.log(opost.tag);
-                console.log(opost.time);
-
                 var $tpl = $('#amz-tags');
                 var source = $tpl.text();
                 var template = Handlebars.compile(source);
@@ -190,12 +185,9 @@
                 var $tp2 = $('relationuser');
                 var source2 = $tp2.text();
                 var template2 = Handlebars.compile(source2);
-                var data2 = {tags: relationuser};
+                var data2 = {relationuser: relationuser};
                 var html2 = template2(data2);
-                $tpl.before(html2);
-
-
-
+                $tp2.before(html2);
                 callbak();
             }
         });
