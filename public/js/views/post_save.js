@@ -1,6 +1,5 @@
 $(function () {
     var saveurl = window.location.href;
-    alert(saveurl);
     var user = AV.User;
     var posts = AV.Object.extend("post");
     var tags = AV.Object.extend("tag");
@@ -9,7 +8,6 @@ $(function () {
     var serverIds=[];
     var userlog, userid, queryobject, nickname
     var postview = window.location.search.split('=')[1];
-    alert(postview);
     if (saveurl.indexOf("=") > 0) {
         userlog = window.location.search.split('=')[1];
         code = userlog.split("&")[0];
@@ -83,7 +81,7 @@ $(function () {
     $(".chooseImage").on("click", function () {
         //var ofileid;
         //var localIds;
-
+        alert("kaishi ");
         wx.chooseImage({
             success: function (res) {
                 var  localIds = res.localIds;

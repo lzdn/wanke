@@ -18,9 +18,10 @@
     function userloading(callbak) {
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
         var code = "";
+        var saveurl = window.location.href;
         var userlog, userid, queryobject, nickname;
-        var postview = window.location.search.split('?')[1];
-        if (postview.indexOf("=") > 0) {
+        var postview = window.location.search.split('=')[1];
+        if (saveurl.indexOf("=") > 0) {
             userlog = window.location.search.split('=')[1];
             code = userlog.split("&")[0];
             //alert(code);

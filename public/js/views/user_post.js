@@ -7,7 +7,6 @@
     loading(clickevent());
     $("#foots").on("click", function () {
         var currentUser = AV.User.current();
-        alert(currentUser);
         if (currentUser) {
             window.location.href = "post_save.html?id=" + currentUser.id + "";
         } else {
