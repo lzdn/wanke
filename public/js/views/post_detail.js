@@ -51,8 +51,9 @@
                         $(".usercontent").remove();
                         $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".userphone");
                         $(" <img src=\"" + imgurl + "\" class=\"am-radius\">").appendTo("#headtle");
-
-                        $.post("http://fuwuhao.dianyingren.com/weixin/sendMessage", {openId:""+usersid+"",postId:""+postview+""}, function (res) {
+                             alert(usersid);
+                              alert(postview);
+                        $.post("http://fuwuhao.dianyingren.com/weixin/sendMessage", {openId:usersid,postId:postview}, function (res) {
                             alert(res);
                         });
 
