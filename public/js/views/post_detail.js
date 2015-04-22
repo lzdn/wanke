@@ -52,10 +52,10 @@
                         $(" <img src=\"" + imgurl + "\" class=\"am-radius\">").appendTo("#headtle");
                              alert(usersid);
                               alert(postId);
-                        $.post("http://fuwuhao.dianyingren.com/weixin/sendMessage", {userId:usersid,postId:postId}, function (res) {
+                        $.post("http://fuwuhao.dianyingren.com/weixin/sendMessage", {userId:postId,postId:postId}, function (res) {
                             alert(res);
                         });
-                        //var post = AV.Object.extend("post");
+                        //var post = AV.Object.extend("post");usersid
                         //var query = new AV.Query(post);
                         //query.get(postview, {
                         //    success: function(post) {
