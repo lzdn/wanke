@@ -87,25 +87,8 @@ $(function () {
                 var  localIds = res.localIds;
                 $("#addimg").hide();
                 for(var i=0;i<localIds.length;i++){
-                    $("<div id=\"\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a  class=\"am-icon-close\"></a></div>").prependTo("#imgwall");
-                    wx.uploadImage({
-                        localId:localIds[i]+"",
-                        isShowProgressTips: 1,
-                        success: function (img) {
-                            var serverId = img.serverId; // 返回图片的服务器端ID
-                            $("<div id=\"" + serverId + "\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a  class=\"am-icon-close "+ serverId +"\"></a></div>").prependTo("#imgwall");
-                            $(".am-icon-close "+ serverId +"").on("click",function(){
-                                $("#" + serverId + "").remove();
-                            });
-                           // alert(serverId)
-                            //$.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverId:""+serverId+""}, function (imgid) {
-                            //    alert(imgid);
-                            //    // relation.add(imgid);
-                            //});
-                        }
-                    });
+                    uploadIds(localIds[i]);
                 }
-
                 }
         });
     });
@@ -210,7 +193,31 @@ $(function () {
         }
 
     }
+
+    function uploadIds (localIds){
+            wx.uploadImage({
+            localId:localIds+"",
+            isShowProgressTips: 1,
+            success: function (img) {
+                var serverId = img.serverId; // 返回图片的服务器端ID
+                $("<div id=\"" + serverId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a  class=\"am-icon-close "+ serverId +"\"></a></div>").prependTo("#imgwall");
+                $(".am-icon-close "+ serverId +"").on("click",function(){
+                    alert("shanchu");
+                    $("#" + serverId + "").remove();
+                });
+                // alert(serverId)
+                //$.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverId:""+serverId+""}, function (imgid) {
+                //    alert(imgid);
+                //    // relation.add(imgid);
+                //});
+            }
+        });
+
+    }
+
+
 });
+
 
 
 
