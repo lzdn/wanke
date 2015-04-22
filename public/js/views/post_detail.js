@@ -1,14 +1,16 @@
 (function ($) {
+    var saveurl = window.location.href;
     var number = "";
     var code = "";
     var userlog, userid, queryobject, nickname, phonenumber,usersid,postId,tagvalue;
     var postview = window.location.search.split('=')[1];
-    if (postview.indexOf("=") > 0) {
-        userlog = window.location.search.split('=')[1];
-        code = userlog.split("&")[0];
-        alert(code);
-        id = ""
-    }
+    alert(postview);
+    //if (saveurl.indexOf("=") > 1) {
+    //    userlog = window.location.search.split('=')[1];
+    //    code = userlog.split("&")[0];
+    //    alert(code);
+    //    id = ""
+    //}
     // alert(postview);
     loadwx();
     loading(function () {
