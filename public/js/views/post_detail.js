@@ -1,7 +1,7 @@
 (function ($) {
     var number = "";
     var code = "";
-    var userlog, userid, queryobject, nickname, phonenumber,usersid,postId;
+    var userlog, userid, queryobject, nickname, phonenumber,usersid,postId,tagvalue;
     var postview = window.location.search.split('=')[1];
     if (postview.indexOf("=") > 0) {
         userlog = window.location.search.split('=')[1];
@@ -46,7 +46,6 @@
                 setTimeout(function(){
                     alert(phonenumber);
                     if (phonenumber) {
-                        // window.location.href= "user_detail.html?"+currentUser.id+"";
                         var imgurl = currentUser.get("authData").weixin.headimgurl;
                         $(".usercontent").remove();
                         $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".userphone");
@@ -55,6 +54,17 @@
                               alert(postId);
                         $.post("http://fuwuhao.dianyingren.com/weixin/sendMessage", {userId:usersid,postId:postId}, function (res) {
                             alert(res);
+                        });
+                        var post = AV.Object.extend("post");
+                        var query = new AV.Query(post);
+                        query.get(postview, {
+                            success: function(post) {
+                                post.set("relation",[{usersid:usersid,phonenumber:phonenumber}]);
+                                post.save();
+                            },
+                            error: function(object, error) {
+                                console.log(object);
+                            }
                         });
 
                     } else {
@@ -126,7 +136,7 @@
                 var ousername = object.get("username").attributes.authData.weixin;
                 var username = ousername.nickname;
                 var headimgurl = ousername.headimgurl;
-                var tagvalue = otagkey.get("tagtitle");
+                tagvalue = otagkey.get("tagtitle");
                 var oldtime = object.createdAt.getTime();
                 var publishtime = newtime - oldtime;
                 var day = parseInt(publishtime / 86400000);
