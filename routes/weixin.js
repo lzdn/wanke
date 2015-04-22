@@ -122,7 +122,7 @@ router.post('/sendMessage', function (req, res) {
                     res.json({msg: err});
                 }
 
-                res.json({msg: "发送成功"});
+                res.json({msg: "success"});
             });
         }
     });
