@@ -5,6 +5,7 @@ $(function () {
     var tags = AV.Object.extend("tag");
     var newtag = 1;
     var code = "";
+    var serverIds=[];
     var userlog, userid, queryobject, nickname
     var postview = window.location.search.split('=')[1];
     alert(postview);
@@ -95,22 +96,24 @@ $(function () {
 
     //…………………………保存心情 和 tagkey………………………………
     function savecontent() {
-        var aUserval2 = $("#doc-ta-1").val();
-        var tag = new tags();
-        tag.id = newtag;
-        var postc = new posts();
-        var user = AV.User.current();
-        postc.save({
-            content: aUserval2,
-            tagkey: tag,
-            //imgs: relation,
-            username: user
-        }, {
-            success: function (object) {
-                alert("发表成功");
-                window.location.href = "post_index.html"
-            }
-        });
+        alert(serverIds.length);
+        alert(serverIds);
+        //var aUserval2 = $("#doc-ta-1").val();
+        //var tag = new tags();
+        //tag.id = newtag;
+        //var postc = new posts();
+        //var user = AV.User.current();
+        //postc.save({
+        //    content: aUserval2,
+        //    tagkey: tag,
+        //    //imgs: relation,
+        //    username: user
+        //}, {
+        //    success: function (object) {
+        //        alert("发表成功");
+        //        window.location.href = "post_index.html"
+        //    }
+        //});
     }
 
 //………………………………储备函数…………………………………………
@@ -201,9 +204,10 @@ $(function () {
             success: function (img) {
                 $("#addimg").show();
                 var serverId = img.serverId; // 返回图片的服务器端ID
-                $("<div id=\"" + serverId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + serverId + "\"  class=\"am-icon-close "+ serverId +"\"></a></div>").prependTo("#imgwall");
+                serverIds.push(serverId);
+                $("<div id=\"" + serverId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + serverId + "\" value=\"" + serverId + "\" class=\"am-icon-close "+ serverId +"\"></a></div>").prependTo("#imgwall");
                 $("#destroy" + serverId + "").on("click",function(){
-                    alert("shanchu");
+                    //serverIds.remove($(this).attr("value"));
                     $("#" + serverId + "").remove();
                     if($(".imgnav").length==0){
                         $("#addimg").hide();
