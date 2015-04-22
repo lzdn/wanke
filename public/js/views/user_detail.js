@@ -59,14 +59,11 @@
             var source = $tpl.text();
             var template = Handlebars.compile(source);
             alert(authData.weixin.headimgurl);
-            //alert(authData.get("weixin").headimgurl);
-           // alert(authData.weixin.get("headimgurl"));
-            alert(currentUser.id)
             var data = {
                 user: {
                     openid: authData.weixin.openid,
                     nickname: authData.weixin.nickname,
-                    headUrl: authData.weixin.headimgurl
+                    headUrl: authData.weixin.get("headimgurl")
                 }
             };
             var html = template(data);
