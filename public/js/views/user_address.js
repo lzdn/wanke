@@ -102,8 +102,8 @@
                 var data = {homes: homes};
                 var html = template(data);
                 $tpl.before(html);
-                if (AV.User.current().get("buliding") != "")
-                    $("#homes").find("option[text=\"" + AV.User.current().get("buliding") + "\"]").attr("selected", true);
+                //if (AV.User.current().get("buliding") != "")
+                $("#homes").find("option[text=\"" + AV.User.current().get("buliding") + "\"]").attr("selected", true);
 
                 alert("$(\"#homes\").val()" + $("#homes").val());
                 var home = AV.Object.extend("home");
