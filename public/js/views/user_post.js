@@ -5,7 +5,17 @@
     loadwx();
     $("#arrow").hide();
     loading(clickevent());
-
+    $("#foots").on("click", function () {
+        var currentUser = AV.User.current();
+        alert(currentUser);
+        if (currentUser) {
+            window.location.href = "post_save.html?id=" + currentUser.id + "";
+        } else {
+            $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=post_save", function (res) {
+                window.location.href = res.authUrl;
+            })
+        }
+    });
     $(window).scroll(function () {
         var htmlHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
         var clientHeight = document.body.clientHeight || document.documentElement.clientHeight;

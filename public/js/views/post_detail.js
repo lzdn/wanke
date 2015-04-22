@@ -55,18 +55,17 @@
                         $.post("http://fuwuhao.dianyingren.com/weixin/sendMessage", {userId:usersid,postId:postId}, function (res) {
                             alert(res);
                         });
-                        var post = AV.Object.extend("post");
-                        var query = new AV.Query(post);
-                        query.get(postview, {
-                            success: function(post) {
-                                post.set("relation",[{usersid:usersid,phonenumber:phonenumber}]);
-                                post.save();
-                            },
-                            error: function(object, error) {
-                                console.log(object);
-                            }
-                        });
-
+                        //var post = AV.Object.extend("post");
+                        //var query = new AV.Query(post);
+                        //query.get(postview, {
+                        //    success: function(post) {
+                        //        post.set("relation",[{usersid:usersid,phonenumber:phonenumber}]);
+                        //        post.save();
+                        //    },
+                        //    error: function(object, error) {
+                        //        console.log(object);
+                        //    }
+                        //});
                     } else {
                         $('#my-prompt').modal({
                             // relatedTarget: this,
