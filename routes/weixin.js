@@ -110,20 +110,20 @@ router.post('/sendMessage', function (req, res) {
             // Do stuff
             text = "活动提醒\n" +
             "有人报名了您发起的活动\n" +
-            "姓名: " + user.get("authData").weixin.nickname + "\n" +
-            "联系方式: " + user.get("mobilePhoneNumber") + "\n" +
+            "姓名:" + user.get("authData").weixin.nickname + "\n" +
+            "联系方式:" + user.get("mobilePhoneNumber") + "\n" +
             "\n" +
             "<a href=\"http://fuwuhao.dianyingren.com/post_details.html?id=" + postId + "\">点击查看详情</a>"
             "\n" +
             "";
             console.log(user.get("authData").weixin);
 
-            api.sendText(user.get("authData").weixin.openid, text, function (err) {
+            api.sendText(user.get("authData").weixin.openid, text, function (err, result) {
                 if (err) {
                     res.json(err);
                 }
 
-                res.json("发送成功！");
+                res.json(result);
             });
         }
     });
