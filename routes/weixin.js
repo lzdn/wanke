@@ -114,8 +114,7 @@ router.post('/sendMessage', function (req, res) {
             "联系方式:" + user.get("mobilePhoneNumber") + "\n" +
             "\n" +
             "<a href=\"http://fuwuhao.dianyingren.com/post_details.html?id=" + postId + "\">点击查看详情</a>"
-            "\n" +
-            "";
+            "\n";
             console.log(user.get("authData").weixin);
 
             api.sendText(user.get("authData").weixin.openid, text, function (err, result) {
@@ -130,37 +129,32 @@ router.post('/sendMessage', function (req, res) {
 });
 
 router.post('/uploadImage', function (req, res) {
-    var serverId = req.body.serverId;
+    var userId = req.body.userId,
+        serverIds = req.body.serverId;
     console.log(req.body);
-    if (!serverId) {
-        res.json("参数\"serverId\"不能为空！");
+    if (!userId) {
+        return res.json("参数\"userId\"不能为空！");
+    }
+    if (serverIds.length <= 0) {
+        return res.json("参数\"serverIds\"不能为空！");
     }
 
-    api.getMedia(serverId, function (err, result, res) {
-        if (err) {
-            res.json("err:" + err);
-        }
-        var now = new Date();
-        var file = new AV.File(now.getTime() + ".png", result);
-        //file.save(null, {
-        //    success: function (file) {
-        //
-        //    },
-        //    error: function (file, error) {
-        //        // Execute any logic that should take place if the save fails.
-        //        // error is a AV.Error with an error code and description.
-        //        res.json({error: error.message});
-        //    }
-        //});
-        file.save().then(function(file) {
-            // Execute any logic that should take place after the object is saved.
-            res.json({fileId: file.id});
-        }, function(error) {
-            // The file either could not be read, or could not be saved to AV.
-            res.json({error: error.message});
+    serverIds.forEach(function (e) {
+        api.getMedia(e, function (err, result, res) {
+            if (err) {
+                return res.json("err:" + err);
+            }
+            var now = new Date();
+            var file = new AV.File(now.getTime() + ".png", result);
+            file.save().then(function () {
+                // Execute any logic that should take place after the object is saved.
+                //res.json({fileId: file.id});
+            }, function (error) {
+                // The file either could not be read, or could not be saved to AV.
+                res.json({error: error.message});
+            });
         });
     });
 });
-
 
 module.exports = router;
