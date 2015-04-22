@@ -4,6 +4,16 @@
     var skx = -5;
     var bload = 1;
     var length
+    $(".am-form-field").keydown(function(){
+        setTimeout(function(){
+            if( $(".am-form-field").val()==""&&bload==0){
+                $(".Delete").empty();
+                skx = -5;
+                loading(clickevent());
+                bload = 1;
+            }
+        },20);
+    });
     $(".am-input-group-label").on("click", function () {
         var val = $(".am-form-field").val();
         if (val != "") {
@@ -76,12 +86,14 @@
                                     var data = {posts: posts};
                                     var html = template(data);
                                     $tpl.before(html);
+                                    clickevent();
                                 }
                             })
                         }
                         $("<p class=\"Delete am-sans-serif\">包含“" + val + "”的结果共“" + length + "”条</p>").appendTo($("#field"));
                         bload = 0;
                     } else {
+                        bload = 0;
                         $(".Delete").empty();
                         $(".Publish").remove();
                         $(".am-icon-spin-extend").remove();
@@ -90,10 +102,11 @@
                 }
             });
         } else {
-            $(".Delete").empty();
-            // $("<p class=\"Delete am-sans-serif\">请输入搜索条件</p>").appendTo($("#field"));
-            loading();
-            bload = 1;
+            //$(".Delete").empty();
+            //skx = -5;
+            //// $("<p class=\"Delete am-sans-serif\">请输入搜索条件</p>").appendTo($("#field"));
+            //loading();
+            //bload = 1;
         }
     });
     $("#arrow").hide();
@@ -106,7 +119,7 @@
         $("#users").on("click", function () {
             var currentUser = AV.User.current();
             if (currentUser) {
-                window.location.href = "user_detail.html?" + currentUser.id + "";
+                window.location.href = "user_detail.html?id=" + currentUser.id + "";
             } else {
                 $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail", function (res) {
                     window.location.href = res.authUrl;
@@ -117,7 +130,7 @@
             var currentUser = AV.User.current();
             alert(currentUser);
             if (currentUser) {
-                window.location.href = "post_save.html?" + currentUser.id + "";
+                window.location.href = "post_save.html?id=" + currentUser.id + "";
             } else {
                 $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=post_save", function (res) {
                     alert(res);
@@ -125,20 +138,10 @@
                 })
             }
         });
-        if ($(".imgpreview").attr("value") != 1) {
-
-        }
-        $(".imgpreview").on("click", function () {
-            var cur = $(this).attr("src");
-            var url = $(this).parent().attr("value");
-            var arr = url.split(",");
-            wx.previewImage({
-                current: cur, // 当前显示的图片链接
-                urls: arr // 需要预览的图片链接列表
-            });
-            event.stopPropagation();
-        });
-        $(".imgpreview").removeClass("imgpreview");
+        //if ($(".imgpreview").attr("value") != 1) {
+        //
+        //}
+        clickevent();
     });
     $(window).scroll(function () {
         var htmlHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
@@ -152,23 +155,7 @@
         }
         if (scrollTop + newheight + 200 >= htmlHeight) {
             if (bload != 0) {
-                loading(function () {
-                    $(".title").on("click", function () {
-                        var postview = $(this).attr("value");
-                        window.location.href = "post_detail.html?" + postview + "";
-                    });
-                    $(".imgpreview").on("click", function () {
-                        var cur = $(this).attr("src");
-                        var url = $(this).parent().attr("value");
-                        var arr = url.split(",");
-                        wx.previewImage({
-                            current: cur, // 当前显示的图片链接
-                            urls: arr// 需要预览的图片链接列表
-                        });
-                        event.stopPropagation();
-                    });
-                    $(".imgpreview").removeClass("imgpreview");
-                });
+                loading(clickevent());
             }
         }
     });
@@ -282,6 +269,25 @@
             });
         });
     }
+
+    function clickevent (){
+        $(".title").on("click", function () {
+            var postview = $(this).attr("value");
+            window.location.href = "post_detail.html?id=" + postview + "";
+        });
+        $(".imgpreview").on("click", function () {
+            var cur = $(this).attr("src");
+            var url = $(this).parent().attr("value");
+            var arr = url.split(",");
+            wx.previewImage({
+                current: cur, // 当前显示的图片链接
+                urls: arr// 需要预览的图片链接列表
+            });
+            event.stopPropagation();
+        });
+        $(".imgpreview").removeClass("imgpreview");
+    }
+
 })(jQuery);
 
 

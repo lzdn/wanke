@@ -1,6 +1,6 @@
 
 (function($) {
-    var postview=window.location.search.split('?')[1];
+    var postview=window.location.search.split('=')[1];
     var number="";
    // alert(postview);
     loadwx();
@@ -76,9 +76,11 @@
                     }
                 }
                 var otagkey = object.get("tagkey");
-                var ousername = object.get("username");
-                number=ousername.get("mobilePhoneNumber");
-                var username = ousername.get("username");
+                console.log(object);
+                number=object.get("username").get("mobilePhoneNumber");
+                var ousername = object.get("username").attributes.authData.weixin;
+                var username = ousername.nickname;
+                var headimgurl=ousername.headimgurl;
                 var tagvalue = otagkey.get("tagtitle");
                 var oldtime = object.createdAt.getTime();
                 var publishtime = newtime - oldtime;
@@ -100,6 +102,7 @@
                 // var tagvalue = object.get('tagkey');
                 var opost = {
                     name: username,
+                    titleimg:headimgurl,
                     usersay: content,
                     tag: tagvalue,
                     time: times,
