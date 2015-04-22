@@ -105,15 +105,16 @@ router.post('/sendMessage', function (req, res) {
     var query = new AV.Query(AV.User);
     query.get(userId, {
         success: function (user) {
+            console.log(user.get("authData").weixin);
+
             // Do stuff
-            text = "活动提醒<br/>" +
-            "<br/>" +
-            "有人报名了您发起的活动<br/>" +
-            "姓名: " + user.get("authData").weixin.nickname + "<br/>" +
-            "联系方式: " + user.get("mobilePhoneNumber") + "<br/>" +
-            "<br/>" +
-            "<a href=\"http://fuwuhao.dianyingren.com/post_details.html?id=" + postId + "\">点击查看详情</a>>"
-            "<br/>" +
+            text = "活动提醒\n" +
+            "有人报名了您发起的活动\n" +
+            "姓名: " + user.get("authData").weixin.nickname + "\n" +
+            "联系方式: " + user.get("mobilePhoneNumber") + "\n" +
+            "\n" +
+            "<a href=\"http://fuwuhao.dianyingren.com/post_details.html?id=" + postId + "\">点击查看详情</a>"
+            "\n" +
             "";
             console.log(user.get("authData").weixin);
 
