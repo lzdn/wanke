@@ -14,11 +14,11 @@ $(function () {
         alert(code);
         id = ""
     }
-    $("#esc").on("click",function(){
-        window.location.href = "post_index.html"
-    });
-    dataLoad(function () {
 
+    dataLoad(function () {
+        $("#esc").on("click", function () {
+            window.location.href = "post_index.html?sss";
+        });
         //wx.ready(function () {
         //   // alert("绑定事件:隐藏菜单");
         //    wx.hideOptionMenu();
