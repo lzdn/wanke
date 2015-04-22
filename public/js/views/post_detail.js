@@ -27,42 +27,49 @@
         $(".imgpreview").removeClass("imgpreview");
 
         $("#btnname").on("click",function(){
-
-            $('#my-prompt').modal({
-               // relatedTarget: this,
-                onConfirm: function(e) {
-                    //e.data
-                    if (/^1[3|4|5|8]\d{9}$/.test(e.data)) {
-                        alert("zhengque");
-                        var query = new AV.Query(AV.User);
-                        query.get("553606c1e4b0825685fcadfa", {
-                            success: function (user) {
-                                user.set('mobilePhoneNumber',e.data);
-                                user.save()
-                            }
-                        });
-                    } else {
-                        alert("请输入正确的电话号码");
+            var currentUser = AV.User.current();
+            if (currentUser) {
+                var query = new AV.Query(AV.User);
+                query.equalTo("objectId", "553606c1e4b0825685fcadfa");  // find all the women
+                query.find({
+                    success: function(user) {
+                        var phonenumber=user.get("mobilePhoneNumber");
+                        if(phonenumber){
+                            // window.location.href= "user_detail.html?"+currentUser.id+"";
+                            var imgurl=currentUser.get("authData").weixin.headimgurl;
+                            $(".usercontent").remove();
+                            $(" <p class=\"usercontent am-sans-serif\">联系方式："+number+"</p>").prependTo(".userphone");
+                            $(" <img src=\""+imgurl+"\" class=\"am-radius\">").appendTo("#headtle");
+                        }else{
+                            $('#my-prompt').modal({
+                                // relatedTarget: this,
+                                onConfirm: function(e) {
+                                    //e.data
+                                    if (/^1[3|4|5|8]\d{9}$/.test(e.data)) {
+                                        var query = new AV.Query(AV.User);
+                                        query.get("553606c1e4b0825685fcadfa", {
+                                            success: function (user) {
+                                                user.set('mobilePhoneNumber',e.data);
+                                                user.save()
+                                            }
+                                        });
+                                    } else {
+                                        alert("请输入正确的电话号码");
+                                    }
+                                },
+                                onCancel: function(e) {
+                                }
+                            });
+                        }
                     }
-                },
-                onCancel: function(e) {
+                });
 
-                }
-            });
-
-            //var currentUser = AV.User.current();
-            //if (currentUser) {
-            //   // window.location.href= "user_detail.html?"+currentUser.id+"";
-            // var imgurl=currentUser.get("authData").weixin.headimgurl;
-            // $(".usercontent").remove();
-            //    $(" <p class=\"usercontent am-sans-serif\">联系方式："+number+"</p>").prependTo(".userphone");
-            //    $(" <img src=\""+imgurl+"\" class=\"am-radius\">").appendTo("#headtle");
-            //} else {
-            //    alert("没有登录")
-            //    $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail",function(res){
-            //        window.location.href=res.authUrl;
-            //    })
-            //}
+            } else {
+                alert("没有登录")
+                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail",function(res){
+                    window.location.href=res.authUrl;
+                })
+            }
         });
     });
 
