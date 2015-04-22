@@ -131,11 +131,11 @@
                         starthomename = user[0].get("buliding");
                         startbuilding = user[0].get("floorname");
                         housenumber = user[0].get("housenumber");
-                        $("#homes").find("option[text='" + user[0].get("buliding") + "']").attr("selected", true);
-                        $("#buildings").find("option[text='" + user[0].get("floorname") + "']").attr("selected", true);
+                        $("#homes").find("option[value='" + user[0].get("buliding") + "']").attr("selected", true);
+                        $("#buildings").find("option[value='" + user[0].get("floorname") + "']").attr("selected", true);
                         $('#wxnum').val(user[0].get("housenumber"));
-                        //alert(starthomename);
-                        //alert(startbuilding);
+                        alert("starthomename" + starthomename);
+                        alert("startbuilding" + startbuilding);
                         callbak();
                     }
                 });
