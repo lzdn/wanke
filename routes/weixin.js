@@ -118,10 +118,10 @@ router.post('/sendMessage', function (req, res) {
 
             api.sendText(openId, text, function (err) {
                 if (err) {
-                    res.json(err);
+                    res.json({msg: err});
                 }
 
-                res.json("发送成功");
+                res.json({msg: "发送成功"});
             });
         }
     });

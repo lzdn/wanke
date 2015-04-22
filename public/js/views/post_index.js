@@ -1,19 +1,8 @@
 (function ($) {
-    var saveurl = window.location.href;
     loadwx();
     var skx = -5;
     var bload = 1;
     var length
-    $(".am-form-field").keydown(function(){
-        setTimeout(function(){
-            if( $(".am-form-field").val()==""&&bload==0){
-                $(".Delete").empty();
-                skx = -5;
-                loading(clickevent());
-                bload = 1;
-            }
-        },20);
-    });
     $(".am-input-group-label").on("click", function () {
         var val = $(".am-form-field").val();
         if (val != "") {
@@ -39,7 +28,7 @@
                             query.equalTo("objectId", select[i].id);
                             query.find({
                                 success: function (sele) {
-                                    var posts = [];
+                                    var tags = [];
                                     var object = sele[0];
                                     console.log(object);
                                     var newtime = new Date().getTime();
@@ -48,9 +37,8 @@
                                     var avalue = object.id;
                                     var content = object.get('content');
                                     var otagkey = object.get("tagkey");
-                                    var ousername = object.get("username").attributes.authData.weixin;
-                                    var username = ousername.nickname;
-                                    var headimgurl=ousername.headimgurl;
+                                    var ousername = object.get("username");
+                                    var username = ousername.get("username");
                                     var tagvalue = otagkey.get("tagtitle");
                                     var oldtime = object.createdAt.getTime();
                                     var publishtime = newtime - oldtime;
@@ -72,28 +60,25 @@
                                     var osele = {
                                         name: username,
                                         usersay: content,
-                                        titleimg:headimgurl,
                                         tag: tagvalue,
                                         time: times,
                                         value: avalue,
                                         img: imgs
                                     };
-                                    posts.push(osele);
+                                    tags.push(osele);
                                     console.log(tags);
-                                    var $tpl = $('#usercontent');
+                                    var $tpl = $('#amz-tags');
                                     var source = $tpl.text();
                                     var template = Handlebars.compile(source);
-                                    var data = {posts: posts};
+                                    var data = {tags: tags};
                                     var html = template(data);
                                     $tpl.before(html);
-                                    clickevent();
                                 }
                             })
                         }
                         $("<p class=\"Delete am-sans-serif\">包含“" + val + "”的结果共“" + length + "”条</p>").appendTo($("#field"));
                         bload = 0;
                     } else {
-                        bload = 0;
                         $(".Delete").empty();
                         $(".Publish").remove();
                         $(".am-icon-spin-extend").remove();
@@ -102,11 +87,10 @@
                 }
             });
         } else {
-            //$(".Delete").empty();
-            //skx = -5;
-            //// $("<p class=\"Delete am-sans-serif\">请输入搜索条件</p>").appendTo($("#field"));
-            //loading();
-            //bload = 1;
+            $(".Delete").empty();
+            // $("<p class=\"Delete am-sans-serif\">请输入搜索条件</p>").appendTo($("#field"));
+            loading();
+            bload = 1;
         }
     });
     $("#arrow").hide();
@@ -119,7 +103,7 @@
         $("#users").on("click", function () {
             var currentUser = AV.User.current();
             if (currentUser) {
-                window.location.href = "user_detail.html?id=" + currentUser.id + "";
+                window.location.href = "user_detail.html?code=";
             } else {
                 $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail", function (res) {
                     window.location.href = res.authUrl;
@@ -130,18 +114,32 @@
             var currentUser = AV.User.current();
             alert(currentUser);
             if (currentUser) {
-                window.location.href = "post_save.html?id=" + currentUser.id + "";
+                window.location.href = "post_save.html?" + currentUser.id + "";
             } else {
+<<<<<<< HEAD
                 $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail", function (res) {
+=======
+                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=post_save", function (res) {
+>>>>>>> origin/master
                     alert(res);
                     window.location.href = res.authUrl;
                 })
             }
         });
-        //if ($(".imgpreview").attr("value") != 1) {
-        //
-        //}
-        clickevent();
+        if ($(".imgpreview").attr("value") != 1) {
+
+        }
+        $(".imgpreview").on("click", function () {
+            var cur = $(this).attr("src");
+            var url = $(this).parent().attr("value");
+            var arr = url.split(",");
+            wx.previewImage({
+                current: cur, // 当前显示的图片链接
+                urls: arr // 需要预览的图片链接列表
+            });
+            event.stopPropagation();
+        });
+        $(".imgpreview").removeClass("imgpreview");
     });
     $(window).scroll(function () {
         var htmlHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
@@ -155,7 +153,23 @@
         }
         if (scrollTop + newheight + 200 >= htmlHeight) {
             if (bload != 0) {
-                loading(clickevent());
+                loading(function () {
+                    $(".title").on("click", function () {
+                        var postview = $(this).attr("value");
+                        window.location.href = "post_detail.html?" + postview + "";
+                    });
+                    $(".imgpreview").on("click", function () {
+                        var cur = $(this).attr("src");
+                        var url = $(this).parent().attr("value");
+                        var arr = url.split(",");
+                        wx.previewImage({
+                            current: cur, // 当前显示的图片链接
+                            urls: arr// 需要预览的图片链接列表
+                        });
+                        event.stopPropagation();
+                    });
+                    $(".imgpreview").removeClass("imgpreview");
+                });
             }
         }
     });
@@ -198,13 +212,12 @@
                                     imgpattern = "imgpatternthree"
                                 }
                             }
-                            console.log(object);
                             var avalue = object.id;
                             var content = object.get('content');
                             var otagkey = object.get("tagkey");
-                            var ousername = object.get("username").attributes.authData.weixin;
-                            var username = ousername.nickname;
-                            var headimgurl=ousername.headimgurl;
+                            var ousername = object.get("username");
+                            console.log(ousername);
+                            var username = ousername.get("nickname");
                             var tagvalue = otagkey.get("tagtitle");
                             var oldtime = object.createdAt.getTime();
                             var publishtime = newtime - oldtime;
@@ -225,7 +238,6 @@
                             }
                             var opost = {
                                 name: username,
-                                titleimg:headimgurl,
                                 usersay: content,
                                 tag: tagvalue,
                                 time: times,
@@ -236,8 +248,7 @@
                             posts.push(opost);
 
                         }
-                        console.log(posts);
-                        var $tpl = $('#usercontent');
+                        var $tpl = $('#amz-tags');
                         var source = $tpl.text();
                         var template = Handlebars.compile(source);
                         var data = {posts: posts};
@@ -252,7 +263,7 @@
 
     function loadwx() {
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
-        $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + saveurl + ""}, function (result) {
+        $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=post_index", function (result) {
             appId = result.appId;
             jslist = result.jsApiList;
             noncestr = result.nonceStr;
@@ -269,25 +280,6 @@
             });
         });
     }
-
-    function clickevent (){
-        $(".Publish").on("click", function () {
-            var postview = $(this).attr("value");
-            window.location.href = "post_detail.html?id=" + postview + "";
-        });
-        $(".imgpreview").on("click", function () {
-            var cur = $(this).attr("src");
-            var url = $(this).parent().attr("value");
-            var arr = url.split(",");
-            wx.previewImage({
-                current: cur, // 当前显示的图片链接
-                urls: arr// 需要预览的图片链接列表
-            });
-            event.stopPropagation();
-        });
-        $(".imgpreview").removeClass("imgpreview");
-    }
-
 })(jQuery);
 
 

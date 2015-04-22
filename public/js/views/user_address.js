@@ -38,8 +38,7 @@
                     }
                 })
             }
-
-        })
+        });
 
         $("#usr-sbm-sub").on("click", function () {
             var home = AV.Object.extend("home");
