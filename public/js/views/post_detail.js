@@ -37,7 +37,7 @@
             var currentUser = AV.User.current();
             if (currentUser) {
                 usersid=currentUser.id
-                        phonenumber=currentUser.get("mobilePhoneNumber");
+                        phonenumber=currentUser.mobilePhoneNumber;
                 alert(phonenumber);
                 if (phonenumber) {
                     // window.location.href= "user_detail.html?"+currentUser.id+"";
@@ -47,10 +47,10 @@
                     $(" <img src=\"" + imgurl + "\" class=\"am-radius\">").appendTo("#headtle");
 
                     $.post("http://fuwuhao.dianyingren.com/weixin/sendMessage", {
-                        openId: userid,
+                        openId: usersid,
                         postId: postview
                     }, function (res) {
-
+                            alert(res);
                     });
 
                 } else {
