@@ -16,6 +16,7 @@
     loading(function () {
 
         for(var i=0; i<relationuser.length;i++){
+            alert(usersid);
             if(relationuser[i].id==usersid){
                 alert("已报名");
             }
