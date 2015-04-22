@@ -52,7 +52,7 @@
                         $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".userphone");
                         $(" <img src=\"" + imgurl + "\" class=\"am-radius\">").appendTo("#headtle");
                              alert(usersid);
-                              alert(postview);
+                              alert(postId);
                         $.post("http://fuwuhao.dianyingren.com/weixin/sendMessage", {openId:usersid,postId:postId}, function (res) {
                             alert(res);
                         });
