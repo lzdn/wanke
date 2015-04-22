@@ -5,12 +5,12 @@
         var starthomename = user.get("buliding");
         var startbuilding = user.get("floorname");
         var housenumber = user.get("housenumber");
-        $("#homes").find("option[value=\"" + user.get("buliding") + "\"]…").attr("selected", true);
+        $("#homes").find("option[value=\"" + user.get("buliding") + "\"]").attr("selected", true);
         $("#buildings").find("option[value=\"" + user.get("floorname") + "\"]").attr("selected", true);
         $('#wxnum').val(user.get("housenumber"));
         alert("starthomename" + starthomename);
         alert("startbuilding" + startbuilding);
-        alert("option" + $("#buildings").find("option[value=\"" + startbuilding + "\"]").val());
+        alert("option[value=\"" + user.get("floorname") + "\"]");
 
         $("#haederleft").on("click", function () {
             window.location.href = "user_detail.html?code=";
