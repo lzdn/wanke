@@ -32,39 +32,42 @@
         <a id="usr-sbm-sub" class="am-btn am-btn-link .am-btn-lg am-disabled">保存</a>
     </div>
 </div>
-<div id="content">
-    <form class="am-form">
-        <fieldset>
-            <div class="am-form-group">
-                <label for="doc-select-1">填小区</label>
-                <select id="doc-select-1">
-                    <script type="text/x-handlebars-template" id="homes">
-                        {{#each homes}}
-                        <option class="homes" value={{this.id}} {{this.selected}}>{{this.name}}</option>
-                        {{/each}}
-                    </script>
-                </select>
-                <span class="am-form-caret"></span>
+<form class="am-form">
+    <div class="am-container">
+        <div class="am-g">
+            <div class="am-u-sm-12">
+                <div class="am-form-group">
+                    <label for="doc-select-1">填小区</label>
+                    <select id="doc-select-1">
+                        <script type="text/x-handlebars-template" id="homes">
+                            {{#each homes}}
+                            <option class="homes" value={{this.id}} {{this.selected}}>{{this.name}}</option>
+                            {{/each}}
+                        </script>
+                    </select>
+                </div>
             </div>
-
-            <div class="am-form-group">
-                <label for="doc-select-2">楼栋号</label>
-                <select id="doc-select-2">
-                    <script type="text/x-handlebars-template" id="buildings">
-                        {{#each buildings}}
-                        <option class="Starthomes" value={{this.names}}>{{this.names}}</option>
-                        {{/each}}
-                    </script>
-                </select>
-                <span class="am-form-caret"></span>
+            <div class="am-u-sm-12">
+                <div class="am-form-group">
+                    <label for="doc-select-2">楼栋号</label>
+                    <select id="doc-select-2">
+                        <script type="text/x-handlebars-template" id="buildings">
+                            {{#each buildings}}
+                            <option class="Starthomes" value={{this.names}}>{{this.names}}</option>
+                            {{/each}}
+                        </script>
+                    </select>
+                </div>
             </div>
-            <div class="am-form-group">
-                <label>门牌号（如1023）</label>
-                <input class="am-form-field" id="wxnum" type="text" minlength="3" required/>
+            <div class="am-u-sm-12">
+                <div class="am-form-group">
+                    <label>门牌号（如1023）</label>
+                    <input class="am-form-field" id="wxnum" type="text" minlength="3" required/>
+                </div>
             </div>
-        </fieldset>
-    </form>
-</div>
+        </div>
+    </div>
+</form>
 
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/amazeui.min.js"></script>
