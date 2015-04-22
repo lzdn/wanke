@@ -172,7 +172,6 @@
                     "authData": res,
                     success: function (user) {
                         userid = user.id;
-                        alert(userid);
                         queryobject = user.get("authData");
                         var query = new AV.Query(AV.User);
                         query.get(userid, {
