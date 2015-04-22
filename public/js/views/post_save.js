@@ -37,7 +37,6 @@ $(function () {
             };
         }
     });
-    $("#usr-sbm-sub").css({color: "rgba(68,68,68,3)"});
     $("#doc-ta-1").keydown(function () {
         setTimeout(function () {
             var aUserval = $("#doc-ta-1").val();
