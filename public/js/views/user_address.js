@@ -86,7 +86,7 @@
                 var homes = [];
                 for (var i = 0; i < res.length; i++) {
                     var object = res[i];
-                    alert(object);
+
                     var homename = object.get("homename");
                     var homeid = object.id;
                     var building = object.get("building");
@@ -95,6 +95,7 @@
                         id: homeid,
                         selected: ""
                     };
+                    alert(home);
                     if (AV.User.current().get("buliding") == building)
                         home.selected = "selected";
                     homes.push(home);
@@ -106,38 +107,38 @@
                 var html = template(data);
                 $tpl.before(html);
 
-                alert("$(\"#homes\").val()" + $("#homes").val());
-                var home = AV.Object.extend("home");
-                var query2 = new AV.Query(home);
-                query2.get($("#homes").val(), {
-                    success: function (home) {
-                        console.log(home);
-                        var oldbuilding = home.get("building");
-                        console.log(oldbuilding);
-                        var buildings = [];
-                        for (var j = 0; j < oldbuilding.length; j++) {
-                            var building = {
-                                names: oldbuilding[j]
-                            };
-                            buildings.push(building);
-                        }
-                        var $buildings = $('#buildings');
-                        var source2 = $buildings.text();
-                        var template2 = Handlebars.compile(source2);
-                        var data2 = {buildings: buildings};
-                        var html2 = template2(data2);
-                        $buildings.before(html2);
-                        $("#buildings").find("option[value=\"" + AV.User.current().get("floorname") + "\"]").attr("selected", true);
-
-                        var query = new AV.Query(AV.User);
-                        //query.equalTo("objectId", postview);  // find all the women
-                        query.get(postview, {
-                            success: function (user) {
-                                callback(null, user);
-                            }
-                        });
-                    }
-                });
+                //alert("$(\"#homes\").val()" + $("#homes").val());
+                //var home = AV.Object.extend("home");
+                //var query2 = new AV.Query(home);
+                //query2.get($("#homes").val(), {
+                //    success: function (home) {
+                //        console.log(home);
+                //        var oldbuilding = home.get("building");
+                //        console.log(oldbuilding);
+                //        var buildings = [];
+                //        for (var j = 0; j < oldbuilding.length; j++) {
+                //            var building = {
+                //                names: oldbuilding[j]
+                //            };
+                //            buildings.push(building);
+                //        }
+                //        var $buildings = $('#buildings');
+                //        var source2 = $buildings.text();
+                //        var template2 = Handlebars.compile(source2);
+                //        var data2 = {buildings: buildings};
+                //        var html2 = template2(data2);
+                //        $buildings.before(html2);
+                //        $("#buildings").find("option[value=\"" + AV.User.current().get("floorname") + "\"]").attr("selected", true);
+                //
+                //        var query = new AV.Query(AV.User);
+                //        //query.equalTo("objectId", postview);  // find all the women
+                //        query.get(postview, {
+                //            success: function (user) {
+                //                callback(null, user);
+                //            }
+                //        });
+                //    }
+                //});
                 //query2.equalTo("objectId",);
                 //query2.find();
             }
