@@ -89,11 +89,14 @@
                     console.log(object);
                     var homename = object.get("homename");
                     var homeid = object.id;
-                    building = object.get("building");
+                    var building = object.get("building");
                     var home = {
                         name: homename,
-                        id: homeid
+                        id: homeid,
+                        selected: ""
                     };
+                    if (AV.User.current().get("buliding") == building)
+                        home.selected = "selected";
                     homes.push(home);
                 }
                 var $tpl = $('#homes');
@@ -102,8 +105,6 @@
                 var data = {homes: homes};
                 var html = template(data);
                 $tpl.before(html);
-                //if (AV.User.current().get("buliding") != "")
-                $("#homes").find("option[text=\"" + AV.User.current().get("buliding") + "\"]").attr("selected", true);
 
                 alert("$(\"#homes\").val()" + $("#homes").val());
                 var home = AV.Object.extend("home");
