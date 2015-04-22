@@ -29,11 +29,8 @@
         $("#btnname").on("click",function(){
             var currentUser = AV.User.current();
             if (currentUser) {
-                var query = new AV.Query(AV.User);
-                query.equalTo("objectId", "553606c1e4b0825685fcadfa");  // find all the women
-                query.find({
-                    success: function(user) {
-                        var phonenumber=user.get("mobilePhoneNumber");
+                 // find all the women
+                        var phonenumber=currentUser.get("mobilePhoneNumber");
                         if(phonenumber){
                             // window.location.href= "user_detail.html?"+currentUser.id+"";
                             var imgurl=currentUser.get("authData").weixin.headimgurl;
@@ -61,8 +58,6 @@
                                 }
                             });
                         }
-                    }
-                });
 
             } else {
                 alert("没有登录")
