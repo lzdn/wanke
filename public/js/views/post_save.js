@@ -78,7 +78,7 @@ $(function () {
     var postc = new posts();
     var relation = postc.relation("imgs");
 
-    $("#smimg").on("click", function () {
+    $(".chooseImage").on("click", function () {
         //var ofileid;
         //var localIds;
 
@@ -199,11 +199,15 @@ $(function () {
             localId:localIds+"",
             isShowProgressTips: 1,
             success: function (img) {
+                $("#addimg").show();
                 var serverId = img.serverId; // 返回图片的服务器端ID
                 $("<div id=\"" + serverId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + serverId + "\"  class=\"am-icon-close "+ serverId +"\"></a></div>").prependTo("#imgwall");
                 $("#destroy" + serverId + "").on("click",function(){
                     alert("shanchu");
                     $("#" + serverId + "").remove();
+                    if($(".imgnav").length==0){
+                        $("#addimg").hide();
+                    }
                 });
                 // alert(serverId)
                 //$.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverId:""+serverId+""}, function (imgid) {
