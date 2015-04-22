@@ -123,9 +123,10 @@
                 var tags = [];
                 var imgpattern = "";
                 var object = results[0];
-                console.log(results[0]);
+                console.log(object);
                 var content = object.get('content');
                 var imgs = object.get('imgs');
+                var relationuser=object.get("relationuser");
                 if (imgs) {
                     if (imgs.length == 1) {
                         imgpattern = "imgpatternone"
@@ -138,7 +139,7 @@
                     }
                 }
                 var otagkey = object.get("tagkey");
-                var relationuser=object.get("relationuser");
+
                 number = object.get("username").get("mobilePhoneNumber");
                 postId = object.get("username").id;
                 openid = object.get("username").get("authData").weixin.openid;
@@ -175,22 +176,28 @@
                     pattern: imgpattern
                 };
                 tags.push(opost);
-                var $tpl = $('#amz-tags');
-                var source = $tpl.text();
+                console.log(tags);
+                var $tpl2 = $('#amz-tags');
+                var source2 = $tpl2.text();
+                var template2 = Handlebars.compile(source2);
+                var data2 = {tags: tags};
+                var html2 = template2(data2);
+                $tpl2.before(html2);
+
+                console.log(relationuser);
+                var $tpl = $('#relationuser');
+                var source= $tpl.text();
                 var template = Handlebars.compile(source);
-                var data = {tags: tags};
+                var data = {relationuser: relationuser};
                 var html = template(data);
                 $tpl.before(html);
 
-                var $tp2 = $('relationuser');
-                var source2 = $tp2.text();
-                var template2 = Handlebars.compile(source2);
-                var data2 = {relationuser: relationuser};
-                var html2 = template2(data2);
-                $tp2.before(html2);
+
                 callbak();
             }
+
         });
+
 
         if (code != "") {
             $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
