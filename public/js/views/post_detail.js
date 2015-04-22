@@ -1,7 +1,7 @@
 (function ($) {
     var number = "";
     var code = "";
-    var userlog, userid, queryobject, nickname, phonenumber;
+    var userlog, userid, queryobject, nickname, phonenumber,usersid;
     var postview = window.location.search.split('=')[1];
     if (postview.indexOf("=") > 0) {
         userlog = window.location.search.split('=')[1];
@@ -36,6 +36,7 @@
         $("#btnname").on("click", function () {
             var currentUser = AV.User.current();
             if (currentUser) {
+                usersid=currentUser.id
                         phonenumber=currentUser.get("mobilePhoneNumber");
                 alert(phonenumber);
                 if (phonenumber) {
@@ -59,7 +60,7 @@
                             //e.data
                             if (/^1[3|4|5|8]\d{9}$/.test(e.data)) {
                                 var query = new AV.Query(AV.User);
-                                query.get(userid, {
+                                query.get(usersid, {
                                     success: function (user) {
                                         user.set('mobilePhoneNumber', e.data);
                                         user.save()
