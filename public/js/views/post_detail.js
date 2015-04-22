@@ -42,6 +42,7 @@
                 query.find({
                     success: function(women) {
                         phonenumber=women.get("mobilePhoneNumber");
+                        alert(phonenumber);
                     }
                 });
                 alert(phonenumber);
