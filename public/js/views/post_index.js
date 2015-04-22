@@ -116,15 +116,14 @@
             if (currentUser) {
                 window.location.href = "post_save.html?" + currentUser.id + "";
             } else {
-<<<<<<< HEAD
-                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail", function (res) {
-=======
+             $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail", function (res) {
+
                 $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=post_save", function (res) {
->>>>>>> origin/master
+
                     alert(res);
                     window.location.href = res.authUrl;
                 })
-            }
+
         });
         if ($(".imgpreview").attr("value") != 1) {
 
