@@ -43,43 +43,45 @@
                     success: function(women) {
                         phonenumber=women.get("mobilePhoneNumber");
                         alert(phonenumber);
-                        if (phonenumber) {
-                            // window.location.href= "user_detail.html?"+currentUser.id+"";
-                            var imgurl = currentUser.get("authData").weixin.headimgurl;
-                            $(".usercontent").remove();
-                            $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".userphone");
-                            $(" <img src=\"" + imgurl + "\" class=\"am-radius\">").appendTo("#headtle");
-
-                            $.post("http://fuwuhao.dianyingren.com/weixin/sendMessage", {
-                                openId: usersid,
-                                postId: postview
-                            }, function (res) {
-                                alert(res);
-                            });
-
-                        } else {
-                            $('#my-prompt').modal({
-                                // relatedTarget: this,
-                                onConfirm: function (e) {
-                                    //e.data
-                                    if (/^1[3|4|5|8]\d{9}$/.test(e.data)) {
-                                        var query = new AV.Query(AV.User);
-                                        query.get(usersid, {
-                                            success: function (user) {
-                                                user.set('mobilePhoneNumber', e.data);
-                                                user.save()
-                                            }
-                                        });
-                                    } else {
-                                        alert("请输入正确的电话号码");
-                                    }
-                                },
-                                onCancel: function (e) {
-                                }
-                            });
-                        }
                     }
-                })
+                }).then(function(){
+                    alert(phonenumber);
+                    if (phonenumber) {
+                        // window.location.href= "user_detail.html?"+currentUser.id+"";
+                        var imgurl = currentUser.get("authData").weixin.headimgurl;
+                        $(".usercontent").remove();
+                        $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".userphone");
+                        $(" <img src=\"" + imgurl + "\" class=\"am-radius\">").appendTo("#headtle");
+
+                        $.post("http://fuwuhao.dianyingren.com/weixin/sendMessage", {
+                            openId: usersid,
+                            postId: postview
+                        }, function (res) {
+                            alert(res);
+                        });
+
+                    } else {
+                        $('#my-prompt').modal({
+                            // relatedTarget: this,
+                            onConfirm: function (e) {
+                                //e.data
+                                if (/^1[3|4|5|8]\d{9}$/.test(e.data)) {
+                                    var query = new AV.Query(AV.User);
+                                    query.get(usersid, {
+                                        success: function (user) {
+                                            user.set('mobilePhoneNumber', e.data);
+                                            user.save()
+                                        }
+                                    });
+                                } else {
+                                    alert("请输入正确的电话号码");
+                                }
+                            },
+                            onCancel: function (e) {
+                            }
+                        });
+                    }
+                });
 
 
             } else {
