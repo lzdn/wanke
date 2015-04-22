@@ -137,6 +137,9 @@ router.post('/uploadImage', function (req, res) {
     }
 
     api.getMedia(serverId, function (err, result, res) {
+        if (err) {
+            res.json("err:" + err);
+        }
         var now = new Date();
         var file = new AV.File(now.getTime() + ".png", result);
         file.save(null, {
