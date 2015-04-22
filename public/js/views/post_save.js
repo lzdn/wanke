@@ -92,9 +92,11 @@ $(function () {
                     localId: localIds[0] + "",
                     isShowProgressTips: 1,
                     success: function (res) {
+                        alert("微信接口图像上传成功!");
                         var serverId = res.serverId; // 返回图片的服务器端ID
                         alert(serverId);
                         $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverId: serverId + ""}, function (imgid) {
+                            alert("微信接口图像上传成功!");
                             alert(imgid);
                             // relation.add(imgid);
                         });
