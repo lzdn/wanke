@@ -87,6 +87,7 @@ $(function () {
                 var  localIds = res.localIds;
                 $("#addimg").hide();
                 for(var i=0;i<localIds.length;i++){
+                    $("<div id=\"\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a  class=\"am-icon-close\"></a></div>").prependTo("#imgwall");
                     wx.uploadImage({
                         localId:localIds[i]+"",
                         isShowProgressTips: 1,
