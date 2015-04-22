@@ -13,31 +13,32 @@
         });
         $("#doc-select-1").change(function () {
             $("#usr-sbm-sub").removeClass("am-disabled");
-            if (homeval != $(this).val()) {
-                homeval = $(this).val();
-                $("#buildings").remove();
-                var home = AV.Object.extend("home");
-                var query2 = new AV.Query(home);
-                query2.equalTo("objectId", $(this).val());
-                query2.find({
-                    success: function (results) {
-                        var oldbuilding = results[0].get("building");
-                        var buildings = [];
-                        for (var j = 0; j < oldbuilding.length; j++) {
-                            var building = {
-                                names: oldbuilding[j]
-                            }
-                            buildings.push(building);
+            $("#buildings").remove();
+            var home = AV.Object.extend("home");
+            var query2 = new AV.Query(home);
+            query2.equalTo("objectId", $(this).val());
+            query2.find({
+                success: function (results) {
+                    var oldbuilding = results[0].get("building");
+                    var buildings = [];
+                    for (var j = 0; j < oldbuilding.length; j++) {
+                        var building = {
+                            names: oldbuilding[j]
                         }
-                        var $buildings = $('#buildings');
-                        var source2 = $buildings.text();
-                        var template2 = Handlebars.compile(source2);
-                        var data2 = {buildings: buildings};
-                        var html2 = template2(data2);
-                        $buildings.before(html2);
+                        buildings.push(building);
                     }
-                })
-            }
+                    var $buildings = $('#buildings');
+                    var source2 = $buildings.text();
+                    var template2 = Handlebars.compile(source2);
+                    var data2 = {buildings: buildings};
+                    var html2 = template2(data2);
+                    $buildings.before(html2);
+                }
+            })
+            //if (homeval != $(this).val()) {
+            //    homeval = $(this).val();
+            //
+            //}
         });
 
         $("#usr-sbm-sub").on("click", function () {
