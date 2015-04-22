@@ -120,10 +120,10 @@ router.post('/sendMessage', function (req, res) {
 
             api.sendText(user.get("authData").weixin.openid, text, function (err) {
                 if (err) {
-                    res.json({msg: err});
+                    res.json(err);
                 }
 
-                res.json({msg: "success"});
+                res.json("发送成功！");
             });
         }
     });
