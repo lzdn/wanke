@@ -108,10 +108,10 @@
                 var html = template(data);
                 $tpl.before(html);
 
-                alert("$(\"#homes\").find('option[selected]').val()" + $("#homes").selected().val());
+                var homename = AV.User.current().get("buliding") != "" ? AV.User.current().get("buliding") : "孙爽嘉园";
                 var home = AV.Object.extend("home");
                 var query2 = new AV.Query(home);
-                query2.equalTo("homename", AV.User.current().get("buliding"));
+                query2.equalTo("homename", homename);
                 query2.find({
                     success: function (results) {
                         alert("Successfully retrieved " + results.length + " scores.");
