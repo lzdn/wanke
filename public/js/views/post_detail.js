@@ -51,14 +51,24 @@
                         var imgurl = currentUser.get("authData").weixin.headimgurl;
                         $(".usercontent").remove();
                         $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".userphone");
-                        $(" <img src=\"" + imgurl + "\" class=\"am-radius\">").appendTo("#headtle");
-                             alert(usersid);
-                              alert(postId);
+                        $(" <img src=\"" + imgurl + "\" value=\" "+usersid+"&"+imgurl+" \" class=\"am-radius\">").appendTo("#headtle");
+                             //alert(usersid);
+                             // alert(postId);
                         $.post("http://fuwuhao.dianyingren.com/weixin/sendMessage", {userId:postId,postId:openid}, function (res) {
                             alert(res);
+
                         });
-                        //var post = AV.Object.extend("post");usersid
-                        //var query = new AV.Query(post);
+                        //usersid  postId  openid
+                        var post = AV.Object.extend("post");
+                        var query = new AV.Query(post);
+                        query.equalTo("objectId",postview);
+                        query.find({
+                            success:function(post){
+                                var relation = post.relation("likes");
+                                relation.add({id:usersid,url:imgurl,phonenumber:phonenumber});
+                                post.save();
+                            }
+                        })
                         //query.get(postview, {
                         //    success: function(post) {
                         //        post.set("relation",[{usersid:usersid,phonenumber:phonenumber}]);
