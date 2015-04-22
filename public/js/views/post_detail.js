@@ -36,13 +36,7 @@
         $("#btnname").on("click", function () {
             var currentUser = AV.User.current();
             if (currentUser) {
-                query.equalTo("objectId", currentUser.id);  // find all the women
-                query.find({
-                    success: function(user) {
-                        phonenumber=user.get("mobilePhoneNumber");
-                        // Do stuff
-                    }
-                });
+                        phonenumber=currentUser.get("mobilePhoneNumber");
                 alert(phonenumber);
                 if (phonenumber) {
                     // window.location.href= "user_detail.html?"+currentUser.id+"";
