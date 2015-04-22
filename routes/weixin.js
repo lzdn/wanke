@@ -130,7 +130,7 @@ router.post('/sendMessage', function (req, res) {
 
 router.post('/uploadImage', function (req, res) {
     var userId = req.body.userId,
-        serverIds = req.body.serverId;
+        serverIds = req.body.serverIds;
     console.log(req.body);
     if (!userId) {
         return res.json("参数\"userId\"不能为空！");
