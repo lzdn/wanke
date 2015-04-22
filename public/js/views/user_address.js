@@ -97,7 +97,7 @@
                     };
                     if (AV.User.current().get("buliding") == homename) {
                         //alert(home.name);
-                        home.selected = "data-am-selected";
+                        home.selected = "selected data-am-selected";
                     }
                     homes.push(home);
                 }
@@ -108,7 +108,7 @@
                 var html = template(data);
                 $tpl.before(html);
 
-                alert("$(\"#homes\").find('option[selected]').val()" + $("#homes").selected());
+                alert("$(\"#homes\").find('option[selected]').val()" + $("#homes").selected().val());
                 var home = AV.Object.extend("home");
                 var query2 = new AV.Query(home);
                 query2.equalTo("homename", $("#homes").find('option[selected]').val());
