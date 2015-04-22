@@ -91,7 +91,7 @@ router.post('/userSignUp', function (req, res) {
 });
 
 router.post('/sendMessage', function (req, res) {
-    var openId = req.body.openId,
+    var userId = req.body.userId,
         postId = req.body.postId,
         text = "";
     console.log(req.body);
@@ -103,21 +103,20 @@ router.post('/sendMessage', function (req, res) {
     }
 
     var query = new AV.Query(AV.User);
-    query.equalTo("authData.weixin.openId", openId);  // find all the women
-    query.find({
+    query.get(userId, {
         success: function (user) {
             // Do stuff
             text = "活动提醒<br/>" +
             "<br/>" +
             "有人报名了您发起的活动<br/>" +
-            "姓名: " + user[0].get("authData.weixin.nickname") + "<br/>" +
-            "联系方式: " + user[0].get("mobilePhoneNumber") + "<br/>" +
+            "姓名: " + user.get("authData").weixin.nickname + "<br/>" +
+            "联系方式: " + user.get("mobilePhoneNumber") + "<br/>" +
             "<br/>" +
             "<a href=\"http://fuwuhao.dianyingren.com/post_details.html?id=" + postId + "\">点击查看详情</a>>"
             "<br/>" +
             "";
 
-            api.sendText(openId, text, function (err) {
+            api.sendText(user.get("authData").weixin.openId, text, function (err) {
                 if (err) {
                     res.json({msg: err});
                 }
