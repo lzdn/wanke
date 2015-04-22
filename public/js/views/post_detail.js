@@ -1,8 +1,7 @@
-
-(function($) {
-    var number="";
+(function ($) {
+    var number = "";
     var code = "";
-    var userlog, userid, queryobject, nickname, phonenumber
+    var userlog, userid, queryobject, nickname, phonenumber,usersid;
     var postview = window.location.search.split('=')[1];
     if (postview.indexOf("=") > 0) {
         userlog = window.location.search.split('=')[1];
@@ -10,73 +9,79 @@
         alert(code);
         id = ""
     }
-   // alert(postview);
+    // alert(postview);
     loadwx();
-    loading(function(){
-        $("#users").on("click",function(){
-            window.location.href="user_detail.html?sss";
+    loading(function () {
+        $("#users").on("click", function () {
+            window.location.href = "user_detail.html?sss";
         });
-        thread_url= "http://localhost:63342/wanke/public/post_detail.html?55223dcfe4b0cd5b62664791";
-        thread_key= postview;
+        thread_url = "http://localhost:63342/wanke/public/post_detail.html?55223dcfe4b0cd5b62664791";
+        thread_key = postview;
         console.log(postview);
         thread_title = 'post_detail';
         //$("<div id=\"ds-thread\" class=\"ds-thread\" data-thread-key=postview+\"\" data-title=\"post_detail\" data-url=\"http://localhost:63342/wanke/public/post_detail.html?55223dcfe4b0cd5b62664791\"></div>"
         //).prependTo("#thread");
-        $(".imgpreview").on("click",function(){
-            var cur= $(this).attr("src");
-            var  url=$(this).parent().attr("value");
-            var arr=url.split(",");
+        $(".imgpreview").on("click", function () {
+            var cur = $(this).attr("src");
+            var url = $(this).parent().attr("value");
+            var arr = url.split(",");
             wx.previewImage({
-                current:cur, // 当前显示的图片链接
-                urls:arr// 需要预览的图片链接列表
+                current: cur, // 当前显示的图片链接
+                urls: arr// 需要预览的图片链接列表
             });
             event.stopPropagation();
         });
         $(".imgpreview").removeClass("imgpreview");
 
-        $("#btnname").on("click",function(){
+        $("#btnname").on("click", function () {
             var currentUser = AV.User.current();
             if (currentUser) {
+                usersid=currentUser.id;
                 var query = new AV.Query(AV.User);
-                query.get(userid, {
+                query.get(usersid, {
                     success: function (user) {
                         phonenumber= user.get('mobilePhoneNumber');
-
                     }
                 });
-                alert(phonenumber);
-                        if(phonenumber){
-                            // window.location.href= "user_detail.html?"+currentUser.id+"";
-                            var imgurl=currentUser.get("authData").weixin.headimgurl;
-                            $(".usercontent").remove();
-                            $(" <p class=\"usercontent am-sans-serif\">联系方式："+number+"</p>").prependTo(".userphone");
-                            $(" <img src=\""+imgurl+"\" class=\"am-radius\">").appendTo("#headtle");
-                        }else{
-                            $('#my-prompt').modal({
-                                // relatedTarget: this,
-                                onConfirm: function(e) {
-                                    //e.data
-                                    if (/^1[3|4|5|8]\d{9}$/.test(e.data)) {
-                                        var query = new AV.Query(AV.User);
-                                        query.get(userid, {
-                                            success: function (user) {
-                                                user.set('mobilePhoneNumber',e.data);
-                                                user.save()
-                                            }
-                                        });
-                                    } else {
-                                        alert("请输入正确的电话号码");
-                                    }
-                                },
-                                onCancel: function(e) {
-                                }
-                            });
-                        }
+                setTimeout(function(){
+                    alert(phonenumber);
+                    if (phonenumber) {
+                        // window.location.href= "user_detail.html?"+currentUser.id+"";
+                        var imgurl = currentUser.get("authData").weixin.headimgurl;
+                        $(".usercontent").remove();
+                        $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".userphone");
+                        $(" <img src=\"" + imgurl + "\" class=\"am-radius\">").appendTo("#headtle");
 
+                        $.post("http://fuwuhao.dianyingren.com/weixin/sendMessage", {openId:""+usersid+"",postId:""+postview+""}, function (res) {
+                            alert(res);
+                        });
+
+                    } else {
+                        $('#my-prompt').modal({
+                            // relatedTarget: this,
+                            onConfirm: function (e) {
+                                //e.data
+                                if (/^1[3|4|5|8]\d{9}$/.test(e.data)) {
+                                    var query = new AV.Query(AV.User);
+                                    query.get(usersid, {
+                                        success: function (user) {
+                                            user.set('mobilePhoneNumber', e.data);
+                                            user.save()
+                                        }
+                                    });
+                                } else {
+                                    alert("请输入正确的电话号码");
+                                }
+                            },
+                            onCancel: function (e) {
+                            }
+                        });
+                    }
+                },100);
             } else {
                 alert("没有登录")
-                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=post_detail",function(res){
-                    window.location.href=res.authUrl;
+                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail", function (res) {
+                    window.location.href = res.authUrl;
                 })
             }
         });
@@ -115,11 +120,10 @@
                     }
                 }
                 var otagkey = object.get("tagkey");
-                console.log(object);
-                number=object.get("username").get("mobilePhoneNumber");
+                number = object.get("username").get("mobilePhoneNumber");
                 var ousername = object.get("username").attributes.authData.weixin;
                 var username = ousername.nickname;
-                var headimgurl=ousername.headimgurl;
+                var headimgurl = ousername.headimgurl;
                 var tagvalue = otagkey.get("tagtitle");
                 var oldtime = object.createdAt.getTime();
                 var publishtime = newtime - oldtime;
@@ -141,7 +145,7 @@
                 // var tagvalue = object.get('tagkey');
                 var opost = {
                     name: username,
-                    titleimg:headimgurl,
+                    titleimg: headimgurl,
                     usersay: content,
                     tag: tagvalue,
                     time: times,
@@ -172,7 +176,6 @@
                     "authData": res,
                     success: function (user) {
                         userid = user.id;
-                        alert(userid);
                         queryobject = user.get("authData");
                         var query = new AV.Query(AV.User);
                         query.get(userid, {
@@ -188,7 +191,7 @@
 
     }
 
-    function loadwx(){
+    function loadwx() {
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
         $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=post_index", function (result) {
             console.log(result);
@@ -211,3 +214,39 @@
 
 
 })(jQuery);
+
+//{
+//    "weixin"
+//:
+//    {
+//        "sex"
+//    :
+//        1, "nickname"
+//    :
+//        "动名词", "city"
+//    :
+//        "Mudanjiang", "headimgurl"
+//    :
+//        "http://wx.qlogo.cn/mmopen/PiajxSqBRaEJgfrRe3VDiaNqFHsR4dBj8Z5rWgsr0icBXAiaY1DmjoNBg85PILc6WQw1sgACOUsGNibYp2QW5KgeRpw/0", "openid"
+//    :
+//        "omoCDjmkB3VOX-C8SX5-AfE6GmHU", "language"
+//    :
+//        "zh_CN", "province"
+//    :
+//        "Heilongjiang", "country"
+//    :
+//        "China", "privilege"
+//    :
+//        []
+//    }
+//}
+
+
+
+
+
+
+
+
+
+

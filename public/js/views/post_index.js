@@ -3,10 +3,22 @@
     var skx = -5;
     var bload = 1;
     var length
+    $(".am-form-field").keydown(function(){
+        setTimeout(function(){
+            if( $(".am-form-field").val()==""&&bload==0){
+               // $(".Delete").empty();
+                $(".Publish").remove();
+               // $(".am-icon-spin-extend").remove();
+                skx = -5;
+                loading(clickevent());
+                bload = 1;
+            }
+        },20);
+    });
     $(".am-input-group-label").on("click", function () {
         var val = $(".am-form-field").val();
         if (val != "") {
-            $(".Delete").empty();
+          //  $(".Delete").empty();
             AV.Query.doCloudQuery("select * from post where (content like \"" + val + "\")", {
                 success: function (result) {
                     var select = result.results;
@@ -28,7 +40,7 @@
                             query.equalTo("objectId", select[i].id);
                             query.find({
                                 success: function (sele) {
-                                    var tags = [];
+                                    var posts = [];
                                     var object = sele[0];
                                     console.log(object);
                                     var newtime = new Date().getTime();
@@ -37,8 +49,9 @@
                                     var avalue = object.id;
                                     var content = object.get('content');
                                     var otagkey = object.get("tagkey");
-                                    var ousername = object.get("username");
-                                    var username = ousername.get("username");
+                                    var ousername = object.get("username").attributes.authData.weixin;
+                                    var username = ousername.nickname;
+                                    var headimgurl=ousername.headimgurl;
                                     var tagvalue = otagkey.get("tagtitle");
                                     var oldtime = object.createdAt.getTime();
                                     var publishtime = newtime - oldtime;
@@ -60,19 +73,20 @@
                                     var osele = {
                                         name: username,
                                         usersay: content,
+                                        titleimg:headimgurl,
                                         tag: tagvalue,
                                         time: times,
                                         value: avalue,
                                         img: imgs
                                     };
-                                    tags.push(osele);
-                                    console.log(tags);
-                                    var $tpl = $('#amz-tags');
+                                    posts.push(osele);
+                                    var $tpl = $('#usercontent');
                                     var source = $tpl.text();
                                     var template = Handlebars.compile(source);
-                                    var data = {tags: tags};
+                                    var data = {posts: posts};
                                     var html = template(data);
                                     $tpl.before(html);
+                                    clickevent ();
                                 }
                             })
                         }
@@ -83,14 +97,11 @@
                         $(".Publish").remove();
                         $(".am-icon-spin-extend").remove();
                         $("<p class=\"Delete am-sans-serif\">关于“" + val + "”的查询结果不存在</p>").appendTo($("#field"));
+                        bload = 0;
                     }
                 }
             });
         } else {
-            $(".Delete").empty();
-            // $("<p class=\"Delete am-sans-serif\">请输入搜索条件</p>").appendTo($("#field"));
-            loading();
-            bload = 1;
         }
     });
     $("#arrow").hide();
@@ -110,6 +121,21 @@
                 })
             }
         });
+        $(".Publish").on("click", function () {
+            var postview = $(this).attr("value");
+            window.location.href = "post_detail.html?id=" + postview + "";
+        });
+        $(".imgpreview").on("click", function () {
+            var cur = $(this).attr("src");
+            var url = $(this).parent().attr("value");
+            var arr = url.split(",");
+            wx.previewImage({
+                current: cur, // 当前显示的图片链接
+                urls: arr// 需要预览的图片链接列表
+            });
+            event.stopPropagation();
+        });
+        $(".imgpreview").removeClass("imgpreview");
         $("#foots").on("click", function () {
             var currentUser = AV.User.current();
             alert(currentUser);
@@ -117,7 +143,6 @@
                 window.location.href = "post_save.html?" + currentUser.id + "";
             } else {
                 $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=post_save", function (res) {
-                    alert(res);
                     window.location.href = res.authUrl;
                 })
             }
@@ -150,7 +175,7 @@
         if (scrollTop + newheight + 200 >= htmlHeight) {
             if (bload != 0) {
                 loading(function () {
-                    $(".title").on("click", function () {
+                    $(".Publish").on("click", function () {
                         var postview = $(this).attr("value");
                         window.location.href = "post_detail.html?" + postview + "";
                     });
@@ -208,12 +233,13 @@
                                     imgpattern = "imgpatternthree"
                                 }
                             }
+                            console.log(object);
                             var avalue = object.id;
                             var content = object.get('content');
                             var otagkey = object.get("tagkey");
-                            var ousername = object.get("username");
-                            console.log(ousername);
-                            var username = ousername.get("nickname");
+                            var ousername = object.get("username").attributes.authData.weixin;
+                            var username = ousername.nickname;
+                            var headimgurl=ousername.headimgurl;
                             var tagvalue = otagkey.get("tagtitle");
                             var oldtime = object.createdAt.getTime();
                             var publishtime = newtime - oldtime;
@@ -235,6 +261,7 @@
                             var opost = {
                                 name: username,
                                 usersay: content,
+                                titleimg:headimgurl,
                                 tag: tagvalue,
                                 time: times,
                                 value: avalue,
@@ -244,7 +271,8 @@
                             posts.push(opost);
 
                         }
-                        var $tpl = $('#amz-tags');
+                        console.log(posts);
+                        var $tpl = $('#usercontent');
                         var source = $tpl.text();
                         var template = Handlebars.compile(source);
                         var data = {posts: posts};
@@ -276,6 +304,25 @@
             });
         });
     }
+
+    function clickevent (){
+        $(".Publish").on("click", function () {
+            var postview = $(this).attr("value");
+            window.location.href = "post_detail.html?id=" + postview + "";
+        });
+        $(".imgpreview").on("click", function () {
+            var cur = $(this).attr("src");
+            var url = $(this).parent().attr("value");
+            var arr = url.split(",");
+            wx.previewImage({
+                current: cur, // 当前显示的图片链接
+                urls: arr// 需要预览的图片链接列表
+            });
+            event.stopPropagation();
+        });
+        $(".imgpreview").removeClass("imgpreview");
+    }
+
 })(jQuery);
 
 

@@ -13,6 +13,9 @@ $(function () {
         alert(code);
         id = ""
     }
+    $("#esc").on("click",function(){
+        window.location.href = "post_index.html"
+    });
     dataLoad(function () {
 
         //wx.ready(function () {
@@ -177,6 +180,7 @@ $(function () {
         }, {
             success: function (object) {
                 alert("发表成功");
+                window.location.href = "post_index.html"
             }
         });
     }
@@ -209,7 +213,7 @@ $(function () {
         query.find({
             success: function (results) {
                 var tags = [];
-                newtag=results[0].get('tagtitle');
+                newtag=results[0].id;
                 for (var i = 0; i < results.length; i++) {
                     var object = results[i];
                     var tagid = object.id;
