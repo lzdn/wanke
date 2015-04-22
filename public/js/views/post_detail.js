@@ -2,7 +2,7 @@
     var saveurl = window.location.href;
     var number = "";
     var code = "";
-    var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid;
+    var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid,relationuser;
     var postview = window.location.search.split('=')[1];
     alert(postview);
     //if (saveurl.indexOf("=") > 1) {
@@ -14,6 +14,12 @@
     // alert(postview);
     loadwx();
     loading(function () {
+
+        for(var i=0; i<relationuser.length;i++){
+            if(relationuser[i].id==usersid){
+                alert("已报名");
+            }
+        }
         $("#users").on("click", function () {
             window.location.href = "user_detail.html?sss";
         });
@@ -126,7 +132,7 @@
                 console.log(object);
                 var content = object.get('content');
                 var imgs = object.get('imgs');
-                var relationuser=object.get("relationuser");
+                relationuser=object.get("relationuser");
                 if (imgs) {
                     if (imgs.length == 1) {
                         imgpattern = "imgpatternone"
