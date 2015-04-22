@@ -96,7 +96,7 @@
                         selected: ""
                     };
                     if (AV.User.current().get("buliding") == homename) {
-                        alert(home.name);
+                        //alert(home.name);
                         home.selected = "selected";
                     }
                     homes.push(home);
@@ -108,9 +108,9 @@
                 var html = template(data);
                 $tpl.before(html);
 
-                alert("$(\"#homes\").val()" + $("#homes").val());
                 var home = AV.Object.extend("home");
                 var query2 = new AV.Query(home);
+                query2.equalTo();
                 query2.get($("#homes").val(), {
                     success: function (home) {
                         console.log(home);
