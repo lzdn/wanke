@@ -1,13 +1,17 @@
 (function ($) {
-    loading(function () {
+    loading(function (err, user) {
         var buliding;
         var homeval;
-        //alert(starthomename);
-        //alert(startbuilding);
-        //if (starthomename) {
-        //    $("option[value$=\"" + starthomename + "\"]").attr("selected", true);
-        //    $("option[value$=\"" + startbuilding + "\"]").attr("selected", true);
-        //}
+        starthomename = user[0].get("buliding");
+        startbuilding = user[0].get("floorname");
+        housenumber = user[0].get("housenumber");
+        $("#homes").find("option[value=\"" + user[0].get("buliding") + "\"]…").attr("selected", true);
+        $("#buildings").find("option[value=\"" + user[0].get("floorname") + "\"]").attr("selected", true);
+        $('#wxnum').val(user[0].get("housenumber"));
+        alert("starthomename" + starthomename);
+        alert("startbuilding" + startbuilding);
+        alert("option" + $("#buildings").find("option[value=\"" + startbuilding + "\"]").val());
+
         $("#haederleft").on("click", function () {
             window.location.href = "user_detail.html?code=";
         });
@@ -122,25 +126,17 @@
                         var data2 = {buildings: buildings};
                         var html2 = template2(data2);
                         $buildings.before(html2);
-                    }
-                });
-                var query = new AV.Query(AV.User);
-                query.equalTo("objectId", postview);  // find all the women
-                query.find({
-                    success: function (user) {
-                        starthomename = user[0].get("buliding");
-                        startbuilding = user[0].get("floorname");
-                        housenumber = user[0].get("housenumber");
-                        $("#homes").find("option[value=\"" + user[0].get("buliding") + "\"]…").attr("selected", true);
-                        $("#buildings").find("option[value=\"" + user[0].get("floorname") + "\"]").attr("selected", true);
-                        $('#wxnum').val(user[0].get("housenumber"));
-                        alert("starthomename" + starthomename);
-                        alert("startbuilding" + startbuilding);
-                        alert("option" + $("#buildings").find("option[value=\"" + user[0].get("floorname") + "\"]").val());
-                        callbak();
-                    }
-                });
 
+                        var query = new AV.Query(AV.User);
+                        query.equalTo("objectId", postview);  // find all the women
+                        query.find({
+                            success: function (user) {
+
+                                callbak(err, user);
+                            }
+                        });
+                    }
+                });
             }
         });
 
