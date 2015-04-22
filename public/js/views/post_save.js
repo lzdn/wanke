@@ -92,8 +92,10 @@ $(function () {
                         isShowProgressTips: 1,
                         success: function (img) {
                             var serverId = img.serverId; // 返回图片的服务器端ID
-                            $("<div id=\"" + serverId + "\" class=\"imgnav\"><img src=\"" + serverId + "\" alt=\"\"/><a  class=\"am-icon-close "+ serverId +"\"></a></div>").prependTo("#imgwall");
-
+                            $("<div id=\"" + serverId + "\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a  class=\"am-icon-close "+ serverId +"\"></a></div>").prependTo("#imgwall");
+                            $(".am-icon-close "+ serverId +"").on("click",function(){
+                                $("#" + serverId + "").remove();
+                            });
                            // alert(serverId)
                             //$.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverId:""+serverId+""}, function (imgid) {
                             //    alert(imgid);
