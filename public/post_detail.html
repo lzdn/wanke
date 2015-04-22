@@ -60,7 +60,11 @@
     <div id="registration">
         <p>已报名:</p>
         <div id="headtle">
-
+            <script type="text/x-handlebars-template" id="relationuser">
+                {{#each relationuser}}
+            <img src={{this.url}} value= {{this.usersid}}&{{this.phonenumber}} class="am-radius">
+                {{/each}}
+            </script>
         </div>
     </div>
 

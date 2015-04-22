@@ -2,7 +2,7 @@
     var saveurl = window.location.href;
     var number = "";
     var code = "";
-    var userlog, userid, queryobject, nickname, phonenumber,usersid,postId,tagvalue,openid;
+    var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid;
     var postview = window.location.search.split('=')[1];
     alert(postview);
     //if (saveurl.indexOf("=") > 1) {
@@ -38,43 +38,39 @@
         $("#btnname").on("click", function () {
             var currentUser = AV.User.current();
             if (currentUser) {
-                usersid=currentUser.id;
+                usersid = currentUser.id;
                 var query = new AV.Query(AV.User);
                 query.get(usersid, {
                     success: function (user) {
-                        phonenumber= user.get('mobilePhoneNumber');
+                        phonenumber = user.get('mobilePhoneNumber');
                     }
                 });
-                setTimeout(function(){
+                setTimeout(function () {
                     alert(phonenumber);
                     if (phonenumber) {
                         var imgurl = currentUser.get("authData").weixin.headimgurl;
                         $(".usercontent").remove();
                         $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".userphone");
-                        $(" <img src=\"" + imgurl + "\" value=\" "+usersid+"&"+imgurl+" \" class=\"am-radius\">").appendTo("#headtle");
-                             //alert(usersid);
-                             // alert(postId);
-                        $.post("http://fuwuhao.dianyingren.com/weixin/sendMessage", {userId:postId,postId:openid}, function (res) {
+                        $(" <img src=\"" + imgurl + "\" value=\" " + usersid + "&" + phonenumber + " \" class=\"am-radius\">").appendTo("#headtle");
+                        //alert(usersid);
+                        // alert(postId);
+                        $.post("http://fuwuhao.dianyingren.com/weixin/sendMessage", {
+                            userId: postId,
+                            postId: openid
+                        }, function (res) {
                             alert(res);
 
                         });
                         //usersid  postId  openid
                         var post = AV.Object.extend("post");
                         var query = new AV.Query(post);
-                        query.equalTo("objectId",postview);
-                        //query.find({
-                        //    success:function(post){
-                        //        var relation = post.relation("likes");
-                        //        relation.add({id:usersid,url:imgurl,phonenumber:phonenumber});
-                        //        post.save();
-                        //    }
-                        //})
+                        query.equalTo("objectId", postview);
                         query.get(postview, {
-                            success: function(post) {
-                                post.add("relation",{id:usersid,url:imgurl,phonenumber:phonenumber});
+                            success: function (post) {
+                                post.add("relationuser", {id: usersid, url: imgurl, phonenumber: phonenumber});
                                 post.save();
                             },
-                            error: function(object, error) {
+                            error: function (object, error) {
                                 console.log(object);
                             }
                         });
@@ -99,7 +95,7 @@
                             }
                         });
                     }
-                },100);
+                }, 100);
             } else {
                 alert("没有登录")
                 $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail", function (res) {
@@ -142,9 +138,10 @@
                     }
                 }
                 var otagkey = object.get("tagkey");
+                var relationuser=object.get("relationuser");
                 number = object.get("username").get("mobilePhoneNumber");
-                postId=object.get("username").id;
-                openid=object.get("username").get("authData").weixin.openid;
+                postId = object.get("username").id;
+                openid = object.get("username").get("authData").weixin.openid;
                 alert(openid);
                 var ousername = object.get("username").attributes.authData.weixin;
                 var username = ousername.nickname;
@@ -189,6 +186,16 @@
                 var data = {tags: tags};
                 var html = template(data);
                 $tpl.before(html);
+
+                var $tp2 = $('relationuser');
+                var source2 = $tp2.text();
+                var template2 = Handlebars.compile(source2);
+                var data2 = {tags: relationuser};
+                var html2 = template2(data2);
+                $tpl.before(html2);
+
+
+
                 callbak();
             }
         });
