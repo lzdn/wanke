@@ -98,7 +98,7 @@ $(function () {
         alert(serverIds.length);
         alert(serverIds);
         alert(userid);
-        $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverIds:serverIds,userId:userid}, function (imgid) {
+        $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverIds:serverIds,userId:"55378dcfe4b0cafb0a1636e0"}, function (imgid) {
                 alert(imgid);
                 // relation.add(imgid);
             });
@@ -175,6 +175,7 @@ $(function () {
                     "authData": res,
                     success: function (user) {
                        userid=user.id
+                        alert(userid)
                     },
                     error: function (err) {
                         console.dir(err);
@@ -184,6 +185,7 @@ $(function () {
         } else {
             var currentUser = AV.User.current();
             userid = currentUser.id;
+            alert(userid);
         }
 
     }
