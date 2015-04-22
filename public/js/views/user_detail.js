@@ -60,7 +60,7 @@
             var template = Handlebars.compile(source);
             alert(authData.weixin.headimgurl);
             //alert(authData.get("weixin").headimgurl);
-            alert(authData.weixin.get("headimgurl"));
+           // alert(authData.weixin.get("headimgurl"));
             alert(currentUser.id)
             var data = {
                 user: {
