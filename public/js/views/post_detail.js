@@ -2,7 +2,7 @@
 (function($) {
     var number="";
     var code = "";
-    var userlog, userid, queryobject, nickname, phonenumber
+    var userlog, userid, queryobject, nickname, phonenumber;
     var postview = window.location.search.split('=')[1];
     if (postview.indexOf("=") > 0) {
         userlog = window.location.search.split('=')[1];
@@ -51,6 +51,11 @@
                             $(".usercontent").remove();
                             $(" <p class=\"usercontent am-sans-serif\">联系方式："+number+"</p>").prependTo(".userphone");
                             $(" <img src=\""+imgurl+"\" class=\"am-radius\">").appendTo("#headtle");
+
+                            $.post("http://fuwuhao.dianyingren.com/weixin/sendMessage",{openId:userid,postId:postview},function(res){
+
+                            });
+
                         }else{
                             $('#my-prompt').modal({
                                 // relatedTarget: this,
@@ -75,7 +80,7 @@
 
             } else {
                 alert("没有登录")
-                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=post_detail",function(res){
+                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail", function (res) {
                     window.location.href=res.authUrl;
                 })
             }
@@ -115,7 +120,6 @@
                     }
                 }
                 var otagkey = object.get("tagkey");
-                console.log(object);
                 number=object.get("username").get("mobilePhoneNumber");
                 var ousername = object.get("username").attributes.authData.weixin;
                 var username = ousername.nickname;

@@ -132,8 +132,8 @@
             if (currentUser) {
                 window.location.href = "post_save.html?id=" + currentUser.id + "";
             } else {
-                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=post_save", function (res) {
-                   // alert(res);
+                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail", function (res) {
+                    alert(res);
                     window.location.href = res.authUrl;
                 })
             }
