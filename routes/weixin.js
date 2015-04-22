@@ -117,7 +117,7 @@ router.post('/sendMessage', function (req, res) {
             "";
             console.log(user.get("authData").weixin);
 
-            api.sendText(user.get("authData").weixin.openId, text, function (err) {
+            api.sendText(user.get("authData").weixin.openid, text, function (err) {
                 if (err) {
                     res.json({msg: err});
                 }
