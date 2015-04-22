@@ -2,12 +2,12 @@
     loading(function (err, user) {
         var buliding;
         var homeval;
-        starthomename = user[0].get("buliding");
-        startbuilding = user[0].get("floorname");
-        housenumber = user[0].get("housenumber");
-        $("#homes").find("option[value=\"" + user[0].get("buliding") + "\"]…").attr("selected", true);
-        $("#buildings").find("option[value=\"" + user[0].get("floorname") + "\"]").attr("selected", true);
-        $('#wxnum').val(user[0].get("housenumber"));
+        var starthomename = user.get("buliding");
+        var startbuilding = user.get("floorname");
+        var housenumber = user.get("housenumber");
+        $("#homes").find("option[value=\"" + user.get("buliding") + "\"]…").attr("selected", true);
+        $("#buildings").find("option[value=\"" + user.get("floorname") + "\"]").attr("selected", true);
+        $('#wxnum').val(user.get("housenumber"));
         alert("starthomename" + starthomename);
         alert("startbuilding" + startbuilding);
         alert("option" + $("#buildings").find("option[value=\"" + startbuilding + "\"]").val());
@@ -74,7 +74,7 @@
 
         })
     });
-    function loading(callbak) {
+    function loading(callback) {
         var postview = window.location.search.split('=')[1];
         //alert(postview)
         var starthomename, startbuilding, housenumber;
@@ -128,31 +128,17 @@
                         $buildings.before(html2);
 
                         var query = new AV.Query(AV.User);
-                        query.equalTo("objectId", postview);  // find all the women
-                        query.find({
+                        //query.equalTo("objectId", postview);  // find all the women
+                        query.get(postview, {
                             success: function (user) {
-
-                                callbak(err, user);
+                                callback(null, user);
                             }
                         });
                     }
                 });
             }
         });
-
-        //……………… 此处添加用户 暂时无用………………
-        //var array = ['小圆1号','小圆2号','小圆3号','小圆4号','小圆5号'];
-        //var homes= new home();
-        //homes.set("building",array);
-        //homes.save({
-        //    success:function(aa){
-        //        console.log(aa);
-        //    }
-        //});
-
     }
-
-
 })(jQuery);
 
 
