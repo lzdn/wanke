@@ -6,9 +6,9 @@
         var startbuilding = user.get("floorname");
         var housenumber = user.get("housenumber");
         $('#wxnum').val(user.get("housenumber"));
-        alert("starthomename" + starthomename);
-        alert("startbuilding" + startbuilding);
-        alert("option[value=\"" + user.get("floorname") + "\"]");
+        //alert("starthomename" + starthomename);
+        //alert("startbuilding" + startbuilding);
+        //alert("option[value=\"" + user.get("floorname") + "\"]");
 
         $("#haederleft").on("click", function () {
             window.location.href = "user_detail.html?code=";
@@ -116,36 +116,38 @@
                     success: function (results) {
                         alert("Successfully retrieved " + results.length + " scores.");
                         // Do something with the returned AV.Object values
-                        var home = results[0];
-                        //alert(object.id + ' - ' + object.get('playerName'));
-                        var oldbuilding = home.get("building");
-                        //console.log(oldbuilding);
-                        var buildings = [];
-                        for (var j = 0; j < oldbuilding.length; j++) {
-                            var building = {
-                                names: oldbuilding[j],
-                                selected: ""
-                            };
-                            if (AV.User.current().get("floorname") == oldbuilding[j]) {
-                                //alert(home.name);
-                                building.selected = "selected";
+                        for (var i = 0; i < results.length; i++) {
+                            var home = results[i];
+                            //alert(object.id + ' - ' + object.get('playerName'));
+                            var oldbuilding = home.get("building");
+                            //console.log(oldbuilding);
+                            var buildings = [];
+                            for (var j = 0; j < oldbuilding.length; j++) {
+                                var building = {
+                                    names: oldbuilding[j],
+                                    selected: ""
+                                };
+                                if (AV.User.current().get("floorname") == oldbuilding[j]) {
+                                    //alert(home.name);
+                                    building.selected = "selected";
+                                }
+                                buildings.push(building);
                             }
-                            buildings.push(building);
-                        }
-                        var $buildings = $('#buildings');
-                        var source2 = $buildings.text();
-                        var template2 = Handlebars.compile(source2);
-                        var data2 = {buildings: buildings};
-                        var html2 = template2(data2);
-                        $buildings.before(html2);
+                            var $buildings = $('#buildings');
+                            var source2 = $buildings.text();
+                            var template2 = Handlebars.compile(source2);
+                            var data2 = {buildings: buildings};
+                            var html2 = template2(data2);
+                            $buildings.before(html2);
 
-                        var query = new AV.Query(AV.User);
-                        //query.equalTo("objectId", postview);  // find all the women
-                        query.get(postview, {
-                            success: function (user) {
-                                callback(null, user);
-                            }
-                        });
+                            var query = new AV.Query(AV.User);
+                            //query.equalTo("objectId", postview);  // find all the women
+                            query.get(postview, {
+                                success: function (user) {
+                                    callback(null, user);
+                                }
+                            });
+                        }
                     },
                     error: function (error) {
                         alert("Error: " + error.code + " " + error.message);
