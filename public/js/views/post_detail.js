@@ -37,7 +37,13 @@
             var currentUser = AV.User.current();
             if (currentUser) {
                 usersid=currentUser.id
-                        phonenumber=currentUser.get("mobilePhoneNumber");
+                var query = new AV.Query(AV.User);
+                query.equalTo("objectId",usersid);  // find all the women
+                query.find({
+                    success: function(women) {
+                        phonenumber=women.get("mobilePhoneNumber");
+                    }
+                });
                 alert(phonenumber);
                 if (phonenumber) {
                     // window.location.href= "user_detail.html?"+currentUser.id+"";
