@@ -102,22 +102,22 @@ $(function () {
                 alert(imgid);
                 // relation.add(imgid);
             });
-        //var aUserval2 = $("#doc-ta-1").val();
-        //var tag = new tags();
-        //tag.id = newtag;
-        //var postc = new posts();
-        //var user = AV.User.current();
-        //postc.save({
-        //    content: aUserval2,
-        //    tagkey: tag,
-        //    //imgs: relation,
-        //    username: user
-        //}, {
-        //    success: function (object) {
-        //        alert("发表成功");
-        //        window.location.href = "post_index.html"
-        //    }
-        //});
+        var aUserval2 = $("#doc-ta-1").val();
+        var tag = new tags();
+        tag.id = newtag;
+        var postc = new posts();
+        var user = AV.User.current();
+        postc.save({
+            content: aUserval2,
+            tagkey: tag,
+            //imgs: relation,
+            username: user
+        }, {
+            success: function (object) {
+                alert("发表成功");
+                window.location.href = "post_index.html"
+            }
+        });
     }
 
 //………………………………储备函数…………………………………………
