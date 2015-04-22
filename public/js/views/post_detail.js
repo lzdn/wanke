@@ -1,7 +1,15 @@
 
 (function($) {
-    var postview=window.location.search.split('?')[1];
     var number="";
+    var code = "";
+    var userlog, userid, queryobject, nickname, phonenumber
+    var postview = window.location.search.split('=')[1];
+    if (postview.indexOf("=") > 0) {
+        userlog = window.location.search.split('=')[1];
+        code = userlog.split("&")[0];
+        alert(code);
+        id = ""
+    }
    // alert(postview);
     loadwx();
     loading(function(){
@@ -29,14 +37,45 @@
         $("#btnname").on("click",function(){
             var currentUser = AV.User.current();
             if (currentUser) {
-               // window.location.href= "user_detail.html?"+currentUser.id+"";
-             var imgurl=currentUser.get("authData").weixin.headimgurl;
-             $(".usercontent").remove();
-                $(" <p class=\"usercontent am-sans-serif\">联系方式："+number+"</p>").prependTo(".userphone");
-                $(" <img src=\""+imgurl+"\" class=\"am-radius\">").appendTo("#headtle");
+                var query = new AV.Query(AV.User);
+                query.get(userid, {
+                    success: function (user) {
+                        phonenumber= user.get('mobilePhoneNumber');
+
+                    }
+                });
+                alert(phonenumber);
+                        if(phonenumber){
+                            // window.location.href= "user_detail.html?"+currentUser.id+"";
+                            var imgurl=currentUser.get("authData").weixin.headimgurl;
+                            $(".usercontent").remove();
+                            $(" <p class=\"usercontent am-sans-serif\">联系方式："+number+"</p>").prependTo(".userphone");
+                            $(" <img src=\""+imgurl+"\" class=\"am-radius\">").appendTo("#headtle");
+                        }else{
+                            $('#my-prompt').modal({
+                                // relatedTarget: this,
+                                onConfirm: function(e) {
+                                    //e.data
+                                    if (/^1[3|4|5|8]\d{9}$/.test(e.data)) {
+                                        var query = new AV.Query(AV.User);
+                                        query.get(userid, {
+                                            success: function (user) {
+                                                user.set('mobilePhoneNumber',e.data);
+                                                user.save()
+                                            }
+                                        });
+                                    } else {
+                                        alert("请输入正确的电话号码");
+                                    }
+                                },
+                                onCancel: function(e) {
+                                }
+                            });
+                        }
+
             } else {
                 alert("没有登录")
-                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail",function(res){
+                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=post_detail",function(res){
                     window.location.href=res.authUrl;
                 })
             }
@@ -76,9 +115,11 @@
                     }
                 }
                 var otagkey = object.get("tagkey");
-                var ousername = object.get("username");
-                number=ousername.get("mobilePhoneNumber");
-                var username = ousername.get("username");
+                console.log(object);
+                number=object.get("username").get("mobilePhoneNumber");
+                var ousername = object.get("username").attributes.authData.weixin;
+                var username = ousername.nickname;
+                var headimgurl=ousername.headimgurl;
                 var tagvalue = otagkey.get("tagtitle");
                 var oldtime = object.createdAt.getTime();
                 var publishtime = newtime - oldtime;
@@ -100,6 +141,7 @@
                 // var tagvalue = object.get('tagkey');
                 var opost = {
                     name: username,
+                    titleimg:headimgurl,
                     usersay: content,
                     tag: tagvalue,
                     time: times,
@@ -121,6 +163,29 @@
                 callbak();
             }
         });
+
+        if (code != "") {
+            $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
+                queryobject = res;
+                nickname = res.nickname;
+                AV.User._logInWith("weixin", {
+                    "authData": res,
+                    success: function (user) {
+                        userid = user.id;
+                        alert(userid);
+                        queryobject = user.get("authData");
+                        var query = new AV.Query(AV.User);
+                        query.get(userid, {
+                            success: function (user) {
+                                user.set('nickname', nickname);
+                                user.save()
+                            }
+                        });
+                    }
+                })
+            });
+        }
+
     }
 
     function loadwx(){

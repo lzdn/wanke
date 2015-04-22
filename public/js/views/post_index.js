@@ -103,7 +103,7 @@
         $("#users").on("click", function () {
             var currentUser = AV.User.current();
             if (currentUser) {
-                window.location.href = "user_detail.html?code=";
+                window.location.href = "user_detail.html?" + currentUser.id + "";
             } else {
                 $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail", function (res) {
                     window.location.href = res.authUrl;

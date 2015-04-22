@@ -6,7 +6,7 @@ $(function () {
     var newtag = 1;
     var code = "";
     var userlog, userid, queryobject, nickname
-    var postview = window.location.search.split('?')[1];
+    var postview = window.location.search.split('=')[1];
     if (postview.indexOf("=") > 0) {
         userlog = window.location.search.split('=')[1];
         code = userlog.split("&")[0];
@@ -209,6 +209,7 @@ $(function () {
         query.find({
             success: function (results) {
                 var tags = [];
+                newtag=results[0].get('tagtitle');
                 for (var i = 0; i < results.length; i++) {
                     var object = results[i];
                     var tagid = object.id;

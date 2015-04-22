@@ -1,30 +1,10 @@
 (function ($) {
-    // var userid=window.location.search.split('?')[1];
-    var userid ="55277430e4b0f543683906ac";
+    var userid=window.location.search.split('=')[1];
     var skx = -5;
     var postview
     loadwx();
     $("#arrow").hide();
-    loading(function () {
-        $(".title").on("click", function () {
-             postview = $(this).attr("value");
-        });
-        $("#users").on("click", function () {
-            window.location.href = "user_detail.html";
-        });
-        $(".imgpreview").on("click",function(){
-            var cur= $(this).attr("src");
-            var  url=$(this).parent().attr("value");
-            var arr=url.split(",");
-            wx.previewImage({
-                current:cur, // 当前显示的图片链接
-                urls:arr// 需要预览的图片链接列表
-            });
-            event.stopPropagation();
-        });
-        $(".imgpreview").removeClass("imgpreview");
-
-    });
+    loading(clickevent());
 
     $(window).scroll(function () {
         var htmlHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
@@ -38,26 +18,7 @@
             $("#arrow").hide().removeClass("am-animation-fade");
         }
         if (scrollTop + newheight + 200 >= htmlHeight) {
-            loading(function () {
-                $(".title").on("click", function () {
-                    postview = $(this).attr("value");
-                });
-                $("#users").on("click", function () {
-                    window.location.href = "user_detail.html";
-                });
-                $(".imgpreview").on("click",function(){
-                    var cur= $(this).attr("src");
-                    var  url=$(this).parent().attr("value");
-                    var arr=url.split(",");
-                    wx.previewImage({
-                        current:cur, // 当前显示的图片链接
-                        urls:arr// 需要预览的图片链接列表
-                    });
-                    event.stopPropagation();
-                });
-                $(".imgpreview").removeClass("imgpreview");
-
-            });
+            loading(clickevent());
         }
     });
 
@@ -102,6 +63,7 @@
                                 var imgpattern="";
                                 for (var i = 0; i < arry.length; i++) {
                                     var object = arry[i];
+                                    console.log(object);
                                     var avalue = object.id;
                                     var content = object.get('content');
                                     var imgs = object.get('imgs');
@@ -117,8 +79,9 @@
                                         }
                                     }
                                     var otagkey = object.get("tagkey");
-                                    var ousername = object.get("username");
-                                    var username = ousername.get("username");
+                                    var ousername = object.get("username").attributes.authData.weixin;
+                                    var username = ousername.nickname;
+                                    var headimgurl=ousername.headimgurl;
                                     var tagvalue = otagkey.get("tagtitle");
                                     var oldtime = object.createdAt.getTime();
                                     var publishtime = newtime - oldtime;
@@ -140,6 +103,7 @@
                                     var imge = object.get('imgs')
                                     var opost = {
                                         name: username,
+                                        titleimg:headimgurl,
                                         usersay: content,
                                         tag: tagvalue,
                                         time: times,
@@ -149,7 +113,7 @@
                                     };
                                     tags.push(opost);
                                 }
-                                var $tpl = $('#amz-tags');
+                                var $tpl = $('#usercontent');
                                 var source = $tpl.text();
                                 var template = Handlebars.compile(source);
                                 var data = {tags: tags};
@@ -165,7 +129,25 @@
 
     }
 
-
+    function clickevent(){
+        $(".Publish").on("click", function () {
+            postview = $(this).attr("value");
+        });
+        $("#users").on("click", function () {
+            window.location.href = "user_detail.html";
+        });
+        $(".imgpreview").on("click",function(){
+            var cur= $(this).attr("src");
+            var  url=$(this).parent().attr("value");
+            var arr=url.split(",");
+            wx.previewImage({
+                current:cur, // 当前显示的图片链接
+                urls:arr// 需要预览的图片链接列表
+            });
+            event.stopPropagation();
+        });
+        $(".imgpreview").removeClass("imgpreview");
+    }
 
 
     function destroy(postid){

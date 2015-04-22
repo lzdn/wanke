@@ -31,11 +31,11 @@
         </div>
     </div>
     <div id="publish">
-        <script type="text/x-handlebars-template" id="amz-tags">
-            {{#each tags}}
+        <script type="text/x-handlebars-template" id="usercontent">
+            {{#each posts}}
             <hr data-am-widget="divider" style="" class="am-divider"/>
             <div class="Publish am-animation-fade" value={{this.value}}>
-                <div class="show"><img src="assets/i/img/ss1.jpg"></div>
+                <div class="show"><img src={{this.titleimg}}></div>
                 <div class="title" value={{this.value}}>
                     <p class="username am-sans-serif">{{this.name}}</p>
                     <div class="content">
@@ -49,7 +49,8 @@
                     {{/each}}
                     {{/if}}
                 </div>
-                    <span class="time am-sans-serif">发布于{{this.time}}前</span>
+                    <span class="time am-sans-serif">{{this.time}}前</span>
+                    <!--<span class="with am-sans-serif">查看详情</span>-->
                 </div>
             </div>
             {{/each}}
