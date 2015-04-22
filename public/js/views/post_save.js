@@ -210,7 +210,7 @@ $(function () {
                     //serverIds.remove($(this).attr("value"));
                     //var val=this.val();
                     //alert(val);
-                    serverIds.remove(serverId);
+                    alert(serverId);
                     $("#" + serverId + "").remove();
                     if($(".imgnav").length==0){
                         $("#addimg").hide();
