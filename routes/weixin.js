@@ -95,8 +95,8 @@ router.post('/sendMessage', function (req, res) {
         postId = req.body.postId,
         text = "";
     console.log(req.body);
-    if (!openId) {
-        res.json("参数\"openId\"不能为空！");
+    if (!userId) {
+        res.json("参数\"userId\"不能为空！");
     }
     if (!postId) {
         res.json("参数\"postId\"不能为空！");
