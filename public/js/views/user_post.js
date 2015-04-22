@@ -130,7 +130,7 @@
     }
 
     function clickevent(){
-        $(".title").on("click", function () {
+        $(".Publish").on("click", function () {
             postview = $(this).attr("value");
         });
         $("#users").on("click", function () {

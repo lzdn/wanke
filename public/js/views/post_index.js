@@ -271,7 +271,7 @@
     }
 
     function clickevent (){
-        $(".title").on("click", function () {
+        $(".Publish").on("click", function () {
             var postview = $(this).attr("value");
             window.location.href = "post_detail.html?id=" + postview + "";
         });
