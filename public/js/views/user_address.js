@@ -95,7 +95,7 @@
                         id: homeid,
                         selected: ""
                     };
-                    if (AV.User.current().get("buliding") == building) {
+                    if (AV.User.current().get("buliding") == homename) {
                         alert(home.name);
                         home.selected = "selected";
                     }
