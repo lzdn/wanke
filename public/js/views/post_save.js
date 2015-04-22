@@ -200,8 +200,8 @@ $(function () {
             isShowProgressTips: 1,
             success: function (img) {
                 var serverId = img.serverId; // 返回图片的服务器端ID
-                $("<div id=\"" + serverId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a  class=\"am-icon-close "+ serverId +"\"></a></div>").prependTo("#imgwall");
-                $(".am-icon-close "+ serverId +"").on("click",function(){
+                $("<div id=\"" + serverId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + serverId + "\"  class=\"am-icon-close "+ serverId +"\"></a></div>").prependTo("#imgwall");
+                $("#destroy" + serverId + "").on("click",function(){
                     alert("shanchu");
                     $("#" + serverId + "").remove();
                 });
