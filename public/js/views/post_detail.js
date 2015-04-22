@@ -39,7 +39,6 @@
                 query.equalTo("objectId", currentUser.id);  // find all the women
                 query.find({
                     success: function(user) {
-                        alert(user.id)
                         phonenumber=user.get("mobilePhoneNumber");
                         // Do stuff
                     }
