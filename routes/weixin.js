@@ -115,6 +115,7 @@ router.post('/sendMessage', function (req, res) {
             "<a href=\"http://fuwuhao.dianyingren.com/post_details.html?id=" + postId + "\">点击查看详情</a>>"
             "<br/>" +
             "";
+            console.log(user.get("authData").weixin);
 
             api.sendText(user.get("authData").weixin.openId, text, function (err) {
                 if (err) {
