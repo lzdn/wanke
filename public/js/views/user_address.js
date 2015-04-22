@@ -86,7 +86,7 @@
                 var homes = [];
                 for (var i = 0; i < res.length; i++) {
                     var object = res[i];
-                    console.log(object);
+                    alert(object);
                     var homename = object.get("homename");
                     var homeid = object.id;
                     var building = object.get("building");
