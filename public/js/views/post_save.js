@@ -85,14 +85,11 @@ $(function () {
 
         wx.chooseImage({
             success: function (res) {
-<<<<<<< HEAD
                 var  localIds = res.localIds;
                 $("#addimg").hide();
                 for(var i=0;i<localIds.length;i++){
                     $("<div id=\"" + localIds[i] + "\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a  class=\"am-icon-close "+ localIds[i] +"\"></a></div>").prependTo("#imgwall");
-
                 }
-
                     wx.uploadImage({
                         localId:localIds,
                         isShowProgressTips: 1,
@@ -107,26 +104,6 @@ $(function () {
                         }
                     });
                 }
-=======
-                var localIds = res.localIds;
-                //alert(localIds);
-                $("<div id=\"" + localIds + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a  class=\"am-icon-close\" value=\"" + localIds + "\"></a></div>").prependTo("#imgwall");
-                wx.uploadImage({
-                    localId: localIds[0] + "",
-                    isShowProgressTips: 1,
-                    success: function (res) {
-                        alert("微信接口图像上传成功!");
-                        var serverId = res.serverId; // 返回图片的服务器端ID
-                        alert(serverId);
-                        $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverId: serverId + ""}, function (imgid) {
-                            alert("微信接口图像上传成功!");
-                            alert(imgid);
-                            // relation.add(imgid);
-                        });
-                    }
-                });
-            }
->>>>>>> origin/master
         });
     });
 
