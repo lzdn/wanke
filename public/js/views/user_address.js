@@ -94,7 +94,7 @@ function load(callback) {
                     selected: ""
                 };
                 if (AV.User.current().get("buliding") == homename) {
-                    //alert(home.name);
+                    alert("AV.User.current().get(\"buliding\")" + AV.User.current().get("buliding"));
                     home.selected = "selected";
                 }
                 homes.push(home);
