@@ -38,11 +38,9 @@
             if (currentUser) {
                 usersid=currentUser.id;
                 var query = new AV.Query(AV.User);
-                query.equalTo("objectId",usersid);  // find all the women
-                query.find({
-                    success: function(women) {
-                        phonenumber=women.get("mobilePhoneNumber");
-                        alert(phonenumber);
+                query.get(usersid, {
+                    success: function (user) {
+                        phonenumber= user.get('mobilePhoneNumber');
                     }
                 });
                 setTimeout(function(){
