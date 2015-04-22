@@ -142,16 +142,22 @@ router.post('/uploadImage', function (req, res) {
         }
         var now = new Date();
         var file = new AV.File(now.getTime() + ".png", result);
-        file.save(null, {
-            success: function (file) {
-                // Execute any logic that should take place after the object is saved.
-                res.json({fileId: file.id});
-            },
-            error: function (file, error) {
-                // Execute any logic that should take place if the save fails.
-                // error is a AV.Error with an error code and description.
-                res.json({error: error.message});
-            }
+        //file.save(null, {
+        //    success: function (file) {
+        //
+        //    },
+        //    error: function (file, error) {
+        //        // Execute any logic that should take place if the save fails.
+        //        // error is a AV.Error with an error code and description.
+        //        res.json({error: error.message});
+        //    }
+        //});
+        file.save().then(function(file) {
+            // Execute any logic that should take place after the object is saved.
+            res.json({fileId: file.id});
+        }, function(error) {
+            // The file either could not be read, or could not be saved to AV.
+            res.json({error: error.message});
         });
     });
 });
