@@ -98,9 +98,8 @@ $(function () {
     function savecontent() {
         alert(serverIds.length);
         alert(serverIds);
-        var userids = AV.User.current();
-        alert(userids.id);
-        $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverIds:serverIds,userId:userids.id}, function (imgid) {
+        alert(userid);
+        $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverIds:serverIds,userId:userid}, function (imgid) {
                 alert(imgid);
                 // relation.add(imgid);
             });
@@ -173,32 +172,19 @@ $(function () {
         if (code != "") {
             $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
-                nickname = res.nickname;
                 AV.User._logInWith("weixin", {
                     "authData": res,
                     success: function (user) {
-                        userid = user.id;
-                        alert(userid);
-                        queryobject = user.get("authData");
-                        var query = new AV.Query(AV.User);
-                        query.get(userid, {
-                            success: function (user) {
-                                user.set('nickname', nickname);
-                                user.save()
-                            }
-                        });
+                       userid=user.id
+                    },
+                    error: function (err) {
+                        console.dir(err);
                     }
                 })
             });
         } else {
-            var query = new AV.Query(AV.User);
-            query.equalTo("objectId", postview);  // find all the women
-            query.find({
-                success: function (user) {
-                    userid = user[0].id;
-                    alert(userid);
-                }
-            });
+            var currentUser = AV.User.current();
+            userid = currentUser.id;
         }
 
     }
