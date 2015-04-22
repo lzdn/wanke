@@ -2,9 +2,7 @@
     loading(function (err, user) {
         var buliding;
         var homeval;
-        var starthomename = user.get("buliding");
-        var startbuilding = user.get("floorname");
-        var housenumber = user.get("housenumber");
+
         $('#wxnum').val(user.get("housenumber"));
         //alert("starthomename" + starthomename);
         //alert("startbuilding" + startbuilding);
@@ -17,7 +15,7 @@
             $("#usr-sbm-sub").removeClass("am-disabled");
             if (homeval != $(this).val()) {
                 homeval = $(this).val();
-                $(".homeval").remove();
+                $("#buildings").remove();
                 var home = AV.Object.extend("home");
                 var query2 = new AV.Query(home);
                 query2.equalTo("objectId", $(this).val());
