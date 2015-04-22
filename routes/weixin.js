@@ -110,8 +110,8 @@ router.post('/sendMessage', function (req, res) {
             text = "活动提醒<br/>" +
             "<br/>" +
             "有人报名了您发起的活动<br/>" +
-            "姓名: " + user.get("authData.weixin.nickname") + "<br/>" +
-            "联系方式: " + user.get("mobilePhoneNumber") + "<br/>" +
+            "姓名: " + user[0].get("authData.weixin.nickname") + "<br/>" +
+            "联系方式: " + user[0].get("mobilePhoneNumber") + "<br/>" +
             "<br/>" +
             "<a href=\"http://fuwuhao.dianyingren.com/post_details.html?id=" + postId + "\">点击查看详情</a>>"
             "<br/>" +
