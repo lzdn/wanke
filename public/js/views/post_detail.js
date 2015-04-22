@@ -45,7 +45,7 @@
                                     //e.data
                                     if (/^1[3|4|5|8]\d{9}$/.test(e.data)) {
                                         var query = new AV.Query(AV.User);
-                                        query.get("553606c1e4b0825685fcadfa", {
+                                        query.get("55370400e4b06917fbdfd82c", {
                                             success: function (user) {
                                                 user.set('mobilePhoneNumber',e.data);
                                                 user.save()
