@@ -2,7 +2,7 @@
     var saveurl = window.location.href;
     var number = "";
     var code = "";
-    var userlog, userid, queryobject, nickname, phonenumber,usersid,postId,tagvalue;
+    var userlog, userid, queryobject, nickname, phonenumber,usersid,postId,tagvalue,openid;
     var postview = window.location.search.split('=')[1];
     alert(postview);
     //if (saveurl.indexOf("=") > 1) {
@@ -54,7 +54,7 @@
                         $(" <img src=\"" + imgurl + "\" class=\"am-radius\">").appendTo("#headtle");
                              alert(usersid);
                               alert(postId);
-                        $.post("http://fuwuhao.dianyingren.com/weixin/sendMessage", {userId:postId,postId:postId}, function (res) {
+                        $.post("http://fuwuhao.dianyingren.com/weixin/sendMessage", {userId:postId,postId:openid}, function (res) {
                             alert(res);
                         });
                         //var post = AV.Object.extend("post");usersid
@@ -134,6 +134,8 @@
                 var otagkey = object.get("tagkey");
                 number = object.get("username").get("mobilePhoneNumber");
                 postId=object.get("username").id;
+                openid=object.get("username").get("authData").weixin.openid;
+                alert(openid);
                 var ousername = object.get("username").attributes.authData.weixin;
                 var username = ousername.nickname;
                 var headimgurl = ousername.headimgurl;
