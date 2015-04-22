@@ -110,17 +110,25 @@
 
                 var home = AV.Object.extend("home");
                 var query2 = new AV.Query(home);
-                query2.equalTo();
-                query2.get($("#homes").val(), {
-                    success: function (home) {
-                        console.log(home);
+                query2.equalTo("homename", $("#homes").val());
+                query2.find({
+                    success: function (results) {
+                        alert("Successfully retrieved " + results.length + " scores.");
+                        // Do something with the returned AV.Object values
+                        var home = results[0];
+                        //alert(object.id + ' - ' + object.get('playerName'));
                         var oldbuilding = home.get("building");
-                        console.log(oldbuilding);
+                        //console.log(oldbuilding);
                         var buildings = [];
                         for (var j = 0; j < oldbuilding.length; j++) {
                             var building = {
-                                names: oldbuilding[j]
+                                names: oldbuilding[j],
+                                selected: ""
                             };
+                            if (AV.User.current().get("floorname") == oldbuilding[j]) {
+                                //alert(home.name);
+                                building.selected = "selected";
+                            }
                             buildings.push(building);
                         }
                         var $buildings = $('#buildings');
@@ -129,7 +137,6 @@
                         var data2 = {buildings: buildings};
                         var html2 = template2(data2);
                         $buildings.before(html2);
-                        $("#buildings").find("option[value=\"" + AV.User.current().get("floorname") + "\"]").attr("selected", true);
 
                         var query = new AV.Query(AV.User);
                         //query.equalTo("objectId", postview);  // find all the women
@@ -138,6 +145,9 @@
                                 callback(null, user);
                             }
                         });
+                    },
+                    error: function (error) {
+                        alert("Error: " + error.code + " " + error.message);
                     }
                 });
             }
