@@ -36,11 +36,12 @@
         $("#btnname").on("click", function () {
             var currentUser = AV.User.current();
             if (currentUser) {
-                var query = new AV.Query(AV.User);
-                query.get(currentUser.id, {
-                    success: function (user) {
-                        phonenumber = user.get('mobilePhoneNumber');
-
+                query.equalTo("objectId", currentUser.id);  // find all the women
+                query.find({
+                    success: function(user) {
+                        alert(user.id)
+                        phonenumber=user.get("mobilePhoneNumber");
+                        // Do stuff
                     }
                 });
                 alert(phonenumber);
@@ -180,7 +181,6 @@
                         userid = user.id;
                         alert(userid);
                         queryobject = user.get("authData");
-                        nickname=queryobject.weixin.nickname;
                         var query = new AV.Query(AV.User);
                         query.get(userid, {
                             success: function (user) {
