@@ -36,9 +36,10 @@
 
         $("#btnname").on("click",function(){
             var currentUser = AV.User.current();
+           alert(userid);
             if (currentUser) {
                 var query = new AV.Query(AV.User);
-                query.get(userid, {
+                query.get(currentUser.id, {
                     success: function (user) {
                         phonenumber= user.get('mobilePhoneNumber');
 
