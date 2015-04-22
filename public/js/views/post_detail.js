@@ -2,6 +2,15 @@
 (function($) {
     var postview=window.location.search.split('=')[1];
     var number="";
+    var code = "";
+    var userlog, userid, queryobject, nickname, phonenumber
+    var postview = window.location.search.split('=')[1];
+    if (postview.indexOf("=") > 0) {
+        userlog = window.location.search.split('=')[1];
+        code = userlog.split("&")[0];
+        alert(code);
+        id = ""
+    }
    // alert(postview);
     loadwx();
     loading(function(){
@@ -29,8 +38,13 @@
         $("#btnname").on("click",function(){
             var currentUser = AV.User.current();
             if (currentUser) {
-                 // find all the women
-                        var phonenumber=currentUser.get("mobilePhoneNumber");
+                var query = new AV.Query(AV.User);
+                query.get(userid, {
+                    success: function (user) {
+                        phonenumber= user.get('mobilePhoneNumber');
+
+                    }
+                });
                 alert(phonenumber);
                         if(phonenumber){
                             // window.location.href= "user_detail.html?"+currentUser.id+"";
@@ -45,7 +59,7 @@
                                     //e.data
                                     if (/^1[3|4|5|8]\d{9}$/.test(e.data)) {
                                         var query = new AV.Query(AV.User);
-                                        query.get("55370400e4b06917fbdfd82c", {
+                                        query.get(userid, {
                                             success: function (user) {
                                                 user.set('mobilePhoneNumber',e.data);
                                                 user.save()
@@ -62,7 +76,7 @@
 
             } else {
                 alert("没有登录")
-                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail",function(res){
+                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=post_detail",function(res){
                     window.location.href=res.authUrl;
                 })
             }
@@ -150,6 +164,29 @@
                 callbak();
             }
         });
+
+        if (code != "") {
+            $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
+                queryobject = res;
+                nickname = res.nickname;
+                AV.User._logInWith("weixin", {
+                    "authData": res,
+                    success: function (user) {
+                        userid = user.id;
+                        alert(userid);
+                        queryobject = user.get("authData");
+                        var query = new AV.Query(AV.User);
+                        query.get(userid, {
+                            success: function (user) {
+                                user.set('nickname', nickname);
+                                user.save()
+                            }
+                        });
+                    }
+                })
+            });
+        }
+
     }
 
     function loadwx(){
