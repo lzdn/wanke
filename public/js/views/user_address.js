@@ -95,9 +95,10 @@
                         id: homeid,
                         selected: ""
                     };
-                    alert(home);
-                    if (AV.User.current().get("buliding") == building)
+                    if (AV.User.current().get("buliding") == building) {
+                        alert(home.name);
                         home.selected = "selected";
+                    }
                     homes.push(home);
                 }
                 var $tpl = $('#homes');
