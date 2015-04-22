@@ -7,6 +7,7 @@ $(function () {
     var code = "";
     var userlog, userid, queryobject, nickname
     var postview = window.location.search.split('=')[1];
+    alert(postview);
     if (postview.indexOf("=") > 0) {
         userlog = window.location.search.split('=')[1];
         code = userlog.split("&")[0];
