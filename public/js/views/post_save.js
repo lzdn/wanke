@@ -207,8 +207,6 @@ $(function () {
                 serverIds.push(serverId);
                 $("<div id=\"" + serverId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + serverId + "\" value=\"" + serverId + "\" class=\"am-icon-close "+ serverId +"\"></a></div>").prependTo("#imgwall");
                 $("#destroy" + serverId + "").on("click",function(){
-                    alert($(this.attr("value")));
-                    alert( $("#" + serverId + "").attr("value"));
                     //serverIds.remove($(this).attr("value"));
                     $("#" + serverId + "").remove();
                     if($(".imgnav").length==0){
