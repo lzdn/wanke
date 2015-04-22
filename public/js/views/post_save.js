@@ -16,8 +16,8 @@ $(function () {
     }
 
     dataLoad(function () {
-        $("#esc").on("click", function () {
-            window.location.href = "post_index.html?sss";
+        $("#usr-sbm-s").on("click", function () {
+            window.location.href = "post_index.html";
         });
         //wx.ready(function () {
         //   // alert("绑定事件:隐藏菜单");
@@ -47,9 +47,9 @@ $(function () {
                 $(".usr-say-leg-2").html("<p>" + aUserval.length + "</p>").removeClass("maxlegcss");
             }
             if ($("#doc-ta-1").val() != "") {
-                $("#usr-sbm-sub").removeClass("am-disabled").css({color: "#ff8200"});
+                $("#usr-sbm-sub").removeClass("am-disabled");
             } else {
-                $("#usr-sbm-sub").addClass("am-disabled").css({color: "rgba(68,68,68,3)"});
+                $("#usr-sbm-sub").addClass("am-disabled");
             }
         }, 100);
     });
