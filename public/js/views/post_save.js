@@ -37,6 +37,7 @@ $(function () {
             };
         }
     });
+    $("#usr-sbm-sub").css({color: "rgba(68,68,68,3)"});
     $("#doc-ta-1").keydown(function () {
         setTimeout(function () {
             var aUserval = $("#doc-ta-1").val();
@@ -84,6 +85,7 @@ $(function () {
 
         wx.chooseImage({
             success: function (res) {
+<<<<<<< HEAD
                 var  localIds = res.localIds;
                 $("#addimg").hide();
                 for(var i=0;i<localIds.length;i++){
@@ -105,69 +107,27 @@ $(function () {
                         }
                     });
                 }
+=======
+                var localIds = res.localIds;
+                //alert(localIds);
+                $("<div id=\"" + localIds + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a  class=\"am-icon-close\" value=\"" + localIds + "\"></a></div>").prependTo("#imgwall");
+                wx.uploadImage({
+                    localId: localIds[0] + "",
+                    isShowProgressTips: 1,
+                    success: function (res) {
+                        alert("微信接口图像上传成功!");
+                        var serverId = res.serverId; // 返回图片的服务器端ID
+                        alert(serverId);
+                        $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverId: serverId + ""}, function (imgid) {
+                            alert("微信接口图像上传成功!");
+                            alert(imgid);
+                            // relation.add(imgid);
+                        });
+                    }
+                });
+            }
+>>>>>>> origin/master
         });
-
-
-
-
-        //        wx.chooseImage({
-        //            success: function (res) {
-        //                console.log(res);
-        //                localIds = res.localIds;
-        //                alert(localIds);
-        //                    $("<div id=\"" + localIds[0] + "\" class=\"imgnav\"><img src=\"" + localIds[0] + "\" alt=\"\"/><a  class=\"am-icon-close\" value=\"" + localIds[0] + "\"></a></div>").prependTo("#imgwall");
-        //                    wx.uploadImage({
-        //                        localId:""+localIds[0]+"",
-        //                        isShowProgressTips: 1, // 默认为1，显示进度提示
-        //                        success: function (res) {
-        //                            var serverId = res.serverId; // 返回图片的服务器端ID
-        //                            alert(serverId);
-        //                            $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage",{serverId:serverId},function(imgid){
-        //                                alert(imgid);
-        //                                relation.add(imgid);
-        //                            });
-        //                        }
-        //                    });
-        //            }
-        //        });
-
-        // var file = AV.File.withURL('img11.jpg', localIds);
-        //// 以下保存图片…………………………………………
-        // file.save({
-        //     success: function (ofile) {
-        //         ofileid = ofile.id;
-        //         console.log(ofileid);
-        //     }
-        // }).then(function () {
-        //     var postc = new posts();
-        //     var relation = postc.relation("imgs");
-        //     $("<div class=\"imgnav imgnav-" + ofileid + " \" ><a href=\"#\" value=\"" + ofileid + "\" class=\"am-close\">&times;</a><img src=\""+ofileid+"\" alt=\"#\"/></div>").prependTo("#imgwall");
-        //     $("#addimg").show();
-        //     var aimgnav = $(".am-close");
-        //     for (var i = 0; i < aimgnav.length; i++) {
-        //         aimgnav[i].onclick = function () {
-        //             var remobeidx = $(this).attr('value');
-        //             console.log(remobeidx);
-        //             var query = new AV.Query('_File');
-        //             query.get(remobeidx, {
-        //                 success: function (ofile) {
-        //                     // The object was retrieved successfully.
-        //                     console.log("ofile.id:" + ofile.id);
-        //                     //ofile.remove(ofile);
-        //                     ofile.destroy().then(function () {
-        //                         //删除成功
-        //                         console.log('删除成功');
-        //                     });
-        //                 }
-        //             });
-        //             $(".imgnav-" + remobeidx + "").remove();
-        //             var aimgshow = $(".imgnav");
-        //             if (aimgshow.length == 0) {
-        //                 $("#addimg").hide();
-        //             }
-        //         };
-        //     }
-        // });
     });
 
     //…………………………保存心情 和 tagkey………………………………
@@ -203,7 +163,7 @@ $(function () {
             jsApiList = result.jsApiList;
 
             wx.config({
-                debug: false,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                debug: result.debug,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                 appId: appId, // 必填，公众号的唯一标识
                 timestamp: timestamp, // 必填，生成签名的时间戳
                 nonceStr: noncestr, // 必填，生成签名的随机串
@@ -218,7 +178,7 @@ $(function () {
         query.find({
             success: function (results) {
                 var tags = [];
-                newtag=results[0].id;
+                newtag = results[0].id;
                 for (var i = 0; i < results.length; i++) {
                     var object = results[i];
                     var tagid = object.id;
@@ -270,27 +230,7 @@ $(function () {
         }
 
     }
-
-
 });
-//^^^^^^^^^^^^^^^^^^^^备用
-//for (var i = 0; i < localIds.length; i++) {
-//    $("<div id=\"" + localIds[i] + "\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a href=\"\" class=\"am-icon-close\" value=\"" + localIds[i] + "\"></a></div>").prependTo("#imgwall");
-//}
-//$("#addimg").show();
-//var aimgnav = $(".am-icon-close");
-//var aaa = $(".imgnav");
-//for (var i = 0; i < aimgnav.length; i++) {
-//    aimgnav[i].onclick = function () {
-//        var remobeidx = $(this).attr('value');
-//        alert(remobeidx);
-//        var aimgshow = $(".imgnav");
-//        $("" + remobeidx + "").remove();
-//        if (aimgshow.length == 0) {
-//            $("#addimg").hide();
-//        }
-//    }
-//}
 
 
 
