@@ -88,9 +88,8 @@ $(function () {
                 $("#addimg").hide();
                 for(var i=0;i<localIds.length;i++){
                     $("<div id=\"" + localIds[i] + "\" class=\"imgnav\"><img src=\"" + localIds[i] + "\" alt=\"\"/><a  class=\"am-icon-close "+ localIds[i] +"\"></a></div>").prependTo("#imgwall");
-                }
                     wx.uploadImage({
-                        localId:localIds,
+                        localId:localIds[i]+"",
                         isShowProgressTips: 1,
                         success: function (img) {
                             alert("haha");
@@ -102,6 +101,8 @@ $(function () {
                             //});
                         }
                     });
+                }
+
                 }
         });
     });
