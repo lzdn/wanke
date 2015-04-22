@@ -35,7 +35,6 @@
 
         $("#btnname").on("click", function () {
             var currentUser = AV.User.current();
-            alert(currentUser.id);
             if (currentUser) {
                 var query = new AV.Query(AV.User);
                 query.get(currentUser.id, {
@@ -181,6 +180,7 @@
                         userid = user.id;
                         alert(userid);
                         queryobject = user.get("authData");
+                        nickname=queryobject.weixin.nickname;
                         var query = new AV.Query(AV.User);
                         query.get(userid, {
                             success: function (user) {
