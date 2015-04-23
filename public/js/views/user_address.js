@@ -15,13 +15,13 @@
             $("#usr-sbm-sub").removeClass("am-disabled");
             alert("gaibaian");
             alert($(this).val());
-            alert(objectId);
-            $(".Starthomes").remove();
+            //$(".Starthomes").remove();
             var home = AV.Object.extend("home");
             var query2 = new AV.Query(home);
             query2.equalTo("objectId", $(this).val());
             query2.find({
                 success: function (results) {
+                    alert("查询成功");
                     var oldbuilding = results[0].get("building");
                     var buildings = [];
                     for (var j = 0; j < oldbuilding.length; j++) {
