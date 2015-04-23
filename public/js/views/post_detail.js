@@ -131,7 +131,7 @@
                 var object = results[0];
                 console.log(object);
                 var content = object.get('content');
-                var imgs = object.get('imgs');
+                var imgs = object.get('relationimgs');
                 relationuser=object.get("relationuser");
                 if (imgs) {
                     if (imgs.length == 1) {

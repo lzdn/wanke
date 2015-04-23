@@ -115,7 +115,7 @@
                                     console.log(object);
                                     var avalue = object.id;
                                     var content = object.get('content');
-                                    var imgs = object.get('imgs');
+                                    var imgs = object.get('relationimgs');
                                     if(imgs){
                                         if(imgs.length==1){
                                             imgpattern="imgpatternone"
@@ -151,7 +151,7 @@
                                             }
                                         }
                                     }
-                                    var imge = object.get('imgs')
+
                                     var opost = {
                                         name: username,
                                         titleimg:headimgurl,
