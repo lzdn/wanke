@@ -57,9 +57,21 @@
                             query.find({
                                 success: function (sele) {
                                     var posts = [];
+                                    var imgpattern = "";
                                     var object = sele[0];
                                     var newtime = new Date().getTime();
                                     var imgs = object.get('relationimgs');
+                                    if (imgs) {
+                                        if (imgs.length == 1) {
+                                            imgpattern = "imgpatternone"
+                                        }
+                                        if (imgs.length == 2 || imgs.length == 4) {
+                                            imgpattern = "imgpatterntwo"
+                                        }
+                                        if (imgs.length >= 3 && imgs.length != 4) {
+                                            imgpattern = "imgpatternthree"
+                                        }
+                                    }
                                     var avalue = object.id;
                                     var content = object.get('content');
                                     var otagkey = object.get("tagkey");
@@ -91,7 +103,8 @@
                                         tag: tagvalue,
                                         time: times,
                                         value: avalue,
-                                        img: imgs
+                                        img: imgs,
+                                        pattern: imgpattern
                                     };
                                     console.log(osele);
                                     posts.push(osele);
