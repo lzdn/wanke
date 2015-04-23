@@ -5,10 +5,7 @@ $(function () {
     var tags = AV.Object.extend("tag");
     var newtag = 1;
     var code = "";
-    var fileIds = [];
-    var postsimg = new posts();
-    var imgrelation = postsimg.relation("likes");
-   // relation.add(post);
+    var fileurls = [];
     var userlog, userid, queryobject, phonenumber, nickname
     if (saveurl.indexOf("=") > 1) {
         userlog = window.location.search.split('=')[1];
@@ -106,12 +103,12 @@ $(function () {
                     var aUserval2 = $("#doc-ta-1").val();
                     var tag = new tags();
                     tag.id = newtag;
-
+                    var postc = new posts();
                     var user = AV.User.current();
-                    postsimg.save({
+                    postc.save({
                         content: aUserval2,
                         tagkey: tag,
-                      // imgrelation: imgrelation,
+                        relationimgs: fileIds,
                         username: user
                     }, {
                         success: function (object) {
@@ -134,9 +131,9 @@ $(function () {
                                     var aUserval2 = $("#doc-ta-1").val();
                                     var tag = new tags();
                                     tag.id = newtag;
-
+                                    var postc = new posts();
                                     var user = AV.User.current();
-                                    postsimg.save({
+                                    postc.save({
                                         content: aUserval2,
                                         tagkey: tag,
                                         //imgs: relation,
@@ -242,23 +239,23 @@ $(function () {
                     method: "POST",
                     url: "http://fuwuhao.dianyingren.com/weixin/uploadImage",
                     data: JSON.stringify({
-                        serverId: imgserverId,
-                        userId:userid
+                        serverId: imgserverId
                     }),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (data) {
-                        var fileId = data.fileId;
+                        var fileId = data.id;
+                        var fileurl= data.url;
                         // Play with returned data in JSON format
                         $("#addimg").show();
                         $("#usr-sbm-sub").removeClass("am-disabled");
-                       // fileIds.push(fileId);
-                        alert(fileId);
-                        $("<div id=\"" + fileId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + fileId + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div>").prependTo("#imgwall");
-                        imgrelation.add(data);
-                        $("#destroy" + fileId + "").on("click", function () {
-                            fileIds.splice(jQuery.inArray(fileId, fileIds), 1);
-                            $("#" + fileId + "").remove();
+                        fileurls.push(fileurl);
+                        alert(fileId+"dssdfsdfdsfsdfdsfsdfsdfsdf");
+                        alert(fileurl+"53465453153145312135121212121");
+                        $("<div id=\"" + fileurl + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + fileurl + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div>").prependTo("#imgwall");
+                        $("#destroy" + fileurl + "").on("click", function () {
+                            fileurls.splice(jQuery.inArray(fileurl, fileurls), 1);
+                            $("#" + fileurl + "").remove();
                             if ($(".imgnav").length == 0) {
                                 $("#addimg").hide();
                                 if ($("#doc-ta-1").val() == ""){
