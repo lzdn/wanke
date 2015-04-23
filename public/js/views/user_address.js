@@ -4,24 +4,18 @@
         var homeval;
 
         $('#wxnum').val(user.get("housenumber"));
-        //alert("starthomename" + starthomename);
-        //alert("startbuilding" + startbuilding);
-        //alert("option[value=\"" + user.get("floorname") + "\"]");
 
         $("#haederleft").on("click", function () {
             window.location.href = "user_detail.html?code=";
         });
         $("#doc-select-1").change(function () {
             $("#usr-sbm-sub").removeClass("am-disabled");
-            alert("gaibaian");
-            alert($(this).val());
             $(".starthomes").remove();
             var home = AV.Object.extend("home");
             var query2 = new AV.Query(home);
             query2.equalTo("objectId", $(this).val());
             query2.find({
                 success: function (results) {
-                    alert("查询成功");
                     var oldbuilding = results[0].get("building");
                     var buildings = [];
                     for (var j = 0; j < oldbuilding.length; j++) {
@@ -30,8 +24,6 @@
                         }
                         buildings.push(building);
                     }
-                    alert(buildings);
-
                     var $buildings = $('#buildings');
                     var source2 = $buildings.text();
                     var template2 = Handlebars.compile(source2);
@@ -41,16 +33,10 @@
 
                 }
             })
-            //if (homeval != $(this).val()) {
-            //    homeval = $(this).val();
-            //
-            //}
         });
 
         $("#usr-sbm-sub").on("click", function () {
-            alert("kaishi 保存")
             var home = AV.Object.extend("home");
-            alert($("#doc-select-1").val());
             var query = new AV.Query(home);
             query.equalTo("objectId", $("#doc-select-1").val());
             query.find({
@@ -58,7 +44,6 @@
                     buliding = results[0].get("homename");
                     var floorname = $("#doc-select-2").val();
                     var housenumber = $("#wxnum").val();
-                    alert(buliding+"&"+floorname+"&"+ housenumber);
                     var query = new AV.Query(AV.User);
                     query.get(user.id, {
                         success: function (user) {
@@ -66,7 +51,7 @@
                             user.set('floorname', floorname);
                             user.set('housenumber', housenumber);
                             user.save().then(function () {
-                                window.location.href = "user_detail.html?" + postview + "";
+                                window.location.href = "user_detail.html?code=";
                             });
                         },
                         error: function (object, error) {
@@ -94,7 +79,6 @@ function load(callback) {
             var homes = [];
             for (var i = 0; i < res.length; i++) {
                 var object = res[i];
-
                 var homename = object.get("homename");
                 var homeid = object.id;
                 var building = object.get("building");
@@ -104,7 +88,6 @@ function load(callback) {
                     selected: ""
                 };
                 if (AV.User.current().get("buliding") == homename) {
-                    alert("AV.User.current().get(\"buliding\")" + AV.User.current().get("buliding"));
                     home.selected = "selected";
                 }
                 homes.push(home);
@@ -127,11 +110,8 @@ function load(callback) {
             query2.equalTo("homename", homename);
             query2.find({
                 success: function (results) {
-                    // Do something with the returned AV.Object values
                     var home = results[0];
-                    //alert(object.id + ' - ' + object.get('playerName'));
                     var oldbuilding = home.get("building");
-                    //console.log(oldbuilding);
                     var buildings = [];
                     for (var j = 0; j < oldbuilding.length; j++) {
                         var building = {
@@ -150,9 +130,7 @@ function load(callback) {
                     var data2 = {buildings: buildings};
                     var html2 = template2(data2);
                     $buildings.before(html2);
-
                     var query = new AV.Query(AV.User);
-                    //query.equalTo("objectId", postview);  // find all the women
                     query.get(postview, {
                         success: function (user) {
                             callback(null, user);
@@ -160,7 +138,6 @@ function load(callback) {
                     });
                 },
                 error: function (error) {
-                    alert("Error: " + error.code + " " + error.message);
                 }
             });
         }
