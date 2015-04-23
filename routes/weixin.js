@@ -129,9 +129,11 @@ router.post('/sendMessage', function (req, res) {
 });
 
 router.post('/uploadImage', function (req, res) {
-    var userId = req.body.userId,
-        serverIds = req.body.serverIds;
     console.log(req.body);
+
+    var body = JSON.parse(req.body),
+        userId = body.userId,
+        serverIds = body.serverIds;
     if (!userId) {
         return res.json("参数\"userId\"不能为空！");
     }

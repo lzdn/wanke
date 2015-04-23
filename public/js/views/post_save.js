@@ -106,10 +106,10 @@ $(function () {
                     $.ajax({
                         method: "POST",
                         url: "http://fuwuhao.dianyingren.com/weixin/uploadImage",
-                        data: {
+                        data: JSON.stringify({
                             serverIds: serverIds,
                             userId: userid
-                        },
+                        }),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (data) {
