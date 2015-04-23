@@ -21,9 +21,7 @@
         //        alert("已报名");
         //    }
         //}
-        $("#users").on("click", function () {
-            window.location.href = "user_detail.html?sss";
-        });
+
         thread_url = "http://localhost:63342/wanke/public/post_detail.html?55223dcfe4b0cd5b62664791";
         thread_key = postview;
         console.log(postview);
@@ -106,8 +104,8 @@
                 }, 100);
             } else {
                 alert("没有登录")
-                $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page="+saveurl+"", function (res) {
-                    window.location.href = res.authUrl;
+                    $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl",{page:saveurl}, function (res) {
+                        window.location.href = res.authUrl;
                 })
             }
         });
