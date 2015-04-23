@@ -46,8 +46,6 @@
                 var html = template(data);
                 $tpl.before(html);
 
-                alert('http://fuwuhao.dianyingren.com/imgs/40' + logo.substr(logo.indexOf('/') + 1, 1) + '.PNG');
-
                 wx.onMenuShareTimeline({
                     title: shopname,
                     link: window.location.href,
