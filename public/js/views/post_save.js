@@ -104,7 +104,7 @@ $(function () {
                     alert(serverIds.length);
                     alert(serverIds);
                     alert(userid);
-                    $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverIds:serverIds,userId:"55378dcfe4b0cafb0a1636e0"}, function (imgid) {
+                    $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverIds:serverIds,userId:""+userid+""}, function (imgid) {
                         alert(imgid);
                         // relation.add(imgid);
                     });
@@ -248,6 +248,7 @@ $(function () {
             isShowProgressTips: 1,
             success: function (img) {
                 $("#addimg").show();
+                $(".usr-say-leg-2").html("<p>" + aUserval.length + "</p>").removeClass("maxlegcss");
                 var serverId = img.serverId; // 返回图片的服务器端ID
                 serverIds.push(serverId);
                 $("<div id=\"" + serverId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + serverId + "\" class=\"am-icon-close \" value=\"" + serverId + "\"  \"></a></div>").prependTo("#imgwall");
