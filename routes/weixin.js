@@ -141,14 +141,20 @@ router.post('/uploadImage', function (req, res) {
         return res.json("参数\"serverIds\"不能为空！");
     }
 
+    console.log(serverIds);
+
     serverIds.forEach(function (e) {
         api.getMedia(e, function (err, result, res) {
             if (err) {
                 return res.json("err:" + err);
             }
+            console.log(e);
+
             var now = new Date();
             var file = new AV.File(now.getTime() + ".png", result);
             file.save().then(function () {
+                console.log("success");
+
                 // Execute any logic that should take place after the object is saved.
                 //res.json({fileId: file.id});
             }, function (error) {
