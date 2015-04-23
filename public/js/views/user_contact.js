@@ -32,12 +32,10 @@
 
         $("#usr-sbm-sub").on("click", function () {
             phonenum = $("#phonenum").val();
-            alert("phonenum" + phonenum);
             if (bnum == 1) {
                 var query = new AV.Query(AV.User);
                 query.get(postview, {
                     success: function (user) {
-                        alert("phonenum" + user.get('mobilePhoneNumber'));
 
                         user.set('mobilePhoneNumber', phonenum);
                         user.save().then(function () {
@@ -51,7 +49,6 @@
                     }
                 });
             } else {
-                //alert("sb");
                 $("<div class=\"am-alert am-alert-danger\" data-am-alert>\
             <button type=\"button\" class=\"am-close\">&times;</button>\
             请输入正确的手机号\
