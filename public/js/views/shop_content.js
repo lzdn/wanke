@@ -49,7 +49,7 @@
                 wx.onMenuShareTimeline({
                     title: shopname,
                     link: window.location.href,
-                    imgUrl: logo,
+                    imgUrl: 'http://fuwuhao.dianyingren.com/' + logo,
                     success: function () {
                     },
                     cancel: function () {
@@ -57,10 +57,10 @@
                 });
                 wx.onMenuShareAppMessage({
                     title: shopname,
-                    desc: shopaddress,
+                    desc: '地址: ' + shopaddress,
                     link: window.location.href,
                     type: 'link',
-                    imgUrl: logo,
+                    imgUrl: 'http://fuwuhao.dianyingren.com/' + logo,
                     success: function () {
                     },
                     cancel: function () {
