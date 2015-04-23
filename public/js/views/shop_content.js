@@ -2,11 +2,10 @@
     var shopid = window.location.search.split('?')[1];
     //alert(shopid);
     loadwx(function () {
-
-    });
-    loading(function () {
-        $("#users").on("click", function () {
-            window.location.href = "user_detail.html";
+        loading(function () {
+            $("#users").on("click", function () {
+                window.location.href = "user_detail.html";
+            });
         });
     });
 
