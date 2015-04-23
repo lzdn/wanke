@@ -1,4 +1,6 @@
 (function ($) {
+    var postview = window.location.search.split('=')[1];
+    alert(postview);
     load(function (err, user) {
         var buliding;
         var homeval;
@@ -12,8 +14,6 @@
             window.location.href = "user_detail.html?code=";
         });
         $("#doc-select-1").change(function () {
-            alert("sadsadsadsa");
-            alert( $(this).val());
             $("#usr-sbm-sub").removeClass("am-disabled");
             $(".Starthomes").remove();
             var home = AV.Object.extend("home");
@@ -47,7 +47,9 @@
         });
 
         $("#usr-sbm-sub").on("click", function () {
+            alert("kaishi 保存")
             var home = AV.Object.extend("home");
+            alert($("#doc-select-1").val());
             var query = new AV.Query(home);
             query.equalTo("objectId", $("#doc-select-1").val());
             query.find({
@@ -55,6 +57,7 @@
                     buliding = results[0].get("homename");
                     var floorname = $("#doc-select-2").val();
                     var housenumber = $("#wxnum").val();
+                    alert(buliding+"&"+floorname+"&"+ housenumber);
                     var query = new AV.Query(AV.User);
                     query.get(postview, {
                         success: function (user) {
@@ -80,7 +83,7 @@
 })(jQuery);
 
 function load(callback) {
-    var postview = window.location.search.split('=')[1];
+
     AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
     var home = AV.Object.extend("home");
     var query = new AV.Query(home);
@@ -123,7 +126,6 @@ function load(callback) {
             query2.equalTo("homename", homename);
             query2.find({
                 success: function (results) {
-                    alert("Successfully retrieved " + results.length + " scores.");
                     // Do something with the returned AV.Object values
                     var home = results[0];
                     //alert(object.id + ' - ' + object.get('playerName'));
