@@ -15,12 +15,12 @@
     loadwx();
     loading(function () {
 
-        for(var i=0; i<relationuser.length;i++){
-            alert(usersid);
-            if(relationuser[i].id==usersid){
-                alert("已报名");
-            }
-        }
+        //for(var i=0; i<relationuser.length;i++){
+        //    alert(usersid);
+        //    if(relationuser[i].id==usersid){
+        //        alert("已报名");
+        //    }
+        //}
         $("#users").on("click", function () {
             window.location.href = "user_detail.html?sss";
         });
@@ -43,6 +43,7 @@
         $(".imgpreview").removeClass("imgpreview");
 
         $("#btnname").on("click", function () {
+            alert("hah");
             var currentUser = AV.User.current();
             if (currentUser) {
                 usersid = currentUser.id;
