@@ -6,6 +6,9 @@ $(function () {
     var newtag = 1;
     var code = "";
     var fileIds = [];
+    var postsimg = new posts();
+    var imgrelation = postsimg.relation("likes");
+   // relation.add(post);
     var userlog, userid, queryobject, phonenumber, nickname
     if (saveurl.indexOf("=") > 1) {
         userlog = window.location.search.split('=')[1];
@@ -103,12 +106,12 @@ $(function () {
                     var aUserval2 = $("#doc-ta-1").val();
                     var tag = new tags();
                     tag.id = newtag;
-                    var postc = new posts();
+
                     var user = AV.User.current();
-                    postc.save({
+                    postsimg.save({
                         content: aUserval2,
                         tagkey: tag,
-                        relationimgs: fileIds,
+                      // imgrelation: imgrelation,
                         username: user
                     }, {
                         success: function (object) {
@@ -131,9 +134,9 @@ $(function () {
                                     var aUserval2 = $("#doc-ta-1").val();
                                     var tag = new tags();
                                     tag.id = newtag;
-                                    var postc = new posts();
+
                                     var user = AV.User.current();
-                                    postc.save({
+                                    postsimg.save({
                                         content: aUserval2,
                                         tagkey: tag,
                                         //imgs: relation,
@@ -248,9 +251,10 @@ $(function () {
                         // Play with returned data in JSON format
                         $("#addimg").show();
                         $("#usr-sbm-sub").removeClass("am-disabled");
-                        fileIds.push(fileId);
+                       // fileIds.push(fileId);
                         alert(fileId);
                         $("<div id=\"" + fileId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + fileId + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div>").prependTo("#imgwall");
+                        imgrelation.add(data);
                         $("#destroy" + fileId + "").on("click", function () {
                             fileIds.splice(jQuery.inArray(fileId, fileIds), 1);
                             $("#" + fileId + "").remove();
