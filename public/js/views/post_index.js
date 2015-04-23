@@ -147,7 +147,7 @@
             if (currentUser) {
                 window.location.href = "user_detail.html?code=";
             } else {
-                $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl",{page:"http://fuwuhao.dianyingren.com/user_detail.html"}, function (res) {
+                $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl", {page: "http://fuwuhao.dianyingren.com/user_detail.html"}, function (res) {
                     window.location.href = res.authUrl;
                 })
             }
@@ -172,7 +172,7 @@
             if (currentUser) {
                 window.location.href = "post_save.html?code=";
             } else {
-                $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl",{page:"http://fuwuhao.dianyingren.com/post_save.html"}, function (res) {
+                $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl", {page: "http://fuwuhao.dianyingren.com/post_save.html"}, function (res) {
                     window.location.href = res.authUrl;
                 })
             }
@@ -285,8 +285,8 @@
                                     var minute = parseInt(publishtime / 60000);
                                     if (minute > 0) {
                                         times = minute + "分钟"
-                                    }else{
-                                        times="刚刚"
+                                    } else {
+                                        times = "刚刚"
                                     }
                                 }
                             }
@@ -318,8 +318,9 @@
     }
 
     function loadwx() {
-        var appId, jslist, noncestr, signature, timestamp, jsApiList;
+        var debug, appId, jslist, noncestr, signature, timestamp, jsApiList;
         $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=post_index", function (result) {
+            debug = result.debug;
             appId = result.appId;
             jslist = result.jsApiList;
             noncestr = result.nonceStr;
@@ -327,13 +328,39 @@
             timestamp = result.timestamp;
             jsApiList = result.jsApiList;
             wx.config({
-                debug: false,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                debug: debug,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                 appId: appId, // 必填，公众号的唯一标识
                 timestamp: timestamp, // 必填，生成签名的时间戳
                 nonceStr: noncestr, // 必填，生成签名的随机串
                 signature: signature,// 必填，签名，见附录1
                 jsApiList: jsApiList// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
             });
+            wx.ready(function () {
+                wx.onMenuShareTimeline({
+                    title: '万科三联书社',
+                    link: window.location.href,
+                    imgUrl: 'http://fuwuhao.dianyingren.com/imgs/wankelife.jpg',
+                    success: function () {
+
+                    },
+                    cancel: function () {
+
+                    }
+                });
+                wx.onMenuShareAppMessage({
+                    title: '万科三联书社',
+                    desc: '悦读 悦心 悦生活',
+                    link: window.location.href,
+                    type: 'link',
+                    imgUrl: 'http://fuwuhao.dianyingren.com/imgs/wankelife.jpg',
+                    success: function () {
+
+                    },
+                    cancel: function () {
+
+                    }
+                })
+            })
         });
     }
 
