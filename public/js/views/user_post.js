@@ -4,7 +4,26 @@
     var postview
     loadwx();
     $("#arrow").hide();
-    loading(clickevent());
+    loading(function(){
+        $(".Publish").on("click", function () {
+            postview = $(this).attr("value");
+            alert(postview);
+        });
+        //$("#users").on("click", function () {
+        //    window.location.href = "user_detail.html";
+        //});
+        $(".imgpreview").on("click",function(){
+            var cur= $(this).attr("src");
+            var  url=$(this).parent().attr("value");
+            var arr=url.split(",");
+            wx.previewImage({
+                current:cur, // 当前显示的图片链接
+                urls:arr// 需要预览的图片链接列表
+            });
+            event.stopPropagation();
+        });
+        $(".imgpreview").removeClass("imgpreview");
+    });
     $("#foots").on("click", function () {
         var currentUser = AV.User.current();
         if (currentUser) {
@@ -27,7 +46,26 @@
             $("#arrow").hide().removeClass("am-animation-fade");
         }
         if (scrollTop + newheight + 200 >= htmlHeight) {
-            loading(clickevent());
+            loading(function(){
+                $(".Publish").on("click", function () {
+                    postview = $(this).attr("value");
+                    alert(postview);
+                });
+                //$("#users").on("click", function () {
+                //    window.location.href = "user_detail.html";
+                //});
+                $(".imgpreview").on("click",function(){
+                    var cur= $(this).attr("src");
+                    var  url=$(this).parent().attr("value");
+                    var arr=url.split(",");
+                    wx.previewImage({
+                        current:cur, // 当前显示的图片链接
+                        urls:arr// 需要预览的图片链接列表
+                    });
+                    event.stopPropagation();
+                });
+                $(".imgpreview").removeClass("imgpreview");
+            });
         }
     });
 
@@ -140,26 +178,9 @@
 
     }
 
-    function clickevent(){
-        $(".Publish").on("click", function () {
-            postview = $(this).attr("value");
-            alert(postview);
-        });
-        //$("#users").on("click", function () {
-        //    window.location.href = "user_detail.html";
-        //});
-        $(".imgpreview").on("click",function(){
-            var cur= $(this).attr("src");
-            var  url=$(this).parent().attr("value");
-            var arr=url.split(",");
-            wx.previewImage({
-                current:cur, // 当前显示的图片链接
-                urls:arr// 需要预览的图片链接列表
-            });
-            event.stopPropagation();
-        });
-        $(".imgpreview").removeClass("imgpreview");
-    }
+    //function clickevent(){
+    //
+    //}
 
 
     function destroy(postid){
