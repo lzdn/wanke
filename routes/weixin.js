@@ -129,14 +129,9 @@ router.post('/sendMessage', function (req, res) {
 });
 
 router.post('/uploadImage', function (req, res) {
-    console.log(req.body);
-    console.log(typeof(req.body));
 
-    var body = JSON.parse(req.body);
-    //userId = body.userId,
-    //serverIds = body.serverIds;
-    console.log("userId" + body.userId);
-    console.log("serverIds" + body.serverIds.length);
+    console.log("userId" + req.body.userId);
+    console.log("serverIds" + req.body.serverIds.length);
 
     //if (!userId) {
     //    return res.json("参数\"userId\"不能为空！");
@@ -146,7 +141,7 @@ router.post('/uploadImage', function (req, res) {
     //}
 
 
-    body.serverIds.forEach(function (e) {
+    req.body.serverIds.forEach(function (e) {
         api.getMedia(e, function (err, result, res) {
             if (err) {
                 return res.json("err:" + err);
