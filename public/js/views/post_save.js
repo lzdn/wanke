@@ -15,9 +15,7 @@ $(function () {
     }
 
     dataLoad(function () {
-        $("#usr-sbm-s").on("click", function () {
-            window.location.href = "post_index.html";
-        });
+
         //wx.ready(function () {
         //   // alert("绑定事件:隐藏菜单");
         //    wx.hideOptionMenu();
@@ -59,6 +57,9 @@ $(function () {
                     savecontent()
                 },
                 onCancel: function () {
+                    $("#usr-sbm-s").on("click", function () {
+                        window.location.href = "post_index.html";
+                    });
                 }
             });
         }
