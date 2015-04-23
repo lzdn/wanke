@@ -15,6 +15,9 @@
         });
         $("#doc-select-1").change(function () {
             $("#usr-sbm-sub").removeClass("am-disabled");
+            alert("gaibaian");
+            alert($(this).val());
+            alert(objectId);
             $(".Starthomes").remove();
             var home = AV.Object.extend("home");
             var query2 = new AV.Query(home);
