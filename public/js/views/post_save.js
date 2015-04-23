@@ -108,7 +108,7 @@ $(function () {
                     postc.save({
                         content: aUserval2,
                         tagkey: tag,
-                        relationimgs: fileIds,
+                        relationimgs: fileurls,
                         username: user
                     }, {
                         success: function (object) {
@@ -136,7 +136,7 @@ $(function () {
                                     postc.save({
                                         content: aUserval2,
                                         tagkey: tag,
-                                        //imgs: relation,
+                                        relationimgs: fileurls,
                                         username: user
                                     }, {
                                         success: function (object) {
@@ -250,8 +250,8 @@ $(function () {
                         $("#addimg").show();
                         $("#usr-sbm-sub").removeClass("am-disabled");
                         fileurls.push(fileurl);
-                        alert(fileId+"dssdfsdfdsfsdfdsfsdfsdfsdf");
-                        alert(fileurl+"53465453153145312135121212121");
+                        alert(fileId);
+                        alert(fileurl);
                         $("<div id=\"" + fileurl + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + fileurl + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div>").prependTo("#imgwall");
                         $("#destroy" + fileurl + "").on("click", function () {
                             fileurls.splice(jQuery.inArray(fileurl, fileurls), 1);
