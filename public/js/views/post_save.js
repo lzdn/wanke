@@ -45,7 +45,9 @@ $(function () {
             if ($("#doc-ta-1").val() != "") {
                 $("#usr-sbm-sub").removeClass("am-disabled");
             } else {
-                $("#usr-sbm-sub").addClass("am-disabled");
+                if ($(".imgnav").length == 0){
+                    $("#usr-sbm-sub").addClass("am-disabled");
+                }
             }
         }, 100);
     });
@@ -100,8 +102,6 @@ $(function () {
             success: function (user) {
                 phonenumber = user.get('mobilePhoneNumber');
                 if (phonenumber) {
-                    alert("fileIds" + fileIds);
-                    alert("userid" + userid);
                     var aUserval2 = $("#doc-ta-1").val();
                     var tag = new tags();
                     tag.id = newtag;
@@ -114,7 +114,6 @@ $(function () {
                         username: user
                     }, {
                         success: function (object) {
-                            alert("发表成功");
                             window.location.href = "post_index.html"
                         }
                     });
@@ -238,7 +237,6 @@ $(function () {
             isShowProgressTips: 1,
             success: function (img) {
                 var imgserverId=img.serverId
-                alert(imgserverId);
                 $.ajax({
                     method: "POST",
                     url: "http://fuwuhao.dianyingren.com/weixin/uploadImage",
@@ -251,7 +249,7 @@ $(function () {
                         var fileId = data.fileId;
                         // Play with returned data in JSON format
                         $("#addimg").show();
-                        alert(fileId);
+                        $("#usr-sbm-sub").removeClass("am-disabled");
                         fileIds.push(fileId);
                         $("<div id=\"" + fileId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + fileId + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div>").prependTo("#imgwall");
                         $("#destroy" + fileId + "").on("click", function () {
@@ -259,6 +257,9 @@ $(function () {
                             $("#" + fileId + "").remove();
                             if ($(".imgnav").length == 0) {
                                 $("#addimg").hide();
+                                if ($("#doc-ta-1").val() == ""){
+                                    $("#usr-sbm-sub").addClass("am-disabled");
+                                }
                             }
                         });
                     },
