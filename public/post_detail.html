@@ -50,6 +50,7 @@
                 <span class="time am-sans-serif">发布于{{this.time}}前</span>
             </div>
         </div>
+        <hr data-am-widget="divider" style="" class="am-divider "/>
 {{/each}}
 </script>
 
@@ -60,12 +61,15 @@
     <div id="registration">
         <p>已报名:</p>
         <div id="headtle">
-
+            <script type="text/x-handlebars-template" id="relationuser">
+                {{#each relationuser}}
+            <img src={{this.url}} value= {{this.usersid}}&{{this.phonenumber}} class="am-radius">
+                {{/each}}
+            </script>
         </div>
     </div>
-
 </div>
-
+    <hr data-am-widget="divider" style="" class="am-divider"/>
     <div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
         <div class="am-modal-dialog">
             <div class="am-modal-bd">
@@ -94,25 +98,28 @@
     <!--})();-->
 <!--</script>-->
 
+    <div data-am-widget="duoshuo" class="am-duoshuo am-duoshuo-default" data-ds-short-name="amazeui">
+        <div class="ds-thread"></div>
+    </div>
+    <hr data-am-widget="divider" style="" class="am-divider"/>
 
-
-<!--<div data-am-widget="duoshuo" class="am-duoshuo am-duoshuo-primary" data-ds-short-name="55223dcfe4b0cd5b62664791">-->
+<!--<div data-am-widget="duoshuo" class="am-duoshuo am-duoshuo-primary" data-ds-short-name="55223dcfe4b0cd5b62">-->
     <!--<div class="ds-thread"></div>-->
 <!--</div>-->
-<div id="thread">
-    <script type="text/javascript">
-        var duoshuoQuery = {short_name: "sunshuang"};
-        (function () {
-            var ds = document.createElement('script');
-            ds.type = 'text/javascript';
-            ds.async = true;
-            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-            ds.charset = 'UTF-8';
-            (document.getElementsByTagName('head')[0]
-            || document.getElementsByTagName('body')[0]).appendChild(ds);
-        })();
-    </script>
-</div>
+<!--<div id="thread">-->
+    <!--<script type="text/javascript">-->
+        <!--var duoshuoQuery = {short_name: "sunshuang"};-->
+        <!--(function () {-->
+            <!--var ds = document.createElement('script');-->
+            <!--ds.type = 'text/javascript';-->
+            <!--ds.async = true;-->
+            <!--ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';-->
+            <!--ds.charset = 'UTF-8';-->
+            <!--(document.getElementsByTagName('head')[0]-->
+            <!--|| document.getElementsByTagName('body')[0]).appendChild(ds);-->
+        <!--})();-->
+    <!--</script>-->
+<!--</div>-->
 
 
 <!-- <div data-am-widget="duoshuo" class="am-duoshuo am-duoshuo-default" data-ds-short-name="amazeui">
