@@ -3,7 +3,7 @@
         loading(function () {
             $(".shopcontent").on("click", function () {
                 var shopid = $(this).attr("value");
-                window.location.href = "shop_content.html?" + shopid + "";
+                window.location.href = "shop_content.html?id=" + shopid;
             });
 
             $("#users").on("click", function () {

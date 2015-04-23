@@ -1,5 +1,5 @@
 (function ($) {
-    var shopid = window.location.search.split('?')[1];
+    var shopid = $.query.get('id');
     //alert(shopid);
     loadwx(function () {
         loading(function () {
