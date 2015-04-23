@@ -50,8 +50,9 @@ $(function () {
         }, 100);
     });
     $("#usr-sbm-s").on("click", function () {
+        var aimglength=$(".imgnav");
         var aUserval3 = $("#doc-ta-1").val();
-        if (aUserval3 != "") {
+        if (aUserval3 != ""||aimglength.length!="") {
             $("#modal-confirm").modal({
                 onConfirm: function () {
                     savecontent()
@@ -60,6 +61,8 @@ $(function () {
                         window.location.href = "post_index.html";
                 }
             });
+        }else{
+            window.location.href = "post_index.html";
         }
     });
     $("#usr-sbm-sub").on("click", function () {
