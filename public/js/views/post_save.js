@@ -10,16 +10,14 @@ $(function () {
     if (saveurl.indexOf("=") > 1) {
         userlog = window.location.search.split('=')[1];
         code = userlog.split("&")[0];
-        alert(code);
         id = ""
     }
 
     dataLoad(function () {
 
-        //wx.ready(function () {
-        //   // alert("绑定事件:隐藏菜单");
-        //    wx.hideOptionMenu();
-        //});
+        wx.ready(function () {
+            wx.hideOptionMenu();
+        });
 
         var aNav = document.getElementsByClassName("am-btn-extend");
         aNav[0].className = "am-btn-extend am-btn am-round am-btn-primary";
@@ -87,7 +85,6 @@ $(function () {
         wx.chooseImage({
             success: function (res) {
                 var localIds = res.localIds;
-                alert(localIds);
                 for (var i = 0; i < localIds.length; i++) {
                     uploadIds(localIds[i]);
                 }
@@ -142,7 +139,6 @@ $(function () {
                                         username: user
                                     }, {
                                         success: function (object) {
-                                            alert("发表成功");
                                             window.location.href = "post_index.html"
                                         }
                                     });
@@ -237,7 +233,6 @@ $(function () {
             isShowProgressTips: 1,
             success: function (img) {
                 var imgserverId=img.serverId
-                alert(imgserverId);
                 $.ajax({
                     method: "POST",
                     url: "http://fuwuhao.dianyingren.com/weixin/uploadImage",
@@ -252,7 +247,6 @@ $(function () {
                         $("#addimg").show();
                         $("#usr-sbm-sub").removeClass("am-disabled");
                         fileIds.push(fileId);
-                        alert(fileId);
                         $("<div id=\"" + fileId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + fileId + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div>").prependTo("#imgwall");
                         $("#destroy" + fileId + "").on("click", function () {
                             fileIds.splice(jQuery.inArray(fileId, fileIds), 1);
@@ -274,7 +268,6 @@ $(function () {
         });
     }
 });
-
 
 
 
