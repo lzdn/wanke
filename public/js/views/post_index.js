@@ -341,10 +341,8 @@
                     link: window.location.href,
                     imgUrl: 'http://fuwuhao.dianyingren.com/imgs/wankelife.jpg',
                     success: function () {
-
                     },
                     cancel: function () {
-
                     }
                 });
                 wx.onMenuShareAppMessage({
@@ -354,10 +352,8 @@
                     type: 'link',
                     imgUrl: 'http://fuwuhao.dianyingren.com/imgs/wankelife.jpg',
                     success: function () {
-
                     },
                     cancel: function () {
-
                     }
                 })
             })
