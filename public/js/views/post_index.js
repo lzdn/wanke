@@ -169,11 +169,10 @@
         $(".imgpreview").removeClass("imgpreview");
         $("#foots").on("click", function () {
             var currentUser = AV.User.current();
-            alert(currentUser);
             if (currentUser) {
                 window.location.href = "post_save.html?code=";
             } else {
-                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=post_save", function (res) {
+                $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl",{page:"http://fuwuhao.dianyingren.com/post_save.html"}, function (res) {
                     window.location.href = res.authUrl;
                 })
             }
