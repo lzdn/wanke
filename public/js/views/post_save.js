@@ -5,7 +5,7 @@ $(function () {
     var tags = AV.Object.extend("tag");
     var newtag = 1;
     var code = "";
-    var serverIds = [];
+    var fileIds = [];
     var userlog, userid, queryobject, phonenumber, nickname
     if (saveurl.indexOf("=") > 1) {
         userlog = window.location.search.split('=')[1];
@@ -100,9 +100,8 @@ $(function () {
             success: function (user) {
                 phonenumber = user.get('mobilePhoneNumber');
                 if (phonenumber) {
-                    alert("serverIds" + serverIds);
+                    alert("fileIds" + fileIds);
                     alert("userid" + userid);
-
                     var aUserval2 = $("#doc-ta-1").val();
                     var tag = new tags();
                     tag.id = newtag;
@@ -111,7 +110,7 @@ $(function () {
                     postc.save({
                         content: aUserval2,
                         tagkey: tag,
-                        //imgs: relation,
+                        relationimgs: fileIds,
                         username: user
                     }, {
                         success: function (object) {
@@ -251,11 +250,11 @@ $(function () {
                         // Play with returned data in JSON format
                         $("#addimg").show();
                         var serverId = img.serverId; // 返回图片的服务器端ID
-                        serverIds.push(serverId);
-                        $("<div id=\"" + serverId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + serverId + "\" class=\"am-icon-close \" value=\"" + serverId + "\"  \"></a></div>").prependTo("#imgwall");
-                        $("#destroy" + serverId + "").on("click", function () {
-                            serverIds.splice(jQuery.inArray(serverId, serverIds), 1);
-                            $("#" + serverId + "").remove();
+                        fileIds.push(fileId);
+                        $("<div id=\"" + fileId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + fileId + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div>").prependTo("#imgwall");
+                        $("#destroy" + fileId + "").on("click", function () {
+                            fileIds.splice(jQuery.inArray(fileId, fileIds), 1);
+                            $("#" + fileId + "").remove();
                             if ($(".imgnav").length == 0) {
                                 $("#addimg").hide();
                             }
