@@ -247,8 +247,8 @@ $(function () {
                     }),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    success: function (fileId) {
-                        //var fileId = data.fileId;
+                    success: function (data) {
+                        var fileId = data.fileId;
                         // Play with returned data in JSON format
                         $("#addimg").show();
                         alert(fileId);
