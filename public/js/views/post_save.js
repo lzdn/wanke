@@ -85,7 +85,6 @@ $(function () {
         wx.chooseImage({
             success: function (res) {
                 var localIds = res.localIds;
-                alert(localIds);
                 for (var i = 0; i < localIds.length; i++) {
                     uploadIds(localIds[i]);
                 }
@@ -250,12 +249,10 @@ $(function () {
                         $("#addimg").show();
                         $("#usr-sbm-sub").removeClass("am-disabled");
                         fileurls.push(fileurl);
-                        alert(fileId);
-                        alert(fileurl);
-                        $("<div id=\"" + fileurl + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + fileurl + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div>").prependTo("#imgwall");
-                        $("#destroy" + fileurl + "").on("click", function () {
+                        $("<div id=\"" + fileId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + fileId + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div>").prependTo("#imgwall");
+                        $("#destroy" + fileId + "").on("click", function () {
                             fileurls.splice(jQuery.inArray(fileurl, fileurls), 1);
-                            $("#" + fileurl + "").remove();
+                            $("#" + fileId + "").remove();
                             if ($(".imgnav").length == 0) {
                                 $("#addimg").hide();
                                 if ($("#doc-ta-1").val() == ""){
