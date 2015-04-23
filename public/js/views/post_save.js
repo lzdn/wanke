@@ -102,54 +102,51 @@ $(function () {
                 phonenumber = user.get('mobilePhoneNumber');
                 if (phonenumber) {
                     alert(serverIds.length);
-<<<<<<< HEAD
                     alert(serverIds);
                     alert(userid);
-                    $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverIds:serverIds,userId:"55378dcfe4b0cafb0a1636e0"}, function (imgid) {
+                    $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverIds:serverIds,userId:""+userid+""}, function (imgid) {
                         alert(imgid);
-                        // relation.add(imgid);
-=======
-                    alert("serverIds" + serverIds);
-                    alert("userid" + userid);
-                    $.ajax({
-                        method: "POST",
-                        url: "http://fuwuhao.dianyingren.com/weixin/uploadImage",
-                        data: {
-                            serverIds: serverIds,
-                            userId: userid
-                        },
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (data) {
-                            // Play with returned data in JSON format
-                        },
-                        error: function (msg) {
-                            alert(msg);
-                        }
->>>>>>> origin/master
-                    });
-                    //$.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {
-                    //    serverIds: serverIds,
-                    //    userId: "" + userid + ""
-                    //}, function (imgid) {
-                    //    alert(imgid);
-                    //    // relation.add(imgid);
-                    //});
-                    var aUserval2 = $("#doc-ta-1").val();
-                    var tag = new tags();
-                    tag.id = newtag;
-                    var postc = new posts();
-                    var user = AV.User.current();
-                    postc.save({
-                        content: aUserval2,
-                        tagkey: tag,
-                        //imgs: relation,
-                        username: user
-                    }, {
-                        success: function (object) {
-                            alert("发表成功");
-                            window.location.href = "post_index.html"
-                        }
+                        alert("serverIds" + serverIds);
+                        alert("userid" + userid);
+                        $.ajax({
+                            method: "POST",
+                            url: "http://fuwuhao.dianyingren.com/weixin/uploadImage",
+                            data: {
+                                serverIds: serverIds,
+                                userId: userid
+                            },
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
+                                // Play with returned data in JSON format
+                            },
+                            error: function (msg) {
+                                alert(msg);
+                            }
+                        });
+                        //$.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {
+                        //    serverIds: serverIds,
+                        //    userId: "" + userid + ""
+                        //}, function (imgid) {
+                        //    alert(imgid);
+                        //    // relation.add(imgid);
+                        //});
+                        var aUserval2 = $("#doc-ta-1").val();
+                        var tag = new tags();
+                        tag.id = newtag;
+                        var postc = new posts();
+                        var user = AV.User.current();
+                        postc.save({
+                            content: aUserval2,
+                            tagkey: tag,
+                            //imgs: relation,
+                            username: user
+                        }, {
+                            success: function (object) {
+                                alert("发表成功");
+                                window.location.href = "post_index.html"
+                            }
+                        });
                     });
                 } else {
                     $('#my-prompt').modal({

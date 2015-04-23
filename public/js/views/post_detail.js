@@ -147,7 +147,6 @@
                     }
                 }
                 var otagkey = object.get("tagkey");
-
                 number = object.get("username").get("mobilePhoneNumber");
                 postId = object.get("username").id;
                 openid = object.get("username").get("authData").weixin.openid;
