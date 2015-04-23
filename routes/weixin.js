@@ -147,7 +147,7 @@ router.post('/uploadImage', function (req, res) {
             console.log(file);
             //res.json("success");
             // Execute any logic that should take place after the object is saved.
-            res.json({fileId: file.id});
+            res.json(file);
         }, function (error) {
             // The file either could not be read, or could not be saved to AV.
             res.json({error: error.message});
