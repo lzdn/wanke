@@ -5,8 +5,8 @@ $(function () {
     var tags = AV.Object.extend("tag");
     var newtag = 1;
     var code = "";
-    var serverIds=[];
-    var userlog, userid, queryobject,phonenumber, nickname
+    var serverIds = [];
+    var userlog, userid, queryobject, phonenumber, nickname
     if (saveurl.indexOf("=") > 1) {
         userlog = window.location.search.split('=')[1];
         code = userlog.split("&")[0];
@@ -50,18 +50,18 @@ $(function () {
         }, 100);
     });
     $("#usr-sbm-s").on("click", function () {
-        var aimglength=$(".imgnav");
+        var aimglength = $(".imgnav");
         var aUserval3 = $("#doc-ta-1").val();
-        if (aUserval3 != ""||aimglength.length!="") {
+        if (aUserval3 != "" || aimglength.length != "") {
             $("#modal-confirm").modal({
                 onConfirm: function () {
                     savecontent()
                 },
                 onCancel: function () {
-                        window.location.href = "post_index.html";
+                    window.location.href = "post_index.html";
                 }
             });
-        }else{
+        } else {
             window.location.href = "post_index.html";
         }
     });
@@ -85,12 +85,12 @@ $(function () {
         alert("kaishi ");
         wx.chooseImage({
             success: function (res) {
-                var  localIds = res.localIds;
+                var localIds = res.localIds;
                 $("#addimg").hide();
-                for(var i=0;i<localIds.length;i++){
+                for (var i = 0; i < localIds.length; i++) {
                     uploadIds(localIds[i]);
                 }
-                }
+            }
         });
     });
 
@@ -102,12 +102,39 @@ $(function () {
                 phonenumber = user.get('mobilePhoneNumber');
                 if (phonenumber) {
                     alert(serverIds.length);
+<<<<<<< HEAD
                     alert(serverIds);
                     alert(userid);
                     $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverIds:serverIds,userId:"55378dcfe4b0cafb0a1636e0"}, function (imgid) {
                         alert(imgid);
                         // relation.add(imgid);
+=======
+                    alert("serverIds" + serverIds);
+                    alert("userid" + userid);
+                    $.ajax({
+                        method: "POST",
+                        url: "http://fuwuhao.dianyingren.com/weixin/uploadImage",
+                        data: {
+                            serverIds: serverIds,
+                            userId: userid
+                        },
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (data) {
+                            // Play with returned data in JSON format
+                        },
+                        error: function (msg) {
+                            alert(msg);
+                        }
+>>>>>>> origin/master
                     });
+                    //$.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {
+                    //    serverIds: serverIds,
+                    //    userId: "" + userid + ""
+                    //}, function (imgid) {
+                    //    alert(imgid);
+                    //    // relation.add(imgid);
+                    //});
                     var aUserval2 = $("#doc-ta-1").val();
                     var tag = new tags();
                     tag.id = newtag;
@@ -136,7 +163,7 @@ $(function () {
                                         user.set('mobilePhoneNumber', e.data);
                                         user.save()
                                     }
-                                }).then(function(){
+                                }).then(function () {
                                     var aUserval2 = $("#doc-ta-1").val();
                                     var tag = new tags();
                                     tag.id = newtag;
@@ -221,7 +248,7 @@ $(function () {
                 AV.User._logInWith("weixin", {
                     "authData": res,
                     success: function (user) {
-                       userid=user.id
+                        userid = user.id
                         alert(userid)
                     },
                     error: function (err) {
@@ -242,20 +269,20 @@ $(function () {
 
     }
 
-    function uploadIds (localIds){
-            wx.uploadImage({
-            localId:localIds+"",
+    function uploadIds(localIds) {
+        wx.uploadImage({
+            localId: localIds + "",
             isShowProgressTips: 1,
             success: function (img) {
                 $("#addimg").show();
                 var serverId = img.serverId; // 返回图片的服务器端ID
                 serverIds.push(serverId);
                 $("<div id=\"" + serverId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + serverId + "\" class=\"am-icon-close \" value=\"" + serverId + "\"  \"></a></div>").prependTo("#imgwall");
-                $("#destroy" + serverId + "").on("click",function(){
+                $("#destroy" + serverId + "").on("click", function () {
                     alert(serverId);
-                    serverIds.splice(jQuery.inArray(serverId,serverIds),1);
+                    serverIds.splice(jQuery.inArray(serverId, serverIds), 1);
                     $("#" + serverId + "").remove();
-                    if($(".imgnav").length==0){
+                    if ($(".imgnav").length == 0) {
                         $("#addimg").hide();
                     }
                 });
