@@ -15,7 +15,7 @@
             alert("sadsadsadsa");
             alert( $(this).val());
             $("#usr-sbm-sub").removeClass("am-disabled");
-            $("#buildings").remove();
+            $(".Starthomes").remove();
             var home = AV.Object.extend("home");
             var query2 = new AV.Query(home);
             query2.equalTo("objectId", $(this).val());
@@ -30,12 +30,14 @@
                         buildings.push(building);
                     }
                     alert(buildings);
+
                     var $buildings = $('#buildings');
                     var source2 = $buildings.text();
                     var template2 = Handlebars.compile(source2);
                     var data2 = {buildings: buildings};
                     var html2 = template2(data2);
                     $buildings.before(html2);
+
                 }
             })
             //if (homeval != $(this).val()) {
