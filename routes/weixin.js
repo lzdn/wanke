@@ -57,13 +57,13 @@ router.post('/getJsConfig', function (req, res) {
     });
 });
 
-router.get('/getAuthUrl', function (req, res) {
-    var page = req.query.page;
+router.post('/getAuthUrl', function (req, res) {
+    var page = req.body.page;
     if (!page) {
         res.json("参数\"page\"不能为空！");
     }
 
-    var url = client.getAuthorizeURL(config.url + "/" + page + ".html", 'lijun2015', 'snsapi_userinfo');
+    var url = client.getAuthorizeURL(page, 'lijun2015', 'snsapi_userinfo');
 
     res.json({
         authUrl: url
