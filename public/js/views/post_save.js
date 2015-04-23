@@ -194,6 +194,7 @@ $(function () {
 //………………………………储备函数…………………………………………
     function dataLoad(callbak) {
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
+        alert(saveurl);
         $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + saveurl + ""}, function (result) {
             console.log(result);
             appId = result.appId;
@@ -230,6 +231,7 @@ $(function () {
                     };
                     tags.push(tag);
                 }
+                alert(tags);
                 var $tpl = $('#amz-tags');
                 var source = $tpl.text();
                 var template = Handlebars.compile(source);
