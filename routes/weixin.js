@@ -130,6 +130,7 @@ router.post('/sendMessage', function (req, res) {
 
 router.post('/uploadImage', function (req, res) {
     console.log(req.body);
+    console.log(typeof(req.body));
 
     var body = JSON.parse(req.body);
     //userId = body.userId,
@@ -156,7 +157,7 @@ router.post('/uploadImage', function (req, res) {
             var file = new AV.File(now.getTime() + ".png", result);
             file.save().then(function () {
                 console.log("success");
-
+                res.json("success")
                 // Execute any logic that should take place after the object is saved.
                 //res.json({fileId: file.id});
             }, function (error) {
