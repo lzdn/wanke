@@ -82,7 +82,6 @@ $(function () {
     $(".chooseImage").on("click", function () {
         //var ofileid;
         //var localIds;
-        alert("kaishi ");
         wx.chooseImage({
             success: function (res) {
                 var localIds = res.localIds;
@@ -175,14 +174,11 @@ $(function () {
                 }
             }
         });
-
     }
 
 //………………………………储备函数…………………………………………
     function dataLoad(callbak) {
-        alert("jiazai")
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
-        alert(saveurl);
         $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + saveurl + ""}, function (result) {
             console.log(result);
             appId = result.appId;
@@ -207,7 +203,6 @@ $(function () {
         var query = new AV.Query(tags);
         query.find({
             success: function (results) {
-                alert("chaxunchengg");
                 var tags = [];
                 newtag = results[0].id;
                 for (var i = 0; i < results.length; i++) {
@@ -220,7 +215,6 @@ $(function () {
                     };
                     tags.push(tag);
                 }
-                alert(tags);
                 var $tpl = $('#amz-tags');
                 var source = $tpl.text();
                 var template = Handlebars.compile(source);
@@ -236,8 +230,7 @@ $(function () {
                 AV.User._logInWith("weixin", {
                     "authData": res,
                     success: function (user) {
-                        userid = user.id
-                        alert(userid)
+                        userid = user.id;
                     },
                     error: function (err) {
                         console.dir(err);
@@ -252,9 +245,7 @@ $(function () {
                 success: function (user) {
                 }
             });
-            alert(userid);
         }
-
     }
 
     function uploadIds(localIds) {
@@ -267,24 +258,15 @@ $(function () {
                 serverIds.push(serverId);
                 $("<div id=\"" + serverId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + serverId + "\" class=\"am-icon-close \" value=\"" + serverId + "\"  \"></a></div>").prependTo("#imgwall");
                 $("#destroy" + serverId + "").on("click", function () {
-                    alert(serverId);
                     serverIds.splice(jQuery.inArray(serverId, serverIds), 1);
                     $("#" + serverId + "").remove();
                     if ($(".imgnav").length == 0) {
                         $("#addimg").hide();
                     }
                 });
-                // alert(serverId)
-                //$.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverId:""+serverId+""}, function (imgid) {
-                //    alert(imgid);
-                //    // relation.add(imgid);
-                //});
             }
         });
-
     }
-
-
 });
 
 
