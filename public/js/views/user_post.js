@@ -36,6 +36,7 @@
         window.location.href = "post_detail.html?id=" + postview + "";
     });
     $(".destroy").on("click",function(){
+        alert(postview)
         destroy(postview);
     });
 
@@ -142,6 +143,7 @@
     function clickevent(){
         $(".Publish").on("click", function () {
             postview = $(this).attr("value");
+            alert(postview);
         });
         //$("#users").on("click", function () {
         //    window.location.href = "user_detail.html";
