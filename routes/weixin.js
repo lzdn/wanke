@@ -43,6 +43,8 @@ router.post('/getJsConfig', function (req, res) {
     var param = {
         debug: false,
         jsApiList: [
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
             'chooseImage',
             'previewImage',
             'uploadImage'],
