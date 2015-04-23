@@ -1,5 +1,5 @@
 (function ($) {
-    var shopid = $.query.get('id');
+    var shopid = window.location.href.split('?')[1].split('&')[0].split('=')[1];
     //alert(shopid);
     loadwx(function () {
         loading(function () {
@@ -46,12 +46,13 @@
                 var html = template(data);
                 $tpl.before(html);
 
+                alert('http://fuwuhao.dianyingren.com/imgs/40' + logo.substr(logo.indexOf('/') + 1, 1) + '.PNG');
+
                 wx.onMenuShareTimeline({
                     title: shopname,
                     link: window.location.href,
-                    imgUrl: 'http://fuwuhao.dianyingren.com/imgs/40' + logo.substr(logo.indexOf('.PNG') - 1, 1) + '.PNG',
+                    imgUrl: 'http://fuwuhao.dianyingren.com/imgs/40' + logo.substr(logo.indexOf('/') + 1, 1) + '.PNG',
                     success: function () {
-                        alert(logo.substr(logo.indexOf('.PNG') - 1, 1));
                     },
                     cancel: function () {
                     }
@@ -61,7 +62,7 @@
                     desc: '地址: ' + shopaddress,
                     link: window.location.href,
                     type: 'link',
-                    imgUrl: 'http://fuwuhao.dianyingren.com/imgs/40' + logo.substr(logo.indexOf('.PNG') - 1, 1) + '.PNG',
+                    imgUrl: 'http://fuwuhao.dianyingren.com/imgs/40' + logo.substr(logo.indexOf('/') + 1, 1) + '.PNG',
                     success: function () {
                     },
                     cancel: function () {
