@@ -232,7 +232,6 @@
         var post = AV.Object.extend("post");
         var tags = AV.Object.extend("tags");
         var user = AV.Object.extend("User");
-        var file = AV.Object.extend("File");
         var query = new AV.Query(post);
         query.count({
             success: function (skip) {
@@ -254,21 +253,9 @@
                         var imgpattern = "";
                         for (var i = 0; i < arry.length; i++) {
                             var object = arry[i];
-                            console.log(object);
                             var imgs = object.get('relationimgs');
-                            for(var j=0; j<imgs.length;j++){
-                                var query = new AV.Query(file);
-                                query.equalTo("objectId", imgs[i]);
-                                query.find({
-                                    success:function(img){
-                                        console.log(img);
-                                        var imgurl=img.get("url");
-                                        console.log(imgurl);
-                                        imgurls.push(imgurl);
-                                    }
-                                });
-                            };
-
+                            var query = new AV.Query(File);
+                            query.equalTo("objectId", imgs[i]);
                             if (imgs) {
                                 if (imgs.length == 1) {
                                     imgpattern = "imgpatternone"
@@ -280,6 +267,7 @@
                                     imgpattern = "imgpatternthree"
                                 }
                             }
+                            console.log(object);
                             var avalue = object.id;
                             var content = object.get('content');
                             var otagkey = object.get("tagkey");
