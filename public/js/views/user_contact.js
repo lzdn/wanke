@@ -32,10 +32,13 @@
 
         $("#usr-sbm-sub").on("click", function () {
             phonenum = $("#phonenum").val();
+            alert("phonenum" + phonenum);
             if (bnum == 1) {
                 var query = new AV.Query(AV.User);
                 query.get(postview, {
                     success: function (user) {
+                        alert("phonenum" + user.get('mobilePhoneNumber'));
+
                         user.set('mobilePhoneNumber', phonenum);
                         user.save().then(function () {
                             window.location.href = "user_detail.html?" + postview + "";
