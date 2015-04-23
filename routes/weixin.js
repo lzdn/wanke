@@ -36,7 +36,7 @@ router.get('/', function (req, res, next) {
 router.post('/getJsConfig', function (req, res) {
     console.log(config);
     var url = req.body.url;
-    if (!url) {
+    if (!url && url == "") {
         res.json("参数\"page\"不能为空！");
     }
 
@@ -59,7 +59,7 @@ router.post('/getJsConfig', function (req, res) {
 
 router.post('/getAuthUrl', function (req, res) {
     var page = req.body.page;
-    if (!page) {
+    if (!page && page == "") {
         res.json("参数\"page\"不能为空！");
     }
 
@@ -73,7 +73,7 @@ router.post('/getAuthUrl', function (req, res) {
 router.post('/userSignUp', function (req, res) {
     var code = req.body.code,
         state = req.body.state;
-    if (!code) {
+    if (!code && code == "") {
         res.json("参数\"code\"不能为空！");
     }
 
@@ -95,10 +95,10 @@ router.post('/sendMessage', function (req, res) {
         postId = req.body.postId,
         text = "";
     console.log(req.body);
-    if (!userId) {
+    if (!userId && userId == "") {
         res.json("参数\"userId\"不能为空！");
     }
-    if (!postId) {
+    if (!postId && postId == "") {
         res.json("参数\"postId\"不能为空！");
     }
 
@@ -130,7 +130,7 @@ router.post('/sendMessage', function (req, res) {
 
 router.post('/uploadImage', function (req, res) {
     var serverId = req.body.serverId;
-    if (serverId == "") {
+    if (!serverId && serverId == "") {
         return res.json("参数\"serverId\"不能为空！");
     }
 
