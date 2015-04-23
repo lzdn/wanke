@@ -250,6 +250,7 @@ $(function () {
                         // Play with returned data in JSON format
                         $("#addimg").show();
                         var serverId = img.serverId; // 返回图片的服务器端ID
+                        alert(fileId);
                         fileIds.push(fileId);
                         $("<div id=\"" + fileId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + fileId + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div>").prependTo("#imgwall");
                         $("#destroy" + fileId + "").on("click", function () {
