@@ -285,6 +285,8 @@
                                     var minute = parseInt(publishtime / 60000);
                                     if (minute > 0) {
                                         times = minute + "分钟"
+                                    }else{
+                                        times="刚刚"
                                     }
                                 }
                             }
