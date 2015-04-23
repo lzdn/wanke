@@ -6,8 +6,11 @@
             $("#usr-sbm-sub").removeClass("am-disabled");});
         $("#doc-select-2").change(function () {
             $("#usr-sbm-sub").removeClass("am-disabled");});
-        $("#wxnum").change(function () {
-            $("#usr-sbm-sub").removeClass("am-disabled");});
+        $("#wxnum").keydown(function (){
+            setTimeout(function () {
+                $("#usr-sbm-sub").removeClass("am-disabled");
+            }, 100);
+        });
         $('#wxnum').val(user.get("housenumber"));
 
         $("#haederleft").on("click", function () {
