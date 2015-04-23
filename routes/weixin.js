@@ -134,14 +134,16 @@ router.post('/uploadImage', function (req, res) {
     var body = JSON.parse(req.body),
         userId = body.userId,
         serverIds = body.serverIds;
-    if (!userId) {
-        return res.json("参数\"userId\"不能为空！");
-    }
-    if (serverIds.length <= 0) {
-        return res.json("参数\"serverIds\"不能为空！");
-    }
+    console.log("userId" + userId);
+    console.log("serverIds" + serverIds);
 
-    console.log(serverIds);
+    //if (!userId) {
+    //    return res.json("参数\"userId\"不能为空！");
+    //}
+    //if (serverIds.length <= 0) {
+    //    return res.json("参数\"serverIds\"不能为空！");
+    //}
+
 
     serverIds.forEach(function (e) {
         api.getMedia(e, function (err, result, res) {
