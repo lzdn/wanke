@@ -193,6 +193,7 @@ $(function () {
 
 //………………………………储备函数…………………………………………
     function dataLoad(callbak) {
+        alert("jiazai")
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
         alert(saveurl);
         $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + saveurl + ""}, function (result) {
@@ -219,6 +220,7 @@ $(function () {
         var query = new AV.Query(tags);
         query.find({
             success: function (results) {
+                alert("chaxunchengg");
                 var tags = [];
                 newtag = results[0].id;
                 for (var i = 0; i < results.length; i++) {
