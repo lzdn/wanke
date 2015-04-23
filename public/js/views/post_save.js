@@ -250,8 +250,8 @@ $(function () {
                         $("#addimg").show();
                         $("#usr-sbm-sub").removeClass("am-disabled");
                         fileurls.push(fileurl);
-                        alert(fileId);
-                        alert(fileurl);
+                        alert(fileId+"dssdfsdfdsfsdfdsfsdfsdfsdf");
+                        alert(fileurl+"53465453153145312135121212121");
                         $("<div id=\"" + fileurl + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + fileurl + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div>").prependTo("#imgwall");
                         $("#destroy" + fileurl + "").on("click", function () {
                             fileurls.splice(jQuery.inArray(fileurl, fileurls), 1);
