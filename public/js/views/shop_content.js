@@ -2,10 +2,11 @@
     var shopid = window.location.search.split('?')[1];
     //alert(shopid);
     loadwx(function () {
-        loading(function () {
-            $("#users").on("click", function () {
-                window.location.href = "user_detail.html";
-            });
+
+    });
+    loading(function () {
+        $("#users").on("click", function () {
+            window.location.href = "user_detail.html";
         });
     });
 
@@ -98,7 +99,6 @@
                     jsApiList: jsApiList// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
                 });
                 wx.ready(function () {
-
                     callback();
                 })
             },
