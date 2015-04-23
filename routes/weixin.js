@@ -41,7 +41,7 @@ router.post('/getJsConfig', function (req, res) {
     }
 
     var param = {
-        debug: true,
+        debug: false,
         jsApiList: [
             'chooseImage',
             'previewImage',
