@@ -244,7 +244,7 @@ $(function () {
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (data) {
-                        var fileId = data.fileId;
+                        var fileId = data.id;
                         var fileurl= data.url;
                         // Play with returned data in JSON format
                         $("#addimg").show();
@@ -254,7 +254,7 @@ $(function () {
                         alert(fileurl);
                         $("<div id=\"" + fileurl + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + fileurl + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div>").prependTo("#imgwall");
                         $("#destroy" + fileurl + "").on("click", function () {
-                            fileIds.splice(jQuery.inArray(fileurl, fileurls), 1);
+                            fileurls.splice(jQuery.inArray(fileurl, fileurls), 1);
                             $("#" + fileurl + "").remove();
                             if ($(".imgnav").length == 0) {
                                 $("#addimg").hide();
