@@ -237,11 +237,13 @@ $(function () {
             localId: localIds + "",
             isShowProgressTips: 1,
             success: function (img) {
+                var imgserverId=img.serverId
+                alert(imgserverId);
                 $.ajax({
                     method: "POST",
                     url: "http://fuwuhao.dianyingren.com/weixin/uploadImage",
                     data: JSON.stringify({
-                        serverId: img.serverId
+                        serverId: imgserverId
                     }),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
