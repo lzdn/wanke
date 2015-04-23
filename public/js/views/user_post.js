@@ -32,7 +32,7 @@
     });
 
     $(".seecontent").on("click",function(){
-        window.location.href = "post_detail.html?" + postview + "";
+        window.location.href = "post_detail.html?id=" + postview + "";
     });
     $(".destroy").on("click",function(){
         destroy(postview);
