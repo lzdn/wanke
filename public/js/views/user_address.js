@@ -12,6 +12,8 @@
             window.location.href = "user_detail.html?code=";
         });
         $("#doc-select-1").change(function () {
+            alert("sadsadsadsa");
+            alert( $(this).val());
             $("#usr-sbm-sub").removeClass("am-disabled");
             $("#buildings").remove();
             var home = AV.Object.extend("home");
@@ -27,6 +29,7 @@
                         }
                         buildings.push(building);
                     }
+                    alert(buildings);
                     var $buildings = $('#buildings');
                     var source2 = $buildings.text();
                     var template2 = Handlebars.compile(source2);
