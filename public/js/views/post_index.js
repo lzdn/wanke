@@ -51,7 +51,7 @@
                             var posts = AV.Object.extend("post");
                             var query = new AV.Query(posts);
                             query.include("tagkey");
-                            query.include("imgs");
+                            query.include("relationimgs");
                             query.include("username");
                             query.equalTo("objectId", select[i].id);
                             query.find({
@@ -60,7 +60,7 @@
                                     var object = sele[0];
                                     console.log(object);
                                     var newtime = new Date().getTime();
-                                    var imgs = object.get('imgs');
+                                    var imgs = object.get('relationimgs');
                                     console.log(imgs);
                                     var avalue = object.id;
                                     var content = object.get('content');
@@ -297,7 +297,7 @@
                                 tag: tagvalue,
                                 time: times,
                                 value: avalue,
-                                img: relationimgs,
+                                img: imgs,
                                 pattern: imgpattern
                             };
                             posts.push(opost);
