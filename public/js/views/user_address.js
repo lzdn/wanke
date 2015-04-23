@@ -1,5 +1,4 @@
 (function ($) {
-    alert(postview);
     load(function (err, user) {
         var buliding;
         var homeval;
