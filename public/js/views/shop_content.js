@@ -49,7 +49,7 @@
                 wx.onMenuShareTimeline({
                     title: shopname,
                     link: window.location.href,
-                    imgUrl: 'http://fuwuhao.dianyingren.com/imgs/40*40' + logo.substr(logo.indexOf('.PNG') - 1, 1) + '.PNG',
+                    imgUrl: 'http://fuwuhao.dianyingren.com/imgs/40' + logo.substr(logo.indexOf('.PNG') - 1, 1) + '.PNG',
                     success: function () {
                         alert(logo.substr(logo.indexOf('.PNG') - 1, 1));
                     },
@@ -61,7 +61,7 @@
                     desc: '地址: ' + shopaddress,
                     link: window.location.href,
                     type: 'link',
-                    imgUrl: 'http://fuwuhao.dianyingren.com/imgs/40*40' + logo.substr(logo.indexOf('.PNG') - 1, 1) + '.PNG',
+                    imgUrl: 'http://fuwuhao.dianyingren.com/imgs/40' + logo.substr(logo.indexOf('.PNG') - 1, 1) + '.PNG',
                     success: function () {
                     },
                     cancel: function () {
