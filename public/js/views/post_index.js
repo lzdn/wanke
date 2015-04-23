@@ -3,14 +3,14 @@
     var skx = -5;
     var bload = 1;
     var length
-    $(".am-form-field").keydown(function () {
-        setTimeout(function () {
-            if ($(".am-form-field").val() == "" && bload == 0) {
-                // $(".Delete").empty();
+    $(".am-form-field").keydown(function(){
+        setTimeout(function(){
+            if( $(".am-form-field").val()==""&&bload==0){
+               // $(".Delete").empty();
                 $(".Publish").remove();
-                // $(".am-icon-spin-extend").remove();
+               // $(".am-icon-spin-extend").remove();
                 skx = -5;
-                loading(function () {
+                loading(function(){
                     $(".Publish").on("click", function () {
                         var postview = $(this).attr("value");
                         window.location.href = "post_detail.html?id=" + postview + "";
@@ -29,12 +29,12 @@
                 });
                 bload = 1;
             }
-        }, 20);
+        },20);
     });
     $(".am-input-group-label").on("click", function () {
         var val = $(".am-form-field").val();
         if (val != "") {
-            //  $(".Delete").empty();
+          //  $(".Delete").empty();
             AV.Query.doCloudQuery("select * from post where (content like \"" + val + "\")", {
                 success: function (result) {
                     var select = result.results;
@@ -67,7 +67,7 @@
                                     var otagkey = object.get("tagkey");
                                     var ousername = object.get("username").attributes.authData.weixin;
                                     var username = ousername.nickname;
-                                    var headimgurl = ousername.headimgurl;
+                                    var headimgurl=ousername.headimgurl;
                                     var tagvalue = otagkey.get("tagtitle");
                                     var oldtime = object.createdAt.getTime();
                                     var publishtime = newtime - oldtime;
@@ -89,7 +89,7 @@
                                     var osele = {
                                         name: username,
                                         usersay: content,
-                                        titleimg: headimgurl,
+                                        titleimg:headimgurl,
                                         tag: tagvalue,
                                         time: times,
                                         value: avalue,
@@ -102,7 +102,7 @@
                                     var data = {posts: posts};
                                     var html = template(data);
                                     $tpl.before(html);
-                                    clickevent();
+                                    clickevent ();
                                 }
                             })
                         }
@@ -147,7 +147,7 @@
             if (currentUser) {
                 window.location.href = "user_detail.html?code=";
             } else {
-                $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl", {page: "http://fuwuhao.dianyingren.com/user_details.html"}, function (res) {
+                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail", function (res) {
                     window.location.href = res.authUrl;
                 })
             }
@@ -270,7 +270,7 @@
                             var otagkey = object.get("tagkey");
                             var ousername = object.get("username").attributes.authData.weixin;
                             var username = ousername.nickname;
-                            var headimgurl = ousername.headimgurl;
+                            var headimgurl=ousername.headimgurl;
                             var tagvalue = otagkey.get("tagtitle");
                             var oldtime = object.createdAt.getTime();
                             var publishtime = newtime - oldtime;
@@ -292,7 +292,7 @@
                             var opost = {
                                 name: username,
                                 usersay: content,
-                                titleimg: headimgurl,
+                                titleimg:headimgurl,
                                 tag: tagvalue,
                                 time: times,
                                 value: avalue,
@@ -336,7 +336,7 @@
         });
     }
 
-    function clickevent() {
+    function clickevent (){
         $(".Publish").on("click", function () {
             var postview = $(this).attr("value");
             window.location.href = "post_detail.html?id=" + postview + "";

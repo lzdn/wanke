@@ -106,7 +106,7 @@
                 }, 100);
             } else {
                 alert("没有登录")
-                $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=user_detail", function (res) {
+                $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page="+saveurl+"", function (res) {
                     window.location.href = res.authUrl;
                 })
             }
