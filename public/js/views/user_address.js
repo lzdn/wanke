@@ -15,7 +15,7 @@
             $("#usr-sbm-sub").removeClass("am-disabled");
             alert("gaibaian");
             alert($(this).val());
-            //$(".Starthomes").remove();
+            $(".starthomes").remove();
             var home = AV.Object.extend("home");
             var query2 = new AV.Query(home);
             query2.equalTo("objectId", $(this).val());
