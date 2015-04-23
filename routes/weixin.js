@@ -129,35 +129,26 @@ router.post('/sendMessage', function (req, res) {
 });
 
 router.post('/uploadImage', function (req, res) {
+    var serverId = req.body.serverId;
+    if (serverId != "") {
+        return res.json("参数\"serverId\"不能为空！");
+    }
 
-    console.log("userId" + req.body.userId);
-    console.log("serverIds" + req.body.serverIds.length);
+    api.getMedia(serverId, function (err, result, response) {
+        if (err) {
+            return res.json("err:" + err);
+        }
 
-    //if (!req.body.userId) {
-    //    return res.json("参数\"userId\"不能为空！");
-    //}
-    //if (req.body.serverIds.length <= 0) {
-    //    return res.json("参数\"serverIds\"不能为空！");
-    //}
-
-    req.body.serverIds.forEach(function (e) {
-        api.getMedia(e, function (err, result, response) {
-            if (err) {
-                return res.json("err:" + err);
-            }
-            console.log(e);
-
-            var now = new Date();
-            var file = new AV.File(now.getTime() + ".png", result);
-            file.save().then(function (file) {
-                console.log(file);
-                //res.json("success");
-                // Execute any logic that should take place after the object is saved.
-                //res.json({fileId: file.id});
-            }, function (error) {
-                // The file either could not be read, or could not be saved to AV.
-                res.json({error: error.message});
-            });
+        var now = new Date();
+        var file = new AV.File(now.getTime() + ".png", result);
+        file.save().then(function (file) {
+            console.log(file);
+            //res.json("success");
+            // Execute any logic that should take place after the object is saved.
+            res.json({fileId: file.id});
+        }, function (error) {
+            // The file either could not be read, or could not be saved to AV.
+            res.json({error: error.message});
         });
     });
 });

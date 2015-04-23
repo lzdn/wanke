@@ -102,22 +102,7 @@ $(function () {
                 if (phonenumber) {
                     alert("serverIds" + serverIds);
                     alert("userid" + userid);
-                    $.ajax({
-                        method: "POST",
-                        url: "http://fuwuhao.dianyingren.com/weixin/uploadImage",
-                        data: JSON.stringify({
-                            serverIds: serverIds,
-                            userId: userid
-                        }),
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function (data) {
-                            // Play with returned data in JSON format
-                        },
-                        error: function (msg) {
-                            alert(msg);
-                        }
-                    });
+
                     var aUserval2 = $("#doc-ta-1").val();
                     var tag = new tags();
                     tag.id = newtag;
@@ -253,17 +238,34 @@ $(function () {
             localId: localIds + "",
             isShowProgressTips: 1,
             success: function (img) {
-                $("#addimg").show();
-                var serverId = img.serverId; // 返回图片的服务器端ID
-                serverIds.push(serverId);
-                $("<div id=\"" + serverId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + serverId + "\" class=\"am-icon-close \" value=\"" + serverId + "\"  \"></a></div>").prependTo("#imgwall");
-                $("#destroy" + serverId + "").on("click", function () {
-                    serverIds.splice(jQuery.inArray(serverId, serverIds), 1);
-                    $("#" + serverId + "").remove();
-                    if ($(".imgnav").length == 0) {
-                        $("#addimg").hide();
+                $.ajax({
+                    method: "POST",
+                    url: "http://fuwuhao.dianyingren.com/weixin/uploadImage",
+                    data: JSON.stringify({
+                        serverId: img.serverId
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        var fileId = data.fileId;
+                        // Play with returned data in JSON format
+                        $("#addimg").show();
+                        var serverId = img.serverId; // 返回图片的服务器端ID
+                        serverIds.push(serverId);
+                        $("<div id=\"" + serverId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + serverId + "\" class=\"am-icon-close \" value=\"" + serverId + "\"  \"></a></div>").prependTo("#imgwall");
+                        $("#destroy" + serverId + "").on("click", function () {
+                            serverIds.splice(jQuery.inArray(serverId, serverIds), 1);
+                            $("#" + serverId + "").remove();
+                            if ($(".imgnav").length == 0) {
+                                $("#addimg").hide();
+                            }
+                        });
+                    },
+                    error: function (msg) {
+                        alert(msg);
                     }
                 });
+
             }
         });
     }
