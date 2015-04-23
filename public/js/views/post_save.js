@@ -245,8 +245,8 @@ $(function () {
                     }),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    success: function (data) {
-                        var fileId = data.fileId;
+                    success: function (fileId) {
+                        //var fileId = data.fileId;
                         // Play with returned data in JSON format
                         $("#addimg").show();
                         var serverId = img.serverId; // 返回图片的服务器端ID
