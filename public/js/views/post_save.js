@@ -242,7 +242,8 @@ $(function () {
                     method: "POST",
                     url: "http://fuwuhao.dianyingren.com/weixin/uploadImage",
                     data: JSON.stringify({
-                        serverId: imgserverId
+                        serverId: imgserverId,
+                        userId:userid
                     }),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
