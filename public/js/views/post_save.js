@@ -93,52 +93,75 @@ $(function () {
 
     //…………………………保存心情 和 tagkey………………………………
     function savecontent() {
-
-        if (phonenumber) {
-            alert(serverIds.length);
-            alert(serverIds);
-            alert(userid);
-            $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverIds:serverIds,userId:"55378dcfe4b0cafb0a1636e0"}, function (imgid) {
-                alert(imgid);
-                // relation.add(imgid);
-            });
-            var aUserval2 = $("#doc-ta-1").val();
-            var tag = new tags();
-            tag.id = newtag;
-            var postc = new posts();
-            var user = AV.User.current();
-            postc.save({
-                content: aUserval2,
-                tagkey: tag,
-                //imgs: relation,
-                username: user
-            }, {
-                success: function (object) {
-                    alert("发表成功");
-                    window.location.href = "post_index.html"
-                }
-            });
-        } else {
-            $('#my-prompt').modal({
-                // relatedTarget: this,
-                onConfirm: function (e) {
-                    //e.data
-                    if (/^1[3|4|5|8]\d{9}$/.test(e.data)) {
-                        var query = new AV.Query(AV.User);
-                        query.get(usersid, {
-                            success: function (user) {
-                                user.set('mobilePhoneNumber', e.data);
-                                user.save()
+        var query = new AV.Query(AV.User);
+        query.get(userid, {
+            success: function (user) {
+                phonenumber = user.get('mobilePhoneNumber');
+                if (phonenumber) {
+                    alert(serverIds.length);
+                    alert(serverIds);
+                    alert(userid);
+                    $.post("http://fuwuhao.dianyingren.com/weixin/uploadImage", {serverIds:serverIds,userId:"55378dcfe4b0cafb0a1636e0"}, function (imgid) {
+                        alert(imgid);
+                        // relation.add(imgid);
+                    });
+                    var aUserval2 = $("#doc-ta-1").val();
+                    var tag = new tags();
+                    tag.id = newtag;
+                    var postc = new posts();
+                    var user = AV.User.current();
+                    postc.save({
+                        content: aUserval2,
+                        tagkey: tag,
+                        //imgs: relation,
+                        username: user
+                    }, {
+                        success: function (object) {
+                            alert("发表成功");
+                            window.location.href = "post_index.html"
+                        }
+                    });
+                } else {
+                    $('#my-prompt').modal({
+                        // relatedTarget: this,
+                        onConfirm: function (e) {
+                            //e.data
+                            if (/^1[3|4|5|8]\d{9}$/.test(e.data)) {
+                                var query = new AV.Query(AV.User);
+                                query.get(userid, {
+                                    success: function (user) {
+                                        user.set('mobilePhoneNumber', e.data);
+                                        user.save()
+                                    }
+                                }).then(function(){
+                                    var aUserval2 = $("#doc-ta-1").val();
+                                    var tag = new tags();
+                                    tag.id = newtag;
+                                    var postc = new posts();
+                                    var user = AV.User.current();
+                                    postc.save({
+                                        content: aUserval2,
+                                        tagkey: tag,
+                                        //imgs: relation,
+                                        username: user
+                                    }, {
+                                        success: function (object) {
+                                            alert("发表成功");
+                                            window.location.href = "post_index.html"
+                                        }
+                                    });
+                                });
+                            } else {
+                                alert("请输入正确的电话号码");
                             }
-                        });
-                    } else {
-                        alert("请输入正确的电话号码");
-                    }
-                },
-                onCancel: function (e) {
+                        },
+                        onCancel: function (e) {
+                        }
+                    });
                 }
-            });
-        }
+            }
+        });
+
     }
 
 //………………………………储备函数…………………………………………
@@ -209,7 +232,6 @@ $(function () {
             var query = new AV.Query(AV.User);
             query.get(userid, {
                 success: function (user) {
-                    phonenumber = user.get('mobilePhoneNumber');
                 }
             });
             alert(userid);
