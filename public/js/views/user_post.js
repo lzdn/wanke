@@ -32,6 +32,7 @@
     });
 
     $(".seecontent").on("click",function(){
+        alert(postview);
         window.location.href = "post_detail.html?id=" + postview + "";
     });
     $(".destroy").on("click",function(){
@@ -142,9 +143,9 @@
         $(".Publish").on("click", function () {
             postview = $(this).attr("value");
         });
-        $("#users").on("click", function () {
-            window.location.href = "user_detail.html";
-        });
+        //$("#users").on("click", function () {
+        //    window.location.href = "user_detail.html";
+        //});
         $(".imgpreview").on("click",function(){
             var cur= $(this).attr("src");
             var  url=$(this).parent().attr("value");
