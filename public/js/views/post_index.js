@@ -242,7 +242,7 @@
                 }
                 query.limit(5).skip(skx);
                 query.include("tagkey");
-                query.include("imgs");
+                query.include("relationimgs");
                 query.include("username");
                 query.find({
                     success: function (arry) {
@@ -251,7 +251,7 @@
                         var imgpattern = "";
                         for (var i = 0; i < arry.length; i++) {
                             var object = arry[i];
-                            var imgs = object.get('imgs');
+                            var imgs = object.get('relationimgs');
                             if (imgs) {
                                 if (imgs.length == 1) {
                                     imgpattern = "imgpatternone"
@@ -297,7 +297,7 @@
                                 tag: tagvalue,
                                 time: times,
                                 value: avalue,
-                                img: imgs,
+                                img: relationimgs,
                                 pattern: imgpattern
                             };
                             posts.push(opost);
