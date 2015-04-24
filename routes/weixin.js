@@ -104,31 +104,38 @@ router.post('/sendMessage', function (req, res) {
         res.json("参数\"postId\"不能为空！");
     }
 
-    var query = new AV.Query(AV.User);
-    query.get(userId, {
-        success: function (user) {
-            // Do stuff
-            text = "活动提醒\n" +
-            "有人报名了您发起的活动\n" +
-            "姓名:" + user.get("authData").weixin.nickname + "\n" +
-            "联系方式:" + user.get("mobilePhoneNumber") + "\n" +
-            "\n" +
-            "<a href=\"http://fuwuhao.dianyingren.com/post_details.html?id=" + postId + "\">点击查看详情</a>"
-            "\n";
-            console.log(user.get("authData").weixin);
-            console.log(user.get("authData").weixin.openid);
+    var post = new AV.Object.extend('post');
+    var post_query = new AV.Query(post);
+    post_query.get(postId, function (post) {
+        var openId = post.get('username').get('authData').weixin.openid
+        var query = new AV.Query(AV.User);
+        query.get(userId, {
+            success: function (user) {
+                // Do stuff
+                text = "活动提醒\n" +
+                "有人报名了您发起的活动\n" +
+                "\n" +
+                "姓名:" + user.get("authData").weixin.nickname + "\n" +
+                "联系方式:" + user.get("mobilePhoneNumber") + "\n" +
+                "\n" +
+                "<a href=\"http://fuwuhao.dianyingren.com/post_details.html?id=" + postId + "\">点击查看详情</a>"
+                "\n";
+                console.log(user.get("authData").weixin);
+                console.log(user.get("authData").weixin.openid);
 
-            api.sendText(user.get("authData").weixin.openid, text, function (err, result) {
-                if (err) {
-                    res.json(err);
-                }
+                api.sendText(openId, text, function (err, result) {
+                    if (err) {
+                        res.json(err);
+                    }
 
-                console.log(result);
+                    console.log(result);
 
-                res.json(result);
-            });
-        }
+                    res.json(result);
+                });
+            }
+        });
     });
+
 });
 
 router.post('/uploadImage', function (req, res) {
