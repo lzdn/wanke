@@ -26,37 +26,7 @@ var client = new OAuth(config.appId, config.appSecret, function (openid, callbac
     fs.writeFile(openid + ':access_token.txt', JSON.stringify(token), callback);
 });
 
-var api = new API(config.appId, config.appSecret, function (callback) {
-    var WeiXinConfig = AV.Object.extend('config');
-    var query = new AV.Query(WeiXinConfig);
-    query.find({
-        success: function (results) {
-            if (results[0]) {
-                callback({msg: "没有token"})
-            }
-            //console.log("results:" + results);
-            //console.log("读取token成功 " + results[0].get('token'));
-            //callback(null, results[0].get('token'));
-        },
-        error: function (error) {
-            callback(error)
-        }
-    });
-}, function (token, callback) {
-    var WeiXinConfig = AV.Object.extend('config');
-    var weixinconfig = new WeiXinConfig();
-    weixinconfig.set('token', token);
-    weixinconfig.save(null, {
-        success: function (weixinconfig) {
-            console.log("保存token成功 " + weixinconfig);
-            callback(null);
-        },
-        error: function (object, error) {
-            callback(error)
-        }
-    })
-});
-api.setOpts({timeout: 15000});
+var api = new API(config.appId, config.appSecret);
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -81,15 +51,11 @@ router.post('/getJsConfig', function (req, res) {
         url: url
     };
     console.log(param);
-    api.getLatestToken(function (err, token) {
-        console.log("err" + err);
-        console.log("token" + token);
-        api.getJsConfig(param, function (err, result) {
-            console.log(err);
-            console.log('------------------------------');
-            console.log(result);
-            res.json(result);
-        });
+    api.getJsConfig(param, function (err, result) {
+        console.log(err);
+        console.log('------------------------------');
+        console.log(result);
+        res.json(result);
     });
 });
 
@@ -159,16 +125,14 @@ router.post('/sendMessage', function (req, res) {
                 console.log(user.get("authData").weixin);
                 console.log(user.get("authData").weixin.openid);
 
-                api.getLatestToken(function () {
-                    api.sendText(openId, text, function (err, result) {
-                        if (err) {
-                            res.json(err);
-                        }
+                api.sendText(openId, text, function (err, result) {
+                    if (err) {
+                        res.json(err);
+                    }
 
-                        console.log(result);
+                    console.log(result);
 
-                        res.json(result);
-                    });
+                    res.json(result);
                 });
             }
         });
