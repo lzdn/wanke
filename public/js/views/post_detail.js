@@ -2,14 +2,15 @@
     var saveurl = window.location.href;
     var number = "";
     var code = "";
-    var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid,relationuser,postview;
-    if (saveurl.split("=").length-1>1) {
+    var relationuser = [];
+    var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid, postview;
+    if (saveurl.split("=").length - 1 > 1) {
         userlog = window.location.search.split('=')[2];
-        code= userlog.split("&")[0];
+        code = userlog.split("&")[0];
         postview = window.location.search.split('=')[1].split("&")[0];
         alert(code);
-    }else{
-            postview = window.location.search.split('=')[1];
+    } else {
+        postview = window.location.search.split('=')[1];
     }
     alert(postview);
     loadwx();
@@ -53,7 +54,7 @@
                         $(" <img src=\"" + imgurl + "\" value=\" " + usersid + "&" + phonenumber + " \" class=\"am-radius\">").appendTo("#headtle");
                         //alert(usersid);
                         // alert(postId);
-                        
+
                         $.ajax({
                             method: "POST",
                             url: "http://fuwuhao.dianyingren.com/weixin/sendMessage",
@@ -64,7 +65,7 @@
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function (data) {
-                              alert(data);
+                                alert(data);
                             },
                             error: function (msg) {
                                 alert(msg);
@@ -111,7 +112,7 @@
                     method: "POST",
                     url: "http://fuwuhao.dianyingren.com/weixin/getAuthUrl",
                     data: JSON.stringify({
-                        page:saveurl
+                        page: saveurl
                     }),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -150,7 +151,7 @@
                 console.log(object);
                 var content = object.get('content');
                 var imgs = object.get('relationimgs');
-                relationuser=object.get("relationuser");
+                relationuser = object.get("relationuser");
                 if (imgs) {
                     if (imgs.length == 1) {
                         imgpattern = "imgpatternone"
@@ -185,8 +186,8 @@
                         var minute = parseInt(publishtime / 60000);
                         if (minute > 0) {
                             times = minute + "分钟"
-                        }else{
-                            times="刚刚"
+                        } else {
+                            times = "刚刚"
                         }
                     }
                 }
@@ -201,7 +202,6 @@
                     pattern: imgpattern
                 };
                 tags.push(opost);
-                console.log(tags);
                 var $tpl2 = $('#amz-tags');
                 var source2 = $tpl2.text();
                 var template2 = Handlebars.compile(source2);
@@ -210,7 +210,7 @@
                 $tpl2.before(html2);
 
                 var $tpl = $('#relationuser');
-                var source= $tpl.text();
+                var source = $tpl.text();
                 var template = Handlebars.compile(source);
                 var data = {relationuser: relationuser};
                 var html = template(data);
@@ -218,6 +218,21 @@
 
 
                 callbak();
+                if (relationuser) {
+                    var currentUser = AV.User.current();
+                    if (currentUser) {
+                        usersid = currentUser.id;
+                        alert(usersid);
+                        for (var i = 0; i < relationuser.length; i++) {
+                            alert("baomingid" + usersid);
+                            alert(relationuser[i].id);
+                            if (relationuser[i].id == usersid) {
+                                alert("已报名");
+                            }
+                        }
+                    }
+                }
+
             }
 
         });
@@ -242,19 +257,6 @@
                     }
                 })
             });
-        }
-
-        var currentUser = AV.User.current();
-        if (currentUser) {
-            usersid = currentUser.id;
-            alert("baomingid"+usersid)
-            for(var i=0; i<relationuser.length;i++){
-                alert("baomingid"+usersid);
-                alert(relationuser[i].id);
-                if(relationuser[i].id==usersid){
-                    alert("已报名");
-                }
-            }
         }
 
 
