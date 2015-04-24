@@ -9,7 +9,7 @@
             $("#users").on("click", function () {
                 var currentUser = AV.User.current();
                 if (currentUser) {
-                    window.location.href = "user_detail.html?" + currentUser.id + "";
+                    window.location.href = "user_detail.html?code=";
                 } else {
                     $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl", {page: "http://fuwuhao.dianyingren.com/user_detail.html"}, function (res) {
                         window.location.href = res.authUrl;

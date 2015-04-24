@@ -167,3 +167,7 @@ body{
 #users :hover{
     cursor:pointer;
 }
+#null{
+    text-align: center;
+    margin-top:20px;
+}

@@ -6,11 +6,12 @@
     $("#arrow").hide();
     loading(function(){
         var adoremove = document.getElementsByClassName("doremove");
+        alert(adoremove.length);
         if(adoremove.length<5){
             $("#load").hide();
         }
         if(adoremove.length==0){
-            $(" <p class=\"null am-sans-serif\">暂时没有发表评论…………</p>").prependTo("#content");
+            $(" <p id=\"null\" class=\"am-sans-serif\">暂时没有发表评论</p>").prependTo("body");
         }
         $(".Publish").on("click", function () {
             postview = $(this).attr("value");
@@ -204,12 +205,12 @@
                         alert(destroyid);
                         $("#"+destroyid+"").remove();
                         var adoremove = document.getElementsByClassName("adoremove");
+                        alert(adoremove.length);
                         if(adoremove.length<5){
                             $("#load").hide();
                         }
                         if(adoremove.length==0){
-                            $(" <p class=\"null am-sans-serif\">暂时没有发表评论…………</p>").prependTo("#content");
-                        }
+                            $(" <p id=\"null\" class=\"am-sans-serif\">暂时没有发表评论</p>").prependTo("body");                        }
                     }
                 });
             }
