@@ -49,21 +49,17 @@ hr{
 }
 .advertising p{
     margin:0;
-    color:#ccc;
     text-align: center;
-    font-size:14px;
+    font-size:12px;
 }
 .advertising{
     padding:10px;
 }
 .advertising .brand{
-    font-size:16px;
+    font-size:14px;
 }
 .advertising .wx-title{
     margin:10px 0;
-}
-.advertising .email,.advertising .contact-us{
-    color:#000;
 }
 .qrcode{
     width: 260px;
