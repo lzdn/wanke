@@ -6,7 +6,7 @@ $(function () {
     var newtag = 1;
     var code = "";
     var fileurls = [];
-    var userlog, userid, queryobject, phonenumber, nickname
+    var userlog, userid, queryobject, phonenumber
     if (saveurl.split("=").length-1> 1) {
         userlog = window.location.search.split('=')[1];
         code = userlog.split("&")[0];
@@ -103,7 +103,6 @@ $(function () {
                     var tag = new tags();
                     tag.id = newtag;
                     var postc = new posts();
-                    var user = AV.User.current();
                     postc.save({
                         content: aUserval2,
                         tagkey: tag,
