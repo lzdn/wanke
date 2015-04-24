@@ -11,18 +11,7 @@
                 // $(".am-icon-spin-extend").remove();
                 skx = -5;
                 loading(function () {
-                    var adoremove = document.getElementsByClassName("doremove");
-                    if(adoremove.length<5){
-                        alert("小于五")
-                        $("#load").hide();
-                    }
-                    if(adoremove.length==0){
-                        alert("dengyu00")
-                        $(" <p class=\"null am-sans-serif\">暂时没有评论…………</p>").prependTo("#content");
-                    }
-                    if($(".Publish")==0){
-                        $(" <p class=\"null am-sans-serif\">暂时没有评论…………</p>").prependTo("#content");
-                    }
+
                     $(".Publish").on("click", function () {
                         var postview = $(this).attr("value");
                         window.location.href = "post_detail.html?id=" + postview + "";
@@ -147,6 +136,15 @@
     });
     $("#arrow").hide();
     loading(function () {
+        var adoremove = document.getElementsByClassName("doremove");
+        if(adoremove.length<5){
+            alert("小于五")
+            $("#load").hide();
+        }
+        if(adoremove.length==0){
+            alert("dengyu00")
+            $(" <p class=\"null am-sans-serif\">暂时没有发表评论…………</p>").prependTo("#content");
+        }
         //this will now be null
         //$(".title").on("click",function(){
         //    var postview=$(this).attr("value");

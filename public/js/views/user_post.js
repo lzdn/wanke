@@ -12,7 +12,7 @@
         }
         if(adoremove.length==0){
             alert("dengyu00")
-            $(" <p class=\"null am-sans-serif\">暂时没有评论…………</p>").prependTo("#content");
+            $(" <p class=\"null am-sans-serif\">暂时没有发表评论…………</p>").prependTo("#content");
         }
         $(".Publish").on("click", function () {
             postview = $(this).attr("value");
@@ -212,7 +212,7 @@
                         }
                         if(adoremove.length==0){
                             alert("dengyu00")
-                            $(" <p class=\"null am-sans-serif\">暂时没有评论…………</p>").prependTo("#content");
+                            $(" <p class=\"null am-sans-serif\">暂时没有发表评论…………</p>").prependTo("#content");
                         }
                     }
                 });
