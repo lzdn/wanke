@@ -109,66 +109,66 @@ $(function () {
                         btag= true;
                     }
                 }
-            }
-        });
-        var query = new AV.Query(AV.User);
-        query.get(userid, {
-            success: function (user) {
-                phonenumber = user.get('mobilePhoneNumber');
-                alert(btag);
-                if (phonenumber||btag==true) {
-                    var aUserval2 = $("#doc-ta-1").val();
-                    var tag = new tags();
-                    tag.id = newtag;
-                    var postc = new posts();
-                    var user = AV.User.current();
-                    postc.save({
-                        content: aUserval2,
-                        tagkey: tag,
-                        relationimgs: fileurls,
-                        username: user
-                    }, {
-                        success: function (object) {
-                            window.location.href = "post_index.html"
-                        }
-                    });
-                } else {
-                    $('#my-prompt').modal({
-                        // relatedTarget: this,
-                        onConfirm: function (e) {
-                            //e.data
-                            if (/^1[3|4|5|8]\d{9}$/.test(e.data)) {
-                                var query = new AV.Query(AV.User);
-                                query.get(userid, {
-                                    success: function (user) {
-                                        user.set('mobilePhoneNumber', e.data);
-                                        user.save()
+                var query = new AV.Query(AV.User);
+                query.get(userid, {
+                    success: function (user) {
+                        phonenumber = user.get('mobilePhoneNumber');
+                        alert(btag);
+                        if (phonenumber||btag==true) {
+                            var aUserval2 = $("#doc-ta-1").val();
+                            var tag = new tags();
+                            tag.id = newtag;
+                            var postc = new posts();
+                            var user = AV.User.current();
+                            postc.save({
+                                content: aUserval2,
+                                tagkey: tag,
+                                relationimgs: fileurls,
+                                username: user
+                            }, {
+                                success: function (object) {
+                                    window.location.href = "post_index.html"
+                                }
+                            });
+                        } else {
+                            $('#my-prompt').modal({
+                                // relatedTarget: this,
+                                onConfirm: function (e) {
+                                    //e.data
+                                    if (/^1[3|4|5|8]\d{9}$/.test(e.data)) {
+                                        var query = new AV.Query(AV.User);
+                                        query.get(userid, {
+                                            success: function (user) {
+                                                user.set('mobilePhoneNumber', e.data);
+                                                user.save()
+                                            }
+                                        }).then(function () {
+                                            var aUserval2 = $("#doc-ta-1").val();
+                                            var tag = new tags();
+                                            tag.id = newtag;
+                                            var postc = new posts();
+                                            var user = AV.User.current();
+                                            postc.save({
+                                                content: aUserval2,
+                                                tagkey: tag,
+                                                relationimgs: fileurls,
+                                                username: user
+                                            }, {
+                                                success: function (object) {
+                                                    window.location.href = "post_index.html"
+                                                }
+                                            });
+                                        });
+                                    } else {
+                                        alert("请输入正确的电话号码");
                                     }
-                                }).then(function () {
-                                    var aUserval2 = $("#doc-ta-1").val();
-                                    var tag = new tags();
-                                    tag.id = newtag;
-                                    var postc = new posts();
-                                    var user = AV.User.current();
-                                    postc.save({
-                                        content: aUserval2,
-                                        tagkey: tag,
-                                        relationimgs: fileurls,
-                                        username: user
-                                    }, {
-                                        success: function (object) {
-                                            window.location.href = "post_index.html"
-                                        }
-                                    });
-                                });
-                            } else {
-                                alert("请输入正确的电话号码");
-                            }
-                        },
-                        onCancel: function (e) {
+                                },
+                                onCancel: function (e) {
+                                }
+                            });
                         }
-                    });
-                }
+                    }
+                });
             }
         });
     }
