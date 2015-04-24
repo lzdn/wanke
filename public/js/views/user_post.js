@@ -9,7 +9,7 @@
             $("#load").hide();
         }
         if($(".Publish")==0){
-            $(" <p class=\"null am-sans-serif\">暂时没有评论…………</p>")
+            $(" <p class=\"null am-sans-serif\">暂时没有评论…………</p>").prependTo("#content");
         }
         $(".Publish").on("click", function () {
             postview = $(this).attr("value");
@@ -203,7 +203,7 @@
                         alert(destroyid);
                         $("#"+destroyid+"").remove();
                         if($(".Publish")==0){
-                            $(" <p class=\"null am-sans-serif\">暂时没有评论…………</p>")
+                            $(" <p class=\"null am-sans-serif\">暂时没有评论…………</p>").prependTo("#content");
                         }
                     }
                 });

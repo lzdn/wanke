@@ -13,8 +13,10 @@
                 loading(function () {
                     alert($(".Publish").length);
                     if($(".Publish").length<5){
-                        alert("yincang")
                         $("#load").hide();
+                    }
+                    if($(".Publish")==0){
+                        $(" <p class=\"null am-sans-serif\">暂时没有评论…………</p>").prependTo("#content");
                     }
                     $(".Publish").on("click", function () {
                         var postview = $(this).attr("value");
