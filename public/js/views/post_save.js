@@ -101,6 +101,7 @@ $(function () {
         query.find({
             success: function(results) {
                var marktag=results.get('tagtitle');
+                alert(marktag);
                 for(var i=0; i<marktags.length;i++){
                     if(marktags[i]==marktag){
                         btag= false;
@@ -114,7 +115,8 @@ $(function () {
         query.get(userid, {
             success: function (user) {
                 phonenumber = user.get('mobilePhoneNumber');
-                if (phonenumber||btag) {
+                alert(btag);
+                if (phonenumber||btag==true) {
                     var aUserval2 = $("#doc-ta-1").val();
                     var tag = new tags();
                     tag.id = newtag;
