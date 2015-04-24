@@ -137,6 +137,7 @@
     $("#arrow").hide();
     loading(function () {
         var adoremove = document.getElementsByClassName("doremove");
+        alert(adoremove.length);
         if(adoremove.length<5){
             $("#load").hide();
         }
