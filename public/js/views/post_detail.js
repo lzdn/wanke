@@ -210,7 +210,7 @@
                 callbak();
                 //if(tagvalue=="约吃"||tagvalue=="约玩"||tagvalue=="约运动"||tagvalue=="约聊")
                          for(var i=0;i<marktags.length;i++){
-                             if(tagvalue[i]==tagvalue){
+                             if(marktags[i]==tagvalue){
                                  alert("不隐藏");
                              }else{
                                  alert("隐藏")
