@@ -63,6 +63,7 @@
         </div>
         <div id="registration">
             <p>已报名:</p>
+
             <div id="headtle">
                 {{#if this.relationuser}}
                 {{#each this.relationuser}}
@@ -73,41 +74,43 @@
         </div>
     </div>
 
+    <hr data-am-widget="divider" style="" class="am-divider"/>
+    <div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
+        <div class="am-modal-dialog">
+            <div class="am-modal-bd">
+                您必须填写您的电话号码
+                <input type="text" class="am-modal-prompt-input">
+            </div>
+            <div class="am-modal-footer">
+                <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                <span class="am-modal-btn" data-am-modal-confirm>提交</span>
+            </div>
+        </div>
+    </div>
+    <hr data-am-widget="divider" style="" class="am-divider"/>
+    <div id="duoshuo">
+        <div data-am-widget="duoshuo" class="am-duoshuo am-duoshuo-default" data-ds-short-name="sunshuang">
+            <div class="ds-thread"></div>
+        </div>
+    </div>
+
+
+    <hr data-am-widget="divider" style="" class="am-divider"/>
+    <div class="advertising">
+        <p class="brand am-sans-serif">“北京VK生活馆”致力于为您提供舒心便利的服务，推荐给更多邻居让他们知道VK</p>
+
+        <p class="wx-title am-sans-serif">微信搜索公众号“北京VK生活馆”或者长按二维码识别</p>
+
+        <div class="qrcode">
+            <img src="imgs/wanke_2db.jpg" alt=""/>
+        </div>
+        <p class="contact-us am-sans-serif">联系我们请发送邮件至：</p>
+
+        <p class="email am-sans-serif">kefu@wankechangyang.com</p>
+    </div>
     {{/each}}
 </script>
 
-
-<hr data-am-widget="divider" style="" class="am-divider"/>
-<div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
-    <div class="am-modal-dialog">
-        <div class="am-modal-bd">
-            您必须填写您的电话号码
-            <input type="text" class="am-modal-prompt-input">
-        </div>
-        <div class="am-modal-footer">
-            <span class="am-modal-btn" data-am-modal-cancel>取消</span>
-            <span class="am-modal-btn" data-am-modal-confirm>提交</span>
-        </div>
-    </div>
-</div>
-<hr data-am-widget="divider" style="" class="am-divider"/>
-<div id="duoshuo">
-    <div data-am-widget="duoshuo" class="am-duoshuo am-duoshuo-default" data-ds-short-name="sunshuang">
-        <div class="ds-thread"></div>
-    </div>
-</div>
-
-
-<hr data-am-widget="divider" style="" class="am-divider"/>
-<div class="advertising">
-    <p class="brand am-sans-serif">“北京VK生活馆”致力于为您提供舒心便利的服务，推荐给更多邻居让他们知道VK</p>
-    <p class="wx-title am-sans-serif">微信搜索公众号“北京VK生活馆”或者长按二维码识别</p>
-    <div class="qrcode">
-        <img src="imgs/wanke_2db.jpg" alt=""/>
-    </div>
-    <p class="contact-us am-sans-serif">联系我们请发送邮件至：</p>
-    <p class="email am-sans-serif">kefu@wankechangyang.com</p>
-</div>
 
 <!--<div class="ds-thread" data-thread-key="请将此处替换成文章在你的站点中的ID" data-title="请替换成文章的标题" data-url="请替换成文章的网址"></div>-->
 <!--&lt;!&ndash; 多说评论框 end &ndash;&gt;-->
@@ -123,7 +126,6 @@
 <!--|| document.getElementsByTagName('body')[0]).appendChild(ds);-->
 <!--})();-->
 <!--</script>-->
-
 
 
 <!--<div data-am-widget="duoshuo" class="am-duoshuo am-duoshuo-primary" data-ds-short-name="55223dcfe4b0cd5b62">-->
