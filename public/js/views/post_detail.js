@@ -206,15 +206,6 @@
                 var data2 = {tags: tags};
                 var html2 = template2(data2);
                 $tpl2.before(html2);
-
-                //var $tpl = $('#relationuser');
-                //var source = $tpl.text();
-                //var template = Handlebars.compile(source);
-                //var data = {relationuser: relationuser};
-                //var html = template(data);
-                //$tpl.before(html);
-
-
                 callbak();
                 if (relationuser) {
                     var currentUser = AV.User.current();
@@ -223,7 +214,7 @@
                         for (var i = 0; i < relationuser.length; i++) {
                             if (relationuser[i].id == usersid) {
                                 $(".usercontent").remove();
-                                $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".userphone");
+                                $(" <p class=\"usercontent usercontents am-sans-serif\">联系方式：" + number + "</p>").prependTo(".userphone");
                                 $("#btnname").remove();
                                 $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
                             }
