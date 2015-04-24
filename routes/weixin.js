@@ -34,9 +34,9 @@ var api = new API(config.appId, config.appSecret, function (callback) {
             if (results[0]) {
                 callback({msg: "没有token"})
             }
-            console.log("results:" + results);
-            console.log("读取token成功 " + results[0].get('token'));
-            callback(null, results[0].get('token'));
+            //console.log("results:" + results);
+            //console.log("读取token成功 " + results[0].get('token'));
+            //callback(null, results[0].get('token'));
         },
         error: function (error) {
             callback(error)
