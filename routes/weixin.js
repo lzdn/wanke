@@ -46,7 +46,7 @@ var api = new API(config.appId, config.appSecret, function (callback) {
     weixinconfig.save(null, {
         success: function (weixinconfig) {
             console.log("保存token成功 " + weixinconfig);
-            callback(null, weixinconfig);
+            callback(null);
         },
         error: function (object, error) {
             callback(error)
