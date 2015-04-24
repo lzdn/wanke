@@ -11,12 +11,12 @@
                 // $(".am-icon-spin-extend").remove();
                 skx = -5;
                 loading(function () {
-                    var aPublish = document.getElementsByClassName("Publish");
-                    if(aPublish.length<5){
+                    var adoremove = document.getElementsByClassName("doremove");
+                    if(adoremove.length<5){
                         alert("小于五")
                         $("#load").hide();
                     }
-                    if(aPublish==""){
+                    if(adoremove.length==0){
                         alert("dengyu00")
                         $(" <p class=\"null am-sans-serif\">暂时没有评论…………</p>").prependTo("#content");
                     }
