@@ -5,12 +5,11 @@
     loadwx();
     $("#arrow").hide();
     loading(function(){
-        alert($(".Publish").length);
         if($(".Publish").length<5){
             $("#load").hide();
         }
-        if(!$(".Publish")){
-            alert("没有");
+        if($(".Publish")==0){
+            $(" <p class=\"null am-sans-serif\">暂时没有评论…………</p>")
         }
         $(".Publish").on("click", function () {
             postview = $(this).attr("value");
@@ -203,6 +202,9 @@
                     success: function(myObject) {
                         alert(destroyid);
                         $("#"+destroyid+"").remove();
+                        if($(".Publish")==0){
+                            $(" <p class=\"null am-sans-serif\">暂时没有评论…………</p>")
+                        }
                     }
                 });
             }
