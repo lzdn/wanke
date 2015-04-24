@@ -78,7 +78,9 @@ router.post('/getJsConfig', function (req, res) {
         url: url
     };
     console.log(param);
-    api.getLatestToken(function(){
+    api.getLatestToken(function (err, token) {
+        console.log("err" + err);
+        console.log("token" + token);
         api.getJsConfig(param, function (err, result) {
             console.log(err);
             console.log('------------------------------');
@@ -154,7 +156,7 @@ router.post('/sendMessage', function (req, res) {
                 console.log(user.get("authData").weixin);
                 console.log(user.get("authData").weixin.openid);
 
-                api.getLatestToken(function(){
+                api.getLatestToken(function () {
                     api.sendText(openId, text, function (err, result) {
                         if (err) {
                             res.json(err);
