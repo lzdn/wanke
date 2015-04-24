@@ -107,8 +107,6 @@ router.post('/sendMessage', function (req, res) {
     var query = new AV.Query(AV.User);
     query.get(userId, {
         success: function (user) {
-            console.log(user.get("authData").weixin);
-
             // Do stuff
             text = "活动提醒\n" +
             "有人报名了您发起的活动\n" +
@@ -118,11 +116,14 @@ router.post('/sendMessage', function (req, res) {
             "<a href=\"http://fuwuhao.dianyingren.com/post_details.html?id=" + postId + "\">点击查看详情</a>"
             "\n";
             console.log(user.get("authData").weixin);
+            console.log(user.get("authData").weixin.openid);
 
             api.sendText(user.get("authData").weixin.openid, text, function (err, result) {
                 if (err) {
                     res.json(err);
                 }
+
+                console.log(result);
 
                 res.json(result);
             });

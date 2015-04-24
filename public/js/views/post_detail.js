@@ -65,7 +65,7 @@
                             url: "http://fuwuhao.dianyingren.com/weixin/sendMessage",
                             data: JSON.stringify({
                                 userId: postId,
-                                postId: openid
+                                postId: postview
                             }),
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
