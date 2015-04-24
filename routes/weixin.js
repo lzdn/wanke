@@ -53,6 +53,7 @@ var api = new API(config.appId, config.appSecret, function (callback) {
         }
     })
 });
+api.setOpts({timeout: 15000});
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
