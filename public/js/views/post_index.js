@@ -11,9 +11,14 @@
                 // $(".am-icon-spin-extend").remove();
                 skx = -5;
                 loading(function () {
-                    alert($(".Publish").length);
-                    if($(".Publish").length<5){
+                    var aPublish = document.getElementsByClassName("Publish");
+                    if(aPublish.length<5){
+                        alert("小于五")
                         $("#load").hide();
+                    }
+                    if(aPublish==""){
+                        alert("dengyu00")
+                        $(" <p class=\"null am-sans-serif\">暂时没有评论…………</p>").prependTo("#content");
                     }
                     if($(".Publish")==0){
                         $(" <p class=\"null am-sans-serif\">暂时没有评论…………</p>").prependTo("#content");
