@@ -11,7 +11,7 @@
             $("#load").hide();
         }
         if(adoremove.length==0){
-            $(" <p id=\"null\" class=\"am-sans-serif\">暂时没有发表评论</p>").prependTo("body");
+            $(" <div id=\"null\"><p class=\"am-sans-serif\">暂时没有发表评论</p></div>").prependTo("body");
         }
         $(".Publish").on("click", function () {
             postview = $(this).attr("value");
@@ -210,7 +210,7 @@
                             $("#load").hide();
                         }
                         if(adoremove.length==0){
-                            $(" <p id=\"null\" class=\"am-sans-serif\">暂时没有发表评论</p>").prependTo("body");                        }
+                            $(" <div id=\"null\"><p class=\"am-sans-serif\">暂时没有发表评论</p></div>").prependTo("body");             }
                     }
                 });
             }
