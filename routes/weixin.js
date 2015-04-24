@@ -106,6 +106,7 @@ router.post('/sendMessage', function (req, res) {
 
     var post = AV.Object.extend('post');
     var post_query = new AV.Query(post);
+    post_query.include("username");
     post_query.get(postId, function (post) {
         console.log("post.get('username').get('authData')" + post.get('username').get('authData'));
         var openId = post.get('username').get('authData').weixin.openid;
