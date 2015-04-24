@@ -126,7 +126,7 @@
                         $(".Delete").empty();
                         $(".Publish").remove();
                         $(".am-icon-spin-extend").remove();
-                        $("<p class=\"Delete am-sans-serif\">关于“" + val + "”的查询结果不存在</p>").appendTo($("#field"));
+                        $("<p class=\"Delete am-sans-serif\">关于“" + val + "”的查询结果不存在</p>").appendTo($("#publish"));
                         bload = 0;
                     }
                 }
@@ -138,11 +138,9 @@
     loading(function () {
         var adoremove = document.getElementsByClassName("doremove");
         if(adoremove.length<5){
-            alert("小于五")
             $("#load").hide();
         }
         if(adoremove.length==0){
-            alert("dengyu00")
             $(" <p class=\"null am-sans-serif\">暂时没有发表评论…………</p>").prependTo("#content");
         }
         //this will now be null

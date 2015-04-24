@@ -7,11 +7,9 @@
     loading(function(){
         var adoremove = document.getElementsByClassName("doremove");
         if(adoremove.length<5){
-            alert("小于五")
             $("#load").hide();
         }
         if(adoremove.length==0){
-            alert("dengyu00")
             $(" <p class=\"null am-sans-serif\">暂时没有发表评论…………</p>").prependTo("#content");
         }
         $(".Publish").on("click", function () {
@@ -207,11 +205,9 @@
                         $("#"+destroyid+"").remove();
                         var adoremove = document.getElementsByClassName("adoremove");
                         if(adoremove.length<5){
-                            alert("小于五")
                             $("#load").hide();
                         }
                         if(adoremove.length==0){
-                            alert("dengyu00")
                             $(" <p class=\"null am-sans-serif\">暂时没有发表评论…………</p>").prependTo("#content");
                         }
                     }
