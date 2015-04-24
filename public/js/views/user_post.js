@@ -5,6 +5,12 @@
     loadwx();
     $("#arrow").hide();
     loading(function(){
+        if($(".Publish").length<5){
+            $("#load").hide();
+        }
+        if(!$(".Publish")){
+            alert("没有");
+        }
         $(".Publish").on("click", function () {
             postview = $(this).attr("value");
             alert(postview);

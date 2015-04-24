@@ -11,6 +11,10 @@
                 // $(".am-icon-spin-extend").remove();
                 skx = -5;
                 loading(function () {
+                    if($(".Publish").length<5){
+                        alert("yincang")
+                        $("#load").hide();
+                    }
                     $(".Publish").on("click", function () {
                         var postview = $(this).attr("value");
                         window.location.href = "post_detail.html?id=" + postview + "";
