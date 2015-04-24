@@ -60,6 +60,7 @@
                         $(" <img src=\"" + imgurl + "\" value=\" " + usersid + "&" + phonenumber + " \" class=\"am-radius\">").appendTo("#headtle");
                         //alert(usersid);
                         // alert(postId);
+                        
                         $.ajax({
                             method: "POST",
                             url: "http://fuwuhao.dianyingren.com/weixin/sendMessage",
