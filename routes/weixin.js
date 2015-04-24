@@ -120,7 +120,7 @@ router.post('/sendMessage', function (req, res) {
                 "姓名:" + user.get("authData").weixin.nickname + "\n" +
                 "联系方式:" + user.get("mobilePhoneNumber") + "\n" +
                 "\n" +
-                "<a href=\"http://fuwuhao.dianyingren.com/post_details.html?id=" + postId + "\">点击查看详情</a>"
+                "<a href=\"http://fuwuhao.dianyingren.com/post_detail.html?id=" + postId + "\">点击查看详情</a>"
                 "\n";
                 console.log(user.get("authData").weixin);
                 console.log(user.get("authData").weixin.openid);
