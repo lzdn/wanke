@@ -1,6 +1,3 @@
-body{
-    background: #fff;
-}
 hr{
     padding:0;
 }
@@ -42,11 +39,31 @@ hr{
 #registration{
     height: 50px;
 }
+.am-duoshuo{
+    background:#fff;
+}
 .advertising{
- 
+    width: 100%;
+    background:#fff;
+    position:fixed;
+    bottom:0;
 }
 .advertising p{
+    margin:0;
     color:#ccc;
     text-align: center;
+    font-size:14px;
+}
+.advertising{
+    padding:10px;
+}
+.advertising .brand{
+    font-size:16px;
+}
+.advertising .wx-title{
+    margin:10px 0;
+}
+.advertising .email,.advertising .contact-us{
+    color:#000;
 }
 

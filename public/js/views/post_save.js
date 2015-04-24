@@ -6,6 +6,8 @@ $(function () {
     var newtag = 1;
     var code = "";
     var fileurls = [];
+    var marktags=["约吃","约玩","约聊","约运动"];
+    var btag =true;
     var userlog, userid, queryobject, phonenumber, nickname
     if (saveurl.split("=").length-1> 1) {
         userlog = window.location.search.split('=')[1];
@@ -94,11 +96,25 @@ $(function () {
 
     //…………………………保存心情 和 tagkey………………………………
     function savecontent() {
+        var query = new AV.Query(tags);
+        query.equalTo("objectId",newtag);
+        query.find({
+            success: function(results) {
+               var marktag=results.get('tagtitle');
+                for(var i=0; i<marktags.length;i++){
+                    if(marktags[i]==marktag){
+                        btag= false;
+                    }else{
+                        btag= true;
+                    }
+                }
+            }
+        });
         var query = new AV.Query(AV.User);
         query.get(userid, {
             success: function (user) {
                 phonenumber = user.get('mobilePhoneNumber');
-                if (phonenumber) {
+                if (phonenumber||btag) {
                     var aUserval2 = $("#doc-ta-1").val();
                     var tag = new tags();
                     tag.id = newtag;
