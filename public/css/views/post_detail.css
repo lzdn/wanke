@@ -66,8 +66,12 @@ hr{
     color:#000;
 }
 .qrcode{
-    width: 430px;
-    height: 430px;
+    width: 260px;
+    height: 260px;
     margin:0 auto;
+}
+.qrcode img{
+    width: 260px;
+    height: 260px;
 }
 
