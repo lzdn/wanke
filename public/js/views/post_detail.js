@@ -2,16 +2,18 @@
     var saveurl = window.location.href;
     var number = "";
     var code = "";
-    var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid,relationuser;
-    var postview = window.location.search.split('=')[1];
+    var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid,relationuser,postview;
+    postview = window.location.search.split('=')[1];
     alert(postview);
-    //if (saveurl.indexOf("=") > 1) {
-    //    userlog = window.location.search.split('=')[1];
-    //    code = userlog.split("&")[0];
-    //    alert(code);
-    //    id = ""
-    //}
-    // alert(postview);
+    if (saveurl.indexOf("=") > 2) {
+        userlog = window.location.search.split('=')[2];
+        code = userlog.split("&")[0];
+        postview = window.location.search.split('=')[1].split("&")[0];
+        alert(code);
+    }else{
+        postview = window.location.search.split('=')[1];
+    }
+    alert(postview);
     loadwx();
     loading(function () {
 
@@ -65,7 +67,7 @@
                             method: "POST",
                             url: "http://fuwuhao.dianyingren.com/weixin/sendMessage",
                             data: JSON.stringify({
-                                userId: postId,
+                                userId: usersid,
                                 postId: postview
                             }),
                             contentType: "application/json; charset=utf-8",
