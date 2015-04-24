@@ -143,16 +143,16 @@
                                     var publishtime = newtime - oldtime;
                                     var day = parseInt(publishtime / 86400000);
                                     if (day > 0) {
-                                        times = day + "天"
+                                        times = day + "天前"
                                     } else {
                                         var hours = parseInt(publishtime / 3600000);
                                         if (hours > 0) {
-                                            times = hours + "小时";
+                                            times = hours + "小时前";
                                         }
                                         else {
                                             var minute = parseInt(publishtime / 60000);
                                             if (minute > 0) {
-                                                times = minute + "分钟"
+                                                times = minute + "分钟前"
                                             }else{
                                                 times="刚刚"
                                             }
