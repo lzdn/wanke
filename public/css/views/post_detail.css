@@ -11,20 +11,15 @@ hr{
     width: 200px;
     height: 40px;
     margin:0 auto;
-    margin-top:20px;
+    margin-top:30px;
 }
 .userphone{
     position:relative;
 }
 .usercontent{
     position:absolute;
-    left:0;
+    left:10px;
     top:0;
-}
-#usercontent{
-    position:relative;
-    left:0;
-    top:-10px;
 }
 #btnname .am-btn{
     width: 200px;
