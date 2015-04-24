@@ -6,8 +6,6 @@ $(function () {
     var newtag = 1;
     var code = "";
     var fileurls = [];
-    var marktags=["约吃","约玩","约聊","约运动"];
-    var btag =true;
     var userlog, userid, queryobject, phonenumber, nickname
     if (saveurl.split("=").length-1> 1) {
         userlog = window.location.search.split('=')[1];
@@ -96,79 +94,64 @@ $(function () {
 
     //…………………………保存心情 和 tagkey………………………………
     function savecontent() {
-        var query = new AV.Query(tags);
-        query.equalTo("objectId",newtag);
-        query.find({
-            success: function(results) {
-               var marktag=results.get('tagtitle');
-                alert(marktag);
-                for(var i=0; i<marktags.length;i++){
-                    if(marktags[i]==marktag){
-                        btag= false;
-                    }else{
-                        btag= true;
-                    }
-                }
-                var query = new AV.Query(AV.User);
-                query.get(userid, {
-                    success: function (user) {
-                        phonenumber = user.get('mobilePhoneNumber');
-                        alert(btag);
-                        if (phonenumber||btag==true) {
-                            var aUserval2 = $("#doc-ta-1").val();
-                            var tag = new tags();
-                            tag.id = newtag;
-                            var postc = new posts();
-                            var user = AV.User.current();
-                            postc.save({
-                                content: aUserval2,
-                                tagkey: tag,
-                                relationimgs: fileurls,
-                                username: user
-                            }, {
-                                success: function (object) {
-                                    window.location.href = "post_index.html"
-                                }
-                            });
-                        } else {
-                            $('#my-prompt').modal({
-                                // relatedTarget: this,
-                                onConfirm: function (e) {
-                                    //e.data
-                                    if (/^1[3|4|5|8]\d{9}$/.test(e.data)) {
-                                        var query = new AV.Query(AV.User);
-                                        query.get(userid, {
-                                            success: function (user) {
-                                                user.set('mobilePhoneNumber', e.data);
-                                                user.save()
-                                            }
-                                        }).then(function () {
-                                            var aUserval2 = $("#doc-ta-1").val();
-                                            var tag = new tags();
-                                            tag.id = newtag;
-                                            var postc = new posts();
-                                            var user = AV.User.current();
-                                            postc.save({
-                                                content: aUserval2,
-                                                tagkey: tag,
-                                                relationimgs: fileurls,
-                                                username: user
-                                            }, {
-                                                success: function (object) {
-                                                    window.location.href = "post_index.html"
-                                                }
-                                            });
-                                        });
-                                    } else {
-                                        alert("请输入正确的电话号码");
-                                    }
-                                },
-                                onCancel: function (e) {
-                                }
-                            });
+        var query = new AV.Query(AV.User);
+        query.get(userid, {
+            success: function (user) {
+                phonenumber = user.get('mobilePhoneNumber');
+                alert(btag);
+                if (phonenumber||btag==true) {
+                    var aUserval2 = $("#doc-ta-1").val();
+                    var tag = new tags();
+                    tag.id = newtag;
+                    var postc = new posts();
+                    var user = AV.User.current();
+                    postc.save({
+                        content: aUserval2,
+                        tagkey: tag,
+                        relationimgs: fileurls,
+                        username: user
+                    }, {
+                        success: function (object) {
+                            window.location.href = "post_index.html"
                         }
-                    }
-                });
+                    });
+                } else {
+                    $('#my-prompt').modal({
+                        // relatedTarget: this,
+                        onConfirm: function (e) {
+                            //e.data
+                            if (/^1[3|4|5|8]\d{9}$/.test(e.data)) {
+                                var query = new AV.Query(AV.User);
+                                query.get(userid, {
+                                    success: function (user) {
+                                        user.set('mobilePhoneNumber', e.data);
+                                        user.save()
+                                    }
+                                }).then(function () {
+                                    var aUserval2 = $("#doc-ta-1").val();
+                                    var tag = new tags();
+                                    tag.id = newtag;
+                                    var postc = new posts();
+                                    var user = AV.User.current();
+                                    postc.save({
+                                        content: aUserval2,
+                                        tagkey: tag,
+                                        relationimgs: fileurls,
+                                        username: user
+                                    }, {
+                                        success: function (object) {
+                                            window.location.href = "post_index.html"
+                                        }
+                                    });
+                                });
+                            } else {
+                                alert("请输入正确的电话号码");
+                            }
+                        },
+                        onCancel: function (e) {
+                        }
+                    });
+                }
             }
         });
     }
