@@ -7,12 +7,11 @@ $(function () {
     var code = "";
     var fileurls = [];
     var userlog, userid, queryobject, phonenumber, nickname
-    if (saveurl.indexOf("=") > 1) {
+    if (saveurl.split("=").length-1> 1) {
         userlog = window.location.search.split('=')[1];
         code = userlog.split("&")[0];
         id = ""
     }
-
     dataLoad(function () {
 
         wx.ready(function () {
