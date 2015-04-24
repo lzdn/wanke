@@ -3,9 +3,10 @@
     var number = "";
     var code = "";
     var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid,relationuser,postview;
-    if (saveurl.indexOf("=") > 2) {
+    alert(saveurl.split("D").length);
+    if (saveurl.split("D").length>1) {
         userlog = window.location.search.split('=')[2];
-        code = userlog.split("&")[0];
+        code= userlog.split("&")[0];
         postview = window.location.search.split('=')[1].split("&")[0];
         alert(code);
     }else{
