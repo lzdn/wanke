@@ -45,6 +45,15 @@
                 AV.User._logInWith("weixin", {
                     "authData": res,
                     success: function (user) {
+                        userid = user.id;
+                        queryobject = user.get("authData");
+                        var query = new AV.Query(AV.User);
+                        query.get(userid, {
+                            success: function (user) {
+                                user.set('nickname', nickname);
+                                user.save()
+                            }
+                        });
                         callbak(null, user);
                     },
                     error: function (err) {
