@@ -45,8 +45,7 @@ hr{
 .advertising{
     width: 100%;
     background:#fff;
-    position:absolute;
-    bottom:0;
+
 }
 .advertising p{
     margin:0;
@@ -65,5 +64,10 @@ hr{
 }
 .advertising .email,.advertising .contact-us{
     color:#000;
+}
+.qrcode{
+    width: 430px;
+    height: 430px;
+    margin:0 auto;
 }
 
