@@ -23,9 +23,8 @@ hr{
 }
 .usercontents{
     position:absolute;
-    margin-top:0;
     left:0;
-    top:0;
+    top:-10px;
 }
 #btnname .am-btn{
     width: 200px;
