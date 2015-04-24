@@ -26,7 +26,32 @@ var client = new OAuth(config.appId, config.appSecret, function (openid, callbac
     fs.writeFile(openid + ':access_token.txt', JSON.stringify(token), callback);
 });
 
-var api = new API(config.appId, config.appSecret);
+var api = new API(config.appId, config.appSecret, function (callback) {
+    var WeiXinConfig = AV.Object.extend('config');
+    var query = new AV.Query(WeiXinConfig);
+    query.find({
+        success: function (results) {
+            console.log("读取token成功 " + results[0].get('token'));
+            callback(null, results[0].get('token'));
+        },
+        error: function (error) {
+            callback(error)
+        }
+    });
+}, function (token, callback) {
+    var WeiXinConfig = AV.Object.extend('config');
+    var weixinconfig = new WeiXinConfig();
+    weixinconfig.set('token', token);
+    weixinconfig.save(null, {
+        success: function (weixinconfig) {
+            console.log("保存token成功 " + weixinconfig);
+            callback(null, weixinconfig);
+        },
+        error: function (object, error) {
+            callback(error)
+        }
+    })
+});
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
