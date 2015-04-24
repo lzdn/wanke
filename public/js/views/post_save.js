@@ -159,7 +159,7 @@ $(function () {
     function dataLoad(callbak) {
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
         $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + saveurl + ""}, function (result) {
-            console.log(result);
+            alert(result);
             appId = result.appId;
             jslist = result.jsApiList;
             noncestr = result.nonceStr;
