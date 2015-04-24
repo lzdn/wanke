@@ -45,6 +45,17 @@
                         phonenumber = user.get('mobilePhoneNumber');
                     }
                 });
+                if (relationuser) {
+                        alert(usersid);
+                        for (var i = 0; i < relationuser.length; i++) {
+                            alert("baomingid" + usersid);
+                            alert(relationuser[i].id);
+                            if (relationuser[i].id == usersid) {
+                                alert("已报名");
+                            }
+                        }
+                }
+
                 setTimeout(function () {
                     alert(phonenumber);
                     if (phonenumber) {
