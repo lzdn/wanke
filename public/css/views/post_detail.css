@@ -11,6 +11,15 @@ hr{
     width: 200px;
     height: 40px;
     margin:0 auto;
+    margin-top:30px;
+}
+.userphone{
+    position:relative;
+}
+.usercontent{
+    position:absolute;
+    left:10px;
+    top:0;
 }
 #btnname .am-btn{
     width: 200px;
@@ -32,5 +41,12 @@ hr{
  }
 #registration{
     height: 50px;
+}
+.advertising{
+ 
+}
+.advertising p{
+    color:#ccc;
+    text-align: center;
 }
 

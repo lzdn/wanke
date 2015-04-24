@@ -2,32 +2,17 @@
     var saveurl = window.location.href;
     var number = "";
     var code = "";
-    var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid,relationuser,postview;
-    if (saveurl.split("=").length-1>1) {
+    var relationuser = [];
+    var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid, postview;
+    if (saveurl.split("=").length - 1 > 1) {
         userlog = window.location.search.split('=')[2];
-        code= userlog.split("&")[0];
+        code = userlog.split("&")[0];
         postview = window.location.search.split('=')[1].split("&")[0];
-        alert(code);
-    }else{
-            postview = window.location.search.split('=')[1];
+    } else {
+        postview = window.location.search.split('=')[1];
     }
-    alert(postview);
     loadwx();
     loading(function () {
-
-        //for(var i=0; i<relationuser.length;i++){
-        //    alert(usersid);
-        //    if(relationuser[i].id==usersid){
-        //        alert("已报名");
-        //    }
-        //}
-
-        thread_url = "http://localhost:63342/wanke/public/post_detail.html?55223dcfe4b0cd5b62664791";
-        thread_key = postview;
-        console.log(postview);
-        thread_title = 'post_detail';
-        //$("<div id=\"ds-thread\" class=\"ds-thread\" data-thread-key=postview+\"\" data-title=\"post_detail\" data-url=\"http://localhost:63342/wanke/public/post_detail.html?55223dcfe4b0cd5b62664791\"></div>"
-        //).prependTo("#thread");
         $(".imgpreview").on("click", function () {
             var cur = $(this).attr("src");
             var url = $(this).parent().attr("value");
@@ -41,7 +26,6 @@
         $(".imgpreview").removeClass("imgpreview");
 
         $("#btnname").on("click", function () {
-            alert("hah");
             var currentUser = AV.User.current();
             if (currentUser) {
                 usersid = currentUser.id;
@@ -51,74 +35,82 @@
                         phonenumber = user.get('mobilePhoneNumber');
                     }
                 });
-                setTimeout(function () {
-                    alert(phonenumber);
-                    if (phonenumber) {
-                        var imgurl = currentUser.get("authData").weixin.headimgurl;
-                        $(".usercontent").remove();
-                        $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".userphone");
-                        $(" <img src=\"" + imgurl + "\" value=\" " + usersid + "&" + phonenumber + " \" class=\"am-radius\">").appendTo("#headtle");
-                        //alert(usersid);
-                        // alert(postId);
-                        
-                        $.ajax({
-                            method: "POST",
-                            url: "http://fuwuhao.dianyingren.com/weixin/sendMessage",
-                            data: JSON.stringify({
-                                userId: usersid,
-                                postId: postview
-                            }),
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            success: function (data) {
-                              alert(data);
-                            },
-                            error: function (msg) {
-                                alert(msg);
+                if (relationuser) {
+                        for (var i = 0; i < relationuser.length; i++) {
+                            if (relationuser[i].id == usersid) {
+                                $(".usercontent").remove();
+                                $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".userphone");
+                                $("#btnname").remove();
+                                $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
                             }
-                        });
-                        //usersid  postId  openid
-                        var post = AV.Object.extend("post");
-                        var query = new AV.Query(post);
-                        query.equalTo("objectId", postview);
-                        query.get(postview, {
-                            success: function (post) {
-                                post.add("relationuser", {id: usersid, url: imgurl, phonenumber: phonenumber});
-                                post.save();
-                            },
-                            error: function (object, error) {
-                                console.log(object);
-                            }
-                        });
-                    } else {
-                        $('#my-prompt').modal({
-                            // relatedTarget: this,
-                            onConfirm: function (e) {
-                                //e.data
-                                if (/^1[3|4|5|8]\d{9}$/.test(e.data)) {
-                                    var query = new AV.Query(AV.User);
-                                    query.get(usersid, {
-                                        success: function (user) {
-                                            user.set('mobilePhoneNumber', e.data);
-                                            user.save()
-                                        }
-                                    });
-                                } else {
-                                    alert("请输入正确的电话号码");
+                        }
+                }else{
+                    setTimeout(function () {
+                        if (phonenumber) {
+                            var imgurl = currentUser.get("authData").weixin.headimgurl;
+                            $(".usercontent").remove();
+                            $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".userphone");
+                            $("#btnname").remove();
+                            $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
+                            $(" <img src=\"" + imgurl + "\" value=\" " + usersid + "&" + phonenumber + " \" class=\"am-radius\">").appendTo("#headtle");
+                            $.ajax({
+                                method: "POST",
+                                url: "http://fuwuhao.dianyingren.com/weixin/sendMessage",
+                                data: JSON.stringify({
+                                    userId: usersid,
+                                    postId: postview
+                                }),
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (data) {
+                                },
+                                error: function (msg) {
                                 }
-                            },
-                            onCancel: function (e) {
-                            }
-                        });
-                    }
-                }, 100);
+                            });
+                            //usersid  postId  openid
+                            var post = AV.Object.extend("post");
+                            var query = new AV.Query(post);
+                            query.equalTo("objectId", postview);
+                            query.get(postview, {
+                                success: function (post) {
+                                    post.add("relationuser", {id: usersid, url: imgurl, phonenumber: phonenumber});
+                                    post.save();
+                                },
+                                error: function (object, error) {
+                                    console.log(object);
+                                }
+                            });
+                        } else {
+                            $('#my-prompt').modal({
+                                // relatedTarget: this,
+                                onConfirm: function (e) {
+                                    //e.data
+                                    if (/^1[3|4|5|8]\d{9}$/.test(e.data)) {
+                                        var query = new AV.Query(AV.User);
+                                        query.get(usersid, {
+                                            success: function (user) {
+                                                user.set('mobilePhoneNumber', e.data);
+                                                user.save()
+                                            }
+                                        });
+                                    } else {
+                                        alert("请输入正确的电话号码");
+                                    }
+                                },
+                                onCancel: function (e) {
+                                }
+                            });
+                        }
+                    }, 100);
+                }
+
             } else {
                 alert("没有登录");
                 $.ajax({
                     method: "POST",
                     url: "http://fuwuhao.dianyingren.com/weixin/getAuthUrl",
                     data: JSON.stringify({
-                        page:saveurl
+                        page: saveurl
                     }),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -157,7 +149,7 @@
                 console.log(object);
                 var content = object.get('content');
                 var imgs = object.get('relationimgs');
-                relationuser=object.get("relationuser");
+                relationuser = object.get("relationuser");
                 if (imgs) {
                     if (imgs.length == 1) {
                         imgpattern = "imgpatternone"
@@ -173,7 +165,6 @@
                 number = object.get("username").get("mobilePhoneNumber");
                 postId = object.get("username").id;
                 openid = object.get("username").get("authData").weixin.openid;
-                alert(openid);
                 var ousername = object.get("username").attributes.authData.weixin;
                 var username = ousername.nickname;
                 var headimgurl = ousername.headimgurl;
@@ -192,8 +183,8 @@
                         var minute = parseInt(publishtime / 60000);
                         if (minute > 0) {
                             times = minute + "分钟"
-                        }else{
-                            times="刚刚"
+                        } else {
+                            times = "刚刚"
                         }
                     }
                 }
@@ -205,27 +196,32 @@
                     tag: tagvalue,
                     time: times,
                     img: imgs,
-                    pattern: imgpattern
+                    pattern: imgpattern,
+                    relationuser:relationuser
                 };
                 tags.push(opost);
-                console.log(tags);
                 var $tpl2 = $('#amz-tags');
                 var source2 = $tpl2.text();
                 var template2 = Handlebars.compile(source2);
                 var data2 = {tags: tags};
                 var html2 = template2(data2);
                 $tpl2.before(html2);
-
-                console.log(relationuser);
-                var $tpl = $('#relationuser');
-                var source= $tpl.text();
-                var template = Handlebars.compile(source);
-                var data = {relationuser: relationuser};
-                var html = template(data);
-                $tpl.before(html);
-
-
                 callbak();
+                if (relationuser) {
+                    var currentUser = AV.User.current();
+                    if (currentUser) {
+                        usersid = currentUser.id;
+                        for (var i = 0; i < relationuser.length; i++) {
+                            if (relationuser[i].id == usersid) {
+                                $(".usercontent").remove();
+                                $("<p id=\"usercontent\" class=\"usercontent am-sans-serif\">联系方式："+number+"</p>").prependTo(".userphone");
+                                $("#btnname").remove();
+                                $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
+                            }
+                        }
+                    }
+                }
+
             }
 
         });
@@ -251,6 +247,7 @@
                 })
             });
         }
+
 
     }
 
