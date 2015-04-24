@@ -22,7 +22,7 @@ hr{
     top:0;
 }
 #usercontent{
-    position:absolute;
+    position:relative;
     left:0;
     top:-10px;
 }
