@@ -98,8 +98,7 @@ $(function () {
         query.get(userid, {
             success: function (user) {
                 phonenumber = user.get('mobilePhoneNumber');
-                alert(btag);
-                if (phonenumber||btag==true) {
+                if (phonenumber) {
                     var aUserval2 = $("#doc-ta-1").val();
                     var tag = new tags();
                     tag.id = newtag;
