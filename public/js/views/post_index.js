@@ -140,9 +140,6 @@
         if(adoremove.length<5){
             $("#load").hide();
         }
-        if(adoremove.length==0){
-            $(" <p class=\"null am-sans-serif\">暂时没有发表评论…………</p>").prependTo("#content");
-        }
         //this will now be null
         //$(".title").on("click",function(){
         //    var postview=$(this).attr("value");
