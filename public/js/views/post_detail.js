@@ -196,7 +196,8 @@
                     tag: tagvalue,
                     time: times,
                     img: imgs,
-                    pattern: imgpattern
+                    pattern: imgpattern,
+                    relationuser:relationuser
                 };
                 tags.push(opost);
                 var $tpl2 = $('#amz-tags');
@@ -206,12 +207,12 @@
                 var html2 = template2(data2);
                 $tpl2.before(html2);
 
-                var $tpl = $('#relationuser');
-                var source = $tpl.text();
-                var template = Handlebars.compile(source);
-                var data = {relationuser: relationuser};
-                var html = template(data);
-                $tpl.before(html);
+                //var $tpl = $('#relationuser');
+                //var source = $tpl.text();
+                //var template = Handlebars.compile(source);
+                //var data = {relationuser: relationuser};
+                //var html = template(data);
+                //$tpl.before(html);
 
 
                 callbak();
