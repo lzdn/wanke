@@ -40,7 +40,7 @@
                         for (var i = 0; i < relationuser.length; i++) {
                             if (relationuser[i].id == usersid) {
                                 $(".usercontent").remove();
-                                $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".userphone");
+                                $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".usercont");
                                 $("#btnname").remove();
                                 $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
                             }
@@ -50,7 +50,7 @@
                         if (phonenumber) {
                             var imgurl = currentUser.get("authData").weixin.headimgurl;
                             $(".usercontent").remove();
-                            $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".userphone");
+                            $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".usercont");
                             $("#btnname").remove();
                             $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
                             $(" <img src=\"" + imgurl + "\" value=\" " + usersid + "&" + phonenumber + " \" class=\"am-radius\">").appendTo("#headtle");
@@ -223,7 +223,7 @@
                         for (var i = 0; i < relationuser.length; i++) {
                             if (relationuser[i].id == usersid) {
                                 $(".usercontent").remove();
-                                $("<p id=\"usercontent\" class=\"usercontent am-sans-serif\">联系方式："+number+"</p>").prependTo(".userphone");
+                                $("<p id=\"usercontent\" class=\"usercontent am-sans-serif\">联系方式："+number+"</p>").prependTo(".usercont");
                                 $("#btnname").remove();
                                 $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
                             }
