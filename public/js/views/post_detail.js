@@ -3,8 +3,6 @@
     var number = "";
     var code = "";
     var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid,relationuser,postview;
-    postview = window.location.search.split('=')[1];
-    alert(postview);
     if (saveurl.indexOf("=") > 2) {
         userlog = window.location.search.split('=')[2];
         code = userlog.split("&")[0];
