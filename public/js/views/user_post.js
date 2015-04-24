@@ -5,10 +5,13 @@
     loadwx();
     $("#arrow").hide();
     loading(function(){
-        if($(".Publish").length<5){
+        var aPublish = document.getElementsByClassName("Publish");
+        if(aPublish.length<5){
+            alert("小于五")
             $("#load").hide();
         }
-        if($(".Publish")==0){
+        if(aPublish==0){
+            alert("dengyu00")
             $(" <p class=\"null am-sans-serif\">暂时没有评论…………</p>").prependTo("#content");
         }
         $(".Publish").on("click", function () {
@@ -202,7 +205,12 @@
                     success: function(myObject) {
                         alert(destroyid);
                         $("#"+destroyid+"").remove();
-                        if($(".Publish")==0){
+                        if(aPublish.length<5){
+                            alert("小于五")
+                            $("#load").hide();
+                        }
+                        if(aPublish==0){
+                            alert("dengyu00")
                             $(" <p class=\"null am-sans-serif\">暂时没有评论…………</p>").prependTo("#content");
                         }
                     }
