@@ -77,13 +77,6 @@
                                 alert(msg);
                             }
                         });
-                        //$.post("http://fuwuhao.dianyingren.com/weixin/sendMessage", {
-                        //    userId: postId,
-                        //    postId: openid
-                        //}, function (res) {
-                        //    alert(res);
-                        //
-                        //});
                         //usersid  postId  openid
                         var post = AV.Object.extend("post");
                         var query = new AV.Query(post);
