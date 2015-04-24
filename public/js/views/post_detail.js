@@ -14,18 +14,20 @@
     alert(postview);
     loadwx();
     loading(function () {
-
-        //for(var i=0; i<relationuser.length;i++){
-        //    alert(usersid);
-        //    if(relationuser[i].id==usersid){
-        //        alert("已报名");
-        //    }
-        //}
-
-        thread_url = "http://localhost:63342/wanke/public/post_detail.html?55223dcfe4b0cd5b62664791";
-        thread_key = postview;
-        console.log(postview);
-        thread_title = 'post_detail';
+        var currentUser = AV.User.current();
+        if (currentUser) {
+            usersid = currentUser.id;
+            for(var i=0; i<relationuser.length;i++){
+                alert(usersid);
+                if(relationuser[i].id==usersid){
+                    alert("已报名");
+                }
+            }
+        }
+        //thread_url = "http://localhost:63342/wanke/public/post_detail.html?55223dcfe4b0cd5b62664791";
+        //thread_key = postview;
+        //console.log(postview);
+        //thread_title = 'post_detail';
         //$("<div id=\"ds-thread\" class=\"ds-thread\" data-thread-key=postview+\"\" data-title=\"post_detail\" data-url=\"http://localhost:63342/wanke/public/post_detail.html?55223dcfe4b0cd5b62664791\"></div>"
         //).prependTo("#thread");
         $(".imgpreview").on("click", function () {
