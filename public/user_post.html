@@ -26,7 +26,7 @@
     <script type="text/x-handlebars-template" id="usercontent">
         {{#each tags}}
         <hr data-am-widget="divider" style="" class="am-divider"/>
-        <div id={{this.value}} class="Publish am-animation-fade" value={{this.value}}>
+        <div id={{this.value}} class="Publish am-animation-fade doremove" value={{this.value}}>
             <div class="show"><img src={{this.titleimg}}></div>
             <div class="title" value={{this.value}} data-am-modal="{target: '#my-actions'}">
                 <p class="username am-sans-serif">{{this.name}}</p>
@@ -41,15 +41,15 @@
                     {{/each}}
                     {{/if}}
                 </div>
-                <span class="time am-sans-serif">发布于{{this.time}}前</span>
+                <span class="time am-sans-serif">发布于{{this.time}}</span>
             </div>
         </div>
 {{/each}}
 </script>
 </div>
-<!--<div id="load">-->
-    <!--<i class="am-icon-refresh am-icon-spin am-icon-spin-extend am-icon-sm"></i>-->
-<!--</div>-->
+<div id="load">
+    <i class="am-icon-refresh am-icon-spin am-icon-spin-extend am-icon-sm"></i>
+</div>
 
 <div class="am-modal-actions" id="my-actions">
     <div class="am-modal-actions-group">

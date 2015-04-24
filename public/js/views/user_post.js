@@ -5,6 +5,13 @@
     loadwx();
     $("#arrow").hide();
     loading(function(){
+        var adoremove = document.getElementsByClassName("doremove");
+        if(adoremove.length<5){
+            $("#load").hide();
+        }
+        if(adoremove.length==0){
+            $(" <p class=\"null am-sans-serif\">暂时没有发表评论…………</p>").prependTo("#content");
+        }
         $(".Publish").on("click", function () {
             postview = $(this).attr("value");
             alert(postview);
@@ -136,16 +143,16 @@
                                     var publishtime = newtime - oldtime;
                                     var day = parseInt(publishtime / 86400000);
                                     if (day > 0) {
-                                        times = day + "天"
+                                        times = day + "天前"
                                     } else {
                                         var hours = parseInt(publishtime / 3600000);
                                         if (hours > 0) {
-                                            times = hours + "小时";
+                                            times = hours + "小时前";
                                         }
                                         else {
                                             var minute = parseInt(publishtime / 60000);
                                             if (minute > 0) {
-                                                times = minute + "分钟"
+                                                times = minute + "分钟前"
                                             }else{
                                                 times="刚刚"
                                             }
@@ -196,6 +203,13 @@
                     success: function(myObject) {
                         alert(destroyid);
                         $("#"+destroyid+"").remove();
+                        var adoremove = document.getElementsByClassName("adoremove");
+                        if(adoremove.length<5){
+                            $("#load").hide();
+                        }
+                        if(adoremove.length==0){
+                            $(" <p class=\"null am-sans-serif\">暂时没有发表评论…………</p>").prependTo("#content");
+                        }
                     }
                 });
             }
