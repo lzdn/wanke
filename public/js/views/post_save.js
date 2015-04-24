@@ -213,7 +213,7 @@ $(function () {
                         var query = new AV.Query(AV.User);
                         query.get(userid, {
                             success: function (user) {
-                                user.set('nickname', nickname);
+                                user.set('nickname', res.nickname);
                                 user.save()
                             }
                         });
