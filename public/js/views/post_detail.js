@@ -3,6 +3,7 @@
     var number = "";
     var code = "";
     var relationuser = [];
+    var marktags=["约吃","约玩","约聊","约运动"];
     var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid, postview;
     if (saveurl.split("=").length - 1 > 1) {
         userlog = window.location.search.split('=')[2];
@@ -208,10 +209,14 @@
                 $tpl2.before(html2);
                 callbak();
                 //if(tagvalue=="约吃"||tagvalue=="约玩"||tagvalue=="约运动"||tagvalue=="约聊")
+                         for(var i=0;i<marktags.length;i++){
+                             if(tagvalue[i]==tagvalue){
+                                 alert("不隐藏");
+                             }else{
+                                 alert("隐藏")
+                             }
+                         }
 
-                    if(tagvalue==("约吃"||"约玩"||"约运动"||"约聊")){
-                        alert("应该隐藏");
-                    }
 
                 if (relationuser) {
                     var currentUser = AV.User.current();
