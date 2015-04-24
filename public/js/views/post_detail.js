@@ -60,13 +60,29 @@
                         $(" <img src=\"" + imgurl + "\" value=\" " + usersid + "&" + phonenumber + " \" class=\"am-radius\">").appendTo("#headtle");
                         //alert(usersid);
                         // alert(postId);
-                        $.post("http://fuwuhao.dianyingren.com/weixin/sendMessage", {
-                            userId: postId,
-                            postId: openid
-                        }, function (res) {
-                            alert(res);
-
+                        $.ajax({
+                            method: "POST",
+                            url: "http://fuwuhao.dianyingren.com/weixin/sendMessage",
+                            data: JSON.stringify({
+                                userId: postId,
+                                postId: openid
+                            }),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
+                              alert(data);
+                            },
+                            error: function (msg) {
+                                alert(msg);
+                            }
                         });
+                        //$.post("http://fuwuhao.dianyingren.com/weixin/sendMessage", {
+                        //    userId: postId,
+                        //    postId: openid
+                        //}, function (res) {
+                        //    alert(res);
+                        //
+                        //});
                         //usersid  postId  openid
                         var post = AV.Object.extend("post");
                         var query = new AV.Query(post);
@@ -103,10 +119,25 @@
                     }
                 }, 100);
             } else {
-                alert("没有登录")
-                    $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl",{page:saveurl}, function (res) {
-                        window.location.href = res.authUrl;
-                })
+                alert("没有登录");
+                $.ajax({
+                    method: "POST",
+                    url: "http://fuwuhao.dianyingren.com/weixin/getAuthUrl",
+                    data: JSON.stringify({
+                        page:saveurl
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        window.location.href = data.authUrl;
+                    },
+                    error: function (msg) {
+                        alert(msg);
+                    }
+                });
+                //    $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl",{page:saveurl}, function (res) {
+                //        window.location.href = res.authUrl;
+                //})
             }
         });
     });
