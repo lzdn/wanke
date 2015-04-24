@@ -11,6 +11,7 @@
                 // $(".am-icon-spin-extend").remove();
                 skx = -5;
                 loading(function () {
+                    alert($(".Publish").length);
                     if($(".Publish").length<5){
                         alert("yincang")
                         $("#load").hide();

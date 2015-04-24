@@ -5,6 +5,7 @@
     loadwx();
     $("#arrow").hide();
     loading(function(){
+        alert($(".Publish").length);
         if($(".Publish").length<5){
             $("#load").hide();
         }
