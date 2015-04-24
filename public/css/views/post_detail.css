@@ -45,7 +45,7 @@ hr{
 .advertising{
     width: 100%;
     background:#fff;
-    position:fixed;
+    position:absolute;
     bottom:0;
 }
 .advertising p{
