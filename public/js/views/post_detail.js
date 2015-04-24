@@ -207,6 +207,12 @@
                 var html2 = template2(data2);
                 $tpl2.before(html2);
                 callbak();
+                //if(tagvalue=="约吃"||tagvalue=="约玩"||tagvalue=="约运动"||tagvalue=="约聊")
+
+                    if(tagvalue==("约吃"||"约玩"||"约运动"||"约聊")){
+                        alert("应该隐藏");
+                    }
+
                 if (relationuser) {
                     var currentUser = AV.User.current();
                     if (currentUser) {
