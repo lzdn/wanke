@@ -78,11 +78,13 @@ router.post('/getJsConfig', function (req, res) {
         url: url
     };
     console.log(param);
-    api.getJsConfig(param, function (err, result) {
-        console.log(err);
-        console.log('------------------------------');
-        console.log(result);
-        res.json(result);
+    api.getLatestToken(function(){
+        api.getJsConfig(param, function (err, result) {
+            console.log(err);
+            console.log('------------------------------');
+            console.log(result);
+            res.json(result);
+        });
     });
 });
 
@@ -152,14 +154,16 @@ router.post('/sendMessage', function (req, res) {
                 console.log(user.get("authData").weixin);
                 console.log(user.get("authData").weixin.openid);
 
-                api.sendText(openId, text, function (err, result) {
-                    if (err) {
-                        res.json(err);
-                    }
+                api.getLatestToken(function(){
+                    api.sendText(openId, text, function (err, result) {
+                        if (err) {
+                            res.json(err);
+                        }
 
-                    console.log(result);
+                        console.log(result);
 
-                    res.json(result);
+                        res.json(result);
+                    });
                 });
             }
         });
