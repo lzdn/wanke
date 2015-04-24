@@ -8,20 +8,11 @@
         userlog = window.location.search.split('=')[2];
         code = userlog.split("&")[0];
         postview = window.location.search.split('=')[1].split("&")[0];
-        alert(code);
     } else {
         postview = window.location.search.split('=')[1];
     }
-    alert(postview);
     loadwx();
     loading(function () {
-
-        //thread_url = "http://localhost:63342/wanke/public/post_detail.html?55223dcfe4b0cd5b62664791";
-        //thread_key = postview;
-        //console.log(postview);
-        //thread_title = 'post_detail';
-        //$("<div id=\"ds-thread\" class=\"ds-thread\" data-thread-key=postview+\"\" data-title=\"post_detail\" data-url=\"http://localhost:63342/wanke/public/post_detail.html?55223dcfe4b0cd5b62664791\"></div>"
-        //).prependTo("#thread");
         $(".imgpreview").on("click", function () {
             var cur = $(this).attr("src");
             var url = $(this).parent().attr("value");
@@ -35,7 +26,6 @@
         $(".imgpreview").removeClass("imgpreview");
 
         $("#btnname").on("click", function () {
-            alert("hah");
             var currentUser = AV.User.current();
             if (currentUser) {
                 usersid = currentUser.id;
@@ -46,10 +36,7 @@
                     }
                 });
                 if (relationuser) {
-                        alert(usersid);
                         for (var i = 0; i < relationuser.length; i++) {
-                            alert("baomingid" + usersid);
-                            alert(relationuser[i].id);
                             if (relationuser[i].id == usersid) {
                                 $(".usercontent").remove();
                                 $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".userphone");
@@ -59,7 +46,6 @@
                         }
                 }else{
                     setTimeout(function () {
-                        alert(phonenumber);
                         if (phonenumber) {
                             var imgurl = currentUser.get("authData").weixin.headimgurl;
                             $(".usercontent").remove();
@@ -67,9 +53,6 @@
                             $("#btnname").remove();
                             $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
                             $(" <img src=\"" + imgurl + "\" value=\" " + usersid + "&" + phonenumber + " \" class=\"am-radius\">").appendTo("#headtle");
-                            //alert(usersid);
-                            // alert(postId);
-
                             $.ajax({
                                 method: "POST",
                                 url: "http://fuwuhao.dianyingren.com/weixin/sendMessage",
@@ -80,10 +63,8 @@
                                 contentType: "application/json; charset=utf-8",
                                 dataType: "json",
                                 success: function (data) {
-                                    alert(data);
                                 },
                                 error: function (msg) {
-                                    alert(msg);
                                 }
                             });
                             //usersid  postId  openid
@@ -184,7 +165,6 @@
                 number = object.get("username").get("mobilePhoneNumber");
                 postId = object.get("username").id;
                 openid = object.get("username").get("authData").weixin.openid;
-                alert(openid);
                 var ousername = object.get("username").attributes.authData.weixin;
                 var username = ousername.nickname;
                 var headimgurl = ousername.headimgurl;
@@ -239,10 +219,7 @@
                     var currentUser = AV.User.current();
                     if (currentUser) {
                         usersid = currentUser.id;
-                        alert(usersid);
                         for (var i = 0; i < relationuser.length; i++) {
-                            alert("baomingid" + usersid);
-                            alert(relationuser[i].id);
                             if (relationuser[i].id == usersid) {
                                 $(".usercontent").remove();
                                 $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".userphone");

@@ -11,6 +11,12 @@ hr{
     width: 200px;
     height: 40px;
     margin:0 auto;
+    margin-top:20px;
+}
+.usercontent{
+    position:absolute;
+    left:0;
+    top:0;
 }
 #btnname .am-btn{
     width: 200px;
