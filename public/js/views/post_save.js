@@ -103,7 +103,7 @@ $(function () {
                     var tag = new tags();
                     tag.id = newtag;
                     var postc = new posts();
-                    var user = AV.User.current();
+                   //var user = AV.User.current();
                     postc.save({
                         content: aUserval2,
                         tagkey: tag,
@@ -159,7 +159,6 @@ $(function () {
     function dataLoad(callbak) {
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
         $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + saveurl + ""}, function (result) {
-            alert(result);
             appId = result.appId;
             jslist = result.jsApiList;
             noncestr = result.nonceStr;
