@@ -59,9 +59,9 @@
 })(jQuery);
 
 function load(callback) {
-    var saveurl = window.location.href;
+    var contacturl = window.location.href;
     var appId, jslist, noncestr, signature, timestamp, jsApiList;
-    $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + saveurl + ""}, function (result) {
+    $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + contacturl + ""}, function (result) {
         appId = result.appId;
         jslist = result.jsApiList;
         noncestr = result.nonceStr;
@@ -77,9 +77,11 @@ function load(callback) {
             signature: signature,// 必填，签名，见附录1
             jsApiList: jsApiList// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         });
-        wx.ready(function () {
-            wx.hideOptionMenu();
-        });
+        setTimeout(function(){
+            wx.ready(function () {
+                wx.hideOptionMenu();
+            });
+        },100)
     });
     var id = window.location.search.split('?id=')[1];
     AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
