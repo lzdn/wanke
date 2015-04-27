@@ -185,9 +185,6 @@
 
     }
 
-    //function clickevent(){
-    //
-    //}
 
 
     function destroy(postid){
