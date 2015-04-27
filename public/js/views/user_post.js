@@ -78,6 +78,7 @@
         window.location.href = "post_detail.html?id=" + postview + "";
     });
     $(".destroy").on("click",function(){
+
         destroy(postview);
     });
 
@@ -190,6 +191,7 @@
 
 
     function destroy(postid){
+        var destroylength = document.getElementsByClassName("doremove");
         var post = AV.Object.extend("post");
         var query = new AV.Query(post);
         query.equalTo("objectId",postid);
@@ -199,12 +201,11 @@
                 res[0].destroy({
                     success: function(myObject) {
                         $("#"+destroyid+"").remove();
-                        var adoremove = document.getElementsByClassName("adoremove");
-                        alert(adoremove.length);
-                        if(adoremove.length<5){
+                        alert(destroylength.length);
+                        if(destroylength.length<5){
                             $("#load").hide();
                         }
-                        if(adoremove.length==0){
+                        if(destroylength.length==0){
                             $(" <div id=\"null\"><p class=\"am-sans-serif\">暂时没有发表评论</p></div>").prependTo("#content");
                         }
                     }
