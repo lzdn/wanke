@@ -26,7 +26,34 @@ var client = new OAuth(config.appId, config.appSecret, function (openid, callbac
     fs.writeFile(openid + ':access_token.txt', JSON.stringify(token), callback);
 });
 
-var api = new API(config.appId, config.appSecret);
+var api = new API(config.appId, config.appSecret, function (callback) {
+    var currentDate = new Date();
+    var expiresDate = new Date().setDate(config["expiresDate"]);
+
+    // 比较是否过期，没过期直接返回token
+    if (currentDate >= expiresDate) {
+        console.log('--------------------------------');
+        console.log('-----------token超时------------');
+        api.getLatestToken(function (err, token) {
+            if (err) return callback(err);
+            // 记录token值
+            config["access_token"] = token;
+            // 记录下一次过期时间点
+            config["expiresDate"] = new Date().getMilliseconds() + 7200000;
+            console.log('-----------token重新获取------------');
+            console.log('-----------token：' + token + '------------');
+
+            callback(null, token);
+        });
+
+    } else {
+        console.log('-----------token未超时------------');
+        console.log('-----------token已获取------------');
+        console.log('-----------token：' + config["access_token"] + '------------');
+
+        callback(null, config["access_token"]);
+    }
+});
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {

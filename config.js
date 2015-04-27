@@ -5,5 +5,8 @@ module.exports = {
     appId: "wxf44ff09e67caaad3",
     appSecret: "3ccef678e38cf9bb3e5a1f137804210c",
     url: "http://fuwuhao.dianyingren.com",
-    token: "dianyingren"
+    token: "dianyingren",
+    access_token: "",
+    expires_in: 0,
+    expiresDate: 0
 };
