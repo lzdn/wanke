@@ -1,9 +1,6 @@
 (function ($) {
     var postview = window.location.search.split('?id=')[1];
     load(function () {
-        wx.ready(function () {
-            wx.hideOptionMenu();
-        });
         var phonenum = "";
         var bnum = 0;
         $("#haederleft").on("click", function () {

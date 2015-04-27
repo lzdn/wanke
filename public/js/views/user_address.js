@@ -1,8 +1,5 @@
 (function ($) {
     load(function (err, user) {
-        wx.ready(function () {
-            wx.hideOptionMenu();
-        });
         var buliding;
         var homeval;
         $("#doc-select-2").change(function () {
