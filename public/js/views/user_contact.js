@@ -1,13 +1,14 @@
 (function ($) {
     var postview = window.location.search.split('?id=')[1];
     load(function () {
-
+        wx.ready(function () {
+            wx.hideOptionMenu();
+        });
         var phonenum = "";
         var bnum = 0;
         $("#haederleft").on("click", function () {
             window.location.href = "user_detail.html?code=";
         });
-
         $('#phonenum').keydown(function () {
             setTimeout(function () {
                 if ($('#phonenum').val() && /^1[3|4|5|8]\d{9}$/.test($('#phonenum').val())) {
@@ -62,7 +63,9 @@
 function load(callback) {
     var saveurl = window.location.href;
     var appId, jslist, noncestr, signature, timestamp, jsApiList;
+    alert(saveurl);
     $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + saveurl + ""}, function (result) {
+        alert(result);
         appId = result.appId;
         jslist = result.jsApiList;
         noncestr = result.nonceStr;
@@ -77,9 +80,6 @@ function load(callback) {
             nonceStr: noncestr, // 必填，生成签名的随机串
             signature: signature,// 必填，签名，见附录1
             jsApiList: jsApiList// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-        });
-        wx.ready(function () {
-            wx.hideOptionMenu();
         });
     });
     var id = window.location.search.split('?id=')[1];
