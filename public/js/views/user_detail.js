@@ -24,12 +24,9 @@
         if (saveurl.split("=").length-1> 1) {
             userlog = window.location.search.split('=')[1];
             code = userlog.split("&")[0];
-            //alert(code);
             id = ""
         }
-
         if (code != "") {
-            alert(code);
             $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
                 var user = {
