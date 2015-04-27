@@ -234,6 +234,7 @@ $(function () {
 
     function uploadIds(localIds,index) {
         var idx=index;
+        alert(localIds[index]);
         wx.uploadImage({
             localId: localIds[index] + "",
             isShowProgressTips: 1,
@@ -254,7 +255,7 @@ $(function () {
                         $("#addimg").show();
                         $("#usr-sbm-sub").removeClass("am-disabled");
                         fileurls.push(fileurl);
-                        $("<div id=\"" + fileId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + fileId + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div>").prependTo("#imgwall");
+                        $("<div id=\"" + fileId + "\" class=\"imgnav\"><img src=\"" + localIds[index] + "\" alt=\"\"/><a id=\"destroy" + fileId + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div>").prependTo("#imgwall");
                         $("#destroy" + fileId + "").on("click", function () {
                             fileurls.splice(jQuery.inArray(fileurl, fileurls), 1);
                             $("#" + fileId + "").remove();
