@@ -84,7 +84,6 @@ $(function () {
         wx.chooseImage({
             success: function (res) {
                 var localIds = res.localIds;
-                alert(localIds);
                 localIds.forEach(function(e){
                     uploadIds(e);
                 });
