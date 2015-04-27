@@ -1,7 +1,7 @@
 (function ($) {
     var userid=window.location.search.split('=')[1];
     var skx = -5;
-    var postview
+    var postview,contentlength;
     loadwx();
     $("#arrow").hide();
     loading(function(){
@@ -101,6 +101,7 @@
                 query.equalTo("username", res[0]);
                 query.count({
                     success: function (skip) {
+                        contentlength=skip;
                         var newtime = new Date().getTime();
                         query.descending("createdAt");
                          skx+=5;
