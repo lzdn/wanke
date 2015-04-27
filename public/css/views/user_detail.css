@@ -46,7 +46,6 @@
 }
 #user_post .icon-1{
     color: rgb(0,124,203);
-    margin-rigth:2px;
 }
 #user_address .icon-1{
     color: rgb(229,28,35);
@@ -58,6 +57,9 @@
 }
 #user_address , #user_contact{
     padding:7px 13px 7px 10px;
+}
+#user_post{
+    padding-rigth:2px;
 }
 #user_address  .icon-1{
     margin:0 18px 0 12px;
