@@ -191,5 +191,30 @@ router.post('/uploadImage', function (req, res) {
         });
     });
 });
+router.get('/createMenu', function (req, res) {
+    var menu = {
+        "button": [{
+            "type": "view",
+            "name": "易生活",
+            "url": "http://fuwuhao.dianyingren.com/shop_index.html"
+        }, {
+            "type": "view",
+            "name": "邻里圈",
+            "url": "http://fuwuhao.dianyingren.com/post_index.html"
+        }, {
+            "type": "view",
+            "name": "个人中心",
+            "url": "http://fuwuhao.dianyingren.com/user_detail.html?code="
+        }]
+    };
+
+    api.createMenu(menu,function(err,result){
+        if(err){
+            res.json(err);
+        }
+
+        res.json(result);
+    });
+});
 
 module.exports = router;
