@@ -6,7 +6,6 @@
     $("#arrow").hide();
     loading(function(){
         var adoremove = document.getElementsByClassName("doremove");
-        alert(adoremove.length);
         if(adoremove.length<5){
             $("#load").hide();
         }
@@ -15,7 +14,6 @@
         }
         $(".Publish").on("click", function () {
             postview = $(this).attr("value");
-            alert(postview);
         });
         //$("#users").on("click", function () {
         //    window.location.href = "user_detail.html";
@@ -57,7 +55,6 @@
             loading(function(){
                 $(".Publish").on("click", function () {
                     postview = $(this).attr("value");
-                    alert(postview);
                 });
                 //$("#users").on("click", function () {
                 //    window.location.href = "user_detail.html";
@@ -78,11 +75,9 @@
     });
 
     $(".seecontent").on("click",function(){
-        alert(postview);
         window.location.href = "post_detail.html?id=" + postview + "";
     });
     $(".destroy").on("click",function(){
-        alert(postview)
         destroy(postview);
     });
 

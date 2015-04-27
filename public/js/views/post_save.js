@@ -267,7 +267,7 @@ $(function () {
                         });
                     },
                     error: function (msg) {
-                        alert(msg);
+                       // alert(msg);
                     }
                 });
 
