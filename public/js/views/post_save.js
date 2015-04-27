@@ -1,6 +1,5 @@
 $(function () {
     var saveurl = window.location.href;
-    var user = AV.User;
     var posts = AV.Object.extend("post");
     var tags = AV.Object.extend("tag");
     var newtag = 1;
@@ -10,14 +9,11 @@ $(function () {
     if (saveurl.split("=").length-1> 1) {
         userlog = window.location.search.split('=')[1];
         code = userlog.split("&")[0];
-        id = ""
     }
     dataLoad(function () {
-
         wx.ready(function () {
             wx.hideOptionMenu();
         });
-
         var aNav = document.getElementsByClassName("am-btn-extend");
         aNav[0].className = "am-btn-extend am-btn am-round am-btn-primary";
         for (var i = 0; i < aNav.length; i++) {
@@ -69,25 +65,18 @@ $(function () {
         if (aUserval2.length > 140) {
             $("#my-alert").modal();
         } else {
-            //alert('准备上传');
             savecontent()
         }
     });
     $("#addimg").hide();
-    //var postc = AV.posts.current();
     var postc = new posts();
     var relation = postc.relation("imgs");
 
     $(".chooseImage").on("click", function () {
-        //var ofileid;
-        //var localIds;
         wx.chooseImage({
             success: function (res) {
                 var localIds = res.localIds;
-                alert(localIds);
-                for (var i = 0; i < localIds.length; i++) {
-                    uploadIds(localIds[i]);
-                }
+                setTimeout(uploadIds(localIds,0),100);
             }
         });
     });
@@ -103,7 +92,6 @@ $(function () {
                     var tag = new tags();
                     tag.id = newtag;
                     var postc = new posts();
-                   //var user = AV.User.current();
                     postc.save({
                         content: aUserval2,
                         tagkey: tag,
@@ -116,7 +104,6 @@ $(function () {
                     });
                 } else {
                     $('#my-prompt').modal({
-                        // relatedTarget: this,
                         onConfirm: function (e) {
                             //e.data
                             if (/^1[3|4|5|8]\d{9}$/.test(e.data)) {
@@ -233,14 +220,13 @@ $(function () {
             });
         }
     }
-
-    function uploadIds(localIds) {
+    function uploadIds(localIds,index) {
+        var idx=index;
         wx.uploadImage({
-            localId: localIds + "",
+            localId: localIds[index] + "",
             isShowProgressTips: 1,
             success: function (img) {
                 var imgserverId=img.serverId;
-                alert(imgserverId);
                 $.ajax({
                     method: "POST",
                     url: "http://fuwuhao.dianyingren.com/weixin/uploadImage",
@@ -252,13 +238,10 @@ $(function () {
                     success: function (data) {
                         var fileId = data.id;
                         var fileurl= data.url;
-                        // Play with returned data in JSON format
                         $("#addimg").show();
                         $("#usr-sbm-sub").removeClass("am-disabled");
                         fileurls.push(fileurl);
-                        alert(fileId);
-                        alert(fileurl);
-                        $("<div id=\"" + fileId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + fileId + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div>").prependTo("#imgwall");
+                        $("<div id=\"" + fileId + "\" class=\"imgnav\"><img src=\"" + localIds[index] + "\" alt=\"\"/><a id=\"destroy" + fileId + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div>").prependTo("#imgwall");
                         $("#destroy" + fileId + "").on("click", function () {
                             fileurls.splice(jQuery.inArray(fileurl, fileurls), 1);
                             $("#" + fileId + "").remove();
@@ -269,6 +252,10 @@ $(function () {
                                 }
                             }
                         });
+                        if(idx!=localIds.length-1){
+                            idx+=1;
+                            uploadIds(localIds,idx)
+                        }
                     },
                     error: function (msg) {
                         alert(msg);

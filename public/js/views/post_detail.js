@@ -106,7 +106,6 @@
                 }
 
             } else {
-                alert("没有登录");
                 $.ajax({
                     method: "POST",
                     url: "http://fuwuhao.dianyingren.com/weixin/getAuthUrl",
