@@ -46,6 +46,7 @@
 }
 #user_post .icon-1{
     color: rgb(0,124,203);
+    margin-left:-2px;
 }
 #user_address .icon-1{
     color: rgb(229,28,35);
