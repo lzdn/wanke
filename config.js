@@ -7,6 +7,5 @@ module.exports = {
     url: "http://fuwuhao.dianyingren.com",
     token: "dianyingren",
     access_token: "",
-    expires_in: 0,
-    expiresDate: 0
+    expireTime: 0
 };

@@ -28,18 +28,18 @@ var client = new OAuth(config.appId, config.appSecret, function (openid, callbac
 
 var api = new API(config.appId, config.appSecret, function (callback) {
     var currentDate = new Date();
-    var expiresDate = new Date().setDate(config["expiresDate"]);
+    var expireTime = new Date().setDate(config["expireTime"]);
 
     // 比较是否过期，没过期直接返回token
-    if (currentDate >= expiresDate) {
+    if (currentDate >= expireTime) {
         console.log('--------------------------------');
         console.log('-----------token超时------------');
         api.getAccessToken(function (err, token) {
             if (err) return callback(err);
             // 记录token值
-            config["access_token"] = token;
+            config["access_token"] = token.accessToken;
             // 记录下一次过期时间点
-            config["expiresDate"] = new Date().getMilliseconds() + 7200000;
+            config["expireTime"] = token.expireTime;
             console.log('-----------token重新获取------------');
             console.log(token);
 
