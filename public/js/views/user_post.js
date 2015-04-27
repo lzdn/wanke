@@ -5,6 +5,9 @@
     loadwx();
     $("#arrow").hide();
     loading(function(){
+        wx.ready(function () {
+            wx.hideOptionMenu();
+        });
         var adoremove = document.getElementsByClassName("doremove");
         if(adoremove.length<5){
             $("#load").hide();
