@@ -41,7 +41,7 @@ var api = new API(config.appId, config.appSecret, function (callback) {
             // 记录下一次过期时间点
             config["expiresDate"] = new Date().getMilliseconds() + 7200000;
             console.log('-----------token重新获取------------');
-            console.log('-----------token：' + token + '------------');
+            console.log(token);
 
             callback(null, token);
         });
@@ -49,7 +49,7 @@ var api = new API(config.appId, config.appSecret, function (callback) {
     } else {
         console.log('-----------token未超时------------');
         console.log('-----------token已获取------------');
-        console.log('-----------token：' + config["access_token"] + '------------');
+        console.log(config["access_token"]);
 
         callback(null, config["access_token"]);
     }
