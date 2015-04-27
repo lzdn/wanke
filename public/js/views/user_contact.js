@@ -1,9 +1,7 @@
 (function ($) {
     var postview = window.location.search.split('?id=')[1];
     load(function () {
-        wx.ready(function () {
-            wx.hideOptionMenu();
-        });
+
         var phonenum = "";
         var bnum = 0;
         $("#haederleft").on("click", function () {
@@ -79,6 +77,9 @@ function load(callback) {
             nonceStr: noncestr, // 必填，生成签名的随机串
             signature: signature,// 必填，签名，见附录1
             jsApiList: jsApiList// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+        wx.ready(function () {
+            wx.hideOptionMenu();
         });
     });
     var id = window.location.search.split('?id=')[1];
