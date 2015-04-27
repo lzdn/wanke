@@ -118,7 +118,7 @@
                         window.location.href = data.authUrl;
                     },
                     error: function (msg) {
-                        alert(msg);
+                       // alert(msg);
                     }
                 });
                 //    $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl",{page:saveurl}, function (res) {
