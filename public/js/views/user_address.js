@@ -1,7 +1,6 @@
 (function ($) {
     load(function (err, user) {
         var buliding;
-        var homeval;
         $("#doc-select-2").change(function () {
             $("#usr-sbm-sub").removeClass("am-disabled");});
         $("#doc-select-2").change(function () {
