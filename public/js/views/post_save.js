@@ -13,7 +13,6 @@ $(function () {
         id = ""
     }
     dataLoad(function () {
-
         wx.ready(function () {
             wx.hideOptionMenu();
         });

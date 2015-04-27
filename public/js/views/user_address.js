@@ -80,6 +80,7 @@
 })(jQuery);
 
 function load(callback) {
+    var saveurl = window.location.href;
     var appId, jslist, noncestr, signature, timestamp, jsApiList;
     $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + saveurl + ""}, function (result) {
         appId = result.appId;
