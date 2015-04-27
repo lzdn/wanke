@@ -200,6 +200,7 @@
                     success: function(myObject) {
                         $("#"+destroyid+"").remove();
                         var adoremove = document.getElementsByClassName("adoremove");
+                        alert(adoremove.length);
                         if(adoremove.length<5){
                             $("#load").hide();
                         }
