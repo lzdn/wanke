@@ -208,8 +208,19 @@ router.get('/createMenu', function (req, res) {
         }]
     };
 
-    api.createMenu(menu,function(err,result){
-        if(err){
+    api.createMenu(menu, function (err, result) {
+        if (err) {
+            res.json(err);
+        }
+
+        res.json(result);
+    });
+});
+
+router.get('/removeMenu', function (req, res) {
+
+    api.removeMenu(function (err, result) {
+        if (err) {
             res.json(err);
         }
 
