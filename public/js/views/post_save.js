@@ -85,9 +85,10 @@ $(function () {
             success: function (res) {
                 var localIds = res.localIds;
                 alert(localIds);
-                for (var i = 0; i < localIds.length; i++) {
-                    uploadIds(localIds[i]);
-                }
+                localIds.forEach(function(e){
+                    alert(e);
+                    uploadIds(e);
+                });
             }
         });
     });
