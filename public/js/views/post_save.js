@@ -86,7 +86,6 @@ $(function () {
                 var localIds = res.localIds;
                 alert(localIds);
                 localIds.forEach(function(e){
-                    alert(e);
                     uploadIds(e);
                 });
             }
@@ -241,7 +240,6 @@ $(function () {
             isShowProgressTips: 1,
             success: function (img) {
                 var imgserverId=img.serverId;
-                alert(imgserverId);
                 $.ajax({
                     method: "POST",
                     url: "http://fuwuhao.dianyingren.com/weixin/uploadImage",
@@ -257,8 +255,6 @@ $(function () {
                         $("#addimg").show();
                         $("#usr-sbm-sub").removeClass("am-disabled");
                         fileurls.push(fileurl);
-                        alert(fileId);
-                        alert(fileurl);
                         $("<div id=\"" + fileId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + fileId + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div>").prependTo("#imgwall");
                         $("#destroy" + fileId + "").on("click", function () {
                             fileurls.splice(jQuery.inArray(fileurl, fileurls), 1);
