@@ -84,7 +84,6 @@ $(function () {
         wx.chooseImage({
             success: function (res) {
                 var localIds = res.localIds;
-                alert(localIds);
                     uploadIds(localIds,0);
             }
         });
@@ -234,7 +233,6 @@ $(function () {
 
     function uploadIds(localIds,index) {
         var idx=index;
-        alert(localIds[index]);
         wx.uploadImage({
             localId: localIds[index] + "",
             isShowProgressTips: 1,
