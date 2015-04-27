@@ -85,7 +85,46 @@ $(function () {
             success: function (res) {
                 var localIds = res.localIds;
                 localIds.forEach(function(e){
-                    uploadIds(e);
+                   // uploadIds(e);
+                    wx.uploadImage({
+                        localId: e + "",
+                        isShowProgressTips: 1,
+                        success: function (img) {
+                            var imgserverId=img.serverId;
+                            $.ajax({
+                                method: "POST",
+                                url: "http://fuwuhao.dianyingren.com/weixin/uploadImage",
+                                data: JSON.stringify({
+                                    serverId: imgserverId
+                                }),
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (data) {
+                                    var fileId = data.id;
+                                    var fileurl= data.url;
+                                    // Play with returned data in JSON format
+                                    $("#addimg").show();
+                                    $("#usr-sbm-sub").removeClass("am-disabled");
+                                    fileurls.push(fileurl);
+                                    $("<div id=\"" + fileId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + fileId + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div>").prependTo("#imgwall");
+                                    $("#destroy" + fileId + "").on("click", function () {
+                                        fileurls.splice(jQuery.inArray(fileurl, fileurls), 1);
+                                        $("#" + fileId + "").remove();
+                                        if ($(".imgnav").length == 0) {
+                                            $("#addimg").hide();
+                                            if ($("#doc-ta-1").val() == ""){
+                                                $("#usr-sbm-sub").addClass("am-disabled");
+                                            }
+                                        }
+                                    });
+                                },
+                                error: function (msg) {
+                                    alert(msg);
+                                }
+                            });
+
+                        }
+                    });
                 });
             }
         });
@@ -234,45 +273,45 @@ $(function () {
     }
 
     function uploadIds(localIds) {
-        wx.uploadImage({
-            localId: localIds + "",
-            isShowProgressTips: 1,
-            success: function (img) {
-                var imgserverId=img.serverId;
-                $.ajax({
-                    method: "POST",
-                    url: "http://fuwuhao.dianyingren.com/weixin/uploadImage",
-                    data: JSON.stringify({
-                        serverId: imgserverId
-                    }),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (data) {
-                        var fileId = data.id;
-                        var fileurl= data.url;
-                        // Play with returned data in JSON format
-                        $("#addimg").show();
-                        $("#usr-sbm-sub").removeClass("am-disabled");
-                        fileurls.push(fileurl);
-                        $("<div id=\"" + fileId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + fileId + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div>").prependTo("#imgwall");
-                        $("#destroy" + fileId + "").on("click", function () {
-                            fileurls.splice(jQuery.inArray(fileurl, fileurls), 1);
-                            $("#" + fileId + "").remove();
-                            if ($(".imgnav").length == 0) {
-                                $("#addimg").hide();
-                                if ($("#doc-ta-1").val() == ""){
-                                    $("#usr-sbm-sub").addClass("am-disabled");
-                                }
-                            }
-                        });
-                    },
-                    error: function (msg) {
-                        alert(msg);
-                    }
-                });
-
-            }
-        });
+        //wx.uploadImage({
+        //    localId: localIds + "",
+        //    isShowProgressTips: 1,
+        //    success: function (img) {
+        //        var imgserverId=img.serverId;
+        //        $.ajax({
+        //            method: "POST",
+        //            url: "http://fuwuhao.dianyingren.com/weixin/uploadImage",
+        //            data: JSON.stringify({
+        //                serverId: imgserverId
+        //            }),
+        //            contentType: "application/json; charset=utf-8",
+        //            dataType: "json",
+        //            success: function (data) {
+        //                var fileId = data.id;
+        //                var fileurl= data.url;
+        //                // Play with returned data in JSON format
+        //                $("#addimg").show();
+        //                $("#usr-sbm-sub").removeClass("am-disabled");
+        //                fileurls.push(fileurl);
+        //                $("<div id=\"" + fileId + "\" class=\"imgnav\"><img src=\"" + localIds + "\" alt=\"\"/><a id=\"destroy" + fileId + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div>").prependTo("#imgwall");
+        //                $("#destroy" + fileId + "").on("click", function () {
+        //                    fileurls.splice(jQuery.inArray(fileurl, fileurls), 1);
+        //                    $("#" + fileId + "").remove();
+        //                    if ($(".imgnav").length == 0) {
+        //                        $("#addimg").hide();
+        //                        if ($("#doc-ta-1").val() == ""){
+        //                            $("#usr-sbm-sub").addClass("am-disabled");
+        //                        }
+        //                    }
+        //                });
+        //            },
+        //            error: function (msg) {
+        //                alert(msg);
+        //            }
+        //        });
+        //
+        //    }
+        //});
     }
 });
 
