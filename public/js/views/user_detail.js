@@ -21,12 +21,13 @@
         var saveurl = window.location.href;
         var userlog, userid, queryobject, nickname;
         var postview = window.location.search.split('=')[1];
-        if (saveurl.indexOf("=") > 1) {
+        if (saveurl.split("=").length-1> 1) {
             userlog = window.location.search.split('=')[1];
             code = userlog.split("&")[0];
             //alert(code);
             id = ""
         }
+
         if (code != "") {
             $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
@@ -63,21 +64,42 @@
                 })
             });
         } else {
-            var currentUser = AV.User.current();
-            var authData = currentUser.get("authData");
-            var $tpl = $('#user');
-            var source = $tpl.text();
-            var template = Handlebars.compile(source);
-            var data = {
-                user: {
-                    openid: authData.weixin.openid,
-                    nickname: authData.weixin.nickname,
-                    headUrl: authData.weixin.headimgurl
-                }
-            };
-            var html = template(data);
-            $tpl.before(html);
-            callbak(null, currentUser);
+            if (currentUser) {
+                var currentUser = AV.User.current();
+                var authData = currentUser.get("authData");
+                var $tpl = $('#user');
+                var source = $tpl.text();
+                var template = Handlebars.compile(source);
+                var data = {
+                    user: {
+                        openid: authData.weixin.openid,
+                        nickname: authData.weixin.nickname,
+                        headUrl: authData.weixin.headimgurl
+                    }
+                };
+                var html = template(data);
+                $tpl.before(html);
+                callbak(null, currentUser);
+            } else {
+                $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl", {page: "http://fuwuhao.dianyingren.com/user_detail.html"}, function (res) {
+                    window.location.href = res.authUrl;
+                })
+            }
+            //var currentUser = AV.User.current();
+            //var authData = currentUser.get("authData");
+            //var $tpl = $('#user');
+            //var source = $tpl.text();
+            //var template = Handlebars.compile(source);
+            //var data = {
+            //    user: {
+            //        openid: authData.weixin.openid,
+            //        nickname: authData.weixin.nickname,
+            //        headUrl: authData.weixin.headimgurl
+            //    }
+            //};
+            //var html = template(data);
+            //$tpl.before(html);
+            //callbak(null, currentUser);
         }
     }
 })(jQuery);
