@@ -203,10 +203,8 @@
                 var destroyid= res[0].id;
                 res[0].destroy({
                     success: function(myObject) {
-                        alert(destroyid);
                         $("#"+destroyid+"").remove();
                         var adoremove = document.getElementsByClassName("adoremove");
-                        alert(adoremove.length);
                         if(adoremove.length<5){
                             $("#load").hide();
                         }

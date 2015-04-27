@@ -131,7 +131,6 @@ function load(callback) {
                                     selected: ""
                                 };
                                 if (user.get("floorname") == oldbuilding[j]) {
-                                    //alert(home.name);
                                     building.selected = "selected";
                                 }
                                 buildings.push(building);
