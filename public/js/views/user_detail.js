@@ -65,8 +65,8 @@
                 })
             });
         } else {
+            var currentUser = AV.User.current();
             if (currentUser) {
-                var currentUser = AV.User.current();
                 var authData = currentUser.get("authData");
                 var $tpl = $('#user');
                 var source = $tpl.text();
