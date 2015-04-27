@@ -84,7 +84,7 @@ $(function () {
         wx.chooseImage({
             success: function (res) {
                 var localIds = res.localIds;
-                setTimeout(uploadIds(localIds,0),10);
+                setTimeout(uploadIds(localIds,0),100);
             }
         });
     });

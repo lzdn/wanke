@@ -201,7 +201,6 @@
                 res[0].destroy({
                     success: function(myObject) {
                         $("#"+destroyid+"").remove();
-                        alert(destroylength.length);
                         if(destroylength.length<5){
                             $("#load").hide();
                         }
