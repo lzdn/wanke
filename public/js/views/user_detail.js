@@ -29,6 +29,7 @@
         }
 
         if (code != "") {
+            alert(code);
             $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
                 var user = {
