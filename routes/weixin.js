@@ -34,7 +34,7 @@ var api = new API(config.appId, config.appSecret, function (callback) {
     if (currentDate >= expiresDate) {
         console.log('--------------------------------');
         console.log('-----------token超时------------');
-        api.getLatestToken(function (err, token) {
+        api.getAccessToken(function (err, token) {
             if (err) return callback(err);
             // 记录token值
             config["access_token"] = token;
