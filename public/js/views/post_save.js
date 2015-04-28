@@ -106,7 +106,7 @@ $(function () {
                     $('#my-prompt').modal({
                         onConfirm: function (e) {
                             //e.data
-                            if (/^1[3|4|5|8]\d{9}$/.test(e.data)) {
+                            if (/^1[3|4|5|7|8]\d{9}$/.test(e.data)) {
                                 var query = new AV.Query(AV.User);
                                 query.get(userid, {
                                     success: function (user) {
