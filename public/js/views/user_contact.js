@@ -9,7 +9,7 @@
 
         $('#phonenum').keydown(function () {
             setTimeout(function () {
-                if ($('#phonenum').val() && /^1[3|4|5|8]\d{9}$/.test($('#phonenum').val())) {
+                if ($('#phonenum').val() && /^1[3|4|5|7|8]\d{9}$/.test($('#phonenum').val())) {
                     bnum = 1;
                     phonenum = $('#phonenum').val();
                     $(".am-alert").alert('close');
