@@ -3,8 +3,8 @@
     var number = "";
     var code = "";
     var relationuser = [];
-    var marktags=["约吃","约玩","约聊","约运动"];
-    var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid, postview;
+    var marktags = ["约吃", "约玩", "约聊", "约运动"];
+    var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid, postview, username, headimgurl;
     if (saveurl.split("=").length - 1 > 1) {
         userlog = window.location.search.split('=')[2];
         code = userlog.split("&")[0];
@@ -14,6 +14,103 @@
     }
     loadwx();
     loading(function () {
+        alert("haha")
+        $(".replypublish").hide();
+        $(".reply").on("click", function () {
+            $(".replypublish").hide();
+            var reply = $(this).parent().attr("value");
+            var $reply=$(this).parent().siblings("."+reply+"");
+            if ($reply.attr("bshow") == 0) {
+                $reply.show();
+                $reply.attr("bshow", "1");
+            } else {
+                $reply.hide();
+                $reply.attr("bshow", "0");
+            }
+        })
+        $(".smpublish").on("click", function () {
+            var comment = AV.Object.extend("comment");
+            var post = AV.Object.extend("post");
+            var relationcommentid = $(this).attr("value");
+            var relationcommentusername =$(this).attr("username");
+            var relationcommentcontent =$(this).attr("usersay");
+            var relationcommentusershow =$(this).attr("usershow");
+            var relationcommentuserid = $(this).attr("userid");
+            console.log(relationcommentid+"$"+relationcommentusername+"$"+relationcommentcontent+"$"+relationcommentusershow)
+            var relationsay = $(this).parent().siblings(".stextarea").children().val();
+            alert(relationsay);
+            var posts = new post();
+            posts.id = postview;
+            var commentrelation=[];
+            commentrelation.push({
+                relationcommentid:relationcommentid,
+                relationcommentusername:relationcommentusername,
+                relationcommentcontent:relationcommentcontent,
+                relationcommentuserid:relationcommentuserid,
+                relationcommentusershow:relationcommentusershow
+            });
+            console.log(commentrelation);
+            var comment = new comment();
+            comment.save({
+                commentcontent: relationsay,
+                commentpost: posts,
+                commentuserid:userid,
+                commentusername: "米振天",
+                commentusershow: headimgurl,
+                commentrelation: commentrelation
+            },{
+                success:function(comment){
+                    alert(comment.id)
+                    var query = new AV.Query(post);
+                    //query.equalTo("objectId", postview);
+                    query.get(postview, {
+                        success: function (post) {
+                            post.add("relationcomment", {id: comment.id});
+                            post.save();
+                        },
+                        error: function (object, error) {
+                            console.log(object);
+                        }
+                    });
+                }
+            })
+        })
+        $("#maxpublish").on("click", function () {
+            alert(userid)
+            var post = AV.Object.extend("post");
+            var comment = AV.Object.extend("comment");
+            alert("haha")
+            var publishsay = $(this).parent().siblings(".textarea").children().val();
+            if (publishsay) {
+                alert(publishsay)
+            }
+            var posts = new post();
+            posts.id = postview;
+            var coment = new comment();
+            coment.save({
+                commentcontent: publishsay,
+                commentpost: posts,
+                commentusername: "米振天",
+                commentuserid:userid,
+                commentusershow: headimgurl
+            }, {
+                success: function (comment) {
+                    alert(comment.id)
+                    var query = new AV.Query(post);
+                    //query.equalTo("objectId", postview);
+                    query.get(postview, {
+                        success: function (post) {
+                            post.add("relationcomment", {id: comment.id});
+                            post.save();
+                        },
+                        error: function (object, error) {
+                            console.log(object);
+                        }
+                    });
+                }
+            });
+        });
+
         $(".imgpreview").on("click", function () {
             var cur = $(this).attr("src");
             var url = $(this).parent().attr("value");
@@ -37,15 +134,15 @@
                     }
                 });
                 if (relationuser) {
-                        for (var i = 0; i < relationuser.length; i++) {
-                            if (relationuser[i].id == usersid) {
-                                $(".usercontent").remove();
-                                $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".usercont");
-                                $("#btnname").remove();
-                                $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
-                            }
+                    for (var i = 0; i < relationuser.length; i++) {
+                        if (relationuser[i].id == usersid) {
+                            $(".usercontent").remove();
+                            $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".usercont");
+                            $("#btnname").remove();
+                            $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
                         }
-                }else{
+                    }
+                } else {
                     setTimeout(function () {
                         if (phonenumber) {
                             var imgurl = currentUser.get("authData").weixin.headimgurl;
@@ -118,7 +215,7 @@
                         window.location.href = data.authUrl;
                     },
                     error: function (msg) {
-                       // alert(msg);
+                        // alert(msg);
                     }
                 });
                 //    $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl",{page:saveurl}, function (res) {
@@ -134,6 +231,7 @@
         var post = AV.Object.extend("post");
         var tags = AV.Object.extend("tags");
         var user = AV.Object.extend("User");
+        var comment = AV.Object.extend("comment");
         var query = new AV.Query(post);
         query.include("tagkey");
         query.include("imgs");
@@ -166,8 +264,8 @@
                 postId = object.get("username").id;
                 openid = object.get("username").get("authData").weixin.openid;
                 var ousername = object.get("username").attributes.authData.weixin;
-                var username = ousername.nickname;
-                var headimgurl = ousername.headimgurl;
+                username = ousername.nickname;
+                headimgurl = ousername.headimgurl;
                 tagvalue = otagkey.get("tagtitle");
                 var oldtime = object.createdAt.getTime();
                 var publishtime = newtime - oldtime;
@@ -197,7 +295,7 @@
                     time: times,
                     img: imgs,
                     pattern: imgpattern,
-                    relationuser:relationuser
+                    relationuser: relationuser
                 };
                 tags.push(opost);
                 var $tpl2 = $('#amz-tags');
@@ -206,13 +304,13 @@
                 var data2 = {tags: tags};
                 var html2 = template2(data2);
                 $tpl2.before(html2);
-                callbak();
-                          $(".userphone").hide();
-                         for(var i=0;i<marktags.length;i++){
-                             if(marktags[i]==tagvalue){
-                                 $(".userphone").show();
-                             }
-                         }
+
+                $(".userphone").hide();
+                for (var i = 0; i < marktags.length; i++) {
+                    if (marktags[i] == tagvalue) {
+                        $(".userphone").show();
+                    }
+                }
 
 
                 if (relationuser) {
@@ -222,7 +320,7 @@
                         for (var i = 0; i < relationuser.length; i++) {
                             if (relationuser[i].id == usersid) {
                                 $(".usercontent").remove();
-                                $("<p id=\"usercontent\" class=\"usercontent am-sans-serif\">联系方式："+number+"</p>").prependTo(".usercont");
+                                $("<p id=\"usercontent\" class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".usercont");
                                 $("#btnname").remove();
                                 $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
                             }
@@ -230,10 +328,90 @@
                     }
                 }
 
+
             }
 
         });
+        //…………………………………………以下为加载评论………………………………
+        var query = new AV.Query(post);
+        query.equalTo("objectId", postview);
+        query.find({
+            success: function (post) {
+                console.log(post[0])
+                var object = post[0].get("relationcomment")
+                if(object){
+                    var comment = AV.Object.extend("comment");
+                    for (var i = object.length-1; i >-1 ; i--) {
 
+                        var query = new AV.Query("comment");
+                        query.include("commentrelation");
+                        query.include("commentuser");
+                        query.equalTo("objectId", object[i].id);
+                        query.find({
+                            success: function (comment) {
+                                console.log(comment[0].id)
+                                var times = 0;
+                                var newtime = new Date().getTime();
+                                var oldtime = comment[0].createdAt.getTime();
+                                var publishtime = newtime - oldtime;
+                                var day = parseInt(publishtime / 86400000);
+                                if (day > 0) {
+                                    times = day + "天前"
+                                } else {
+                                    var hours = parseInt(publishtime / 3600000);
+                                    if (hours > 0) {
+                                        times = hours + "小时前";
+                                    }
+                                    else {
+                                        var minute = parseInt(publishtime / 60000);
+                                        if (minute > 0) {
+                                            times = minute + "分钟前"
+                                        } else {
+                                            times = "刚刚"
+                                        }
+                                    }
+                                }
+                                var commentid = comment[0].id;
+                                var commentusername = comment[0].get("commentusername");
+                                var commentcontent = comment[0].get("commentcontent");
+                                var commentusershow = comment[0].get("commentusershow");
+                                var commentrelation = comment[0].get("commentrelation");
+                                console.log(commentrelation)
+                                var comments = [];
+                                var comment = {
+                                    commentid: commentid,
+                                    commentusername: commentusername,
+                                    commentcontent: commentcontent,
+                                    commentusershow: commentusershow,
+                                    relation: commentrelation,
+                                    times:times
+                                }
+                                comments.push(comment);
+                                console.log(comments);
+                                var $tpl3 = $('#comments');
+                                var source3 = $tpl3.text();
+                                var template3 = Handlebars.compile(source3);
+                                var data3 = {comments: comments};
+                                var html3 = template3(data3);
+                                $tpl3.before(html3);
+                                if($(".commentlength").length==object.length){
+                                    callbak();
+                                }
+                            }
+                        })
+                    }
+
+                }else{
+                    callbak();
+                }
+               // callbak();
+
+            }
+        }).then(function(){
+
+        })
+
+        //……………………………………………………………………………………………
 
         if (code != "") {
             $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
@@ -259,7 +437,7 @@
                                 for (var i = 0; i < relationuser.length; i++) {
                                     if (relationuser[i].id == usersid) {
                                         $(".usercontent").remove();
-                                        $("<p id=\"usercontent\" class=\"usercontent am-sans-serif\">联系方式："+number+"</p>").prependTo(".usercont");
+                                        $("<p id=\"usercontent\" class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".usercont");
                                         $("#btnname").remove();
                                         $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
                                     }
@@ -295,34 +473,12 @@
         });
     }
 
+    function loadingcomment(){
+
+    }
 
 })(jQuery);
 
-//{
-//    "weixin"
-//:
-//    {
-//        "sex"
-//    :
-//        1, "nickname"
-//    :
-//        "动名词", "city"
-//    :
-//        "Mudanjiang", "headimgurl"
-//    :
-//        "http://wx.qlogo.cn/mmopen/PiajxSqBRaEJgfrRe3VDiaNqFHsR4dBj8Z5rWgsr0icBXAiaY1DmjoNBg85PILc6WQw1sgACOUsGNibYp2QW5KgeRpw/0", "openid"
-//    :
-//        "omoCDjmkB3VOX-C8SX5-AfE6GmHU", "language"
-//    :
-//        "zh_CN", "province"
-//    :
-//        "Heilongjiang", "country"
-//    :
-//        "China", "privilege"
-//    :
-//        []
-//    }
-//}
 
 
 

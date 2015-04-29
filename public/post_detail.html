@@ -91,11 +91,117 @@
     {{/each}}
 </script>
 <hr data-am-widget="divider" style="" class="am-divider"/>
-<div id="duoshuo">
-    <div data-am-widget="duoshuo" class="am-duoshuo am-duoshuo-default" data-ds-short-name="sunshuang">
-        <div class="ds-thread"></div>
-    </div>
-</div>
+
+
+<!--<div id="duoshuo">-->
+    <!--<div data-am-widget="duoshuo" class="am-duoshuo am-duoshuo-default" data-ds-short-name="sunshuang">-->
+        <!--<div class="ds-thread"></div>-->
+    <!--</div>-->
+<!--</div>-->
+<!--………………………………以下为自定义评论…………………………………………-->
+
+
+<ul class="am-comments-list  list_extent">
+    <script type="text/x-handlebars-template" id="comments">
+        {{#each comments}}
+    <li class="am-comment commentlength">
+        <a href="">
+            <img class="am-comment-avatar" src={{this.commentusershow}} alt=""/>
+        </a>
+        <div class="am-comment-main">
+            <header class="am-comment-hd">
+                <div class="am-comment-meta">
+                    <a href="#link-to-user" class="am-comment-author">{{this.commentusername}}</a>
+                    <time datetime="">{{this.times}}</time>
+                </div>
+            </header>
+
+            <div class="am-comment-bd">
+                {{#if this.relation}}
+                {{#each this.relation}}
+                <div class="relation">
+                    <img class="am-comment-avatar" src={{this.relationcommentusershow}} alt=""/>
+                    <div class="relationcontent">
+                        <p class="am-sans-serif name">{{this.relationcommentusername}}</p>
+                        <!--预留-->
+                        <!--<p class="time">某天前</p>-->
+                        <!--<p class="layer am-sans-serif">1楼</p>-->
+                    </div>
+                    <div class="relationsay">
+                        <p>{{this.relationcommentcontent}}</p>
+                    </div>
+
+                    <div class="toolbar" value={{this.relationcommentid}}>
+                        <i class="toolbtn reply"><i class="am-icon-reply"></i> 回复</i>
+                    </div>
+
+                    <!-- ………………………………………………此处 回复发表……………………………………………… -->
+
+                    <div class="am-comment replypublish {{this.relationcommentid}}" bshow="0">
+                        <a href="">
+                            <img class="am-comment-avatar" src=imgs/nullusershow.png alt=""/>
+                        </a>
+                        <div class="am-comment-main">
+                            <div class="textarea">
+                                <textarea name="" id="" placeholder="说点什么吧"></textarea>
+                            </div>
+                            <div class="publish">
+                                <button  class="am-btn am-btn-secondary smpublish" value={{this.commentid}} userid={{this.commentuserid}} username={{this.commentusername}} usersay={{this.commentcontent}} usershow={{this.commentusershow}}>发表</button>
+                            </div>
+                        </div>
+                        <!-- ………………………………………………此处 ^ 回复发表……………………………………………… -->
+                    </div>
+                </div>
+                {{/each}}
+                {{/if}}
+                <p>{{this.commentcontent}}</p>
+            </div>
+
+            <div class="toolbar" value={{this.commentid}}>
+                <i class="toolbtn reply"><i class="am-icon-reply"></i> 回复</i>
+                <i class="toolbtn close"><i class="am-icon-close"></i> 删除</i>
+            </div>
+            <!-- ………………………………………………此处 回复发表……………………………………………… -->
+            <div class="am-comment replypublish {{this.commentid}}" bshow="0">
+                <a href="">
+                    <img class="am-comment-avatar" src=imgs/nullusershow.png alt=""/>
+                </a>
+                <div class="am-comment-main">
+                    <div class="textarea">
+                        <textarea name="" placeholder="说点什么吧"></textarea>
+                    </div>
+                    <div class="publish">
+                        <button class="am-btn am-btn-secondary smpublish" value={{this.commentid}} userid={{this.commentuserid}} username={{this.commentusername}} usersay={{this.commentcontent}} usershow={{this.commentusershow}}>发表</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <!-- ………………………………………………此处^回复发表……………………………………………… -->
+    </li>
+        {{/each}}
+    </script>
+</ul>
+
+
+    <!-- ………………………………此处以下为发表框…………………… -->
+
+    <li id="am-comment-extend" class="am-comment">
+        <a href="">
+            <img class="am-comment-avatar" src="imgs/nullusershow.png" alt=""/>
+        </a>
+        <div class="am-comment-main">
+            <div class="textarea">
+                <textarea name="" id="" placeholder="说点什么吧"></textarea>
+            </div>
+            <div class="publish">
+                <button id="maxpublish" class="am-btn am-btn-secondary">发表</button>
+            </div>
+        </div>
+    </li>
+
+
+
+
 <hr data-am-widget="divider" style="" class="am-divider"/>
 <div class="advertising">
     <p class="brand am-sans-serif">“北京VK生活馆”致力于为您提供舒心便利的服务，推荐给更多邻居让他们知道VK</p>
