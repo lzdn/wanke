@@ -18,6 +18,7 @@
         alert($(".nullusershow").attr("src"));
         var currentUser = AV.User.current();
         if (currentUser) {
+            alert("haha");
             usersid = currentUser.id;
             var query = new AV.Query(AV.User);
             query.get(usersid, {
