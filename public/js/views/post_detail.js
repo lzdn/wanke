@@ -283,7 +283,8 @@
 
     function loading(callbak) {
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
-        //ject.createWithoutData('className',id);
+
+        var load = 0 //ject.createWithoutData('className',id);
         var currentUser = AV.User.current();
         if (currentUser) {
             alert(currentUser.id)
@@ -291,8 +292,15 @@
             var authData = currentUser.get("authData");
             nickname = authData.weixin.nickname
             headimgurl = authData.weixin.headimgurl
+            if (load == 4) {
+                callbak();
+            }
+        }else{
+            if (load == 4) {
+                callbak();
+            }
         }
-        var load = 0
+
         var post = AV.Object.extend("post");
         var tags = AV.Object.extend("tags");
         var user = AV.Object.extend("User");
@@ -370,7 +378,7 @@
                 var html2 = template2(data2);
                 $tpl2.before(html2);
                 load += 1
-                if (load == 3) {
+                if (load == 4) {
                     callbak();
                 }
                 $(".userphone").hide();
@@ -464,7 +472,7 @@
                                 $tpl3.before(html3);
                                 if ($(".commentlength").length == object.length) {
                                     load += 1
-                                    if (load == 3) {
+                                    if (load == 4) {
                                         callbak();
                                     }
                                 }
@@ -474,7 +482,7 @@
 
                 } else {
                     load += 1
-                    if (load == 3) {
+                    if (load == 4) {
                         callbak();
                     }
                 }
@@ -520,7 +528,7 @@
                             }
                         }
                         load += 1
-                        if (load == 3) {
+                        if (load == 4) {
                             callbak();
                         }
                     }
@@ -529,7 +537,7 @@
             });
         } else {
             load += 1
-            if (load == 3) {
+            if (load == 4) {
                 callbak();
             }
         }
