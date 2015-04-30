@@ -422,7 +422,7 @@
                 var object = post[0].get("relationcomment")
                 if (object) {
                     var comment = AV.Object.extend("comment");
-                    for (var i = object.length - 1; i > -1; i--) {
+                    for (var i =0; i<object.length; i++) {
 
                         var query = new AV.Query("comment");
                         query.include("commentrelation");
@@ -619,6 +619,108 @@
         var data3 = {comments: comments};
         var html3 = template3(data3);
         $tpl3.before(html3);
+        $(".replypublish").hide();
+
+        $(".reply").on("click", function () {
+            $(".replypublish").hide();
+            var reply = $(this).parent().attr("value");
+            var $reply = $(this).parent().siblings("." + reply + "");
+            if ($reply.attr("bshow") == 0) {
+                $reply.show();
+                $reply.attr("bshow", "1");
+            } else {
+                $reply.hide();
+                $reply.attr("bshow", "0");
+            }
+        })
+        $(".smpublish").on("click", function () {
+                alert(commentuserid);
+                var comment = AV.Object.extend("comment");
+                var post = AV.Object.extend("post");
+                var relationcommentid = $(this).attr("value");
+                var relationcommentusername = $(this).attr("username");
+                var relationcommentcontent = $(this).attr("usersay");
+                var relationcommentusershow = $(this).attr("usershow");
+                var relationcommentuserid = $(this).attr("userid");
+                console.log(relationcommentid + "$" + relationcommentusername + "$" + relationcommentcontent + "$" + relationcommentusershow)
+                var publishsay = $(this).parent().siblings(".textarea").children().val();
+                alert(publishsay);
+                var posts = new post();
+                posts.id = postview;
+                var commentrelation = [];
+                commentrelation.push({
+                    relationcommentid: relationcommentid,
+                    relationcommentusername: relationcommentusername,
+                    relationcommentcontent: relationcommentcontent,
+                    relationcommentuserid: relationcommentuserid,
+                    relationcommentusershow: relationcommentusershow
+                });
+                console.log(commentrelation);
+                var comment = new comment();
+                comment.save({
+                    commentcontent: publishsay,
+                    commentpost: posts,
+                    commentuserid: commentuserid,
+                    commentusername: nickname,
+                    commentusershow: headUrl,
+                    commentrelation: commentrelation
+                }, {
+                    success: function (comment) {
+                        alert(comment.id)
+                        loadingcomment(comment);
+                        var query = new AV.Query(post);
+                        //query.equalTo("objectId", postview);
+                        query.get(postview, {
+                            success: function (post) {
+                                post.add("relationcomment", {id: comment.id});
+                                post.save();
+                            },
+                            error: function (object, error) {
+                                console.log(object);
+                            }
+                        });
+                    }
+                })
+        })
+
+        $("#maxpublish").on("click", function () {
+                alert(commentuserid);
+                alert(nickname);
+                alert(headimgurl);
+                var post = AV.Object.extend("post");
+                var comment = AV.Object.extend("comment");
+                alert("haha")
+                var publishsay = $(this).parent().siblings(".textarea").children().val();
+                if (publishsay) {
+                    alert(publishsay)
+                }
+                var posts = new post();
+                posts.id = postview;
+                var coment = new comment();
+                coment.save({
+                    commentcontent: publishsay,
+                    commentpost: posts,
+                    commentusername: nickname,
+                    commentuserid: commentuserid,
+                    commentusershow: headimgurl
+                }, {
+                    success: function (comment) {
+                        alert(comment.id)
+                        var query = new AV.Query(post);
+                        //query.equalTo("objectId", postview);
+                        loadingcomment(comment);
+                        query.get(postview, {
+                            success: function (post) {
+                                post.add("relationcomment", {id: comment.id});
+                                post.save();
+                            },
+                            error: function (object, error) {
+                                console.log(object);
+                            }
+                        });
+                    }
+                });
+        });
     }
 
 })(jQuery);
