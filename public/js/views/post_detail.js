@@ -286,6 +286,7 @@
         //ject.createWithoutData('className',id);
         var currentUser = AV.User.current();
         if (currentUser) {
+            alert(currentUser.id)
             usersid = currentUser.id;
             var authData = currentUser.get("authData");
             nickname = authData.weixin.nickname
