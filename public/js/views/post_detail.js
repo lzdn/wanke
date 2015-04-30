@@ -84,7 +84,7 @@
                     commentcontent: publishsay,
                     commentpost: posts,
                     commentuserid: userid,
-                    commentusername: "米振天",
+                    commentusername: nickname,
                     commentusershow: headUrl,
                     commentrelation: commentrelation
                 }, {
@@ -148,7 +148,7 @@
                 coment.save({
                     commentcontent: publishsay,
                     commentpost: posts,
-                    commentusername: "米振天",
+                    commentusername: nickname,
                     commentuserid: userid,
                     commentusershow: headimgurl
                 }, {
