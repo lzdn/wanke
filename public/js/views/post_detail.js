@@ -34,6 +34,8 @@
         var aclose = $(".close");
         var currentUser = AV.User.current();
         if(currentUser){
+            alert(aclose.length);
+            alert(aclose[0].attr("commentuserid"))
             for(var i=0; i<aclose.length;i++){
                 if(aclose[i].attr("commentuserid")!=commentuserid){
                     $(this).hide();
