@@ -67,6 +67,8 @@
                     relationcommentuserid: relationcommentuserid,
                     relationcommentusershow: relationcommentusershow
                 });
+                [{"relationcommentid":"userid=","relationcommentusername":"usersay=","relationcommentusershow":""}]
+            //    [{"relationcommentid":"5541a90ee4b04402f3c0b8db","relationcommentusername":"动名词","relationcommentcontent":"测试2","relationcommentuserid":"553a3ad0e4b034be7ed4a270","relationcommentusershow":"http://wx.qlogo.cn/mmopen/PiajxSqBRaEJgfrRe3VDiaNqFHsR4dBj8Z5rWgsr0icBXAiaY1DmjoNBg85PILc6WQw1sgACOUsGNibYp2QW5KgeRpw/0"}]
                // [{"relationcommentid":"5541a6d4e4b04402f3c06d21","relationcommentcontent":"测试评论","relationcommentuserid":"username=动名词","relationcommentusershow":"http://wx.qlogo.cn/mmopen/PiajxSqBRaEJgfrRe3VDiaNqFHsR4dBj8Z5rWgsr0icBXAiaY1DmjoNBg85PILc6WQw1sgACOUsGNibYp2QW5KgeRpw/0"}]
                 console.log(commentrelation);
                 var comment = new comment();
