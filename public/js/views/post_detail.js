@@ -533,7 +533,7 @@
                             }
                         }
                         load+=1
-                        if(load==){
+                        if(load==3){
                             callbak();
                         }
                     }
