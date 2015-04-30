@@ -4,7 +4,7 @@
     var code = "";
     var relationuser = [];
     var marktags = ["约吃", "约玩", "约聊", "约运动"];
-    var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid, postview, username, headimgurl;
+    var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid, postview, username, headimgurl,headUrl;
     if (saveurl.split("=").length - 1 > 1) {
         userlog = window.location.search.split('=')[2];
         code = userlog.split("&")[0];
@@ -15,6 +15,21 @@
     loadwx();
     loading(function () {
         alert("haha")
+        if (currentUser) {
+            usersid = currentUser.id;
+            var query = new AV.Query(AV.User);
+            query.get(usersid, {
+                success: function (user) {
+                    var authData = currentUser.get("authData");
+                    headUrl = authData.weixin.headimgurl
+                }
+            });
+            $(".nullusershow").attr("src",headUrl);
+        }
+
+
+
+
         $(".replypublish").hide();
         $(".reply").on("click", function () {
             $(".replypublish").hide();
@@ -29,52 +44,81 @@
             }
         })
         $(".smpublish").on("click", function () {
-            var comment = AV.Object.extend("comment");
-            var post = AV.Object.extend("post");
-            var relationcommentid = $(this).attr("value");
-            var relationcommentusername =$(this).attr("username");
-            var relationcommentcontent =$(this).attr("usersay");
-            var relationcommentusershow =$(this).attr("usershow");
-            var relationcommentuserid = $(this).attr("userid");
-            console.log(relationcommentid+"$"+relationcommentusername+"$"+relationcommentcontent+"$"+relationcommentusershow)
-            var relationsay = $(this).parent().siblings(".stextarea").children().val();
-            alert(relationsay);
-            var posts = new post();
-            posts.id = postview;
-            var commentrelation=[];
-            commentrelation.push({
-                relationcommentid:relationcommentid,
-                relationcommentusername:relationcommentusername,
-                relationcommentcontent:relationcommentcontent,
-                relationcommentuserid:relationcommentuserid,
-                relationcommentusershow:relationcommentusershow
-            });
-            console.log(commentrelation);
-            var comment = new comment();
-            comment.save({
-                commentcontent: relationsay,
-                commentpost: posts,
-                commentuserid:userid,
-                commentusername: "米振天",
-                commentusershow: headimgurl,
-                commentrelation: commentrelation
-            },{
-                success:function(comment){
-                    alert(comment.id)
-                    var query = new AV.Query(post);
-                    //query.equalTo("objectId", postview);
-                    query.get(postview, {
-                        success: function (post) {
-                            post.add("relationcomment", {id: comment.id});
-                            post.save();
-                        },
-                        error: function (object, error) {
-                            console.log(object);
-                        }
-                    });
-                }
-            })
+            var currentUser = AV.User.current();
+            if (currentUser) {
+                usersid = currentUser.id;
+                var query = new AV.Query(AV.User);
+                query.get(usersid, {
+                    success: function (user) {
+                        var authData = currentUser.get("authData");
+                        headUrl = authData.weixin.headimgurl
+                        userid = user.id
+                    }
+                });
+                var comment = AV.Object.extend("comment");
+                var post = AV.Object.extend("post");
+                var relationcommentid = $(this).attr("value");
+                var relationcommentusername = $(this).attr("username");
+                var relationcommentcontent = $(this).attr("usersay");
+                var relationcommentusershow = $(this).attr("usershow");
+                var relationcommentuserid = $(this).attr("userid");
+                console.log(relationcommentid + "$" + relationcommentusername + "$" + relationcommentcontent + "$" + relationcommentusershow)
+                var relationsay = $(this).parent().siblings(".stextarea").children().val();
+                alert(relationsay);
+                var posts = new post();
+                posts.id = postview;
+                var commentrelation = [];
+                commentrelation.push({
+                    relationcommentid: relationcommentid,
+                    relationcommentusername: relationcommentusername,
+                    relationcommentcontent: relationcommentcontent,
+                    relationcommentuserid: relationcommentuserid,
+                    relationcommentusershow: relationcommentusershow
+                });
+                console.log(commentrelation);
+                var comment = new comment();
+                comment.save({
+                    commentcontent: relationsay,
+                    commentpost: posts,
+                    commentuserid: userid,
+                    commentusername: "米振天",
+                    commentusershow: headUrl,
+                    commentrelation: commentrelation
+                }, {
+                    success: function (comment) {
+                        alert(comment.id)
+                        var query = new AV.Query(post);
+                        //query.equalTo("objectId", postview);
+                        query.get(postview, {
+                            success: function (post) {
+                                post.add("relationcomment", {id: comment.id});
+                                post.save();
+                            },
+                            error: function (object, error) {
+                                console.log(object);
+                            }
+                        });
+                    }
+                })
+            }else{
+                $.ajax({
+                    method: "POST",
+                    url: "http://fuwuhao.dianyingren.com/weixin/getAuthUrl",
+                    data: JSON.stringify({
+                        page: saveurl
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        window.location.href = data.authUrl;
+                    },
+                    error: function (msg) {
+                        // alert(msg);
+                    }
+                });
+            }
         })
+
         $("#maxpublish").on("click", function () {
             alert(userid)
             var post = AV.Object.extend("post");
