@@ -79,6 +79,7 @@
                 }, {
                     success: function (comment) {
                         alert(comment.id)
+                        loadingcomment(comment);
                         var query = new AV.Query(post);
                         //query.equalTo("objectId", postview);
                         query.get(postview, {
@@ -90,8 +91,6 @@
                                 console.log(object);
                             }
                         });
-                        $(".commentlength").remove();
-                        loadingcomment();
                     }
                 })
             } else {
@@ -140,6 +139,7 @@
                         alert(comment.id)
                         var query = new AV.Query(post);
                         //query.equalTo("objectId", postview);
+                        loadingcomment(comment);
                         query.get(postview, {
                             success: function (post) {
                                 post.add("relationcomment", {id: comment.id});
@@ -149,8 +149,6 @@
                                 console.log(object);
                             }
                         });
-                        $(".commentlength").remove();
-                        loadingcomment();
                     }
                 });
             } else {
@@ -574,190 +572,53 @@
         });
     }
 
-    function loadingcomment() {
-        var query = new AV.Query(post);
-        query.equalTo("objectId", postview);
-        query.find({
-            success: function (post) {
-                console.log(post[0])
-                var object = post[0].get("relationcomment")
-                if (object) {
-                    var comment = AV.Object.extend("comment");
-                    for (var i = object.length - 1; i > -1; i--) {
-
-                        var query = new AV.Query("comment");
-                        query.include("commentrelation");
-                        query.include("commentuser");
-                        query.equalTo("objectId", object[i].id);
-                        query.find({
-                            success: function (comment) {
-                                console.log(comment[0].id)
-                                var times = 0;
-                                var newtime = new Date().getTime();
-                                var oldtime = comment[0].createdAt.getTime();
-                                var publishtime = newtime - oldtime;
-                                var day = parseInt(publishtime / 86400000);
-                                if (day > 0) {
-                                    times = day + "天前"
-                                } else {
-                                    var hours = parseInt(publishtime / 3600000);
-                                    if (hours > 0) {
-                                        times = hours + "小时前";
-                                    }
-                                    else {
-                                        var minute = parseInt(publishtime / 60000);
-                                        if (minute > 0) {
-                                            times = minute + "分钟前"
-                                        } else {
-                                            times = "刚刚"
-                                        }
-                                    }
-                                }
-                                var commentid = comment[0].id;
-                                var commentusername = comment[0].get("commentusername");
-                                var commentcontent = comment[0].get("commentcontent");
-                                var commentusershow = comment[0].get("commentusershow");
-                                var commentrelation = comment[0].get("commentrelation");
-                                console.log(commentrelation)
-                                var comments = [];
-                                var comment = {
-                                    commentid: commentid,
-                                    commentusername: commentusername,
-                                    commentuserid:commentuserid,
-                                    commentcontent: commentcontent,
-                                    commentusershow: commentusershow,
-                                    relation: commentrelation,
-                                    times: times
-                                }
-                                comments.push(comment);
-                                console.log(comments);
-                                var $tpl3 = $('#comments');
-                                var source3 = $tpl3.text();
-                                var template3 = Handlebars.compile(source3);
-                                var data3 = {comments: comments};
-                                var html3 = template3(data3);
-                                $tpl3.before(html3);
-                                if ($(".commentlength").length == object.length) {
-                                    alert("haha")
-                                    alert($(".nullusershow").attr("src"));
-                                    var currentUser = AV.User.current();
-                                    if (currentUser) {
-                                        alert("haha");
-                                        usersid = currentUser.id;
-                                        alert(usersid);
-                                        var authData = currentUser.get("authData");
-                                        headUrl = authData.weixin.headimgurl
-                                        alert(headUrl);
-                                        $(".nullusershow").attr("src", headUrl);
-                                        alert($(".nullusershow").attr("src"));
-                                    }
-                                    $(".replypublish").hide();
-                                    $(".reply").on("click", function () {
-                                        $(".replypublish").hide();
-                                        var reply = $(this).parent().attr("value");
-                                        var $reply = $(this).parent().siblings("." + reply + "");
-                                        if ($reply.attr("bshow") == 0) {
-                                            $reply.show();
-                                            $reply.attr("bshow", "1");
-                                        } else {
-                                            $reply.hide();
-                                            $reply.attr("bshow", "0");
-                                        }
-                                    })
-                                    $(".smpublish").on("click", function () {
-                                            alert(commentuserid);
-                                            var comment = AV.Object.extend("comment");
-                                            var post = AV.Object.extend("post");
-                                            var relationcommentid = $(this).attr("value");
-                                            var relationcommentusername = $(this).attr("username");
-                                            var relationcommentcontent = $(this).attr("usersay");
-                                            var relationcommentusershow = $(this).attr("usershow");
-                                            var relationcommentuserid = $(this).attr("userid");
-                                            console.log(relationcommentid + "$" + relationcommentusername + "$" + relationcommentcontent + "$" + relationcommentusershow)
-                                            var publishsay = $(this).parent().siblings(".textarea").children().val();
-                                            alert(publishsay);
-                                            var posts = new post();
-                                            posts.id = postview;
-                                            var commentrelation = [];
-                                            commentrelation.push({
-                                                relationcommentid: relationcommentid,
-                                                relationcommentusername: relationcommentusername,
-                                                relationcommentcontent: relationcommentcontent,
-                                                relationcommentuserid: relationcommentuserid,
-                                                relationcommentusershow: relationcommentusershow
-                                            });
-                                            console.log(commentrelation);
-                                            var comment = new comment();
-                                            comment.save({
-                                                commentcontent: publishsay,
-                                                commentpost: posts,
-                                                commentuserid: commentuserid,
-                                                commentusername: nickname,
-                                                commentusershow: headUrl,
-                                                commentrelation: commentrelation
-                                            }, {
-                                                success: function (comment) {
-                                                    alert(comment.id)
-                                                    var query = new AV.Query(post);
-                                                    //query.equalTo("objectId", postview);
-                                                    query.get(postview, {
-                                                        success: function (post) {
-                                                            post.add("relationcomment", {id: comment.id});
-                                                            post.save();
-                                                        },
-                                                        error: function (object, error) {
-                                                            console.log(object);
-                                                        }
-                                                    });
-                                                }
-                                            })
-                                    })
-                                    $("#maxpublish").on("click", function () {
-                                            alert(commentuserid);
-                                            alert(nickname);
-                                            alert(headimgurl);
-                                            var post = AV.Object.extend("post");
-                                            var comment = AV.Object.extend("comment");
-                                            alert("haha")
-                                            var publishsay = $(this).parent().siblings(".textarea").children().val();
-                                            if (publishsay) {
-                                                alert(publishsay)
-                                            }
-                                            var posts = new post();
-                                            posts.id = postview;
-                                            var coment = new comment();
-                                            coment.save({
-                                                commentcontent: publishsay,
-                                                commentpost: posts,
-                                                commentusername: nickname,
-                                                commentuserid: commentuserid,
-                                                commentusershow: headimgurl
-                                            }, {
-                                                success: function (comment) {
-                                                    alert(comment.id)
-                                                    var query = new AV.Query(post);
-                                                    //query.equalTo("objectId", postview);
-                                                    query.get(postview, {
-                                                        success: function (post) {
-                                                            post.add("relationcomment", {id: comment.id});
-                                                            post.save();
-                                                        },
-                                                        error: function (object, error) {
-                                                            console.log(object);
-                                                        }
-                                                    });
-                                                }
-                                            });
-                                    });
-
-                                }
-                            }
-                        })
-                    }
-
+    function loadingcomment(comment) {
+        console.log(comment.id)
+        var times = 0;
+        var newtime = new Date().getTime();
+        var oldtime = comment.createdAt.getTime();
+        var publishtime = newtime - oldtime;
+        var day = parseInt(publishtime / 86400000);
+        if (day > 0) {
+            times = day + "天前"
+        } else {
+            var hours = parseInt(publishtime / 3600000);
+            if (hours > 0) {
+                times = hours + "小时前";
+            }
+            else {
+                var minute = parseInt(publishtime / 60000);
+                if (minute > 0) {
+                    times = minute + "分钟前"
+                } else {
+                    times = "刚刚"
                 }
             }
-        })
+        }
+        var commentid = comment.id;
+        var commentusername = comment.get("commentusername");
+        var commentcontent = comment.get("commentcontent");
+        var commentusershow = comment.get("commentusershow");
+        var commentrelation = comment.get("commentrelation");
+        console.log(commentrelation)
+        var comments = [];
+        var comment = {
+            commentid: commentid,
+            commentusername: commentusername,
+            commentuserid:commentuserid,
+            commentcontent: commentcontent,
+            commentusershow: commentusershow,
+            relation: commentrelation,
+            times: times
+        }
+        comments.push(comment);
+        console.log(comments);
+        var $tpl3 = $('#comments');
+        var source3 = $tpl3.text();
+        var template3 = Handlebars.compile(source3);
+        var data3 = {comments: comments};
+        var html3 = template3(data3);
+        $tpl3.before(html3);
     }
 
 })(jQuery);
