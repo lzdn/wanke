@@ -42,6 +42,7 @@
                 $reply.hide();
                 $reply.attr("bshow", "0");
             }
+            $(this).removeClass("reply");
         })
         $(".smpublish").on("click", function () {
             var currentUser = AV.User.current();
@@ -622,7 +623,7 @@
         $tpl3.before(html3);
         $(".replypublish").hide();
         $(".nullusershow").attr("src", headUrl);
-        $(".reply"+commentid+"").on("click", function () {
+        $(".reply").on("click", function () {
             $(".replypublish").hide();
             var reply = $(this).parent().attr("value");
             var $reply = $(this).parent().siblings("." + reply + "");
@@ -633,6 +634,7 @@
                 $reply.hide();
                 $reply.attr("bshow", "0");
             }
+            $(this).removeClass("reply");
         })
         $(".smpublish").on("click", function () {
                 alert(commentuserid);
@@ -726,7 +728,6 @@
     }
 
 })(jQuery);
-
 
 
 
