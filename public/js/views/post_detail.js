@@ -4,7 +4,7 @@
     var code = "";
     var relationuser = [];
     var marktags = ["约吃", "约玩", "约聊", "约运动"];
-    var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid, postview, username, headimgurl,headUrl;
+    var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid, postview, username, headimgurl, headUrl;
     if (saveurl.split("=").length - 1 > 1) {
         userlog = window.location.search.split('=')[2];
         code = userlog.split("&")[0];
@@ -20,23 +20,20 @@
         if (currentUser) {
             alert("haha");
             usersid = currentUser.id;
-            var query = new AV.Query(AV.User);
-            query.get(usersid, {
-                success: function (user) {
-                    var authData = currentUser.get("authData");
-                    headUrl = authData.weixin.headimgurl
-                    alert(headUrl);
-                    $(".nullusershow").attr("src",headUrl);
-                    alert($(".nullusershow").attr("src"));
-                }
-            });
-         // document.getElementsByclassName("nullusershow").src=headUrl;
+            alert(usersid);
+            var authData = currentUser.get("authData");
+            headUrl = authData.weixin.headimgurl
+            alert(headUrl);
+            $(".nullusershow").attr("src", headUrl);
+            alert($(".nullusershow").attr("src"));
+
+            // document.getElementsByclassName("nullusershow").src=headUrl;
         }
         $(".replypublish").hide();
         $(".reply").on("click", function () {
             $(".replypublish").hide();
             var reply = $(this).parent().attr("value");
-            var $reply=$(this).parent().siblings("."+reply+"");
+            var $reply = $(this).parent().siblings("." + reply + "");
             if ($reply.attr("bshow") == 0) {
                 $reply.show();
                 $reply.attr("bshow", "1");
@@ -103,7 +100,7 @@
                         });
                     }
                 })
-            }else{
+            } else {
                 $.ajax({
                     method: "POST",
                     url: "http://fuwuhao.dianyingren.com/weixin/getAuthUrl",
@@ -167,7 +164,7 @@
                         });
                     }
                 });
-            }else{
+            } else {
                 $.ajax({
                     method: "POST",
                     url: "http://fuwuhao.dianyingren.com/weixin/getAuthUrl",
@@ -303,7 +300,7 @@
     function loading(callbak) {
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
         //ject.createWithoutData('className',id);
-        var load=0
+        var load = 0
         var post = AV.Object.extend("post");
         var tags = AV.Object.extend("tags");
         var user = AV.Object.extend("User");
@@ -380,8 +377,8 @@
                 var data2 = {tags: tags};
                 var html2 = template2(data2);
                 $tpl2.before(html2);
-                  load+=1
-                if(load==3){
+                load += 1
+                if (load == 3) {
                     callbak();
                 }
                 $(".userphone").hide();
@@ -418,9 +415,9 @@
             success: function (post) {
                 console.log(post[0])
                 var object = post[0].get("relationcomment")
-                if(object){
+                if (object) {
                     var comment = AV.Object.extend("comment");
-                    for (var i = object.length-1; i >-1 ; i--) {
+                    for (var i = object.length - 1; i > -1; i--) {
 
                         var query = new AV.Query("comment");
                         query.include("commentrelation");
@@ -463,7 +460,7 @@
                                     commentcontent: commentcontent,
                                     commentusershow: commentusershow,
                                     relation: commentrelation,
-                                    times:times
+                                    times: times
                                 }
                                 comments.push(comment);
                                 console.log(comments);
@@ -473,9 +470,9 @@
                                 var data3 = {comments: comments};
                                 var html3 = template3(data3);
                                 $tpl3.before(html3);
-                                if($(".commentlength").length==object.length){
-                                   load+=1
-                                    if(load==3){
+                                if ($(".commentlength").length == object.length) {
+                                    load += 1
+                                    if (load == 3) {
                                         callbak();
                                     }
                                 }
@@ -483,17 +480,15 @@
                         })
                     }
 
-                }else{
-                    load+=1
-                    if(load==3){
+                } else {
+                    load += 1
+                    if (load == 3) {
                         callbak();
                     }
                 }
-               // callbak();
+                // callbak();
 
             }
-        }).then(function(){
-
         })
 
         //……………………………………………………………………………………………
@@ -501,7 +496,7 @@
         if (code != "") {
             $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
-                userid= res.id
+                userid = res.id
                 alert(userid)
                 nickname = res.nickname;
                 alert(nickname)
@@ -532,17 +527,17 @@
                                 }
                             }
                         }
-                        load+=1
-                        if(load==3){
+                        load += 1
+                        if (load == 3) {
                             callbak();
                         }
                     }
 
                 })
             });
-        }else{
-            load+=1
-            if(load==3){
+        } else {
+            load += 1
+            if (load == 3) {
                 callbak();
             }
         }
@@ -571,7 +566,7 @@
         });
     }
 
-    function loadingcomment(){
+    function loadingcomment() {
 
     }
 
