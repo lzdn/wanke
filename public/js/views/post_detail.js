@@ -31,7 +31,6 @@
                 }
             });
          // document.getElementsByclassName("nullusershow").src=headUrl;
-
         }
         $(".replypublish").hide();
         $(".reply").on("click", function () {
@@ -67,8 +66,8 @@
                 var relationcommentusershow = $(this).attr("usershow");
                 var relationcommentuserid = $(this).attr("userid");
                 console.log(relationcommentid + "$" + relationcommentusername + "$" + relationcommentcontent + "$" + relationcommentusershow)
-                var relationsay = $(this).parent().siblings(".stextarea").children().val();
-                alert(relationsay);
+                var publishsay = $(this).parent().siblings(".textarea").children().val();
+                alert(publishsay);
                 var posts = new post();
                 posts.id = postview;
                 var commentrelation = [];
