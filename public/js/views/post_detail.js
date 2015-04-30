@@ -292,10 +292,12 @@
             var authData = currentUser.get("authData");
             nickname = authData.weixin.nickname
             headimgurl = authData.weixin.headimgurl
+            load+=1
             if (load == 4) {
                 callbak();
             }
         }else{
+            load+=1
             if (load == 4) {
                 callbak();
             }
