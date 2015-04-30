@@ -705,7 +705,7 @@
                     commentpost: posts,
                     commentusername: nickname,
                     commentuserid: commentuserid,
-                    commentusershow: headimgurl
+                    commentusershow: headUrl
                 }, {
                     success: function (comment) {
                         alert(comment.id)
