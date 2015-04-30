@@ -667,7 +667,6 @@
                 }, {
                     success: function (comment) {
                         alert(comment.id)
-                        $("textarea").val("");
                         loadingcomment(comment);
                         var query = new AV.Query(post);
                         //query.equalTo("objectId", postview);
@@ -709,7 +708,7 @@
                         alert(comment.id)
                         var query = new AV.Query(post);
                         //query.equalTo("objectId", postview);
-                        $("textarea").val("");
+                        $("textarea").val("")
                         loadingcomment(comment);
                         query.get(postview, {
                             success: function (post) {
