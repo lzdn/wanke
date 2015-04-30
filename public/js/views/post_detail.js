@@ -480,6 +480,7 @@
                                     }
                                 }
                                 var commentid = comment[0].id;
+                                var commentuserids = comment[0].get("commentuserid");
                                 var commentusername = comment[0].get("commentusername");
                                 var commentcontent = comment[0].get("commentcontent");
                                 var commentusershow = comment[0].get("commentusershow");
@@ -489,7 +490,7 @@
                                 var comment = {
                                     commentid: commentid,
                                     commentusername: commentusername,
-                                    commentuserid:commentuserid,
+                                    commentuserid:commentuserids,
                                     commentcontent: commentcontent,
                                     commentusershow: commentusershow,
                                     relation: commentrelation,
