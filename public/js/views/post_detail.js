@@ -303,6 +303,7 @@
     function loading(callbak) {
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
         //ject.createWithoutData('className',id);
+        var load=0
         var post = AV.Object.extend("post");
         var tags = AV.Object.extend("tags");
         var user = AV.Object.extend("User");
@@ -379,7 +380,10 @@
                 var data2 = {tags: tags};
                 var html2 = template2(data2);
                 $tpl2.before(html2);
-
+                  load+=1
+                if(load==3){
+                    callbak();
+                }
                 $(".userphone").hide();
                 for (var i = 0; i < marktags.length; i++) {
                     if (marktags[i] == tagvalue) {
@@ -470,14 +474,20 @@
                                 var html3 = template3(data3);
                                 $tpl3.before(html3);
                                 if($(".commentlength").length==object.length){
-                                    callbak();
+                                   load+=1
+                                    if(load==3){
+                                        callbak();
+                                    }
                                 }
                             }
                         })
                     }
 
                 }else{
-                    callbak();
+                    load+=1
+                    if(load==3){
+                        callbak();
+                    }
                 }
                // callbak();
 
@@ -522,7 +532,12 @@
                                 }
                             }
                         }
+                        load+=1
+                        if(load==){
+                            callbak();
+                        }
                     }
+
                 })
             });
         }
