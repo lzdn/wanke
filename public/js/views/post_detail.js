@@ -30,24 +30,20 @@
 
             // document.getElementsByclassName("nullusershow").src=headUrl;
         }
+
+
         $(".replypublish").hide();
-        var currentUser = AV.User.current();
-        if(currentUser){
-            var aclose =document.getElementsByClassName("close");
-            for(var i=0;i<aclose.length;i++){
-                var commentuser=aclose[i].className.substr(14);
-                if(commentuser!=commentuserid){
-                    aclose[i].hide();
-                }else{
-                    aclose[i].show();
-                }
+        var aclose =document.getElementsByClassName("close");
+        for(var i=0;i<aclose.length;i++){
+            var commentuser=aclose[i].className.substr(14);
+            console.log(commentuser)
+            if(commentuser==commentuserid){
+                console.log("yin")
+                aclose[i].className="hide";
             }
-        }else{
-            $(".close").hide();
         }
 
-
-        $(".close").on("click",function(){
+        $(".hide").on("click",function(){
             var close = $(this).parent().attr("value");
             alert(close)
             destroycomment(close);
