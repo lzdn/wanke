@@ -119,7 +119,7 @@
             if (currentUser) {
                 alert(commentuserid);
                 alert(nickname);
-                alert(headimgurl);
+                alert(headUrl);
                 var post = AV.Object.extend("post");
                 var comment = AV.Object.extend("comment");
                 alert("haha")
@@ -135,7 +135,7 @@
                     commentpost: posts,
                     commentusername: nickname,
                     commentuserid: commentuserid,
-                    commentusershow: headimgurl
+                    commentusershow: headUrl
                 }, {
                     success: function (comment) {
                         alert(comment.id)
