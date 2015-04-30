@@ -123,39 +123,67 @@
         })
 
         $("#maxpublish").on("click", function () {
-            alert(userid)
-            var post = AV.Object.extend("post");
-            var comment = AV.Object.extend("comment");
-            alert("haha")
-            var publishsay = $(this).parent().siblings(".textarea").children().val();
-            if (publishsay) {
-                alert(publishsay)
-            }
-            var posts = new post();
-            posts.id = postview;
-            var coment = new comment();
-            coment.save({
-                commentcontent: publishsay,
-                commentpost: posts,
-                commentusername: "米振天",
-                commentuserid:userid,
-                commentusershow: headimgurl
-            }, {
-                success: function (comment) {
-                    alert(comment.id)
-                    var query = new AV.Query(post);
-                    //query.equalTo("objectId", postview);
-                    query.get(postview, {
-                        success: function (post) {
-                            post.add("relationcomment", {id: comment.id});
-                            post.save();
-                        },
-                        error: function (object, error) {
-                            console.log(object);
-                        }
-                    });
+            var currentUser = AV.User.current();
+            if (currentUser) {
+                usersid = currentUser.id;
+                var query = new AV.Query(AV.User);
+                query.get(usersid, {
+                    success: function (user) {
+                        var authData = currentUser.get("authData");
+                        headUrl = authData.weixin.headimgurl
+                        userid = user.id
+                        alert(userid)
+                    }
+                });
+                var post = AV.Object.extend("post");
+                var comment = AV.Object.extend("comment");
+                alert("haha")
+                var publishsay = $(this).parent().siblings(".textarea").children().val();
+                if (publishsay) {
+                    alert(publishsay)
                 }
-            });
+                var posts = new post();
+                posts.id = postview;
+                var coment = new comment();
+                coment.save({
+                    commentcontent: publishsay,
+                    commentpost: posts,
+                    commentusername: "米振天",
+                    commentuserid: userid,
+                    commentusershow: headimgurl
+                }, {
+                    success: function (comment) {
+                        alert(comment.id)
+                        var query = new AV.Query(post);
+                        //query.equalTo("objectId", postview);
+                        query.get(postview, {
+                            success: function (post) {
+                                post.add("relationcomment", {id: comment.id});
+                                post.save();
+                            },
+                            error: function (object, error) {
+                                console.log(object);
+                            }
+                        });
+                    }
+                });
+            }else{
+                $.ajax({
+                    method: "POST",
+                    url: "http://fuwuhao.dianyingren.com/weixin/getAuthUrl",
+                    data: JSON.stringify({
+                        page: saveurl
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        window.location.href = data.authUrl;
+                    },
+                    error: function (msg) {
+                        // alert(msg);
+                    }
+                });
+            }
         });
 
         $(".imgpreview").on("click", function () {
@@ -463,7 +491,10 @@
         if (code != "") {
             $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
+                userid= res.id
+                alert(userid)
                 nickname = res.nickname;
+                alert(nickname)
                 AV.User._logInWith("weixin", {
                     "authData": res,
                     success: function (user) {
