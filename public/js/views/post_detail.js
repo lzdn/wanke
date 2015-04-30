@@ -79,6 +79,7 @@
                 }, {
                     success: function (comment) {
                         alert(comment.id)
+                        $("textarea").val("")
                         loadingcomment(comment);
                         var query = new AV.Query(post);
                         //query.equalTo("objectId", postview);
@@ -139,6 +140,7 @@
                         alert(comment.id)
                         var query = new AV.Query(post);
                         //query.equalTo("objectId", postview);
+                        $("textarea").val("")
                         loadingcomment(comment);
                         query.get(postview, {
                             success: function (post) {
@@ -502,14 +504,13 @@
         if (code != "") {
             $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
-                userid = res.id
-                alert(userid)
                 nickname = res.nickname;
                 alert(nickname)
                 AV.User._logInWith("weixin", {
                     "authData": res,
                     success: function (user) {
                         userid = user.id;
+                        commentuserid=userid;
                         queryobject = user.get("authData");
                         var query = new AV.Query(AV.User);
                         query.get(userid, {
