@@ -621,8 +621,8 @@
         var html3 = template3(data3);
         $tpl3.before(html3);
         $(".replypublish").hide();
-
-        $(".reply").on("click", function () {
+        $(".nullusershow").attr("src", headUrl);
+        $("."+commentid+"").on("click", function () {
             $(".replypublish").hide();
             var reply = $(this).parent().attr("value");
             var $reply = $(this).parent().siblings("." + reply + "");
