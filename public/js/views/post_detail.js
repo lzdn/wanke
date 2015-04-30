@@ -81,7 +81,7 @@
                 console.log(commentrelation);
                 var comment = new comment();
                 comment.save({
-                    commentcontent: relationsay,
+                    commentcontent: publishsay,
                     commentpost: posts,
                     commentuserid: userid,
                     commentusername: "米振天",
