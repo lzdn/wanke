@@ -540,6 +540,11 @@
 
                 })
             });
+        }else{
+            load+=1
+            if(load==3){
+                callbak();
+            }
         }
 
 
