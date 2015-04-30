@@ -15,6 +15,7 @@
     loadwx();
     loading(function () {
         alert("haha")
+        alert($(".nullusershow").attr("src"));
         var currentUser = AV.User.current();
         if (currentUser) {
             usersid = currentUser.id;
@@ -23,6 +24,7 @@
                 success: function (user) {
                     var authData = currentUser.get("authData");
                     headUrl = authData.weixin.headimgurl
+                    alert(headUrl);
                 }
             });
             $(".nullusershow").attr("src",headUrl);
