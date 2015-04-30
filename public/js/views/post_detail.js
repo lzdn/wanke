@@ -504,17 +504,17 @@
         if (code != "") {
             $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
-                userid = res.id
                 nickname = res.nickname;
+                headimgurl = res.headimgurl;
                 alert(nickname)
+                alert(headimgurl)
                 AV.User._logInWith("weixin", {
                     "authData": res,
                     success: function (user) {
+                        commentuserid=user.id;
+                        alert(user.id)
+                        alert(commentuserid);
                         userid = user.id;
-                        commentuserid = user.id;
-                        var authData = user.get("authData");
-                        nickname = authData.weixin.nickname
-                        headimgurl = authData.weixin.headimgurl
                         queryobject = user.get("authData");
                         var query = new AV.Query(AV.User);
                         query.get(userid, {
