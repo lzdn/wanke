@@ -79,7 +79,7 @@
                 }, {
                     success: function (comment) {
                         alert(comment.id)
-                        $("textarea").val("")
+                        $("textarea").val("");
                         loadingcomment(comment);
                         var query = new AV.Query(post);
                         //query.equalTo("objectId", postview);
@@ -510,7 +510,7 @@
                     "authData": res,
                     success: function (user) {
                         userid = user.id;
-                        commentuserid=userid;
+                        commentuserid=userid
                         queryobject = user.get("authData");
                         var query = new AV.Query(AV.User);
                         query.get(userid, {
