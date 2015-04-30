@@ -42,7 +42,8 @@
                 $reply.hide();
                 $reply.attr("bshow", "0");
             }
-            $(this).removeClass("reply");
+        }).then(function(){
+            $(".reply").removeClass("reply");
         })
         $(".smpublish").on("click", function () {
             var currentUser = AV.User.current();
@@ -634,7 +635,8 @@
                 $reply.hide();
                 $reply.attr("bshow", "0");
             }
-            $(this).removeClass("reply");
+        }).then(function(){
+            $(".reply").removeClass("reply");
         })
         $(".smpublish").on("click", function () {
                 alert(commentuserid);
