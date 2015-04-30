@@ -31,9 +31,9 @@
             // document.getElementsByclassName("nullusershow").src=headUrl;
         }
         $(".replypublish").hide();
-        var aclose = $(".close");
         var currentUser = AV.User.current();
         if(currentUser){
+            var aclose = $(".close");
             alert(aclose.length);
             alert(commentuserid);
             alert(aclose[0].attr("commentuserid"))
