@@ -15,6 +15,7 @@
     loadwx();
     loading(function () {
         alert("haha")
+        var currentUser = AV.User.current();
         if (currentUser) {
             usersid = currentUser.id;
             var query = new AV.Query(AV.User);
@@ -26,10 +27,6 @@
             });
             $(".nullusershow").attr("src",headUrl);
         }
-
-
-
-
         $(".replypublish").hide();
         $(".reply").on("click", function () {
             $(".replypublish").hide();
