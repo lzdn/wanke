@@ -32,13 +32,19 @@
         }
         $(".replypublish").hide();
         var aclose = $(".close");
-        for(var i=0; i<aclose.length;i++){
-            if(aclose[i].attr("commentuserid")!=commentuserid){
-                $(this).hide();
-            }else{
-                $(this).show();
+        var currentUser = AV.User.current();
+        if(currentUser){
+            for(var i=0; i<aclose.length;i++){
+                if(aclose[i].attr("commentuserid")!=commentuserid){
+                    $(this).hide();
+                }else{
+                    $(this).show();
+                }
             }
+        }else{
+            $(".close").hide();
         }
+
 
         $(".close").on("click",function(){
             var close = $(this).parent().attr("value");
