@@ -61,11 +61,11 @@
                 posts.id = postview;
                 var commentrelation = [];
                 commentrelation.push({
-                    relationcommentid: relationcommentid,
-                    relationcommentusername: relationcommentusername,
-                    relationcommentcontent: relationcommentcontent,
-                    relationcommentuserid: relationcommentuserid,
-                    relationcommentusershow: relationcommentusershow
+                    commentid: relationcommentid,
+                    commentusername: relationcommentusername,
+                    commentcontent: relationcommentcontent,
+                    commentuserid: relationcommentuserid,
+                    commentusershow: relationcommentusershow
                 });
                 console.log(commentrelation);
                 var comment = new comment();
@@ -650,11 +650,11 @@
                 posts.id = postview;
                 var commentrelation = [];
                 commentrelation.push({
-                    relationcommentid: relationcommentid,
-                    relationcommentusername: relationcommentusername,
-                    relationcommentcontent: relationcommentcontent,
-                    relationcommentuserid: relationcommentuserid,
-                    relationcommentusershow: relationcommentusershow
+                    commentid: relationcommentid,
+                    commentusername: relationcommentusername,
+                    commentcontent: relationcommentcontent,
+                    commentuserid: relationcommentuserid,
+                    commentusershow: relationcommentusershow
                 });
                 console.log(commentrelation);
                 var comment = new comment();
@@ -726,9 +726,6 @@
     }
 
 })(jQuery);
-
-
-
 
 
 

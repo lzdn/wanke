@@ -120,7 +120,7 @@
                 {{#if this.relation}}
                 {{#each this.relation}}
                 <div class="relation">
-                    <img class="am-comment-avatar" src={{this.relationcommentusershow}} alt=""/>
+                    <img class="am-comment-avatar" src={{this.commentusershow}} alt=""/>
                     <div class="relationcontent">
                         <p class="am-sans-serif name">{{this.relationcommentusername}}</p>
                         <!--预留-->
@@ -128,16 +128,16 @@
                         <!--<p class="layer am-sans-serif">1楼</p>-->
                     </div>
                     <div class="relationsay">
-                        <p>{{this.relationcommentcontent}}</p>
+                        <p>{{this.commentcontent}}</p>
                     </div>
 
-                    <div class="toolbar" value={{this.relationcommentid}}>
+                    <div class="toolbar" value={{this.commentid}}>
                         <i class="toolbtn reply {{this.commentid}}"><i class="am-icon-reply"></i> 回复</i>
                     </div>
 
                     <!-- ………………………………………………此处 回复发表……………………………………………… -->
 
-                    <div class="am-comment replypublish {{this.relationcommentid}}" bshow="0">
+                    <div class="am-comment replypublish {{this.commentid}}" bshow="0">
                         <a href="">
                             <img class="am-comment-avatar nullusershow" src=imgs/nullusershow.png alt=""/>
                         </a>
@@ -146,7 +146,7 @@
                                 <textarea name="" id="" placeholder="说点什么吧"></textarea>
                             </div>
                             <div class="publish">
-                                <button  class="am-btn am-btn-secondary smpublish" value={{this.relationcommentid}} userid={{this.relationcommentuserid}} username={{this.relationcommentusername}} usersay={{this.relationcommentcontent}} usershow={{this.relationcommentusershow}}>发表</button>
+                                <button  class="am-btn am-btn-secondary smpublish" value={{this.commentid}} userid={{this.commentuserid}} username={{this.commentusername}} usersay={{this.commentcontent}} usershow={{this.commentusershow}}>发表</button>
                             </div>
                         </div>
                         <!-- ………………………………………………此处 ^ 回复发表……………………………………………… -->
