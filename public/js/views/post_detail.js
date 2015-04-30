@@ -67,6 +67,7 @@
                     relationcommentuserid: relationcommentuserid,
                     relationcommentusershow: relationcommentusershow
                 });
+               // [{"relationcommentid":"5541a6d4e4b04402f3c06d21","relationcommentcontent":"测试评论","relationcommentuserid":"username=动名词","relationcommentusershow":"http://wx.qlogo.cn/mmopen/PiajxSqBRaEJgfrRe3VDiaNqFHsR4dBj8Z5rWgsr0icBXAiaY1DmjoNBg85PILc6WQw1sgACOUsGNibYp2QW5KgeRpw/0"}]
                 console.log(commentrelation);
                 var comment = new comment();
                 comment.save({
@@ -460,6 +461,7 @@
                                 var comment = {
                                     commentid: commentid,
                                     commentusername: commentusername,
+                                    commentuserid:commentuserid,
                                     commentcontent: commentcontent,
                                     commentusershow: commentusershow,
                                     relation: commentrelation,
