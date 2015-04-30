@@ -37,8 +37,8 @@
             alert(aclose.length);
             alert(commentuserid);
             for(var i=0; i<aclose.length;i++){
-                alert(aclose[i].attr("commentuserid"))
-                if(aclose[i].attr("commentuserid")!=commentuserid){
+                alert(aclose[i].attr("value"))
+                if(aclose[i].attr("value")!=commentuserid){
                     $(this).hide();
                 }else{
                     $(this).show();
