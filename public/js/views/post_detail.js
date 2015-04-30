@@ -4,6 +4,7 @@
     var code = "";
     var relationuser = [];
     var marktags = ["约吃", "约玩", "约聊", "约运动"];
+    var commentuserid;
     var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid, postview, username, headimgurl, headUrl;
     if (saveurl.split("=").length - 1 > 1) {
         userlog = window.location.search.split('=')[2];
@@ -45,7 +46,7 @@
         $(".smpublish").on("click", function () {
             var currentUser = AV.User.current();
             if (currentUser) {
-                alert(userid);
+                alert(commentuserid);
                 var comment = AV.Object.extend("comment");
                 var post = AV.Object.extend("post");
                 var relationcommentid = $(this).attr("value");
@@ -71,7 +72,7 @@
                 comment.save({
                     commentcontent: publishsay,
                     commentpost: posts,
-                    commentuserid: userid,
+                    commentuserid: commentuserid,
                     commentusername: nickname,
                     commentusershow: headUrl,
                     commentrelation: commentrelation
@@ -113,9 +114,9 @@
         $("#maxpublish").on("click", function () {
             var currentUser = AV.User.current();
             if (currentUser) {
-                alert(userid);
+                alert(commentuserid);
                 alert(nickname);
-                alert(headimgurl)
+                alert(headimgurl);
                 var post = AV.Object.extend("post");
                 var comment = AV.Object.extend("comment");
                 alert("haha")
@@ -130,7 +131,7 @@
                     commentcontent: publishsay,
                     commentpost: posts,
                     commentusername: nickname,
-                    commentuserid: userid,
+                    commentuserid: commentuserid,
                     commentusershow: headimgurl
                 }, {
                     success: function (comment) {
@@ -288,7 +289,7 @@
         var currentUser = AV.User.current();
         if (currentUser) {
             alert(currentUser.id)
-            usersid = currentUser.id;
+            commentuserid = currentUser.id;
             var authData = currentUser.get("authData");
             nickname = authData.weixin.nickname
             headimgurl = authData.weixin.headimgurl
