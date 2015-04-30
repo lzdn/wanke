@@ -34,11 +34,9 @@
         var currentUser = AV.User.current();
         if(currentUser){
             var aclose =document.getElementsByClassName("close");
-            alert(aclose.length);
-            alert(commentuserid);
-            alert(aclose[0].attr("commentuserid"));
             for(var i=0;i<aclose.length;i++){
-                if(aclose[i].attr("commentuserid")!=commentuserid){
+                var commentuser=aclose[i].className.substr(14);
+                if(commentuser!=commentuserid){
                     aclose[i].hide();
                 }else{
                     aclose[i].show();
