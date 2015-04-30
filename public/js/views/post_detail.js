@@ -42,7 +42,6 @@
                 $reply.hide();
                 $reply.attr("bshow", "0");
             }
-        }).then(function(){
             $(".reply").removeClass("reply");
         })
         $(".smpublish").on("click", function () {
@@ -635,7 +634,6 @@
                 $reply.hide();
                 $reply.attr("bshow", "0");
             }
-        }).then(function(){
             $(".reply").removeClass("reply");
         })
         $(".smpublish").on("click", function () {
