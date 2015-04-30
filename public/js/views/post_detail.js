@@ -27,8 +27,9 @@
                     alert(headUrl);
                 }
             });
-          document.getElementsByclassName("nullusershow").src=headUrl;
-           // $(".nullusershow").attr("src","");
+         // document.getElementsByclassName("nullusershow").src=headUrl;
+          $(".nullusershow").attr("src",headUrl);
+            alert($(".nullusershow").attr("src"));
         }
         $(".replypublish").hide();
         $(".reply").on("click", function () {
