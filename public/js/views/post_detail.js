@@ -31,6 +31,22 @@
             // document.getElementsByclassName("nullusershow").src=headUrl;
         }
         $(".replypublish").hide();
+        var aclose = $(".close");
+        for(var i=0; i<aclose.length;i++){
+            if(aclose[i].attr("commentuserid")!=commentuserid){
+                $(this).hide();
+            }else{
+                $(this).show();
+            }
+        }
+
+        $(".close").on("click",function(){
+            var close = $(this).parent().attr("value");
+            alert(close)
+            destroycomment(close);
+        })
+
+
         $(".reply").on("click", function () {
             $(".replypublish").hide();
             var reply = $(this).parent().attr("value");
@@ -636,6 +652,11 @@
             }
             $(".reply").removeClass("reply");
         })
+        $(".close").on("click",function(){
+            var close = $(this).parent().attr("value");
+            alert(close)
+            destroycomment(close);
+        })
         $(".smpublish").on("click", function () {
                 alert(commentuserid);
                 var comment = AV.Object.extend("comment");
@@ -727,8 +748,28 @@
         });
     }
 
+    function destroycomment(commentid){
+        $(".destroy"+commentid+"").remove();
+        var post = AV.Object.extend("post");
+        var query = new AV.Query(post);
+        //query.equalTo("objectId", postview);
+        $("textarea").val("")
+        query.get(postview, {
+            success: function (post) {
+                console.log(post.get("relationcomment"));
+                post.remove("relationcomment", {id: commentid});
+                post.save();
+            }
+        });
+        var comment = AV.Object.extend("comment");
+        var query2 = new AV.Query(comment);
+        query2.get(commentid,{
+            success:function(comment){
+                comment.destroy();
+            }
+        })
+    }
 })(jQuery);
-
 
 
 

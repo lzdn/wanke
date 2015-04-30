@@ -104,7 +104,7 @@
 <ul class="am-comments-list  list_extent">
     <script type="text/x-handlebars-template" id="comments">
         {{#each comments}}
-    <li class="am-comment commentlength">
+    <li class="am-comment commentlength destroy{{this.commentid}}">
         <a href="">
             <img class="am-comment-avatar" src={{this.commentusershow}} alt=""/>
         </a>
@@ -158,8 +158,8 @@
             </div>
 
             <div class="toolbar" value={{this.commentid}}>
-                <i class="toolbtn reply reply{{this.commentid}}"><i class="am-icon-reply"></i> 回复</i>
-                <i class="toolbtn close"><i class="am-icon-close"></i> 删除</i>
+                <i class="toolbtn reply reply{{this.commentid}}"><i class="am-icon-reply"></i>回复</i>
+                <i class="toolbtn close" commentuserid="{{this.commentuserid}}"><i class="am-icon-close"></i> 删除</i>
             </div>
             <!-- ………………………………………………此处 回复发表……………………………………………… -->
             <div class="am-comment replypublish replypublish2 {{this.commentid}}" bshow="0">
@@ -184,7 +184,7 @@
 
 
     <!-- ………………………………此处以下为发表框…………………… -->
-
+<div class="am-comment-extend2">
     <li id="am-comment-extend" class="am-comment">
         <a href="">
             <img class="am-comment-avatar nullusershow" src="imgs/nullusershow.png" alt=""/>
@@ -198,6 +198,8 @@
             </div>
         </div>
     </li>
+</div>
+
 
 
 
