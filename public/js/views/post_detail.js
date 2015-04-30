@@ -45,16 +45,7 @@
         $(".smpublish").on("click", function () {
             var currentUser = AV.User.current();
             if (currentUser) {
-                usersid = currentUser.id;
-                var query = new AV.Query(AV.User);
-                query.get(usersid, {
-                    success: function (user) {
-                        var authData = currentUser.get("authData");
-                        headUrl = authData.weixin.headimgurl
-                        userid = user.id
-                        alert(userid)
-                    }
-                });
+                alert(userid);
                 var comment = AV.Object.extend("comment");
                 var post = AV.Object.extend("post");
                 var relationcommentid = $(this).attr("value");
@@ -122,16 +113,9 @@
         $("#maxpublish").on("click", function () {
             var currentUser = AV.User.current();
             if (currentUser) {
-                usersid = currentUser.id;
-                var query = new AV.Query(AV.User);
-                query.get(usersid, {
-                    success: function (user) {
-                        var authData = currentUser.get("authData");
-                        headUrl = authData.weixin.headimgurl
-                        userid = user.id
-                        alert(userid)
-                    }
-                });
+                alert(userid);
+                alert(nickname);
+                alert(headimgurl)
                 var post = AV.Object.extend("post");
                 var comment = AV.Object.extend("comment");
                 alert("haha")
@@ -300,6 +284,13 @@
     function loading(callbak) {
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
         //ject.createWithoutData('className',id);
+        var currentUser = AV.User.current();
+        if (currentUser) {
+            usersid = currentUser.id;
+            var authData = currentUser.get("authData");
+            nickname = authData.weixin.nickname
+            headimgurl = authData.weixin.headimgurl
+        }
         var load = 0
         var post = AV.Object.extend("post");
         var tags = AV.Object.extend("tags");
