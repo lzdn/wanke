@@ -36,9 +36,9 @@
             var aclose = $(".close");
             alert(aclose.length);
             alert(commentuserid);
-            alert(aclose[0].parent().attr("commentuserid"));
+            alert(aclose[0].className());
             for(var i=0;i<aclose.length;i++){
-                if(aclose[i].parent().attr("commentuserid")!=commentuserid){
+                if(aclose[i].className()!=commentuserid){
                     $(this).hide();
                 }else{
                     $(this).show();
