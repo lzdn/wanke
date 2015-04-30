@@ -33,12 +33,12 @@
         $(".replypublish").hide();
         var currentUser = AV.User.current();
         if(currentUser){
-            var aclose = $(".close");
+            var aclose =document.getElementsByClassName("close");
             alert(aclose.length);
             alert(commentuserid);
+            alert(aclose[0].attr("commentuserid"));
             for(var i=0;i<aclose.length;i++){
-                alert($(this).attr("value"));
-                if($(this).attr("commentuserid")!=commentuserid){
+                if(aclose[i].attr("commentuserid")!=commentuserid){
                     $(this).hide();
                 }else{
                     $(this).show();
