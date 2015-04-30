@@ -505,6 +505,7 @@
             $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
                 userid = res.id
+                commentuserid=res.id;
                 alert(userid)
                 nickname = res.nickname;
                 alert(nickname)
