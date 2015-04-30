@@ -56,6 +56,7 @@
                         var authData = currentUser.get("authData");
                         headUrl = authData.weixin.headimgurl
                         userid = user.id
+                        alert(userid)
                     }
                 });
                 var comment = AV.Object.extend("comment");
