@@ -45,7 +45,6 @@
                 var data = {shops: shops};
                 var html = template(data);
                 $tpl.before(html);
-                callbak();
             }
         });
         query.equalTo("type","物业管理");
