@@ -408,6 +408,7 @@
         var post = AV.Object.extend("post");
         var tags = AV.Object.extend("tags");
         var user = AV.Object.extend("User");
+        $(".Delete").empty();
         var query = new AV.Query(post);
         query.count({
             success: function (skip) {
@@ -484,6 +485,10 @@
                                 pattern: imgpattern
                             };
                             posts.push(opost);
+                        }
+                        if(posts==""){
+                            $(".Delete").empty();
+                            $("<p class=\"Delete am-sans-serif\">搜索结果不存在</p>").appendTo($("#publish"));
                         }
                         console.log(posts);
                         var $tpl = $('#usercontent');

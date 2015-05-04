@@ -2,6 +2,7 @@
     loadwx(function () {
         loading(function () {
             $(".shopcontent").on("click", function () {
+                $(this).css("background","#e0690c;");
                 var shopid = $(this).attr("value");
                 window.location.href = "shop_content.html?id=" + shopid;
             });

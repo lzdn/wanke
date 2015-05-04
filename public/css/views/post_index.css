@@ -27,8 +27,12 @@ body{
     margin-top:10px;
 
 }
+.tagsearch select{
+    color:rgb(0, 140, 213);
+}
 .tagsearch button{
     border:1px solid #ccc;
+    color:rgb(0, 140, 213);
 }
 #content{
     margin:0 0 30px 0;
