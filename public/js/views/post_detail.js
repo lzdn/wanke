@@ -29,6 +29,8 @@
         for(var i=0;i<aclose.length;i++){
             var commentuser=aclose[i].className.substr(14);
             console.log(commentuser)
+            //if(commentuser==commentuserid){
+                if(commentuser=="553a3ad0e4b034be7ed4a270"){
                 console.log("yin")
                 aclose[i].className="hide";
             }
@@ -37,6 +39,7 @@
             var close = $(this).parent().attr("value");
             alert(close)
             destroycomment(close);
+        });
         $(".reply").on("click", function () {
             $(".replypublish").hide();
             var reply = $(this).parent().attr("value");
@@ -140,6 +143,7 @@
                 }, {
                     success: function (comment) {
                         var query = new AV.Query(post);
+                        $("textarea").val("");
                         loadingcomment(comment);
                         query.get(postview, {
                             success: function (post) {
