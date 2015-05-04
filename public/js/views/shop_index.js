@@ -17,6 +17,7 @@
     function loading(callbak) {
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
         //ject.createWithoutData('className',id);
+        var load = 0;
         var shop = AV.Object.extend("shop");
         var query = new AV.Query(shop);
         query.equalTo("type","周边小店");
@@ -45,6 +46,10 @@
                 var data = {shops: shops};
                 var html = template(data);
                 $tpl.before(html);
+                load+=1
+                if (load == 2) {
+                    callbak();
+                }
             }
         });
         query.equalTo("type","物业管理");
@@ -73,7 +78,10 @@
                 var data = {shops: shops};
                 var html = template(data);
                 $tpl.before(html);
-                callbak();
+                load+=1
+                if (load == 2) {
+                    callbak();
+                }
             }
         });
     }
