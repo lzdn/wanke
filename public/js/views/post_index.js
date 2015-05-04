@@ -3,7 +3,52 @@
     var skx = -5;
     var bload = 1;
     var length;
-    $(".tagsearch").
+    $("select").change(function () {
+        var tag = $(this).val();
+        alert(tag)
+        if (tag == "全部") {
+            $(".Publish").remove();
+            skx = -5;
+            loading(function () {
+                $(".Publish").on("click", function () {
+                    var postview = $(this).attr("value");
+                    window.location.href = "post_detail.html?id=" + postview + "";
+                });
+                $(".imgpreview").on("click", function () {
+                    var cur = $(this).attr("src");
+                    var url = $(this).parent().attr("value");
+                    var arr = url.split(",");
+                    wx.previewImage({
+                        current: cur, // 当前显示的图片链接
+                        urls: arr// 需要预览的图片链接列表
+                    });
+                    event.stopPropagation();
+                });
+                $(".imgpreview").removeClass("imgpreview");
+            });
+        } else {
+            alert(tag);
+            $(".Publish").remove();
+            skx = -5;
+            loadtag(tag, function () {
+                $(".Publish").on("click", function () {
+                    var postview = $(this).attr("value");
+                    window.location.href = "post_detail.html?id=" + postview + "";
+                });
+                $(".imgpreview").on("click", function () {
+                    var cur = $(this).attr("src");
+                    var url = $(this).parent().attr("value");
+                    var arr = url.split(",");
+                    wx.previewImage({
+                        current: cur, // 当前显示的图片链接
+                        urls: arr// 需要预览的图片链接列表
+                    });
+                    event.stopPropagation();
+                });
+                $(".imgpreview").removeClass("imgpreview");
+            });
+        }
+    });
     $(".am-form-field").keydown(function () {
         setTimeout(function () {
             if ($(".am-form-field").val() == "" && bload == 0) {
@@ -138,7 +183,7 @@
     $("#arrow").hide();
     loading(function () {
         var adoremove = document.getElementsByClassName("doremove");
-        if(adoremove.length<5){
+        if (adoremove.length < 5) {
             $("#load").hide();
         }
         $(".Publish").on("click", function () {
@@ -157,7 +202,7 @@
         });
         $(".imgpreview").removeClass("imgpreview");
         $("#users").on("click", function () {
-                window.location.href = "user_detail.html?code=";
+            window.location.href = "user_detail.html?code=";
         });
         $(".Publish").on("click", function () {
             var postview = $(this).attr("value");
@@ -255,7 +300,104 @@
                     success: function (arry) {
                         var times = 0;
                         var posts = [];
-                        var imgurls=[];
+                        var imgurls = [];
+                        var imgpattern = "";
+                        for (var i = 0; i < arry.length; i++) {
+                            var object = arry[i];
+                            var imgs = object.get('relationimgs');
+                            var query = new AV.Query(File);
+                            query.equalTo("objectId", imgs[i]);
+                            if (imgs) {
+                                if (imgs.length == 1) {
+                                    imgpattern = "imgpatternone"
+                                }
+                                if (imgs.length == 2 || imgs.length == 4) {
+                                    imgpattern = "imgpatterntwo"
+                                }
+                                if (imgs.length >= 3 && imgs.length != 4) {
+                                    imgpattern = "imgpatternthree"
+                                }
+                            }
+                            console.log(object);
+                            var avalue = object.id;
+                            var content = object.get('content');
+                            var otagkey = object.get("tagkey");
+                            var ousername = object.get("username").attributes.authData.weixin;
+                            var username = ousername.nickname;
+                            var headimgurl = ousername.headimgurl;
+                            var tagvalue = otagkey.get("tagtitle");
+                            var oldtime = object.createdAt.getTime();
+                            var publishtime = newtime - oldtime;
+                            var day = parseInt(publishtime / 86400000);
+                            if (day > 0) {
+                                times = day + "天前"
+                            } else {
+                                var hours = parseInt(publishtime / 3600000);
+                                if (hours > 0) {
+                                    times = hours + "小时前";
+                                }
+                                else {
+                                    var minute = parseInt(publishtime / 60000);
+                                    if (minute > 0) {
+                                        times = minute + "分钟前"
+                                    } else {
+                                        times = "刚刚"
+                                    }
+                                }
+                            }
+                            var opost = {
+                                name: username,
+                                usersay: content,
+                                titleimg: headimgurl,
+                                tag: tagvalue,
+                                time: times,
+                                value: avalue,
+                                img: imgs,
+                                pattern: imgpattern
+                            };
+                            posts.push(opost);
+
+                        }
+                        console.log(posts);
+                        var $tpl = $('#usercontent');
+                        var source = $tpl.text();
+                        var template = Handlebars.compile(source);
+                        var data = {posts: posts};
+                        var html = template(data);
+                        $tpl.before(html);
+                        callbak();
+                    }
+                });
+            }
+        });
+    }
+
+    function loadtag(tagid,callbak) {
+        AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
+        var post = AV.Object.extend("post");
+        var tags = AV.Object.extend("tags");
+        var user = AV.Object.extend("User");
+        var query = new AV.Query(post);
+        query.count({
+            success: function (skip) {
+                var newtime = new Date().getTime();
+                query.descending("createdAt");
+                skx += 5;
+                if (skx >= skip) {
+                    $("#load").remove();
+                }
+                query.limit(5).skip(skx);
+                query.include("tagkey");
+                query.include("relationimgs");
+                query.include("username");
+                var tag = new tags();
+                tag.id = tagid;
+                query.equalTo("tagkey", tag);
+                query.find({
+                    success: function (arry) {
+                        var times = 0;
+                        var posts = [];
+                        var imgurls = [];
                         var imgpattern = "";
                         for (var i = 0; i < arry.length; i++) {
                             var object = arry[i];
@@ -377,7 +519,7 @@
                 })
             },
             error: function (msg) {
-               // alert(msg);
+                // alert(msg);
             }
         });
     }
