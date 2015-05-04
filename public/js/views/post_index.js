@@ -3,52 +3,19 @@
     var skx = -5;
     var bload = 1;
     var length;
+    var width="";
+
     $("select").change(function () {
-        var tag = $(this).val();
-        alert(tag)
-        if (tag == "全部") {
-            $(".Publish").remove();
-            skx = -5;
-            loading(function () {
-                $(".Publish").on("click", function () {
-                    var postview = $(this).attr("value");
-                    window.location.href = "post_detail.html?id=" + postview + "";
-                });
-                $(".imgpreview").on("click", function () {
-                    var cur = $(this).attr("src");
-                    var url = $(this).parent().attr("value");
-                    var arr = url.split(",");
-                    wx.previewImage({
-                        current: cur, // 当前显示的图片链接
-                        urls: arr// 需要预览的图片链接列表
-                    });
-                    event.stopPropagation();
-                });
-                $(".imgpreview").removeClass("imgpreview");
-            });
-        } else {
-            alert(tag);
-            $(".Publish").remove();
-            skx = -5;
-            loadtag(tag, function () {
-                $(".Publish").on("click", function () {
-                    var postview = $(this).attr("value");
-                    window.location.href = "post_detail.html?id=" + postview + "";
-                });
-                $(".imgpreview").on("click", function () {
-                    var cur = $(this).attr("src");
-                    var url = $(this).parent().attr("value");
-                    var arr = url.split(",");
-                    wx.previewImage({
-                        current: cur, // 当前显示的图片链接
-                        urls: arr// 需要预览的图片链接列表
-                    });
-                    event.stopPropagation();
-                });
-                $(".imgpreview").removeClass("imgpreview");
-            });
-        }
-    });
+        selectchange(function(width){
+            console.log(width);
+            $(".tagsearch").css("width",""+width+"px");
+            var iconleft=width-20;
+            $(" .am-selected-icon").css("left",""+iconleft+"px")
+            //$('select').selected({
+            //    btnWidth: '80px'
+            //});
+        })
+    })
     $(".am-form-field").keydown(function () {
         setTimeout(function () {
             if ($(".am-form-field").val() == "" && bload == 0) {
@@ -541,7 +508,55 @@
         });
         $(".imgpreview").removeClass("imgpreview");
     }
+function selectchange(callback){
+    var tag = $("select").val().split('&')[0];
+    var taglength=$("select").val().split('&')[1].length;
+    width = taglength*20+40;
+    if (tag == "全部") {
+        $(".Publish").remove();
+        skx = -5;
+        loading(function () {
+            $(".Publish").on("click", function () {
+                var postview = $(this).attr("value");
+                window.location.href = "post_detail.html?id=" + postview + "";
+            });
+            $(".imgpreview").on("click", function () {
+                var cur = $(this).attr("src");
+                var url = $(this).parent().attr("value");
+                var arr = url.split(",");
+                wx.previewImage({
+                    current: cur, // 当前显示的图片链接
+                    urls: arr// 需要预览的图片链接列表
+                });
+                event.stopPropagation();
+            });
+            $(".imgpreview").removeClass("imgpreview");
+            callback(width);
+        });
+    } else {
 
+        $(".Publish").remove();
+        skx = -5;
+        loadtag(tag, function () {
+            $(".Publish").on("click", function () {
+                var postview = $(this).attr("value");
+                window.location.href = "post_detail.html?id=" + postview + "";
+            });
+            $(".imgpreview").on("click", function () {
+                var cur = $(this).attr("src");
+                var url = $(this).parent().attr("value");
+                var arr = url.split(",");
+                wx.previewImage({
+                    current: cur, // 当前显示的图片链接
+                    urls: arr// 需要预览的图片链接列表
+                });
+                event.stopPropagation();
+            });
+            $(".imgpreview").removeClass("imgpreview");
+        });
+        callback(width);
+    }
+}
 })(jQuery);
 
 

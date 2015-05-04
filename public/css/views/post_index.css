@@ -20,7 +20,7 @@ body{
     text-align:center;
 }
 .tagsearch{
-    width: 60px;
+    width: 80px;
     height: 43px;
     background: #fff;
     float:left;
@@ -33,8 +33,12 @@ body{
     padding:5px 5px 10px 5px;
     background: #fff;
 }
+#field .am-selected-icon{
+position:absolute;
+    left:60px;
+}
 #field input{
-    margin-left:60px;
+    /*margin-left:60px;*/
     float:right;
 }
 hr{
