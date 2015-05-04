@@ -15,7 +15,7 @@ $(function () {
             wx.hideOptionMenu();
         });
         var aNav = document.getElementsByClassName("am-btn-extend");
-        aNav[0].className = "am-btn-extend am-btn am-round am-btn-primary";
+       // aNav[0].className = "am-btn-extend am-btn am-round am-btn-primary";
         for (var i = 0; i < aNav.length; i++) {
             aNav[i].onclick = function () {
                 for (var j = 0; j < aNav.length; j++) {
@@ -62,10 +62,14 @@ $(function () {
     });
     $("#usr-sbm-sub").on("click", function () {
         var aUserval2 = $("#doc-ta-1").val();
-        if (aUserval2.length > 140) {
-            $("#my-alert").modal();
-        } else {
-            savecontent()
+        if(newtag==1){
+            $("#my-alert2").modal();
+        }else{
+            if (aUserval2.length > 140) {
+                $("#my-alert").modal();
+            } else {
+                savecontent()
+            }
         }
     });
     $("#addimg").hide();
@@ -169,7 +173,7 @@ $(function () {
         query.find({
             success: function (results) {
                 var tags = [];
-                newtag = results[0].id;
+               // newtag = results[0].id;
                 for (var i = 0; i < results.length; i++) {
                     var object = results[i];
                     var tagid = object.id;

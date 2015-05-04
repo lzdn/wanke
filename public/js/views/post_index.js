@@ -4,7 +4,6 @@
     var bload = 1;
     var length;
     var width="";
-
     $("select").change(function () {
         $(".Delete").empty();
        $(".am-form-field").val("");
