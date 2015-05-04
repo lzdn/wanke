@@ -511,7 +511,7 @@
 function selectchange(callback){
     var tag = $("select").val().split('&')[0];
     var taglength=$("select").val().split('&')[1].length;
-    width = taglength*20+40;
+    width = taglength*15+45;
     if (tag == "全部") {
         $(".Publish").remove();
         skx = -5;
