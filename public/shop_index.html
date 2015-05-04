@@ -31,15 +31,13 @@
             <li><div  class="shopcontent" value="{{this.id}}"><img class="am-circle" src={{this.logo}} width="40" height="40"/><p class="am-sans-serif">{{this.name}}</p></div><a href="tel:{{this.tel}}" class="am-icon am-icon-phone am-icon-md"></a></li>
             {{/each}}
         </script>
+    <li>物业管理</li>
+    <script type="text/x-handlebars-template" id="shop2">
+        {{#each shops}}
+        <li><div  class="shopcontent" value="{{this.id}}"><img class="am-circle" src={{this.logo}} width="40" height="40"/><p class="am-sans-serif">{{this.name}}</p></div><a href="tel:{{this.tel}}" class="am-icon am-icon-phone am-icon-md"></a></li>
+        {{/each}}
+    </script>
 </ul>
-    <ul class="am-list am-list-static am-list-extend">
-        <li>物业管理</li>
-        <script type="text/x-handlebars-template" id="shop2">
-            {{#each shops}}
-            <li><div  class="shopcontent" value="{{this.id}}"><img class="am-circle" src={{this.logo}} width="40" height="40"/><p class="am-sans-serif">{{this.name}}</p></div><a href="tel:{{this.tel}}" class="am-icon am-icon-phone am-icon-md"></a></li>
-            {{/each}}
-        </script>
-    </ul>
 </div>
 
 <div data-am-widget="navbar" class="am-navbar am-cf" id="">

@@ -2,7 +2,8 @@
     loadwx();
     var skx = -5;
     var bload = 1;
-    var length
+    var length;
+    $(".tagsearch").
     $(".am-form-field").keydown(function () {
         setTimeout(function () {
             if ($(".am-form-field").val() == "" && bload == 0) {
@@ -140,11 +141,6 @@
         if(adoremove.length<5){
             $("#load").hide();
         }
-        //this will now be null
-        //$(".title").on("click",function(){
-        //    var postview=$(this).attr("value");
-        //    window.location.href="post_detail.html?"+postview+"";
-        //});
         $(".Publish").on("click", function () {
             var postview = $(this).attr("value");
             window.location.href = "post_detail.html?id=" + postview + "";
