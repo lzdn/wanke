@@ -52,6 +52,15 @@
 
         $(".reply").on("click", function () {
             $(".replypublish").hide();
+            var aclose =document.getElementsByClassName("close");
+            for(var i=0;i<aclose.length;i++){
+                var commentuser=aclose[i].className.substr(14);
+                console.log(commentuser)
+                if(commentuser==commentuserid){
+                    console.log("yin")
+                    aclose[i].className="hide";
+                }
+            }
             var reply = $(this).parent().attr("value");
             var $reply = $(this).parent().siblings("." + reply + "");
             if ($reply.attr("bshow") == 0) {
