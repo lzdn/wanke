@@ -19,6 +19,7 @@
         //ject.createWithoutData('className',id);
         var shop = AV.Object.extend("shop");
         var query = new AV.Query(shop);
+        query.equalTo("type","周边小店");
         query.find({
             success: function (arry) {
                 console.log(arry);
@@ -39,6 +40,35 @@
                     console.log(shops);
                 }
                 var $tpl = $('#shop');
+                var source = $tpl.text();
+                var template = Handlebars.compile(source);
+                var data = {shops: shops};
+                var html = template(data);
+                $tpl.before(html);
+                callbak();
+            }
+        });
+        query.equalTo("type","物业管理");
+        query.find({
+            success: function (arry) {
+                console.log(arry);
+                var shops = [];
+                for (var i = 0; i < arry.length; i++) {
+                    var object = arry[i];
+                    shopid = object.id;
+                    shopname = object.get("shopname");
+                    shoptel = object.get("shoptel");
+                    logo = object.get("logo");
+                    var shop = {
+                        id: shopid,
+                        name: shopname,
+                        tel: shoptel,
+                        logo: logo
+                    };
+                    shops.push(shop);
+                    console.log(shops);
+                }
+                var $tpl = $('#shop2');
                 var source = $tpl.text();
                 var template = Handlebars.compile(source);
                 var data = {shops: shops};
