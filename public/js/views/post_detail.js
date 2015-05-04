@@ -15,52 +15,30 @@
     }
     loadwx();
     loading(function () {
-        alert("haha")
-        alert($(".nullusershow").attr("src"));
         var currentUser = AV.User.current();
         if (currentUser) {
-            alert("haha");
             usersid = currentUser.id;
-            alert(usersid);
             var authData = currentUser.get("authData");
             headUrl = authData.weixin.headimgurl
-            alert(headUrl);
             $(".nullusershow").attr("src", headUrl);
             alert($(".nullusershow").attr("src"));
-
-            // document.getElementsByclassName("nullusershow").src=headUrl;
         }
-
-
         $(".replypublish").hide();
         var aclose =document.getElementsByClassName("close");
+        alert(aclose.length)
         for(var i=0;i<aclose.length;i++){
             var commentuser=aclose[i].className.substr(14);
             console.log(commentuser)
-            if(commentuser==commentuserid){
                 console.log("yin")
                 aclose[i].className="hide";
             }
         }
-
         $(".hide").on("click",function(){
             var close = $(this).parent().attr("value");
             alert(close)
             destroycomment(close);
-        })
-
-
         $(".reply").on("click", function () {
             $(".replypublish").hide();
-            var aclose =document.getElementsByClassName("close");
-            for(var i=0;i<aclose.length;i++){
-                var commentuser=aclose[i].className.substr(14);
-                console.log(commentuser)
-                if(commentuser==commentuserid){
-                    console.log("yin")
-                    aclose[i].className="hide";
-                }
-            }
             var reply = $(this).parent().attr("value");
             var $reply = $(this).parent().siblings("." + reply + "");
             if ($reply.attr("bshow") == 0) {
@@ -111,7 +89,6 @@
                         $("textarea").val("");
                         loadingcomment(comment);
                         var query = new AV.Query(post);
-                        //query.equalTo("objectId", postview);
                         query.get(postview, {
                             success: function (post) {
                                 post.add("relationcomment", {id: comment.id});
@@ -145,12 +122,8 @@
         $("#maxpublish").on("click", function () {
             var currentUser = AV.User.current();
             if (currentUser) {
-                alert(commentuserid);
-                alert(nickname);
-                alert(headUrl);
                 var post = AV.Object.extend("post");
                 var comment = AV.Object.extend("comment");
-                alert("haha")
                 var publishsay = $(this).parent().siblings(".textarea").children().val();
                 if (publishsay) {
                     alert(publishsay)
@@ -166,10 +139,7 @@
                     commentusershow: headUrl
                 }, {
                     success: function (comment) {
-                        alert(comment.id)
                         var query = new AV.Query(post);
-                        //query.equalTo("objectId", postview);
-                        $("textarea").val("")
                         loadingcomment(comment);
                         query.get(postview, {
                             success: function (post) {
@@ -317,7 +287,6 @@
 
     function loading(callbak) {
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
-
         var load = 0 //ject.createWithoutData('className',id);
         var currentUser = AV.User.current();
         if (currentUser) {
@@ -353,7 +322,6 @@
                 var tags = [];
                 var imgpattern = "";
                 var object = results[0];
-                console.log(object);
                 var content = object.get('content');
                 var imgs = object.get('relationimgs');
                 relationuser = object.get("relationuser");
@@ -449,7 +417,6 @@
         query.equalTo("objectId", postview);
         query.find({
             success: function (post) {
-                console.log(post[0])
                 var object = post[0].get("relationcomment")
                 if (object) {
                     var comment = AV.Object.extend("comment");
@@ -461,7 +428,6 @@
                         query.equalTo("objectId", object[i].id);
                         query.find({
                             success: function (comment) {
-                                console.log(comment[0].id)
                                 var times = 0;
                                 var newtime = new Date().getTime();
                                 var oldtime = comment[0].createdAt.getTime();
@@ -489,7 +455,6 @@
                                 var commentcontent = comment[0].get("commentcontent");
                                 var commentusershow = comment[0].get("commentusershow");
                                 var commentrelation = comment[0].get("commentrelation");
-                                console.log(commentrelation)
                                 var comments = [];
                                 var comment = {
                                     commentid: commentid,
@@ -501,7 +466,6 @@
                                     times: times
                                 }
                                 comments.push(comment);
-                                console.log(comments);
                                 var $tpl3 = $('#comments');
                                 var source3 = $tpl3.text();
                                 var template3 = Handlebars.compile(source3);
@@ -525,12 +489,9 @@
                     }
                 }
                 // callbak();
-
             }
         })
-
         //……………………………………………………………………………………………
-
         if (code != "") {
             $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
@@ -585,7 +546,6 @@
     function loadwx() {
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
         $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=post_index", function (result) {
-            console.log(result);
             appId = result.appId;
             jslist = result.jsApiList;
             noncestr = result.nonceStr;
@@ -604,7 +564,6 @@
     }
 
     function loadingcomment(comment) {
-        console.log(comment.id)
         var times = 0;
         var newtime = new Date().getTime();
         var oldtime = comment.createdAt.getTime();
@@ -631,7 +590,6 @@
         var commentcontent = comment.get("commentcontent");
         var commentusershow = comment.get("commentusershow");
         var commentrelation = comment.get("commentrelation");
-        console.log(commentrelation)
         var comments = [];
         var comment = {
             commentid: commentid,
@@ -643,7 +601,6 @@
             times: times
         }
         comments.push(comment);
-        console.log(comments);
         var $tpl3 = $('#comments');
         var source3 = $tpl3.text();
         var template3 = Handlebars.compile(source3);
@@ -679,7 +636,6 @@
                 var relationcommentcontent = $(this).attr("usersay");
                 var relationcommentusershow = $(this).attr("usershow");
                 var relationcommentuserid = $(this).attr("userid");
-                console.log(relationcommentid + "$" + relationcommentusername + "$" + relationcommentcontent + "$" + relationcommentusershow)
                 var publishsay = $(this).parent().siblings(".textarea").children().val();
                 alert(publishsay);
                 var posts = new post();
@@ -692,7 +648,6 @@
                     commentuserid: relationcommentuserid,
                     commentusershow: relationcommentusershow
                 });
-                console.log(commentrelation);
                 var comment = new comment();
                 comment.save({
                     commentcontent: publishsay,
@@ -769,7 +724,6 @@
         $("textarea").val("")
         query.get(postview, {
             success: function (post) {
-                console.log(post.get("relationcomment"));
                 post.remove("relationcomment", {id: commentid});
                 post.save();
             }

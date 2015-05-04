@@ -115,26 +115,26 @@ hr{
     overflow:auto;zoom:1;
 }
 .imgpatternone{
-    width: 243px;
+    width: 200px;
 }
 .imgpatternone img{
-    width: 243px;
+    width: 200px;
 }
 .imgpatterntwo{
-    width: 260px;
+    width: 220px;
 }
 .imgpatterntwo img{
-    width: 115px;
-    height: 115px;
-    margin:15px 15px 0 0;
+    width: 100px;
+    height: 100px;
+    margin:10px 10px 0 0;
     float:left;
 }
 .imgpatternthree{
-    width: 270px;
+    width: 210px;
 }
 .imgpatternthree img{
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     margin: 10px 10px 0 0;
     float:left;
 }

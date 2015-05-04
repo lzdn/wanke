@@ -4,6 +4,7 @@
     var bload = 1;
     var length;
     var width="";
+    var tagname="全部"
     $("select").change(function () {
         $(".Delete").empty();
        $(".am-form-field").val("");
@@ -57,7 +58,11 @@
             //  $(".Delete").empty();
             AV.Query.doCloudQuery("select * from post where (content like \"" + val + "\")", {
                 success: function (result) {
+                    //var tag = new tags();
+                    //tag.id = tagid;
+                    //query.equalTo("tagkey", tag);
                     var select = result.results;
+                    console.log(select)
                     var post = AV.Object.extend("post");
                     var tags = AV.Object.extend("tags");
                     var user = AV.Object.extend("User");
@@ -127,9 +132,14 @@
                                         img: imgs,
                                         pattern: imgpattern
                                     };
+                                    if(tagname!="全部"){
+                                        if(tagname==tagvalue){
+                                            posts.push(osele);
+                                        }
+                                    }else{
+                                        posts.push(osele);
+                                    }
                                     console.log(osele);
-                                    posts.push(osele);
-                                    console.log(posts);
                                     var $tpl = $('#usercontent');
                                     var source = $tpl.text();
                                     var template = Handlebars.compile(source);
@@ -137,10 +147,12 @@
                                     var html = template(data);
                                     $tpl.before(html);
                                     clickevent();
+                                    var publish=document.getElementsByClassName("Publish").length;
+                                    $(".Delete").empty();
+                                    $("<p class=\"Delete am-sans-serif\">包含“" + val + "”的结果共“" + publish + "”条</p>").appendTo($("#field"));
                                 }
                             })
                         }
-                        $("<p class=\"Delete am-sans-serif\">包含“" + val + "”的结果共“" + length + "”条</p>").appendTo($("#field"));
                         bload = 0;
                     } else {
                         $(".Delete").empty();
@@ -450,7 +462,6 @@
                                 pattern: imgpattern
                             };
                             posts.push(opost);
-
                         }
                         console.log(posts);
                         var $tpl = $('#usercontent');
@@ -541,6 +552,7 @@
 function selectchange(callback){
     var tag = $("select").val().split('&')[0];
     var taglength=$("select").val().split('&')[1].length;
+    tagname=$("select").val().split('&')[1];
     width = taglength*15+45;
     if (tag == "全部") {
         $("hr").remove();
