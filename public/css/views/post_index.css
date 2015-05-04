@@ -20,9 +20,12 @@ body{
     text-align:center;
 }
 .tagsearch{
-    width: 100%;
+    width: 60px;
+    height: 43px;
     background: #fff;
-    border:none;
+    float:left;
+    border:1px solid #ccc;
+    margin-top:10px;
 }
 #content{
     margin:0 0 30px 0;
@@ -30,6 +33,10 @@ body{
 #field{
     padding:5px 5px 10px 5px;
     background: #fff;
+}
+#field input{
+    margin-left:60px;
+    float:right;
 }
 hr{
     margin:0;
