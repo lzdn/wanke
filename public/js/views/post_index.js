@@ -6,6 +6,12 @@
     var width="";
 
     $("select").change(function () {
+        $(".Delete").empty();
+       $(".am-form-field").val("");
+        var adoremove = document.getElementsByClassName("doremove");
+        if (adoremove.length < 5) {
+            $("#load").hide();
+        }
         selectchange(function(width){
             console.log(width);
             $(".tagsearch").css("width",""+width+"px");
@@ -19,8 +25,9 @@
     $(".am-form-field").keydown(function () {
         setTimeout(function () {
             if ($(".am-form-field").val() == "" && bload == 0) {
-                // $(".Delete").empty();
+                $(".Delete").empty();
                 $(".Publish").remove();
+                $("hr").remove();
                 // $(".am-icon-spin-extend").remove();
                 skx = -5;
                 loading(function () {
@@ -58,6 +65,7 @@
                     if (select.length != 0) {
                         $(".Delete").empty();
                         $(".Publish").remove();
+                        $("hr").remove();
                         $(".am-icon-spin-extend").remove();
                         length = select.length;
                         for (var i = 0; i < select.length; i++) {
@@ -138,6 +146,7 @@
                     } else {
                         $(".Delete").empty();
                         $(".Publish").remove();
+                        $("hr").remove();
                         $(".am-icon-spin-extend").remove();
                         $("<p class=\"Delete am-sans-serif\">关于“" + val + "”的查询结果不存在</p>").appendTo($("#publish"));
                         bload = 0;
@@ -222,24 +231,46 @@
             $("#arrow").hide().removeClass("am-animation-fade");
         }
         if (scrollTop + newheight + 200 >= htmlHeight) {
+            var tag = $("select").val().split('&')[0];
             if (bload != 0) {
-                loading(function () {
-                    $(".Publish").on("click", function () {
-                        var postview = $(this).attr("value");
-                        window.location.href = "post_detail.html?id=" + postview + "";
-                    });
-                    $(".imgpreview").on("click", function () {
-                        var cur = $(this).attr("src");
-                        var url = $(this).parent().attr("value");
-                        var arr = url.split(",");
-                        wx.previewImage({
-                            current: cur, // 当前显示的图片链接
-                            urls: arr// 需要预览的图片链接列表
+                if(tag=="全部"){
+                    loading(function () {
+                        $(".Publish").on("click", function () {
+                            var postview = $(this).attr("value");
+                            window.location.href = "post_detail.html?id=" + postview + "";
                         });
-                        event.stopPropagation();
+                        $(".imgpreview").on("click", function () {
+                            var cur = $(this).attr("src");
+                            var url = $(this).parent().attr("value");
+                            var arr = url.split(",");
+                            wx.previewImage({
+                                current: cur, // 当前显示的图片链接
+                                urls: arr// 需要预览的图片链接列表
+                            });
+                            event.stopPropagation();
+                        });
+                        $(".imgpreview").removeClass("imgpreview");
                     });
-                    $(".imgpreview").removeClass("imgpreview");
-                });
+                }else{
+                    loadtag(tag,function () {
+                        $(".Publish").on("click", function () {
+                            var postview = $(this).attr("value");
+                            window.location.href = "post_detail.html?id=" + postview + "";
+                        });
+                        $(".imgpreview").on("click", function () {
+                            var cur = $(this).attr("src");
+                            var url = $(this).parent().attr("value");
+                            var arr = url.split(",");
+                            wx.previewImage({
+                                current: cur, // 当前显示的图片链接
+                                urls: arr// 需要预览的图片链接列表
+                            });
+                            event.stopPropagation();
+                        });
+                        $(".imgpreview").removeClass("imgpreview");
+                    });
+                }
+
             }
         }
     });
@@ -513,6 +544,7 @@ function selectchange(callback){
     var taglength=$("select").val().split('&')[1].length;
     width = taglength*15+45;
     if (tag == "全部") {
+        $("hr").remove();
         $(".Publish").remove();
         skx = -5;
         loading(function () {
@@ -534,7 +566,7 @@ function selectchange(callback){
             callback(width);
         });
     } else {
-
+        $("hr").remove();
         $(".Publish").remove();
         skx = -5;
         loadtag(tag, function () {
