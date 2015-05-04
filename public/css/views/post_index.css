@@ -25,10 +25,10 @@ body{
     background: #fff;
     float:left;
     margin-top:10px;
-    border:1px solid #ccc;
+
 }
 .tagsearch button{
-    border:none;
+    border:1px solid #ccc;
 }
 #content{
     margin:0 0 30px 0;
