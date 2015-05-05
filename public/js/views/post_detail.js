@@ -179,9 +179,11 @@
         $(".imgpreview").removeClass("imgpreview");
 
         $("#btnname").on("click", function () {
+            alert("开始报名");
             var currentUser = AV.User.current();
             if (currentUser) {
                 usersid = currentUser.id;
+                alert(userid)
                 var query = new AV.Query(AV.User);
                 query.get(usersid, {
                     success: function (user) {
@@ -201,6 +203,7 @@
                     setTimeout(function () {
                         if (phonenumber) {
                             var imgurl = currentUser.get("authData").weixin.headimgurl;
+                            alert(imgurl);
                             $(".usercontent").remove();
                             $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".usercont");
                             $("#btnname").remove();
