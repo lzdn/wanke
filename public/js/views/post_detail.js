@@ -15,6 +15,7 @@
     }
     loadwx();
     loading(function () {
+        $(".close").hide();
         var currentUser = AV.User.current();
         if (currentUser) {
             usersid = currentUser.id;
@@ -28,12 +29,15 @@
         alert(aclose.length)
         for(var i=0;i<aclose.length;i++){
             var commentuser=aclose[i].className.substr(14);
-            console.log(commentuser)
-            //if(commentuser==commentuserid){
-                if(commentuser=="553a3ad0e4b034be7ed4a270"){
-                console.log("yin")
-                aclose[i].className="hide";
-            }
+            alert(i)
+            alert(commentuser)
+            if(commentuser==commentuserid){
+                alert("yin")
+               aclose[i].className="close hide";
+                    $(".hide").show();
+            }else{
+                    alert("xian")
+                }
         }
         $(".hide").on("click",function(){
             var close = $(this).parent().attr("value");
@@ -411,10 +415,7 @@
                         }
                     }
                 }
-
-
             }
-
         });
         //…………………………………………以下为加载评论………………………………
         var query = new AV.Query(post);
@@ -485,7 +486,6 @@
                             }
                         })
                     }
-
                 } else {
                     load += 1
                     if (load == 4) {
@@ -514,7 +514,6 @@
                                 user.save()
                             }
                         });
-
                         if (relationuser) {
                             var currentUser = AV.User.current();
                             if (currentUser) {
@@ -534,7 +533,6 @@
                             callbak();
                         }
                     }
-
                 })
             });
         } else {
@@ -543,10 +541,7 @@
                 callbak();
             }
         }
-
-
     }
-
     function loadwx() {
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
         $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=post_index", function (result) {
@@ -566,7 +561,6 @@
             });
         });
     }
-
     function loadingcomment(comment) {
         var times = 0;
         var newtime = new Date().getTime();
@@ -678,7 +672,6 @@
                     }
                 })
         })
-
         $("#maxpublish").on("click", function () {
                 alert(commentuserid);
                 alert(nickname);
@@ -719,7 +712,6 @@
                 });
         });
     }
-
     function destroycomment(commentid){
         $(".destroy"+commentid+"").remove();
         var post = AV.Object.extend("post");
