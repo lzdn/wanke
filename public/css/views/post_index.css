@@ -122,18 +122,18 @@ hr{
     overflow:auto;zoom:1;
 }
 .imgpatternone{
-    width: 200px;
+    width: 180px;
 }
 .imgpatternone img{
-    width: 200px;
+    width: 180px;
 }
 .imgpatterntwo{
-    width: 220px;
+    width: 210px;
 }
 .imgpatterntwo img{
-    width: 100px;
-    height: 100px;
-    margin:10px 10px 0 0;
+    width: 60px;
+    height: 60px;
+    margin: 10px 10px 0 0;
     float:left;
 }
 .imgpatternthree{
