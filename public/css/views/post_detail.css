@@ -17,7 +17,7 @@ body{
     position:relative;
 }
 .usercont{
-    width: 100%;
+    width: 90%;
     height: 30px;
     position:absolute;
     left:10px;
@@ -48,6 +48,7 @@ body{
     background:#fff;
 }
 .advertising{
+    margin: 10px auto;
     width: 100%;
     background:#fff;
 
