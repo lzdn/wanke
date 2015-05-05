@@ -2,10 +2,10 @@
     loadwx(function () {
         loading(function () {
             $(".am-icon-phone").on("click",function(){
-                $(this).css("color","#e0690c");
+                var thisphone = $(this);
+                thisphone.css("color","#e0690c");
                 setTimeout(function(){
                     alert("haha");
-                    $(this).css("color","#ccc");
                 },100)
             });
             //$(".am-icon-phone").mousedown(function(){
