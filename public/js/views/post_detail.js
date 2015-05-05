@@ -39,7 +39,7 @@
                     alert("xian")
                 }
         }
-        $(".hide").on("click",function(){
+        $(".close").on("click",function(){
             var close = $(this).parent().attr("value");
             alert(close)
             destroycomment(close);
@@ -672,45 +672,45 @@
                     }
                 })
         })
-        $("#maxpublish").on("click", function () {
-                alert(commentuserid);
-                alert(nickname);
-                alert(headimgurl);
-                var post = AV.Object.extend("post");
-                var comment = AV.Object.extend("comment");
-                alert("haha")
-                var publishsay = $(this).parent().siblings(".textarea").children().val();
-                if (publishsay) {
-                    alert(publishsay)
-                }
-                var posts = new post();
-                posts.id = postview;
-                var coment = new comment();
-                coment.save({
-                    commentcontent: publishsay,
-                    commentpost: posts,
-                    commentusername: nickname,
-                    commentuserid: commentuserid,
-                    commentusershow: headUrl
-                }, {
-                    success: function (comment) {
-                        alert(comment.id)
-                        var query = new AV.Query(post);
-                        //query.equalTo("objectId", postview);
-                        $("textarea").val("")
-                        loadingcomment(comment);
-                        query.get(postview, {
-                            success: function (post) {
-                                post.add("relationcomment", {id: comment.id});
-                                post.save();
-                            },
-                            error: function (object, error) {
-                                console.log(object);
-                            }
-                        });
-                    }
-                });
-        });
+        //$("#maxpublish").on("click", function () {
+        //        alert(commentuserid);
+        //        alert(nickname);
+        //        alert(headimgurl);
+        //        var post = AV.Object.extend("post");
+        //        var comment = AV.Object.extend("comment");
+        //        alert("haha")
+        //        var publishsay = $(this).parent().siblings(".textarea").children().val();
+        //        if (publishsay) {
+        //            alert(publishsay)
+        //        }
+        //        var posts = new post();
+        //        posts.id = postview;
+        //        var coment = new comment();
+        //        coment.save({
+        //            commentcontent: publishsay,
+        //            commentpost: posts,
+        //            commentusername: nickname,
+        //            commentuserid: commentuserid,
+        //            commentusershow: headUrl
+        //        }, {
+        //            success: function (comment) {
+        //                alert(comment.id)
+        //                var query = new AV.Query(post);
+        //                //query.equalTo("objectId", postview);
+        //                $("textarea").val("")
+        //                loadingcomment(comment);
+        //                query.get(postview, {
+        //                    success: function (post) {
+        //                        post.add("relationcomment", {id: comment.id});
+        //                        post.save();
+        //                    },
+        //                    error: function (object, error) {
+        //                        console.log(object);
+        //                    }
+        //                });
+        //            }
+        //        });
+        //});
     }
     function destroycomment(commentid){
         $(".destroy"+commentid+"").remove();
