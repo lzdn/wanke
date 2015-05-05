@@ -1,9 +1,12 @@
 (function ($) {
     loadwx(function () {
         loading(function () {
-            $(".am-icon-phone").on("click",function(){
+            $(".am-icon-phone").mousedown(function(){
                 $(this).css("color","#e0690c");
-            })
+            });
+            $(".am-icon-phone").mouseup(function(){
+                $(this).css("color","red");
+            });
             $(".shopcontent").on("click", function () {
                 $(this).css("color","#e0690c");
                 var shopid = $(this).attr("value");
