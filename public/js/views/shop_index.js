@@ -1,7 +1,7 @@
 (function ($) {
     loadwx(function () {
         loading(function () {
-            $(".am-icon-phone").on("mousedown",function(){
+            $(".am-icon-phone").on("click",function(){
                 $(this).css("color","#e0690c");
             });
             $(".shopcontent").on("click", function () {
