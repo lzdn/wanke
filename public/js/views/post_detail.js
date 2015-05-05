@@ -5,7 +5,7 @@
     var relationuser = [];
     var marktags = ["约吃", "约玩", "约聊", "约运动"];
     var commentuserid;
-    var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid, postview, username, headimgurl, headUrl;
+    var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid, postview, username, headimgurl, headUrl,theuserid;
     if (saveurl.split("=").length - 1 > 1) {
         userlog = window.location.search.split('=')[2];
         code = userlog.split("&")[0];
@@ -182,8 +182,8 @@
             alert("开始报名");
             var currentUser = AV.User.current();
             if (currentUser) {
-                currentUser.id;
-                alert(currentUser.id)
+                theuserid= currentUser.id;
+                alert(theuserid)
                 var query = new AV.Query(AV.User);
                 query.get(currentUser.id, {
                     success: function (user) {
@@ -212,13 +212,13 @@
                             $("#btnname").remove();
                             $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
                             $(" <img src=\"" + imgurl + "\" value=\" " + usersid + "&" + phonenumber + " \" class=\"am-radius\">").appendTo("#headtle");
-                           alert(userid);
+                           alert(theuserid);
                             alert(postview);
                             $.ajax({
                                 method: "POST",
                                 url: "http://fuwuhao.dianyingren.com/weixin/sendMessage",
                                 data: JSON.stringify({
-                                    userId: usersid,
+                                    userId: theuserid,
                                     postId: postview
                                 }),
                                 contentType: "application/json; charset=utf-8",
