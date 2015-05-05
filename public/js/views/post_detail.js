@@ -204,7 +204,7 @@
                             bregistration+=1;
                         }
                         if(bregistration==relationuser.length){
-                            alert("无报名")
+                            alert("你没报名")
                             setTimeout(function () {
                                 if (phonenumber) {
                                     var imgurl = currentUser.get("authData").weixin.headimgurl;

@@ -488,7 +488,7 @@
                         }
                         if(posts==""){
                             $(".Delete").empty();
-                            $("<p class=\"Delete am-sans-serif\">搜索结果不存在条</p>").appendTo($("#field"));
+                            $("<p class=\"Delete am-sans-serif\">搜索结果不存在</p>").appendTo($("#field"));
                         }
                         console.log(posts);
                         var $tpl = $('#usercontent');
