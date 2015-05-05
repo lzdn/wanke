@@ -14,6 +14,10 @@ body{
     left:0;
     top:0;
 }
+#field .fieldcontent{
+   border:1px solid #ccc;
+    margin: 10px 0 10px 0;
+}
 #field p{
     margin:0;
     font-size:14px;
@@ -21,16 +25,14 @@ body{
 }
 .tagsearch{
     width: 80px;
-    height: 43px;
     background: #fff;
     float:left;
-    margin-top:10px;
 }
 .tagsearch select{
     color:rgb(0, 140, 213);
 }
 .tagsearch button{
-    border:1px solid #ccc;
+    border:none;
     color:rgb(0, 140, 213);
 }
 #content{
@@ -47,6 +49,12 @@ position:absolute;
 #field input{
     /*margin-left:60px;*/
     float:right;
+    border:none;
+    border-left:1px solid #ccc;
+    border-right:1px solid #ccc;
+}
+#field span{
+    border:none;
 }
 hr{
     margin:0;
@@ -66,9 +74,7 @@ hr{
 .am-icon-extend{
     color: #1E90FF;
 }
-.am-input-exend{
-    margin: 10px 0 10px 0;
-}
+
 .Publish{
     background: #fff;
     width: 100%;
