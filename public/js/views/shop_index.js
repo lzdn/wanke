@@ -6,6 +6,7 @@
                 thisphone.css("color","#e0690c");
                 setTimeout(function(){
                     alert("haha");
+                    thisphone.css("color","red");
                 },100)
             });
             //$(".am-icon-phone").mousedown(function(){
