@@ -25,13 +25,12 @@ body{
     background: #fff;
     float:left;
     margin-top:10px;
-
 }
 .tagsearch select{
     color:rgb(0, 140, 213);
 }
 .tagsearch button{
-    border:1px solid #ccc;
+    border:none;
     color:rgb(0, 140, 213);
 }
 #content{
