@@ -182,19 +182,19 @@
             alert("开始报名");
             var currentUser = AV.User.current();
             if (currentUser) {
-                usersid = currentUser.id;
-                alert(userid)
+                currentUser.id;
+                alert(currentUser.id)
                 var query = new AV.Query(AV.User);
-                query.get(usersid, {
+                query.get(currentUser.id, {
                     success: function (user) {
                         phonenumber = user.get('mobilePhoneNumber');
                         alert(phonenumber);
                     }
                 });
-                if (relationuser!=[]) {
+                if (relationuser) {
                     alert("有报名")
                     for (var i = 0; i < relationuser.length; i++) {
-                        if (relationuser[i].id == usersid) {
+                        if (relationuser[i].id == currentUser.id) {
                             $(".usercontent").remove();
                             $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".usercont");
                             $("#btnname").remove();
