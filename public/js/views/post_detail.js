@@ -22,26 +22,19 @@
             var authData = currentUser.get("authData");
             headUrl = authData.weixin.headimgurl
             $(".nullusershow").attr("src", headUrl);
-            alert($(".nullusershow").attr("src"));
         }
         $(".replypublish").hide();
         var aclose =document.getElementsByClassName("close");
-        alert(aclose.length)
         for(var i=0;i<aclose.length;i++){
             var commentuser=aclose[i].className.substr(14);
-            alert(i)
-            alert(commentuser)
             if(commentuser==commentuserid){
-                alert("yin")
                aclose[i].className="close hide";
                     $(".hide").show();
             }else{
-                    alert("xian")
                 }
         }
         $(".close").on("click",function(){
             var close = $(this).parent().attr("value");
-            alert(close)
             destroycomment(close);
         });
         $(".reply").on("click", function () {
@@ -60,7 +53,6 @@
         $(".smpublish").on("click", function () {
             var currentUser = AV.User.current();
             if (currentUser) {
-                alert(commentuserid);
                 var comment = AV.Object.extend("comment");
                 var post = AV.Object.extend("post");
                 var relationcommentid = $(this).attr("value");
@@ -70,7 +62,6 @@
                 var relationcommentuserid = $(this).attr("userid");
                 console.log(relationcommentid + "$" + relationcommentusername + "$" + relationcommentcontent + "$" + relationcommentusershow)
                 var publishsay = $(this).parent().siblings(".textarea").children().val();
-                alert(publishsay);
                 var posts = new post();
                 posts.id = postview;
                 var commentrelation = [];
@@ -92,7 +83,6 @@
                     commentrelation: commentrelation
                 }, {
                     success: function (comment) {
-                        alert(comment.id)
                         $("textarea").val("");
                         loadingcomment(comment);
                         var query = new AV.Query(post);
@@ -132,9 +122,6 @@
                 var post = AV.Object.extend("post");
                 var comment = AV.Object.extend("comment");
                 var publishsay = $(this).parent().siblings(".textarea").children().val();
-                if (publishsay) {
-                    alert(publishsay)
-                }
                 var posts = new post();
                 posts.id = postview;
                 var coment = new comment();
@@ -298,7 +285,6 @@
         var load = 0 //ject.createWithoutData('className',id);
         var currentUser = AV.User.current();
         if (currentUser) {
-            alert(currentUser.id)
             commentuserid = currentUser.id;
             var authData = currentUser.get("authData");
             nickname = authData.weixin.nickname
@@ -500,7 +486,6 @@
             $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
                 nickname = res.nickname;
-                alert(nickname)
                 AV.User._logInWith("weixin", {
                     "authData": res,
                     success: function (user) {
@@ -622,11 +607,9 @@
         })
         $(".close").on("click",function(){
             var close = $(this).parent().attr("value");
-            alert(close)
             destroycomment(close);
         })
         $(".smpublish").on("click", function () {
-                alert(commentuserid);
                 var comment = AV.Object.extend("comment");
                 var post = AV.Object.extend("post");
                 var relationcommentid = $(this).attr("value");
@@ -635,7 +618,6 @@
                 var relationcommentusershow = $(this).attr("usershow");
                 var relationcommentuserid = $(this).attr("userid");
                 var publishsay = $(this).parent().siblings(".textarea").children().val();
-                alert(publishsay);
                 var posts = new post();
                 posts.id = postview;
                 var commentrelation = [];
@@ -656,7 +638,6 @@
                     commentrelation: commentrelation
                 }, {
                     success: function (comment) {
-                        alert(comment.id)
                         loadingcomment(comment);
                         var query = new AV.Query(post);
                         //query.equalTo("objectId", postview);
@@ -672,45 +653,6 @@
                     }
                 })
         })
-        //$("#maxpublish").on("click", function () {
-        //        alert(commentuserid);
-        //        alert(nickname);
-        //        alert(headimgurl);
-        //        var post = AV.Object.extend("post");
-        //        var comment = AV.Object.extend("comment");
-        //        alert("haha")
-        //        var publishsay = $(this).parent().siblings(".textarea").children().val();
-        //        if (publishsay) {
-        //            alert(publishsay)
-        //        }
-        //        var posts = new post();
-        //        posts.id = postview;
-        //        var coment = new comment();
-        //        coment.save({
-        //            commentcontent: publishsay,
-        //            commentpost: posts,
-        //            commentusername: nickname,
-        //            commentuserid: commentuserid,
-        //            commentusershow: headUrl
-        //        }, {
-        //            success: function (comment) {
-        //                alert(comment.id)
-        //                var query = new AV.Query(post);
-        //                //query.equalTo("objectId", postview);
-        //                $("textarea").val("")
-        //                loadingcomment(comment);
-        //                query.get(postview, {
-        //                    success: function (post) {
-        //                        post.add("relationcomment", {id: comment.id});
-        //                        post.save();
-        //                    },
-        //                    error: function (object, error) {
-        //                        console.log(object);
-        //                    }
-        //                });
-        //            }
-        //        });
-        //});
     }
     function destroycomment(commentid){
         $(".destroy"+commentid+"").remove();
