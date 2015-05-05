@@ -5,8 +5,7 @@
                 var thisphone = $(this);
                 thisphone.css("color","#e0690c");
                 setTimeout(function(){
-                    alert("haha");
-                    thisphone.css("color","blue");
+                    thisphone.css("color","#7CFC00");
                 },100)
             });
             //$(".am-icon-phone").mousedown(function(){
