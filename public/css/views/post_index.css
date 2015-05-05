@@ -30,7 +30,7 @@ body{
     color:rgb(0, 140, 213);
 }
 .tagsearch button{
-    border:2px solid #ccc;
+    border:1px solid #ccc;
     color:rgb(0, 140, 213);
 }
 #content{
@@ -128,20 +128,20 @@ hr{
     width: 180px;
 }
 .imgpatterntwo{
-    width: 210px;
+    width: 240px;
 }
 .imgpatterntwo img{
-    width: 60px;
-    height: 60px;
-    margin: 10px 10px 0 0;
+    width: 70px;
+    height: 70px;
+    margin:10px 10px 0 0;
     float:left;
 }
 .imgpatternthree{
-    width: 210px;
+    width: 240px;
 }
 .imgpatternthree img{
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     margin: 10px 10px 0 0;
     float:left;
 }
