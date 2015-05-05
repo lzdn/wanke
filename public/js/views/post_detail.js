@@ -193,12 +193,78 @@
                 });
                 if (relationuser) {
                     alert("有报名")
+                    var  bregistration=0;
                     for (var i = 0; i < relationuser.length; i++) {
                         if (relationuser[i].id == currentUser.id) {
                             $(".usercontent").remove();
                             $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".usercont");
                             $("#btnname").remove();
                             $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
+                        }else{
+                            bregistration+=1;
+                        }
+                        if(bregistration==relationuser.length){
+                            alert("无报名")
+                            setTimeout(function () {
+                                if (phonenumber) {
+                                    var imgurl = currentUser.get("authData").weixin.headimgurl;
+                                    alert(imgurl);
+                                    $(".usercontent").remove();
+                                    $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".usercont");
+                                    $("#btnname").remove();
+                                    $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
+                                    $(" <img src=\"" + imgurl + "\" value=\" " + usersid + "&" + phonenumber + " \" class=\"am-radius\">").appendTo("#headtle");
+                                    alert(theuserid);
+                                    alert(postview);
+                                    $.ajax({
+                                        method: "POST",
+                                        url: "http://fuwuhao.dianyingren.com/weixin/sendMessage",
+                                        data: JSON.stringify({
+                                            userId: theuserid,
+                                            postId: postview
+                                        }),
+                                        contentType: "application/json; charset=utf-8",
+                                        dataType: "json",
+                                        success: function (data) {
+                                        },
+                                        error: function (msg) {
+                                        }
+                                    });
+                                    //usersid  postId  openid
+                                    var post = AV.Object.extend("post");
+                                    var query = new AV.Query(post);
+                                    query.equalTo("objectId", postview);
+                                    query.get(postview, {
+                                        success: function (post) {
+                                            post.add("relationuser", {id: usersid, url: imgurl, phonenumber: phonenumber});
+                                            post.save();
+                                        },
+                                        error: function (object, error) {
+                                            console.log(object);
+                                        }
+                                    });
+                                } else {
+                                    $('#my-prompt').modal({
+                                        // relatedTarget: this,
+                                        onConfirm: function (e) {
+                                            //e.data
+                                            if (/^1[3|4|5|7|8]\d{9}$/.test(e.data)) {
+                                                var query = new AV.Query(AV.User);
+                                                query.get(usersid, {
+                                                    success: function (user) {
+                                                        user.set('mobilePhoneNumber', e.data);
+                                                        user.save()
+                                                    }
+                                                });
+                                            } else {
+                                                alert("请输入正确的电话号码");
+                                            }
+                                        },
+                                        onCancel: function (e) {
+                                        }
+                                    });
+                                }
+                            }, 100);
                         }
                     }
                 } else {
