@@ -2,7 +2,7 @@
     var saveurl = window.location.href;
     var number = "";
     var code = "";
-    var relationuser;
+    var relationuser = [];
     var marktags = ["约吃", "约玩", "约聊", "约运动"];
     var commentuserid;
     var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid, postview, username, headimgurl, headUrl;
@@ -191,7 +191,8 @@
                         alert(phonenumber);
                     }
                 });
-                if (relationuser) {
+                if (relationuser!=[]) {
+                    alert("有报名")
                     for (var i = 0; i < relationuser.length; i++) {
                         if (relationuser[i].id == usersid) {
                             $(".usercontent").remove();
@@ -201,6 +202,7 @@
                         }
                     }
                 } else {
+                    alert("无报名")
                     setTimeout(function () {
                         if (phonenumber) {
                             var imgurl = currentUser.get("authData").weixin.headimgurl;
