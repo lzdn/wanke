@@ -1,5 +1,6 @@
 (function ($) {
     loadwx(function () {
+        $(this).css("color","#e0690c");
         loading(function () {
             $(".shopcontent").on("click", function () {
                 $(this).css("color","#e0690c");
