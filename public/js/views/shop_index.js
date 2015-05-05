@@ -3,7 +3,16 @@
         loading(function () {
             $(".am-icon-phone").on("click",function(){
                 $(this).css("color","#e0690c");
+                setTimeout(function(){
+                    $(this).css("color","rgb(157, 225, 98)");
+                },100)
             });
+            //$(".am-icon-phone").mousedown(function(){
+            //    $(this).css("color","#e0690c");
+            //});
+            //$(".am-icon-phone").mouseup(function(){
+            //    $(this).css("color","rgb(157, 225, 98)");
+            //});
             $(".shopcontent").on("click", function () {
                 $(this).css("color","#e0690c");
                 var shopid = $(this).attr("value");
