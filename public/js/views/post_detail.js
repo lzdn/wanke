@@ -212,6 +212,8 @@
                             $("#btnname").remove();
                             $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
                             $(" <img src=\"" + imgurl + "\" value=\" " + usersid + "&" + phonenumber + " \" class=\"am-radius\">").appendTo("#headtle");
+                           alert(userid);
+                            alert(postview);
                             $.ajax({
                                 method: "POST",
                                 url: "http://fuwuhao.dianyingren.com/weixin/sendMessage",
