@@ -5,7 +5,7 @@
     var relationuser = [];
     var marktags = ["约吃", "约玩", "约聊", "约运动"];
     var commentuserid;
-    var userlog, userid, queryobject, nickname, phonenumber, usersid, postId, tagvalue, openid, postview, username, headimgurl, headUrl,theuserid;
+    var userlog, userid, queryobject,content, nickname, phonenumber, usersid, postId, tagvalue, openid, postview, username, headimgurl, headUrl,theuserid;
     if (saveurl.split("=").length - 1 > 1) {
         userlog = window.location.search.split('=')[2];
         code = userlog.split("&")[0];
@@ -398,7 +398,7 @@
                 var tags = [];
                 var imgpattern = "";
                 var object = results[0];
-                var content = object.get('content');
+                content = object.get('content');
                 var imgs = object.get('relationimgs');
                 relationuser = object.get("relationuser");
                 if (imgs) {
@@ -626,6 +626,28 @@
                 signature: signature,// 必填，签名，见附录1
                 jsApiList: jsApiList// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
             });
+            wx.ready(function () {
+                wx.onMenuShareTimeline({
+                    title: ''+tagvalue+'' ,
+                    link: window.location.href,
+                    imgUrl:''+headimgurl+'',
+                    success: function () {
+                    },
+                    cancel: function () {
+                    }
+                });
+                wx.onMenuShareAppMessage({
+                    title:  ''+tagvalue+'',
+                    desc: '悦读 悦心 悦生活',
+                    link: ''+content+'',
+                    type: 'link',
+                    imgUrl: 'http://fuwuhao.dianyingren.com/imgs/wankelife.jpg',
+                    success: function () {
+                    },
+                    cancel: function () {
+                    }
+                })
+            })
         });
     }
     function loadingcomment(comment) {
