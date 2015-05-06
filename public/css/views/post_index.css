@@ -238,4 +238,7 @@ hr{
     width: 100px;
     height: 100px;
 }
+.am-selected-list{
+    color:rgb(50,137,199);
+}
 
