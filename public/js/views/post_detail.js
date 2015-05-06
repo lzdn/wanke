@@ -628,17 +628,17 @@
             });
             wx.ready(function () {
                 wx.onMenuShareTimeline({
-                    title: ''+tagvalue+'' ,
+                    title: '万科三联书社',
                     link: window.location.href,
-                    imgUrl:''+headimgurl+'',
+                    imgUrl: 'http://fuwuhao.dianyingren.com/imgs/wankelife.jpg',
                     success: function () {
                     },
                     cancel: function () {
                     }
                 });
                 wx.onMenuShareAppMessage({
-                    title:  ''+tagvalue+'',
-                    desc: ''+content+'',
+                    title: '万科三联书社',
+                    desc: '悦读 悦心 悦生活',
                     link: window.location.href,
                     type: 'link',
                     imgUrl: 'http://fuwuhao.dianyingren.com/imgs/wankelife.jpg',
@@ -648,6 +648,28 @@
                     }
                 })
             })
+            //wx.ready(function () {
+            //    wx.onMenuShareTimeline({
+            //        title: ''+tagvalue+'' ,
+            //        link: window.location.href,
+            //        imgUrl:''+headimgurl+'',
+            //        success: function () {
+            //        },
+            //        cancel: function () {
+            //        }
+            //    });
+            //    wx.onMenuShareAppMessage({
+            //        title:  ''+tagvalue+'',
+            //        desc: ''+content+'',
+            //        link: window.location.href,
+            //        type: 'link',
+            //        imgUrl: 'http://fuwuhao.dianyingren.com/imgs/wankelife.jpg',
+            //        success: function () {
+            //        },
+            //        cancel: function () {
+            //        }
+            //    })
+            //})
         });
     }
     function loadingcomment(comment) {
