@@ -1,10 +1,5 @@
 (function ($) {
     load(function (err, user) {
-        wx.ready(function () {
-            alert("开始隐藏");
-            wx.hideOptionMenu();
-        });
-
         var buliding;
         $("#doc-select-2").change(function () {
             $("#usr-sbm-sub").removeClass("am-disabled");});
@@ -81,10 +76,10 @@
 })(jQuery);
 
 function load(callback) {
-    var address = window.location.href;
-    alert(address);
+    var useerpost = window.location.href;
+    alert(useerpost);
     var appId, jslist, noncestr, signature, timestamp, jsApiList;
-    $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + address + ""}, function (result) {
+    $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + useerpost + ""}, function (result) {
         appId = result.appId;
         jslist = result.jsApiList;
         noncestr = result.nonceStr;

@@ -1,11 +1,6 @@
 (function ($) {
     var postview = window.location.search.split('?id=')[1];
     load(function () {
-        wx.ready(function () {
-            alert("开始隐藏");
-            wx.hideOptionMenu();
-        });
-
         var phonenum = "";
         var bnum = 0;
         $("#haederleft").on("click", function () {
@@ -64,10 +59,10 @@
 })(jQuery);
 
 function load(callback) {
-    var contacturl = window.location.href;
-    alert(contacturl);
+    var useerpost = window.location.href;
+    alert(useerpost);
     var appId, jslist, noncestr, signature, timestamp, jsApiList;
-    $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + contacturl + ""}, function (result) {
+    $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + useerpost + ""}, function (result) {
         appId = result.appId;
         jslist = result.jsApiList;
         noncestr = result.nonceStr;
