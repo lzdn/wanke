@@ -78,6 +78,7 @@ function load(callback) {
             signature: signature,// 必填，签名，见附录1
             jsApiList: jsApiList// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         });
+        wx.hideOptionMenu();
         wx.ready(function () {
             alert("开始隐藏");
             wx.hideOptionMenu();
