@@ -76,10 +76,10 @@
 })(jQuery);
 
 function load(callback) {
-    var useerpost = window.location.href;
-    alert(useerpost);
+    var useraddress = window.location.href;
+    alert(useraddress.split("?")[0]);
     var appId, jslist, noncestr, signature, timestamp, jsApiList;
-    $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + useerpost + ""}, function (result) {
+    $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + useraddress.split("?")[0] + ""}, function (result) {
         appId = result.appId;
         jslist = result.jsApiList;
         noncestr = result.nonceStr;

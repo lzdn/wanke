@@ -85,9 +85,9 @@
     });
 
     function loading(callbak) {
-        var useerpost = window.location.href;
+        var userpost = window.location.href;
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
-        $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + useerpost + ""}, function (result) {
+        $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + userpost + ""}, function (result) {
             appId = result.appId;
             jslist = result.jsApiList;
             noncestr = result.nonceStr;
