@@ -74,7 +74,8 @@ router.post('/getJsConfig', function (req, res) {
             'onMenuShareAppMessage',
             'chooseImage',
             'previewImage',
-            'uploadImage'],
+            'uploadImage',
+            'hideOptionMenu'],
         url: url
     };
     console.log(param);
