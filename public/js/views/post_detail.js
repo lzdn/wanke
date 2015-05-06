@@ -638,8 +638,8 @@
                 });
                 wx.onMenuShareAppMessage({
                     title:  ''+tagvalue+'',
-                    desc: '悦读 悦心 悦生活',
-                    link: ''+content+'',
+                    desc: ''+content+'',
+                    link: window.location.href,
                     type: 'link',
                     imgUrl: 'http://fuwuhao.dianyingren.com/imgs/wankelife.jpg',
                     success: function () {
