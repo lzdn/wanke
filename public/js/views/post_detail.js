@@ -53,50 +53,54 @@
         $(".smpublish").on("click", function () {
             var currentUser = AV.User.current();
             if (currentUser) {
-                var comment = AV.Object.extend("comment");
-                var post = AV.Object.extend("post");
-                var relationcommentid = $(this).attr("value");
-                var relationcommentusername = $(this).attr("username");
-                var relationcommentcontent = $(this).attr("usersay");
-                var relationcommentusershow = $(this).attr("usershow");
-                var relationcommentuserid = $(this).attr("userid");
-                console.log(relationcommentid + "$" + relationcommentusername + "$" + relationcommentcontent + "$" + relationcommentusershow)
                 var publishsay = $(this).parent().siblings(".textarea").children().val();
-                var posts = new post();
-                posts.id = postview;
-                var commentrelation = [];
-                commentrelation.push({
-                    commentid: relationcommentid,
-                    commentusername: relationcommentusername,
-                    commentcontent: relationcommentcontent,
-                    commentuserid: relationcommentuserid,
-                    commentusershow: relationcommentusershow
-                });
-                console.log(commentrelation);
-                var comment = new comment();
-                comment.save({
-                    commentcontent: publishsay,
-                    commentpost: posts,
-                    commentuserid: commentuserid,
-                    commentusername: nickname,
-                    commentusershow: headUrl,
-                    commentrelation: commentrelation
-                }, {
-                    success: function (comment) {
-                        $("textarea").val("");
-                        loadingcomment(comment);
-                        var query = new AV.Query(post);
-                        query.get(postview, {
-                            success: function (post) {
-                                post.add("relationcomment", {id: comment.id});
-                                post.save();
-                            },
-                            error: function (object, error) {
-                                console.log(object);
-                            }
-                        });
-                    }
-                })
+                if(publishsay){
+                    var comment = AV.Object.extend("comment");
+                    var post = AV.Object.extend("post");
+                    var relationcommentid = $(this).attr("value");
+                    var relationcommentusername = $(this).attr("username");
+                    var relationcommentcontent = $(this).attr("usersay");
+                    var relationcommentusershow = $(this).attr("usershow");
+                    var relationcommentuserid = $(this).attr("userid");
+                    console.log(relationcommentid + "$" + relationcommentusername + "$" + relationcommentcontent + "$" + relationcommentusershow)
+                    var posts = new post();
+                    posts.id = postview;
+                    var commentrelation = [];
+                    commentrelation.push({
+                        commentid: relationcommentid,
+                        commentusername: relationcommentusername,
+                        commentcontent: relationcommentcontent,
+                        commentuserid: relationcommentuserid,
+                        commentusershow: relationcommentusershow
+                    });
+                    console.log(commentrelation);
+                    var comment = new comment();
+                    comment.save({
+                        commentcontent: publishsay,
+                        commentpost: posts,
+                        commentuserid: commentuserid,
+                        commentusername: nickname,
+                        commentusershow: headUrl,
+                        commentrelation: commentrelation
+                    }, {
+                        success: function (comment) {
+                            $("textarea").val("");
+                            loadingcomment(comment);
+                            var query = new AV.Query(post);
+                            query.get(postview, {
+                                success: function (post) {
+                                    post.add("relationcomment", {id: comment.id});
+                                    post.save();
+                                },
+                                error: function (object, error) {
+                                    console.log(object);
+                                }
+                            });
+                        }
+                    })
+                }else{
+                    alert("你要说点什么");
+                }
             } else {
                 $.ajax({
                     method: "POST",
@@ -122,31 +126,35 @@
                 var post = AV.Object.extend("post");
                 var comment = AV.Object.extend("comment");
                 var publishsay = $(this).parent().siblings(".textarea").children().val();
-                var posts = new post();
-                posts.id = postview;
-                var coment = new comment();
-                coment.save({
-                    commentcontent: publishsay,
-                    commentpost: posts,
-                    commentusername: nickname,
-                    commentuserid: commentuserid,
-                    commentusershow: headUrl
-                }, {
-                    success: function (comment) {
-                        var query = new AV.Query(post);
-                        $("textarea").val("");
-                        loadingcomment(comment);
-                        query.get(postview, {
-                            success: function (post) {
-                                post.add("relationcomment", {id: comment.id});
-                                post.save();
-                            },
-                            error: function (object, error) {
-                                console.log(object);
-                            }
-                        });
-                    }
-                });
+                if(publishsay){
+                    var posts = new post();
+                    posts.id = postview;
+                    var coment = new comment();
+                    coment.save({
+                        commentcontent: publishsay,
+                        commentpost: posts,
+                        commentusername: nickname,
+                        commentuserid: commentuserid,
+                        commentusershow: headUrl
+                    }, {
+                        success: function (comment) {
+                            var query = new AV.Query(post);
+                            $("textarea").val("");
+                            loadingcomment(comment);
+                            query.get(postview, {
+                                success: function (post) {
+                                    post.add("relationcomment", {id: comment.id});
+                                    post.save();
+                                },
+                                error: function (object, error) {
+                                    console.log(object);
+                                }
+                            });
+                        }
+                    });
+                }else{
+                    alert("你要说点什么");
+                }
             } else {
                 $.ajax({
                     method: "POST",
@@ -684,48 +692,53 @@
             destroycomment(close);
         })
         $(".smpublish").on("click", function () {
-                var comment = AV.Object.extend("comment");
-                var post = AV.Object.extend("post");
-                var relationcommentid = $(this).attr("value");
-                var relationcommentusername = $(this).attr("username");
-                var relationcommentcontent = $(this).attr("usersay");
-                var relationcommentusershow = $(this).attr("usershow");
-                var relationcommentuserid = $(this).attr("userid");
-                var publishsay = $(this).parent().siblings(".textarea").children().val();
-                var posts = new post();
-                posts.id = postview;
-                var commentrelation = [];
-                commentrelation.push({
-                    commentid: relationcommentid,
-                    commentusername: relationcommentusername,
-                    commentcontent: relationcommentcontent,
-                    commentuserid: relationcommentuserid,
-                    commentusershow: relationcommentusershow
-                });
-                var comment = new comment();
-                comment.save({
-                    commentcontent: publishsay,
-                    commentpost: posts,
-                    commentuserid: commentuserid,
-                    commentusername: nickname,
-                    commentusershow: headUrl,
-                    commentrelation: commentrelation
-                }, {
-                    success: function (comment) {
-                        loadingcomment(comment);
-                        var query = new AV.Query(post);
-                        //query.equalTo("objectId", postview);
-                        query.get(postview, {
-                            success: function (post) {
-                                post.add("relationcomment", {id: comment.id});
-                                post.save();
-                            },
-                            error: function (object, error) {
-                                console.log(object);
-                            }
-                        });
-                    }
-                })
+            var publishsay = $(this).parent().siblings(".textarea").children().val();
+if(publishsay){
+    var comment = AV.Object.extend("comment");
+    var post = AV.Object.extend("post");
+    var relationcommentid = $(this).attr("value");
+    var relationcommentusername = $(this).attr("username");
+    var relationcommentcontent = $(this).attr("usersay");
+    var relationcommentusershow = $(this).attr("usershow");
+    var relationcommentuserid = $(this).attr("userid");
+    var posts = new post();
+    posts.id = postview;
+    var commentrelation = [];
+    commentrelation.push({
+        commentid: relationcommentid,
+        commentusername: relationcommentusername,
+        commentcontent: relationcommentcontent,
+        commentuserid: relationcommentuserid,
+        commentusershow: relationcommentusershow
+    });
+    var comment = new comment();
+    comment.save({
+        commentcontent: publishsay,
+        commentpost: posts,
+        commentuserid: commentuserid,
+        commentusername: nickname,
+        commentusershow: headUrl,
+        commentrelation: commentrelation
+    }, {
+        success: function (comment) {
+            loadingcomment(comment);
+            var query = new AV.Query(post);
+            //query.equalTo("objectId", postview);
+            query.get(postview, {
+                success: function (post) {
+                    post.add("relationcomment", {id: comment.id});
+                    post.save();
+                },
+                error: function (object, error) {
+                    console.log(object);
+                }
+            });
+        }
+    })
+}else{
+    alert("你要说点什么");
+}
+
         })
     }
     function destroycomment(commentid){
