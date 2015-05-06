@@ -637,17 +637,17 @@
                 });
                 wx.ready(function () {
                     wx.onMenuShareTimeline({
-                        title: '测试测试',
+                        title: ''+tagvalue+'' ,
                         link: window.location.href,
-                        imgUrl: 'http://fuwuhao.dianyingren.com/imgs/wankelife.jpg',
+                        imgUrl:''+headimgurl+'',
                         success: function () {
                         },
                         cancel: function () {
                         }
                     });
                     wx.onMenuShareAppMessage({
-                        title: '测试测试',
-                        desc: '随便试试',
+                        title:  ''+tagvalue+'',
+                        desc: ''+content+'',
                         link: window.location.href,
                         type: 'link',
                         imgUrl: 'http://fuwuhao.dianyingren.com/imgs/wankelife.jpg',
@@ -657,28 +657,6 @@
                         }
                     })
                 })
-                //wx.ready(function () {
-                //    wx.onMenuShareTimeline({
-                //        title: ''+tagvalue+'' ,
-                //        link: window.location.href,
-                //        imgUrl:''+headimgurl+'',
-                //        success: function () {
-                //        },
-                //        cancel: function () {
-                //        }
-                //    });
-                //    wx.onMenuShareAppMessage({
-                //        title:  ''+tagvalue+'',
-                //        desc: ''+content+'',
-                //        link: window.location.href,
-                //        type: 'link',
-                //        imgUrl: 'http://fuwuhao.dianyingren.com/imgs/wankelife.jpg',
-                //        success: function () {
-                //        },
-                //        cancel: function () {
-                //        }
-                //    })
-                //})
             },
             error: function (msg) {
                 // alert(msg);
