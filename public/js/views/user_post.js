@@ -86,6 +86,7 @@
 
     function loading(callbak) {
         var useerpost = window.location.href;
+        alert(useerpost);
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
         $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + useerpost + ""}, function (result) {
             appId = result.appId;

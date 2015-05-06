@@ -60,6 +60,7 @@
 
 function load(callback) {
     var contacturl = window.location.href;
+    alert(contacturl);
     var appId, jslist, noncestr, signature, timestamp, jsApiList;
     $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + contacturl + ""}, function (result) {
         appId = result.appId;

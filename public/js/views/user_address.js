@@ -77,6 +77,7 @@
 
 function load(callback) {
     var address = window.location.href;
+    alert(address);
     var appId, jslist, noncestr, signature, timestamp, jsApiList;
     $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + address + ""}, function (result) {
         appId = result.appId;
