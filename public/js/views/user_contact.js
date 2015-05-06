@@ -60,9 +60,9 @@
 
 function load(callback) {
     var usercontact = window.location.href;
-    alert(usercontact.split("?")[0]);
+    alert(usercontact);
     var appId, jslist, noncestr, signature, timestamp, jsApiList;
-    $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + usercontact.split("?")[0] + ""}, function (result) {
+    $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + usercontact + ""}, function (result) {
         appId = result.appId;
         jslist = result.jsApiList;
         noncestr = result.nonceStr;
