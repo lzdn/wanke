@@ -2,7 +2,7 @@
     var userid=window.location.search.split('=')[1];
     var skx = -5;
     var postview,contentlength;
-    loadwx();
+   // loadwx();
     $("#arrow").hide();
     loading(function(){
 
@@ -86,7 +86,6 @@
 
     function loading(callbak) {
         var useerpost = window.location.href;
-        alert(useerpost);
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
         $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + useerpost + ""}, function (result) {
             appId = result.appId;
@@ -95,7 +94,6 @@
             signature = result.signature;
             timestamp = result.timestamp;
             jsApiList = result.jsApiList;
-            alert(result);
             wx.config({
                 debug: result.debug,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                 appId: appId, // 必填，公众号的唯一标识
@@ -236,26 +234,26 @@
             }
         });
     }
-    function loadwx(){
-        var appId, jslist, noncestr, signature, timestamp, jsApiList;
-        $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=post_index", function (result) {
-            console.log(result);
-            appId = result.appId;
-            jslist = result.jsApiList;
-            noncestr = result.nonceStr;
-            signature = result.signature;
-            timestamp = result.timestamp;
-            jsApiList = result.jsApiList;
-            wx.config({
-                debug: false,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                appId: appId, // 必填，公众号的唯一标识
-                timestamp: timestamp, // 必填，生成签名的时间戳
-                nonceStr: noncestr, // 必填，生成签名的随机串
-                signature: signature,// 必填，签名，见附录1
-                jsApiList: jsApiList// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-            });
-        });
-    }
+    //function loadwx(){
+    //    var appId, jslist, noncestr, signature, timestamp, jsApiList;
+    //    $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=post_index", function (result) {
+    //        console.log(result);
+    //        appId = result.appId;
+    //        jslist = result.jsApiList;
+    //        noncestr = result.nonceStr;
+    //        signature = result.signature;
+    //        timestamp = result.timestamp;
+    //        jsApiList = result.jsApiList;
+    //        wx.config({
+    //            debug: false,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+    //            appId: appId, // 必填，公众号的唯一标识
+    //            timestamp: timestamp, // 必填，生成签名的时间戳
+    //            nonceStr: noncestr, // 必填，生成签名的随机串
+    //            signature: signature,// 必填，签名，见附录1
+    //            jsApiList: jsApiList// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    //        });
+    //    });
+    //}
 
 
 })(jQuery);

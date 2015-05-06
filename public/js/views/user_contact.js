@@ -82,17 +82,21 @@ function load(callback) {
             alert("开始隐藏");
             wx.hideOptionMenu();
         });
+        wx.error(function(res){
+            alert("调用失败");
+            alert(res);
+        });
     });
-    //var id = window.location.search.split('?id=')[1];
-    //AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
-    //var query = new AV.Query(AV.User);
-    //query.get(id, {
-    //    success: function (user) {
-    //        $('#phonenum').attr("value", user.get("mobilePhoneNumber"));
-    //        callback(null);
-    //    },
-    //    error: function (object, error) {
-    //        callback(error);
-    //    }
-    //})
+    var id = window.location.search.split('?id=')[1];
+    AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
+    var query = new AV.Query(AV.User);
+    query.get(id, {
+        success: function (user) {
+            $('#phonenum').attr("value", user.get("mobilePhoneNumber"));
+            callback(null);
+        },
+        error: function (object, error) {
+            callback(error);
+        }
+    })
 }
