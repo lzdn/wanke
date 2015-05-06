@@ -628,7 +628,7 @@
             });
             wx.ready(function () {
                 wx.onMenuShareTimeline({
-                    title: '万科三联书社',
+                    title: '测试测试',
                     link: window.location.href,
                     imgUrl: 'http://fuwuhao.dianyingren.com/imgs/wankelife.jpg',
                     success: function () {
@@ -637,8 +637,8 @@
                     }
                 });
                 wx.onMenuShareAppMessage({
-                    title: '万科三联书社',
-                    desc: '悦读 悦心 悦生活',
+                    title: '测试测试',
+                    desc: '随便试试',
                     link: window.location.href,
                     type: 'link',
                     imgUrl: 'http://fuwuhao.dianyingren.com/imgs/wankelife.jpg',
