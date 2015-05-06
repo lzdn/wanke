@@ -85,7 +85,6 @@ function load(callback) {
         wx.error(function(res){
             alert("调用失败");
             alert(res);
-            wx.hideOptionMenu();
         });
     });
     var id = window.location.search.split('?id=')[1];
