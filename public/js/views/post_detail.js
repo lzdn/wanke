@@ -650,7 +650,7 @@
                         desc: ''+content+'',
                         link: window.location.href,
                         type: 'link',
-                        imgUrl: 'http://fuwuhao.dianyingren.com/imgs/wankelife.jpg',
+                        imgUrl: ''+headimgurl+'',
                         success: function () {
                         },
                         cancel: function () {
