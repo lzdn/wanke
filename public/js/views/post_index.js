@@ -52,6 +52,7 @@
                             aimg_thumbnail[i].className=("imgthumbnail");
                             console.log(aimg_thumbnail[i]);
                             img_thumbnail($(".imgthumbnail"),url,70);
+                            aimg_thumbnail[i].className=("");
                         }
                     });
                 }else{
@@ -77,6 +78,7 @@
                             aimg_thumbnail[i].className=("imgthumbnail");
                             console.log(aimg_thumbnail[i]);
                             img_thumbnail($(".imgthumbnail"),url,70);
+                            aimg_thumbnail[i].className=("");
                         }
                     });
                 }
@@ -229,6 +231,7 @@
             aimg_thumbnail[i].className=("imgthumbnail");
             console.log(aimg_thumbnail[i]);
             img_thumbnail($(".imgthumbnail"),url,70);
+           aimg_thumbnail[i].className=("");
        }
         $("#foots").on("click", function () {
             var currentUser = AV.User.current();
@@ -278,6 +281,7 @@
                             aimg_thumbnail[i].className=("imgthumbnail");
                             console.log(aimg_thumbnail[i]);
                             img_thumbnail($(".imgthumbnail"),url,70);
+                            aimg_thumbnail[i].className=("");
                         }
                     });
                 }else{
@@ -303,6 +307,7 @@
                             aimg_thumbnail[i].className=("imgthumbnail");
                             console.log(aimg_thumbnail[i]);
                             img_thumbnail($(".imgthumbnail"),url,70);
+                            aimg_thumbnail[i].className=("");
                         }
                     });
                 }
@@ -598,6 +603,7 @@ function querytag(){
             aimg_thumbnail[i].className=("imgthumbnail");
             console.log(aimg_thumbnail[i]);
             img_thumbnail($(".imgthumbnail"),url,70);
+            aimg_thumbnail[i].className=("");
         }
     }
 function selectchange(callback){
@@ -631,6 +637,7 @@ function selectchange(callback){
                 aimg_thumbnail[i].className=("imgthumbnail");
                 console.log(aimg_thumbnail[i]);
                 img_thumbnail($(".imgthumbnail"),url,70);
+                aimg_thumbnail[i].className=("");
             }
             callback(width);
         });
@@ -660,6 +667,7 @@ function selectchange(callback){
                 aimg_thumbnail[i].className=("imgthumbnail");
                 console.log(aimg_thumbnail[i]);
                 img_thumbnail($(".imgthumbnail"),url,70);
+                aimg_thumbnail[i].className=("");
             }
         });
         callback(width);
