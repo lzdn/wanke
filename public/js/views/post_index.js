@@ -121,11 +121,8 @@
                                         if (imgs.length == 1) {
                                             imgpattern = "imgpatternone"
                                         }
-                                        if (imgs.length == 2 || imgs.length == 4) {
+                                        if (imgs.length >= 2) {
                                             imgpattern = "imgpatterntwo"
-                                        }
-                                        if (imgs.length >= 3 && imgs.length != 4) {
-                                            imgpattern = "imgpatternthree"
                                         }
                                     }
                                     var avalue = object.id;
@@ -462,11 +459,8 @@ function querytag(){
                                 if (imgs.length == 1) {
                                     imgpattern = "imgpatternone"
                                 }
-                                if (imgs.length == 2 || imgs.length == 4) {
+                                if (imgs.length >= 2) {
                                     imgpattern = "imgpatterntwo"
-                                }
-                                if (imgs.length >= 3 && imgs.length != 4) {
-                                    imgpattern = "imgpatternthree"
                                 }
                             }
                             console.log(object);

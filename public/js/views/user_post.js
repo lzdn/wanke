@@ -20,17 +20,25 @@
         //$("#users").on("click", function () {
         //    window.location.href = "user_detail.html";
         //});
-        $(".imgpreview").on("click",function(){
-            var cur= $(this).attr("src");
-            var  url=$(this).parent().attr("value");
-            var arr=url.split(",");
+        $(".imgpreview").on("click", function () {
+            var cur = $(this).attr("src");
+            var url = $(this).parent(".images").attr("value");
+            var arr = url.split(",");
             wx.previewImage({
-                current:cur, // 当前显示的图片链接
-                urls:arr// 需要预览的图片链接列表
+                current: cur, // 当前显示的图片链接
+                urls: arr // 需要预览的图片链接列表
             });
             event.stopPropagation();
         });
         $(".imgpreview").removeClass("imgpreview");
+        var aimg_thumbnail=($(".imgpatterntwo .img"));
+        for(var i=0; i<aimg_thumbnail.length;i++){
+            var url = aimg_thumbnail[i].className.split(" ")[1];
+            aimg_thumbnail[i].className=("imgthumbnail");
+            console.log(aimg_thumbnail[i]);
+            img_thumbnail($(".imgthumbnail"),url,70);
+            aimg_thumbnail[i].className=("");
+        }
     });
     $("#foots").on("click", function () {
         var currentUser = AV.User.current();
@@ -61,17 +69,25 @@
                 //$("#users").on("click", function () {
                 //    window.location.href = "user_detail.html";
                 //});
-                $(".imgpreview").on("click",function(){
-                    var cur= $(this).attr("src");
-                    var  url=$(this).parent().attr("value");
-                    var arr=url.split(",");
+                $(".imgpreview").on("click", function () {
+                    var cur = $(this).attr("src");
+                    var url = $(this).parent(".images").attr("value");
+                    var arr = url.split(",");
                     wx.previewImage({
-                        current:cur, // 当前显示的图片链接
-                        urls:arr// 需要预览的图片链接列表
+                        current: cur, // 当前显示的图片链接
+                        urls: arr // 需要预览的图片链接列表
                     });
                     event.stopPropagation();
                 });
                 $(".imgpreview").removeClass("imgpreview");
+                var aimg_thumbnail=($(".imgpatterntwo .img"));
+                for(var i=0; i<aimg_thumbnail.length;i++){
+                    var url = aimg_thumbnail[i].className.split(" ")[1];
+                    aimg_thumbnail[i].className=("imgthumbnail");
+                    console.log(aimg_thumbnail[i]);
+                    img_thumbnail($(".imgthumbnail"),url,70);
+                    aimg_thumbnail[i].className=("");
+                }
             });
         }
     });
@@ -144,15 +160,12 @@
                                     var avalue = object.id;
                                     var content = object.get('content');
                                     var imgs = object.get('relationimgs');
-                                    if(imgs){
-                                        if(imgs.length==1){
-                                            imgpattern="imgpatternone"
+                                    if (imgs) {
+                                        if (imgs.length == 1) {
+                                            imgpattern = "imgpatternone"
                                         }
-                                        if(imgs.length==2||imgs.length==4){
-                                            imgpattern="imgpatterntwo"
-                                        }
-                                        if(imgs.length>=3 && imgs.length!=4){
-                                            imgpattern="imgpatternthree"
+                                        if (imgs.length >= 2) {
+                                            imgpattern = "imgpatterntwo"
                                         }
                                     }
                                     var otagkey = object.get("tagkey");
@@ -233,28 +246,40 @@
             }
         });
     }
-    //function loadwx(){
-    //    var appId, jslist, noncestr, signature, timestamp, jsApiList;
-    //    $.get("http://fuwuhao.dianyingren.com/weixin/getJsConfig?page=post_index", function (result) {
-    //        console.log(result);
-    //        appId = result.appId;
-    //        jslist = result.jsApiList;
-    //        noncestr = result.nonceStr;
-    //        signature = result.signature;
-    //        timestamp = result.timestamp;
-    //        jsApiList = result.jsApiList;
-    //        wx.config({
-    //            debug: false,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-    //            appId: appId, // 必填，公众号的唯一标识
-    //            timestamp: timestamp, // 必填，生成签名的时间戳
-    //            nonceStr: noncestr, // 必填，生成签名的随机串
-    //            signature: signature,// 必填，签名，见附录1
-    //            jsApiList: jsApiList// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-    //        });
-    //    });
-    //}
 
 
+    function img_thumbnail(obj,url,length){
+        var img = new Image();
+        img.src=url;
+        img.onload = function(){
+            var imgwidth=this.width;
+            var imgHeight=this.height;
+            if(imgwidth==imgHeight){
+                obj.css({
+                    width: ''+length+'px',
+                    height:''+length+'px'
+                });
+            }else{
+                if(imgwidth>imgHeight){
+                    var newmargin
+                    var imgwidth =  imgwidth/(imgHeight/length);
+                    var newmargin=-(imgwidth-length)/2;
+                    obj.css({
+                        height: ''+length+'px'
+                    });
+                    obj.css("margin-left",""+newmargin+"px");
+                }else{
+                    var newheight =  imgHeight/(imgwidth/length);
+                    newmargin=-(newheight-length)/2;
+                    obj.css({
+                        width: ''+length+'px',
+                        height: ''+newheight+'px'
+                    });
+                    obj.css("margin-top",""+newmargin+"px");
+                }
+            }
+        }
+    }
 })(jQuery);
 
 

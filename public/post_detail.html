@@ -45,7 +45,11 @@
             <div class="images {{this.pattern}}" value={{this.img}}>
                 {{#if this.img}}
                 {{#each this.img}}
-                <img src={{this}} class="am-radius imgpreview">
+                <div src={{this}} class="post_imgs imgpreview">
+                    <div class="post_img">
+                        <img src={{this}} class="img {{this}}" value="0">
+                    </div>
+                </div>
                 {{/each}}
                 {{/if}}
             </div>
