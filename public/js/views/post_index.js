@@ -238,6 +238,7 @@
             var cur = $(this).attr("src");
             alert(cur);
             var url = $(this).parent().attr("value");
+            alert(url);
             //var arr = url.split(",");
             //wx.previewImage({
             //    current: cur, // 当前显示的图片链接
