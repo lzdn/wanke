@@ -46,6 +46,13 @@
                             event.stopPropagation();
                         });
                         $(".imgpreview").removeClass("imgpreview");
+                        var aimg_thumbnail=($(".imgpatterntwo .img"));
+                        for(var i=0; i<aimg_thumbnail.length;i++){
+                            var url = aimg_thumbnail[i].className.split(" ")[1];
+                            aimg_thumbnail[i].className=("imgthumbnail");
+                            console.log(aimg_thumbnail[i]);
+                            img_thumbnail($(".imgthumbnail"),url,70);
+                        }
                     });
                 }else{
                     loadtag(tag, function () {
@@ -64,6 +71,13 @@
                             event.stopPropagation();
                         });
                         $(".imgpreview").removeClass("imgpreview");
+                        var aimg_thumbnail=($(".imgpatterntwo .img"));
+                        for(var i=0; i<aimg_thumbnail.length;i++){
+                            var url = aimg_thumbnail[i].className.split(" ")[1];
+                            aimg_thumbnail[i].className=("imgthumbnail");
+                            console.log(aimg_thumbnail[i]);
+                            img_thumbnail($(".imgthumbnail"),url,70);
+                        }
                     });
                 }
                 bload = 1;
@@ -209,15 +223,13 @@
             event.stopPropagation();
         });
         $(".imgpreview").removeClass("imgpreview");
-       //var aimg_thumbnail=($(".imgpatterntwo .img"));
-       // for(var i=0; i<aimg_thumbnail.length;i++){
-       //     var url = aimg_thumbnail[i].className.split(" ")[1];
-       //     aimg_thumbnail[i].className=("imgthumbnail");
-       //     console.log(aimg_thumbnail[i]);
-       //     img_thumbnail($(".imgthumbnail"),url,70);
-       //     //var url=aimg_thumbnail[i].attr("src");
-       //    // console.log(url);
-       // }
+       var aimg_thumbnail=($(".imgpatterntwo .img"));
+       for(var i=0; i<aimg_thumbnail.length;i++){
+            var url = aimg_thumbnail[i].className.split(" ")[1];
+            aimg_thumbnail[i].className=("imgthumbnail");
+            console.log(aimg_thumbnail[i]);
+            img_thumbnail($(".imgthumbnail"),url,70);
+       }
         $("#foots").on("click", function () {
             var currentUser = AV.User.current();
             if (currentUser) {
@@ -260,6 +272,13 @@
                             event.stopPropagation();
                         });
                         $(".imgpreview").removeClass("imgpreview");
+                        var aimg_thumbnail=($(".imgpatterntwo .img"));
+                        for(var i=0; i<aimg_thumbnail.length;i++){
+                            var url = aimg_thumbnail[i].className.split(" ")[1];
+                            aimg_thumbnail[i].className=("imgthumbnail");
+                            console.log(aimg_thumbnail[i]);
+                            img_thumbnail($(".imgthumbnail"),url,70);
+                        }
                     });
                 }else{
                     loadtag(tag,function () {
@@ -278,6 +297,13 @@
                             event.stopPropagation();
                         });
                         $(".imgpreview").removeClass("imgpreview");
+                        var aimg_thumbnail=($(".imgpatterntwo .img"));
+                        for(var i=0; i<aimg_thumbnail.length;i++){
+                            var url = aimg_thumbnail[i].className.split(" ")[1];
+                            aimg_thumbnail[i].className=("imgthumbnail");
+                            console.log(aimg_thumbnail[i]);
+                            img_thumbnail($(".imgthumbnail"),url,70);
+                        }
                     });
                 }
 
@@ -566,6 +592,13 @@ function querytag(){
             event.stopPropagation();
         });
         $(".imgpreview").removeClass("imgpreview");
+        var aimg_thumbnail=($(".imgpatterntwo .img"));
+        for(var i=0; i<aimg_thumbnail.length;i++){
+            var url = aimg_thumbnail[i].className.split(" ")[1];
+            aimg_thumbnail[i].className=("imgthumbnail");
+            console.log(aimg_thumbnail[i]);
+            img_thumbnail($(".imgthumbnail"),url,70);
+        }
     }
 function selectchange(callback){
     var tag = $("select").val().split('&')[0];
@@ -592,6 +625,13 @@ function selectchange(callback){
                 event.stopPropagation();
             });
             $(".imgpreview").removeClass("imgpreview");
+            var aimg_thumbnail=($(".imgpatterntwo .img"));
+            for(var i=0; i<aimg_thumbnail.length;i++){
+                var url = aimg_thumbnail[i].className.split(" ")[1];
+                aimg_thumbnail[i].className=("imgthumbnail");
+                console.log(aimg_thumbnail[i]);
+                img_thumbnail($(".imgthumbnail"),url,70);
+            }
             callback(width);
         });
     } else {
@@ -614,46 +654,53 @@ function selectchange(callback){
                 event.stopPropagation();
             });
             $(".imgpreview").removeClass("imgpreview");
+            var aimg_thumbnail=($(".imgpatterntwo .img"));
+            for(var i=0; i<aimg_thumbnail.length;i++){
+                var url = aimg_thumbnail[i].className.split(" ")[1];
+                aimg_thumbnail[i].className=("imgthumbnail");
+                console.log(aimg_thumbnail[i]);
+                img_thumbnail($(".imgthumbnail"),url,70);
+            }
         });
         callback(width);
     }
 }
 
-    //function img_thumbnail(obj,url,length){
-    //    var img = new Image();
-    //    console.log(obj);
-    //    img.src=url;
-    //    img.onload = function(){
-    //        var imgwidth=this.width;
-    //        var imgHeight=this.height;
-    //        alert(imgwidth);
-    //        alert(imgHeight);
-    //        if(imgwidth==imgHeight){
-    //            obj.css({
-    //                width: ''+length+'px',
-    //                height:''+length+'px'
-    //            });
-    //        }else{
-    //            if(imgwidth>imgHeight){
-    //                var newmargin
-    //                var imgwidth =  imgwidth/(imgHeight/length);
-    //                var newmargin=-(imgwidth-length)/2;
-    //                obj.css({
-    //                    height: ''+length+'px'
-    //                });
-    //                obj.css("margin-left",""+newmargin+"px");
-    //            }else{
-    //                var newheight =  imgHeight/(imgwidth/length);
-    //                newmargin=-(newheight-length)/2;
-    //                obj.css({
-    //                    width: ''+length+'px',
-    //                    height: ''+newheight+'px'
-    //                });
-    //                obj.css("margin-top",""+newmargin+"px");
-    //            }
-    //        }
-    //    }
-    //}
+    function img_thumbnail(obj,url,length){
+        var img = new Image();
+        console.log(obj);
+        img.src=url;
+        img.onload = function(){
+            var imgwidth=this.width;
+            var imgHeight=this.height;
+            alert(imgwidth);
+            alert(imgHeight);
+            if(imgwidth==imgHeight){
+                obj.css({
+                    width: ''+length+'px',
+                    height:''+length+'px'
+                });
+            }else{
+                if(imgwidth>imgHeight){
+                    var newmargin
+                    var imgwidth =  imgwidth/(imgHeight/length);
+                    var newmargin=-(imgwidth-length)/2;
+                    obj.css({
+                        height: ''+length+'px'
+                    });
+                    obj.css("margin-left",""+newmargin+"px");
+                }else{
+                    var newheight =  imgHeight/(imgwidth/length);
+                    newmargin=-(newheight-length)/2;
+                    obj.css({
+                        width: ''+length+'px',
+                        height: ''+newheight+'px'
+                    });
+                    obj.css("margin-top",""+newmargin+"px");
+                }
+            }
+        }
+    }
 })(jQuery);
 
 
