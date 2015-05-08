@@ -237,7 +237,7 @@
        var aimg_thumbnail=($(".imgpatterntwo .img"));
         for(var i=0; i<aimg_thumbnail.length;i++){
             var url = aimg_thumbnail[i].className.split(" ")[1];
-            aimg_thumbnail[i].className="imgthumbnail";
+            aimg_thumbnail[i].className="imgthumbnail imgpreview";
             console.log(aimg_thumbnail[i]);
             img_thumbnail($(".imgthumbnail"),url,70);
         }
@@ -619,7 +619,7 @@ function querytag(){
         var aimg_thumbnail=($(".imgpatterntwo .img"));
         for(var i=0; i<aimg_thumbnail.length;i++){
             var url = aimg_thumbnail[i].className.split(" ")[1];
-            aimg_thumbnail[i].className="imgthumbnail";
+            aimg_thumbnail[i].className="imgthumbnail imgpreview";
             console.log(aimg_thumbnail[i]);
             img_thumbnail($(".imgthumbnail"),url,70);
         }
@@ -683,8 +683,6 @@ function selectchange(callback){
         img.onload = function(){
             var imgwidth=this.width;
             var imgHeight=this.height;
-            alert(imgwidth);
-            alert(imgHeight);
             if(imgwidth==imgHeight){
                 obj.css({
                     width: ''+length+'px',
