@@ -668,13 +668,10 @@ function selectchange(callback){
 
     function img_thumbnail(obj,url,length){
         var img = new Image();
-        console.log(obj);
         img.src=url;
         img.onload = function(){
             var imgwidth=this.width;
             var imgHeight=this.height;
-            alert(imgwidth);
-            alert(imgHeight);
             if(imgwidth==imgHeight){
                 obj.css({
                     width: ''+length+'px',
