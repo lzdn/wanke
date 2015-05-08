@@ -237,7 +237,7 @@
         $(".imgpreview").on("click", function () {
             var cur = $(this).attr("src");
             alert(cur);
-            var url = $(this).parent().attr("value");
+            var url = $(this).parent(".images").attr("value");
             alert(url);
             //var arr = url.split(",");
             //wx.previewImage({
