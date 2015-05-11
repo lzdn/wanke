@@ -393,7 +393,9 @@ function querytag(){
                         }
                         if(posts==""){
                             $(".Delete").empty();
-                            $("<p class=\"Delete am-sans-serif\">搜索结果不存在</p>").appendTo($("#field"));
+                            if($(".Publish").length==0){
+                                $("<p class=\"Delete am-sans-serif\">搜索结果不存在</p>").appendTo($("#field"));
+                            }
                         }
                         console.log(posts);
                         var $tpl = $('#usercontent');
