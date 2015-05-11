@@ -464,6 +464,31 @@ function querytag(){
         });
     }
 
+
+function selectchange(callback){
+    var tag = $("select").val().split('&')[0];
+    var taglength=$("select").val().split('&')[1].length;
+    tagname=$("select").val().split('&')[1];
+    width = taglength*15+45;
+    if (tag == "全部") {
+        $("hr").remove();
+        $(".Publish").remove();
+        skx = -5;
+        loading(function () {
+            clickevent();
+            callback(width);
+        });
+    } else {
+        $("hr").remove();
+        $(".Publish").remove();
+        skx = -5;
+        loadtag(tag, function () {
+            clickevent();
+        });
+        callback(width);
+    }
+}
+
     function clickevent() {
         $(".Publish").on("click", function () {
             var postview = $(this).attr("value");
@@ -489,73 +514,6 @@ function querytag(){
             aimg_thumbnail[i].className=("");
         }
     }
-function selectchange(callback){
-    var tag = $("select").val().split('&')[0];
-    var taglength=$("select").val().split('&')[1].length;
-    tagname=$("select").val().split('&')[1];
-    width = taglength*15+45;
-    if (tag == "全部") {
-        $("hr").remove();
-        $(".Publish").remove();
-        skx = -5;
-        loading(function () {
-            $(".Publish").on("click", function () {
-                var postview = $(this).attr("value");
-                window.location.href = "post_detail.html?id=" + postview + "";
-            });
-            $(".imgpreview").on("click", function () {
-                var cur = $(this).attr("src");
-                var url = $(this).parent(".images").attr("value");
-                var arr = url.split(",");
-                wx.previewImage({
-                    current: cur, // 当前显示的图片链接
-                    urls: arr // 需要预览的图片链接列表
-                });
-                event.stopPropagation();
-            });
-            $(".imgpreview").removeClass("imgpreview");
-            var aimg_thumbnail=($(".imgpatterntwo .img"));
-            for(var i=0; i<aimg_thumbnail.length;i++){
-                var url = aimg_thumbnail[i].className.split(" ")[1];
-                aimg_thumbnail[i].className=("imgthumbnail");
-                console.log(aimg_thumbnail[i]);
-                img_thumbnail($(".imgthumbnail"),url,70);
-                aimg_thumbnail[i].className=("");
-            }
-            callback(width);
-        });
-    } else {
-        $("hr").remove();
-        $(".Publish").remove();
-        skx = -5;
-        loadtag(tag, function () {
-            $(".Publish").on("click", function () {
-                var postview = $(this).attr("value");
-                window.location.href = "post_detail.html?id=" + postview + "";
-            });
-            $(".imgpreview").on("click", function () {
-                var cur = $(this).attr("src");
-                var url = $(this).parent(".images").attr("value");
-                var arr = url.split(",");
-                wx.previewImage({
-                    current: cur, // 当前显示的图片链接
-                    urls: arr // 需要预览的图片链接列表
-                });
-                event.stopPropagation();
-            });
-            $(".imgpreview").removeClass("imgpreview");
-            var aimg_thumbnail=($(".imgpatterntwo .img"));
-            for(var i=0; i<aimg_thumbnail.length;i++){
-                var url = aimg_thumbnail[i].className.split(" ")[1];
-                aimg_thumbnail[i].className=("imgthumbnail");
-                console.log(aimg_thumbnail[i]);
-                img_thumbnail($(".imgthumbnail"),url,70);
-                aimg_thumbnail[i].className=("");
-            }
-        });
-        callback(width);
-    }
-}
 
     function img_thumbnail(obj,url,length){
         var img = new Image();
