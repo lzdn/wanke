@@ -1,28 +1,27 @@
 (function ($) {
     AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
     loadwx();
-    var $selected = $("#js-selected");
+    //var $selected = $("#js-selected");
     //for(var i = 0; i<5;i++){
     //    $selected.append("<option value=\""+i+"&"+i+"\">\""+i+"\"</option>");
-    //   // $selected.append('<option value="">ss </option>');
     //}
-    querytag();
+    //querytag();
     var skx = -5;
     var bload = 1;
     var length;
-    var width="";
-    var tagname="全部"
+    var width = "";
+    var tagname = "全部"
     $("select").change(function () {
         $(".Delete").empty();
-       $(".am-form-field").val("");
+        $(".am-form-field").val("");
         var adoremove = document.getElementsByClassName("doremove");
         if (adoremove.length < 5) {
             $("#load").hide();
         }
-        selectchange(function(width){
-            $(".tagsearch").css("width",""+width+"px");
-            var iconleft=width-20;
-            $(" .am-selected-icon").css("left",""+iconleft+"px")
+        selectchange(function (width) {
+            $(".tagsearch").css("width", "" + width + "px");
+            var iconleft = width - 20;
+            $(" .am-selected-icon").css("left", "" + iconleft + "px")
         })
     })
     $(".am-form-field").keydown(function () {
@@ -33,11 +32,11 @@
                 $("hr").remove();
                 skx = -5;
                 var tag = $("select").val().split('&')[0];
-                if(tag=="全部"){
+                if (tag == "全部") {
                     loading(function () {
                         clickevent();
                     });
-                }else{
+                } else {
                     loadtag(tag, function () {
                         clickevent();
                     });
@@ -119,11 +118,11 @@
                                         img: imgs,
                                         pattern: imgpattern
                                     };
-                                    if(tagname!="全部"){
-                                        if(tagname==tagvalue){
+                                    if (tagname != "全部") {
+                                        if (tagname == tagvalue) {
                                             posts.push(osele);
                                         }
-                                    }else{
+                                    } else {
                                         posts.push(osele);
                                     }
                                     console.log(osele);
@@ -134,7 +133,7 @@
                                     var html = template(data);
                                     $tpl.before(html);
                                     clickevent();
-                                    var publish=document.getElementsByClassName("Publish").length;
+                                    var publish = document.getElementsByClassName("Publish").length;
                                     $(".Delete").empty();
                                     $("<p class=\"Delete am-sans-serif\">包含“" + val + "”的结果共“" + publish + "”条</p>").appendTo($("#field"));
                                 }
@@ -194,12 +193,12 @@
         if (scrollTop + newheight + 200 >= htmlHeight) {
             var tag = $("select").val().split('&')[0];
             if (bload != 0) {
-                if(tag=="全部"){
+                if (tag == "全部") {
                     loading(function () {
                         clickevent();
                     });
-                }else{
-                    loadtag(tag,function () {
+                } else {
+                    loadtag(tag, function () {
                         clickevent();
                     });
                 }
@@ -292,36 +291,34 @@
             }
         });
     }
-function querytag(){
-    var tags = AV.Object.extend("tag");
-    var querytag=new AV.Query(tags);
-    querytag.find({
-        success:function(querytag){
-            var querytags = [];
-            for (var i = 0; i < querytag.length; i++) {
-                var object = querytag[i];
-                var tagid = object.id;
-                var tagvalue = object.get('tagtitle');
-                var tag = {
-                    key: tagid,
-                    value: tagvalue
-                };
 
-                //querytags.push(tag);
-           $selected.append("<option value=\""+tagid+"&"+tagvalue+"\">\""+tagvalue+"\"</option>");
-               // $selected.append('<option value="o' + i +'">动态插入的选项 ' + i + '</option>');
-            }
-            //console.log(querytags);
-            //var $tpl2 = $('#query-tags');
-            //var source2 = $tpl2.text();
-            //var template2 = Handlebars.compile(source2);
-            //var data2 = {querytags: querytags};
-            //var html2 = template2(data2);
-            //$tpl2.before(html2);
-        }
-    })
-}
-    function loadtag(tagid,callbak) {
+    //function querytag() {
+    //    var tags = AV.Object.extend("tag");
+    //    var querytag = new AV.Query(tags);
+    //    querytag.find({
+    //        success: function (querytag) {
+    //           // var querytags = [];
+    //            var $selected = $("#js-selected");
+    //            for (var i = 0; i < querytag.length; i++) {
+    //                var object = querytag[i];
+    //                var tagid = object.id;
+    //                var tagvalue = object.get('tagtitle');
+    //                // alert(tagid+"&&&"+tagvalue)
+    //                // $selected.append("<option value=\""+tagid+"&"+tagvalue+"\">\""+tagvalue+"\"</option>");
+    //               // $selected.append("<option value=\""+i+"&"+i+"\">\""+i+"\"</option>");
+    //            }
+    //            //console.log(querytags);
+    //            //var $tpl2 = $('#query-tags');
+    //            //var source2 = $tpl2.text();
+    //            //var template2 = Handlebars.compile(source2);
+    //            //var data2 = {querytags: querytags};
+    //            //var html2 = template2(data2);
+    //            //$tpl2.before(html2);
+    //        }
+    //    })
+    //}
+
+    function loadtag(tagid, callbak) {
         var post = AV.Object.extend("post");
         var tags = AV.Object.extend("tags");
         var user = AV.Object.extend("User");
@@ -400,9 +397,9 @@ function querytag(){
                             };
                             posts.push(opost);
                         }
-                        if(posts==""){
+                        if (posts == "") {
                             $(".Delete").empty();
-                            if($(".Publish").length==0){
+                            if ($(".Publish").length == 0) {
                                 $("<p class=\"Delete am-sans-serif\">搜索结果不存在</p>").appendTo($("#field"));
                             }
                         }
@@ -476,29 +473,29 @@ function querytag(){
     }
 
 
-function selectchange(callback){
-    var tag = $("select").val().split('&')[0];
-    var taglength=$("select").val().split('&')[1].length;
-    tagname=$("select").val().split('&')[1];
-    width = taglength*15+45;
-    if (tag == "全部") {
-        $("hr").remove();
-        $(".Publish").remove();
-        skx = -5;
-        loading(function () {
-            clickevent();
+    function selectchange(callback) {
+        var tag = $("select").val().split('&')[0];
+        var taglength = $("select").val().split('&')[1].length;
+        tagname = $("select").val().split('&')[1];
+        width = taglength * 15 + 45;
+        if (tag == "全部") {
+            $("hr").remove();
+            $(".Publish").remove();
+            skx = -5;
+            loading(function () {
+                clickevent();
+                callback(width);
+            });
+        } else {
+            $("hr").remove();
+            $(".Publish").remove();
+            skx = -5;
+            loadtag(tag, function () {
+                clickevent();
+            });
             callback(width);
-        });
-    } else {
-        $("hr").remove();
-        $(".Publish").remove();
-        skx = -5;
-        loadtag(tag, function () {
-            clickevent();
-        });
-        callback(width);
+        }
     }
-}
 
     function clickevent() {
         $(".Publish").on("click", function () {
@@ -516,44 +513,44 @@ function selectchange(callback){
             event.stopPropagation();
         });
         $(".imgpreview").removeClass("imgpreview");
-        var aimg_thumbnail=($(".imgpatterntwo .img"));
-        for(var i=0; i<aimg_thumbnail.length;i++){
+        var aimg_thumbnail = ($(".imgpatterntwo .img"));
+        for (var i = 0; i < aimg_thumbnail.length; i++) {
             var url = aimg_thumbnail[i].className.split(" ")[1];
-            aimg_thumbnail[i].className=("imgthumbnail");
+            aimg_thumbnail[i].className = ("imgthumbnail");
             console.log(aimg_thumbnail[i]);
-            img_thumbnail($(".imgthumbnail"),url,70);
-            aimg_thumbnail[i].className=("");
+            img_thumbnail($(".imgthumbnail"), url, 70);
+            aimg_thumbnail[i].className = ("");
         }
     }
 
-    function img_thumbnail(obj,url,length){
+    function img_thumbnail(obj, url, length) {
         var img = new Image();
-        img.src=url;
-        img.onload = function(){
-            var imgwidth=this.width;
-            var imgHeight=this.height;
-            if(imgwidth==imgHeight){
+        img.src = url;
+        img.onload = function () {
+            var imgwidth = this.width;
+            var imgHeight = this.height;
+            if (imgwidth == imgHeight) {
                 obj.css({
-                    width: ''+length+'px',
-                    height:''+length+'px'
+                    width: '' + length + 'px',
+                    height: '' + length + 'px'
                 });
-            }else{
-                if(imgwidth>imgHeight){
+            } else {
+                if (imgwidth > imgHeight) {
                     var newmargin
-                    var imgwidth =  imgwidth/(imgHeight/length);
-                    var newmargin=-(imgwidth-length)/2;
+                    var imgwidth = imgwidth / (imgHeight / length);
+                    var newmargin = -(imgwidth - length) / 2;
                     obj.css({
-                        height: ''+length+'px'
+                        height: '' + length + 'px'
                     });
-                    obj.css("margin-left",""+newmargin+"px");
-                }else{
-                    var newheight =  imgHeight/(imgwidth/length);
-                    newmargin=-(newheight-length)/2;
+                    obj.css("margin-left", "" + newmargin + "px");
+                } else {
+                    var newheight = imgHeight / (imgwidth / length);
+                    newmargin = -(newheight - length) / 2;
                     obj.css({
-                        width: ''+length+'px',
-                        height: ''+newheight+'px'
+                        width: '' + length + 'px',
+                        height: '' + newheight + 'px'
                     });
-                    obj.css("margin-top",""+newmargin+"px");
+                    obj.css("margin-top", "" + newmargin + "px");
                 }
             }
         }
