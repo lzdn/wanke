@@ -1,6 +1,11 @@
 (function ($) {
     AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
     loadwx();
+    var $selected = $("#js-selected");
+    //for(var i = 0; i<5;i++){
+    //    $selected.append("<option value=\""+i+"&"+i+"\">\""+i+"\"</option>");
+    //   // $selected.append('<option value="">ss </option>');
+    //}
     querytag();
     var skx = -5;
     var bload = 1;
@@ -301,15 +306,18 @@ function querytag(){
                     key: tagid,
                     value: tagvalue
                 };
-                querytags.push(tag);
+
+                //querytags.push(tag);
+           $selected.append("<option value=\""+tagid+"&"+tagvalue+"\">\""+tagvalue+"\"</option>");
+               // $selected.append('<option value="o' + i +'">动态插入的选项 ' + i + '</option>');
             }
-            console.log(querytags);
-            var $tpl2 = $('#query-tags');
-            var source2 = $tpl2.text();
-            var template2 = Handlebars.compile(source2);
-            var data2 = {querytags: querytags};
-            var html2 = template2(data2);
-            $tpl2.before(html2);
+            //console.log(querytags);
+            //var $tpl2 = $('#query-tags');
+            //var source2 = $tpl2.text();
+            //var template2 = Handlebars.compile(source2);
+            //var data2 = {querytags: querytags};
+            //var html2 = template2(data2);
+            //$tpl2.before(html2);
         }
     })
 }
