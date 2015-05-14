@@ -150,6 +150,7 @@
         }
     });
     $("#arrow").hide();
+    skx = -5;
     loading(function () {
         var adoremove = document.getElementsByClassName("doremove");
         if (adoremove.length < 5) {
