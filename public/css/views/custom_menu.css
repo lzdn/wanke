@@ -1,0 +1,10 @@
+.menulist{
+    width: 100%;
+    height: 500px;
+}
+.menulist div{
+    margin-top:30px;
+    width: 50%;
+    height: 200px;
+    float:left;
+}
