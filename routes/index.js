@@ -12,19 +12,3 @@ router.get('/', function(req, res) {
 });
 
 module.exports = router;
-
-//exports.reply = wechat(config.access_token).text(function (message, req, res, next) {
-//    // TODO
-//    var Keyword = AV.Object.Extend('keyword');
-//    var keyword = new Keyword();
-//    var query = new AV.Query(Keyword);
-//    query.find({
-//        success: function (results) {
-//            for (var x = 0; x < results.length; x++) {
-//                if (results[x].get(message.trim()) != null || results[x].get(message.trim()) != '') {
-//                    res.reply(results[x].get('word'));
-//                }
-//            }
-//        }
-//    })
-//});
