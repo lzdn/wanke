@@ -12,13 +12,13 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-    var parseString = require('xml2js').parseString;
-    var xml = "<root>Hello xml2js!</root>"
-    parseString(xml, function (err, result) {
-        console.log(result);
-    });
+    //var parseString = require('xml2js').parseString;
+    //var xml = "<root>Hello xml2js!</root>"
+    //parseString(xml, function (err, result) {
+    //    console.log(result);
+    //});
     console.log(req.body);
-    //res.send(req.query.echostr);
+    res.send(req.query.echostr);
     //res.send('respond with a resource');
 });
 
