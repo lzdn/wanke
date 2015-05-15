@@ -7,6 +7,9 @@ var bodyParser = require('body-parser');
 var hbs = require('hbs');
 var amuiHelper = require('amui-hbs-helper')(hbs);
 var wechat = require('wechat');
+var config = require('./config');
+var AV = require('avoscloud-sdk').AV;
+AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
 
 
 //hbs.registerPartials(widgetDir + '/slider/src');
@@ -26,19 +29,33 @@ app.set('view engine', 'hbs');
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
 app.use('/users', users);
 app.use('/weixin', weixin);
+app.use('/', wechat(config.access_token).text(function (message, req, res, next) {
+    // TODO
+    var Keyword = AV.Object.Extend('keyword');
+    var keyword = new Keyword();
+    var query = new AV.Query(Keyword);
+    query.find({
+        success: function (results) {
+            for (var x = 0; x < results.length; x++) {
+                if (results[x].get(message) != null || results[x].get(message) != '') {
+                    res.reply(results[x].get('word'));
+                }
+            }
+        }
+    })
+}));
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handlers
@@ -46,23 +63,23 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
+    app.use(function (err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
     });
-  });
 }
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
 });
 
 
