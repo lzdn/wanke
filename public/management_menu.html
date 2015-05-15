@@ -49,13 +49,78 @@
 
         <div class="am-cf am-padding">
             <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">自定义菜单设置</strong></div>
+            <button type="button" class="am-btn am-radius am-btn-xs am-btn-primary add-menu-btn">添加一级菜单</button>
         </div>
         <div class="menulist">
-            <div class="menulist_left">
+            <!--<div class="title">-->
+               <!--<p class="am-sans-serif">北京VK生活馆-自定义菜单</p>-->
+            <!--</div>-->
+            <div class="menulist_content">
+                <!--^^^^^^^^^^^-->
+                <div class="am-panel-group" id="accordion">
+                    <div class="am-panel am-panel-default">
+                        <div class="am-panel-hd">
+                            <h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-1'}">
+                              易生活
+                                <span class="am-icon-chain am-icon-sm menu_icon"></span>
+                                <div class="btn_content">
+                                    <button type="button" class="am-btn am-radius am-btn-default menu_btn">编辑</button>
+                                </div>
+                            </h4>
+                        </div>
+                        <div id="do-not-say-1" class="am-panel-collapse am-collapse am-in">
+                            <ul class="am-list">
+                                <li class="add_menu_list"><a class="am-icon-arrows" href="#"></a><a href="#" class="add_menu">添加二级菜单</a></li>
+                                <li class="menu_list"><a href="#">啊啊啊dfdfsdfdsfs<span class="am-icon-chain am-icon-sm menu_icon"></span></a></li>
+                                <li class="menu_list"><a href="#">sadsadsadsadasd</a></li>
+                                <li class="menu_list"><a href="#">wwwwwwwwwwww</a></li>
+                                <li class="menu_list"><a href="#">rrrrrrrrr</a></li>
+                                <li class="menu_list"><a href="#">xxxxxxxxxxx</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="am-panel am-panel-default">
+                        <div class="am-panel-hd">
+                            <h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-2'}">
+                                邻里圈
+                            </h4>
+                        </div>
+                        <div id="do-not-say-2" class="am-panel-collapse am-collapse">
+                            <ul class="am-list">
+                                <li class="add_menu_list"><a class="am-icon-arrows" href="#"></a><a href="#" class="add_menu">添加二级菜单</a></li>
+                                <li><a href="#">啊啊啊啊啊啊</a></li>
+                                <li><a href="#">sadsadsadsadasd</a></li>
+                                <li><a href="#">wwwwwwwwwwww</a></li>
+                                <li><a href="#">rrrrrrrrr</a></li>
+                                <li><a href="#">xxxxxxxxxxx</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="am-panel am-panel-default">
+                        <div class="am-panel-hd">
+                            <h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-3'}">
+                                个人中心
+                            </h4>
+                        </div>
+                        <div id="do-not-say-3" class="am-panel-collapse am-collapse">
+                            <ul class="am-list">
+                                <li class="add_menu_list"><a class="am-icon-arrows" href="#"></a><a href="#" class="add_menu">添加二级菜单</a></li>
+                                <li><a href="#">啊啊啊啊啊啊</a></li>
+                                <li><a href="#">sadsadsadsadasd</a></li>
+                                <li><a href="#">wwwwwwwwwwww</a></li>
+                                <li><a href="#">rrrrrrrrr</a></li>
+                                <li><a href="#">xxxxxxxxxxx</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
+                <!--^^^^^^^^^^^-->
             </div>
-            <div class="menulist_right">
-              <h3>预览</h3>
+
+            <div class="menulist_foot">
+                <button type="button" class="am-btn am-btn-default am-radius">保存</button>
+                <button type="button" class="am-btn am-btn-primary am-radius">发布</button>
             </div>
         </div>
     </div>
@@ -68,6 +133,45 @@
         <hr>
         <p class="am-padding-left">北京VK生活馆管理后台</p>
     </footer>
+
+<div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
+    <div class="am-modal-dialog">
+        <div class="am-modal-bd">
+            编辑菜单
+        </div>
+
+        <form action="" class="am-form">
+            <fieldset>
+                <div class="am-form-group">
+                    <label class="input_menu input_menu_input" for="doc-vld-name-2">菜单名：</label>
+                    <input class="input input_menu_name" type="text" id="doc-vld-name-2" minlength="3" placeholder="输入菜单名" required/>
+                </div>
+                <div class="am-form-group">
+                    <label class="input_menu input_menu_input" for="doc-vld-url-2">关联&nbsp&nbsp&nbsp：</label>
+                    <input class="input input_menu_url" type="text" id="doc-vld-url-2" placeholder="请输入关联" required/>
+                </div>
+                <div class="am-form-group">
+                    <label class="input_menu">菜单类型： </label>
+                    <label class="am-radio-inline">
+                        <input type="radio"  value="click" name="docVlGender" required> 回复
+                    </label>
+                    <label class="am-radio-inline">
+                        <input type="radio" value="views" name="docVlGender"> 跳转链接
+                    </label>
+                    <label class="am-radio-inline">
+                        <input type="radio" value="null" name="docVlGender"> 一级菜单
+                    </label>
+                </div>
+            </fieldset>
+        </form>
+
+        <div class="am-modal-footer">
+            <span class="am-modal-btn" data-am-modal-cancel>返回</span>
+            <span class="am-modal-btn remove_menu" data-am-modal-cancel>删除</span>
+            <span class="am-modal-btn save_menu" data-am-modal-confirm>确认</span>
+        </div>
+    </div>
+</div>
 
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/amazeui.min.js"></script>
