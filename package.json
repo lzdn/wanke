@@ -18,6 +18,7 @@
     "wechat": "latest",
     "wechat-api": "latest",
     "wechat-oauth": "latest",
-    "avoscloud-sdk": "latest"
+    "avoscloud-sdk": "latest",
+    "xml2js":"latest"
   }
 }

@@ -11,4 +11,16 @@ router.get('/', function(req, res) {
     //res.send('respond with a resource');
 });
 
+router.post('/', function(req, res) {
+    var parseString = require('xml2js').parseString;
+    var xml = "<root>Hello xml2js!</root>"
+    parseString(xml, function (err, result) {
+        console.log(result);
+    });
+    console.log(req.body);
+    //res.send(req.query.echostr);
+    //res.send('respond with a resource');
+});
+
+
 module.exports = router;
