@@ -17,7 +17,7 @@ router.post('/', function(req, res) {
     //parseString(xml, function (err, result) {
     //    console.log(result);
     //});
-    console.log(req.body);
+    console.log(req);
     res.send(req.query.echostr);
     //res.send('respond with a resource');
 });
