@@ -32,9 +32,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.usr(wechat(config.access_token).text(function (message, req, res, next) {
+app.use(wechat(config.access_token).text(function (message, req, res, next) {
     // TODO
-    var Keyword = AV.Object.Extend('keyword');
+    var Keyword = AV.Object.extend('keyword');
     var keyword = new Keyword();
     var query = new AV.Query(Keyword);
     query.find({
