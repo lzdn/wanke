@@ -12,14 +12,13 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-    //var parseString = require('xml2js').parseString;
-    //var xml = "<root>Hello xml2js!</root>"
-    //parseString(xml, function (err, result) {
-    //    console.log(result);
-    //});
-    console.log(req);
-    res.send(req.query.echostr);
-    //res.send('respond with a resource');
+    wechat(config.access_token)
+        .text(function (message, req, res, next) {
+            // TODO
+            res.reply('hehe');
+        }).location(function (message, req, res, next) {
+            // TODO
+        }).middlewarify();
 });
 
 
