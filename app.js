@@ -34,6 +34,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+console.log(config.access_token);
 app.use('/', wechat(config.access_token, function (req, res, next) {
     // 微信输入信息都在req.weixin上
     console.log(req.weixin);
