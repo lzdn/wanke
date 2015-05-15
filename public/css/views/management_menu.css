@@ -1,10 +1,88 @@
 .menulist{
     width: 100%;
+}
+/*.menulist div{*/
+    /*float:left;*/
+/*}*/
+.title{
+    width: 100%;
+    height: 50px;
+    background: #F5F5DC;
+    /*background: #e6e6e6;*/
+    border:1px solid #ccc;
+}
+.title p{
+    line-height: 50px;
+    text-align: center;
+}
+.menulist_content{
+    width: 100%;
     height: 500px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
 }
-.menulist div{
-    margin-top:30px;
-    width: 50%;
-    height: 200px;
-    float:left;
+.menulist_foot{
+    width: 100%;
+    height: 50px;
+    background: #F5F5DC;
+    /*background: #e6e6e6;*/
+    border:1px solid #ccc;
+    padding:3px 0 0 3px;
 }
+select{
+    display:block;
+}
+li{
+    padding-left:20px;
+}
+li a{
+    display:block;
+}
+.am-icon-arrows{
+    width: 20px;
+    position:absolute;
+    left:20px;
+    top:0;
+}
+.add-menu-btn{
+    float:right;
+}
+
+.add_menu{
+    width: 80%;
+    margin-left:20px;
+}
+.btn_content{
+    width: 40px;
+    height: 25px;
+    float:right;
+    overflow: hidden;
+}
+.menu_btn{
+    margin-left:-13px;
+    margin-top:-9px;
+}
+.menu_icon{
+    position:absolute;
+    right:60px;
+    color:#ccc;
+    margin-right:2px;
+}
+
+.am-form-group .input_menu{
+position:absolute;
+    left:0;
+    margin-left:20px;
+}
+.input_menu_input{
+    margin-top:7px;
+}
+#doc-vld-name-2,#doc-vld-url-2{
+    width: 450px;
+}
+.am-form-group .input{
+    margin-left:70px;
+    width: 300px;
+}
+
+
