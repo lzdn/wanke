@@ -26,7 +26,7 @@
             id = ""
         }
         if (code != "") {
-            $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
+            $.post("http://wanke.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
                 var user = {
                     openid: res.openid,
@@ -78,7 +78,7 @@
                 $tpl.before(html);
                 callbak(null, currentUser);
             } else {
-                $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl", {page: "http://fuwuhao.dianyingren.com/user_detail.html"}, function (res) {
+                $.post("http://wanke.dianyingren.com/weixin/getAuthUrl", {page: "http://wanke.dianyingren.com/user_detail.html"}, function (res) {
                     window.location.href = res.authUrl;
                 })
             }

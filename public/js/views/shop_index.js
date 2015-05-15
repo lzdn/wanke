@@ -104,7 +104,7 @@
         var debug, appId, jslist, noncestr, signature, timestamp, jsApiList;
         $.ajax({
             method: "POST",
-            url: "http://fuwuhao.dianyingren.com/weixin/getJsConfig",
+            url: "http://wanke.dianyingren.com/weixin/getJsConfig",
             data: JSON.stringify({
                 url: window.location.href
             }),
@@ -130,7 +130,7 @@
                     wx.onMenuShareTimeline({
                         title: '万科三联书社',
                         link: window.location.href,
-                        imgUrl: 'http://fuwuhao.dianyingren.com/imgs/wankelife.jpg',
+                        imgUrl: 'http://wanke.dianyingren.com/imgs/wankelife.jpg',
                         success: function () {
                         },
                         cancel: function () {
@@ -141,7 +141,7 @@
                         desc: '悦读 悦心 悦生活',
                         link: window.location.href,
                         type: 'link',
-                        imgUrl: 'http://fuwuhao.dianyingren.com/imgs/wankelife.jpg',
+                        imgUrl: 'http://wanke.dianyingren.com/imgs/wankelife.jpg',
                         success: function () {
                         },
                         cancel: function () {

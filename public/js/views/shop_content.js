@@ -48,7 +48,7 @@
                 wx.onMenuShareTimeline({
                     title: shopname,
                     link: window.location.href,
-                    imgUrl: 'http://fuwuhao.dianyingren.com/imgs/40' + logo.substr(logo.indexOf('/') + 1, 1) + '.PNG',
+                    imgUrl: 'http://wanke.dianyingren.com/imgs/40' + logo.substr(logo.indexOf('/') + 1, 1) + '.PNG',
                     success: function () {
                     },
                     cancel: function () {
@@ -59,7 +59,7 @@
                     desc: '地址: ' + shopaddress,
                     link: window.location.href,
                     type: 'link',
-                    imgUrl: 'http://fuwuhao.dianyingren.com/imgs/40' + logo.substr(logo.indexOf('/') + 1, 1) + '.PNG',
+                    imgUrl: 'http://wanke.dianyingren.com/imgs/40' + logo.substr(logo.indexOf('/') + 1, 1) + '.PNG',
                     success: function () {
                     },
                     cancel: function () {
@@ -74,7 +74,7 @@
         var debug, appId, jslist, noncestr, signature, timestamp, jsApiList;
         $.ajax({
             method: "POST",
-            url: "http://fuwuhao.dianyingren.com/weixin/getJsConfig",
+            url: "http://wanke.dianyingren.com/weixin/getJsConfig",
             data: JSON.stringify({
                 url: window.location.href
             }),

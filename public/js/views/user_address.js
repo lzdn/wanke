@@ -79,7 +79,7 @@ function load(callback) {
     var useraddress = window.location.href;
     //alert(useraddress);
     var appId, jslist, noncestr, signature, timestamp, jsApiList;
-    $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + useraddress + ""}, function (result) {
+    $.post("http://wanke.dianyingren.com/weixin/getJsConfig", {url: "" + useraddress + ""}, function (result) {
         appId = result.appId;
         jslist = result.jsApiList;
         noncestr = result.nonceStr;

@@ -45,7 +45,7 @@
         if (currentUser) {
             window.location.href = "post_save.html?code=";
         } else {
-            $.get("http://fuwuhao.dianyingren.com/weixin/getAuthUrl?page=post_save", function (res) {
+            $.get("http://wanke.dianyingren.com/weixin/getAuthUrl?page=post_save", function (res) {
                 window.location.href = res.authUrl;
             })
         }
@@ -103,7 +103,7 @@
     function loading(callbak) {
         var userpost = window.location.href;
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
-        $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + userpost + ""}, function (result) {
+        $.post("http://wanke.dianyingren.com/weixin/getJsConfig", {url: "" + userpost + ""}, function (result) {
             appId = result.appId;
             jslist = result.jsApiList;
             noncestr = result.nonceStr;
