@@ -6,20 +6,17 @@ var AV = require('avoscloud-sdk').AV;
 AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
 
 /* GET users listing. */
-router.get('/', function(req, res) {
+router.get('/', function (req, res) {
     res.send(req.query.echostr);
     //res.send('respond with a resource');
 });
 
-router.post('/', function(req, res) {
-    wechat(config.access_token)
-        .text(function (message, req, res, next) {
-            // TODO
-            res.reply('hehe');
-        }).location(function (message, req, res, next) {
-            // TODO
-        }).middlewarify();
-});
+router.post('/', wechat(config.access_token, function (req, res, next) {
+    var message = req.weixin;
+    console.log('req.weixin:' + req.weixin);
+    console.log('req.body:' + req.body);
+    res.reply('hehe');
+}));
 
 
 module.exports = router;
