@@ -15,7 +15,23 @@ router.post('/', wechat(config.token, function (req, res, next) {
     var message = req.weixin;
     console.log('req.weixin:' + req.weixin);
     console.log('req.body:' + req.body);
-    res.reply('hehe');
+    if (message.MsgType === 'text') {
+        var Keyword = AV.Object.extend('keyword');
+        var query = new AV.Query(Keyword);
+        query.find({
+            success: function (results) {
+                for (var x = 0; x < results.length; x++) {
+                    if (results[x].get(message.Content) != null || results[x].get(message.Content) != "") {
+                        res.reply(results[x].get('word'));
+                    }
+                }
+            }
+            ,
+            error: function (results, error) {
+                res.reply("服务器向我们发起进攻，我们的工程师和首席打气官正在英勇的与其战斗...");
+            }
+        });
+    }
 }));
 
 
