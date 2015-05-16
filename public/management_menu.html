@@ -49,7 +49,7 @@
 
         <div class="am-cf am-padding">
             <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">自定义菜单设置</strong></div>
-            <button type="button" class="am-btn am-radius am-btn-xs am-btn-primary add-menu-btn">添加一级菜单</button>
+            <button type="button" class="am-btn am-radius am-btn-xs am-btn-primary add-menu-btn" menuid="0" bmenu="1" grade="1">添加一级菜单</button>
         </div>
         <div class="menulist">
             <!--<div class="title">-->
@@ -58,63 +58,33 @@
             <div class="menulist_content">
                 <!--^^^^^^^^^^^-->
                 <div class="am-panel-group" id="accordion">
+                    <script type="text/x-handlebars-template" id="push_menu">
+                        {{#each menus}}
+
                     <div class="am-panel am-panel-default">
                         <div class="am-panel-hd">
-                            <h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-1'}">
-                              易生活
-                                <span class="am-icon-chain am-icon-sm menu_icon"></span>
+                            <h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#{{this.id}}'}">
+                              {{this.name}}
+                                <span class="{{this.title}} am-icon-sm menu_icon" title={{this.title}}></span>
                                 <div class="btn_content">
-                                    <button type="button" class="am-btn am-radius am-btn-default menu_btn">编辑</button>
+                                    <button menuid={{this.id}} bmenu="0" grade="2" type="button" class="am-btn am-radius am-btn-default menu_btn">编辑</button>
                                 </div>
                             </h4>
                         </div>
-                        <div id="do-not-say-1" class="am-panel-collapse am-collapse am-in">
+                        <div id={{this.id}} class="am-panel-collapse am-collapse">
                             <ul class="am-list">
-                                <li class="add_menu_list"><a class="am-icon-arrows" href="#"></a><a href="#" class="add_menu">添加二级菜单</a></li>
-                                <li class="menu_list"><a href="#">啊啊啊dfdfsdfdsfs<span class="am-icon-chain am-icon-sm menu_icon"></span></a></li>
-                                <li class="menu_list"><a href="#">sadsadsadsadasd</a></li>
-                                <li class="menu_list"><a href="#">wwwwwwwwwwww</a></li>
-                                <li class="menu_list"><a href="#">rrrrrrrrr</a></li>
-                                <li class="menu_list"><a href="#">xxxxxxxxxxx</a></li>
+                                <li menuid={{this.id}} bmenu="2" grade="1" class="add_menu_list"><a class="am-icon-arrows" href="#"></a><a href="#" class="add_menu">添加二级菜单</a></li>
+                                {{#if this.relation}}
+                                {{#each this.relation}}
+                                <li menuid={{this.id}} bmenu="0" grade="2" class="menu_list"><a href="#">{{this.name}}<span class="{{this.title}} am-icon-sm menu_icon"></span></a></li>
+                                {{/each}}
+                                {{/if}}
                             </ul>
                         </div>
                     </div>
-                    <div class="am-panel am-panel-default">
-                        <div class="am-panel-hd">
-                            <h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-2'}">
-                                邻里圈
-                            </h4>
-                        </div>
-                        <div id="do-not-say-2" class="am-panel-collapse am-collapse">
-                            <ul class="am-list">
-                                <li class="add_menu_list"><a class="am-icon-arrows" href="#"></a><a href="#" class="add_menu">添加二级菜单</a></li>
-                                <li><a href="#">啊啊啊啊啊啊</a></li>
-                                <li><a href="#">sadsadsadsadasd</a></li>
-                                <li><a href="#">wwwwwwwwwwww</a></li>
-                                <li><a href="#">rrrrrrrrr</a></li>
-                                <li><a href="#">xxxxxxxxxxx</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="am-panel am-panel-default">
-                        <div class="am-panel-hd">
-                            <h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#do-not-say-3'}">
-                                个人中心
-                            </h4>
-                        </div>
-                        <div id="do-not-say-3" class="am-panel-collapse am-collapse">
-                            <ul class="am-list">
-                                <li class="add_menu_list"><a class="am-icon-arrows" href="#"></a><a href="#" class="add_menu">添加二级菜单</a></li>
-                                <li><a href="#">啊啊啊啊啊啊</a></li>
-                                <li><a href="#">sadsadsadsadasd</a></li>
-                                <li><a href="#">wwwwwwwwwwww</a></li>
-                                <li><a href="#">rrrrrrrrr</a></li>
-                                <li><a href="#">xxxxxxxxxxx</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
 
+                        {{/each}}
+                    </script>
                 <!--^^^^^^^^^^^-->
             </div>
 
