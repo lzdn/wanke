@@ -21,7 +21,7 @@ router.post('/', wechat(config.token, function (req, res, next) {
         query.find({
             success: function (results) {
                 for (var x = 0; x < results.length; x++) {
-                    if (results[x].get(message.Content) != null || results[x].get(message.Content) != "") {
+                    if (results[x].get('key') == message.Content) {
                         res.reply(results[x].get('word'));
                     }
                 }
