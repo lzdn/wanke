@@ -11,7 +11,7 @@ router.get('/', function (req, res) {
     //res.send('respond with a resource');
 });
 
-router.post('/', wechat(config.access_token, function (req, res, next) {
+router.post('/', wechat(config.token, function (req, res, next) {
     var message = req.weixin;
     console.log('req.weixin:' + req.weixin);
     console.log('req.body:' + req.body);
