@@ -62,7 +62,7 @@ function load(callback) {
     var usercontact = window.location.href;
     //alert(usercontact);
     var appId, jslist, noncestr, signature, timestamp, jsApiList;
-    $.post("http://wanke.dianyingren.com/weixin/getJsConfig", {url: "" + usercontact + ""}, function (result) {
+    $.post(server + "/weixin/getJsConfig", {url: "" + usercontact + ""}, function (result) {
         appId = result.appId;
         jslist = result.jsApiList;
         noncestr = result.nonceStr;

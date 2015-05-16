@@ -28,7 +28,7 @@
                     for (var j = 0; j < oldbuilding.length; j++) {
                         var building = {
                             names: oldbuilding[j]
-                        }
+                        };
                         buildings.push(building);
                     }
                     var $buildings = $('#buildings');
@@ -79,7 +79,7 @@ function load(callback) {
     var useraddress = window.location.href;
     //alert(useraddress);
     var appId, jslist, noncestr, signature, timestamp, jsApiList;
-    $.post("http://wanke.dianyingren.com/weixin/getJsConfig", {url: "" + useraddress + ""}, function (result) {
+    $.post(server + "/weixin/getJsConfig", {url: "" + useraddress + ""}, function (result) {
         appId = result.appId;
         jslist = result.jsApiList;
         noncestr = result.nonceStr;

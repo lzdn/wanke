@@ -5,7 +5,7 @@
     var relationuser = [];
     var marktags = ["约吃", "约玩", "约聊", "约运动"];
     var commentuserid;
-    var userlog, userid, queryobject,content, nickname, phonenumber, usersid, postId, tagvalue, openid, postview, username, headimgurl, headUrl,theuserid;
+    var userlog, userid, queryobject, content, nickname, phonenumber, usersid, postId, tagvalue, openid, postview, username, headimgurl, headUrl, theuserid;
     if (saveurl.split("=").length - 1 > 1) {
         userlog = window.location.search.split('=')[2];
         code = userlog.split("&")[0];
@@ -24,16 +24,16 @@
             $(".nullusershow").attr("src", headUrl);
         }
         $(".replypublish").hide();
-        var aclose =document.getElementsByClassName("close");
-        for(var i=0;i<aclose.length;i++){
-            var commentuser=aclose[i].className.substr(14);
-            if(commentuser==commentuserid){
-               aclose[i].className="close hide";
-                    $(".hide").show();
-            }else{
-                }
+        var aclose = document.getElementsByClassName("close");
+        for (var i = 0; i < aclose.length; i++) {
+            var commentuser = aclose[i].className.substr(14);
+            if (commentuser == commentuserid) {
+                aclose[i].className = "close hide";
+                $(".hide").show();
+            } else {
+            }
         }
-        $(".close").on("click",function(){
+        $(".close").on("click", function () {
             var close = $(this).parent().attr("value");
             destroycomment(close);
         });
@@ -54,7 +54,7 @@
             var currentUser = AV.User.current();
             if (currentUser) {
                 var publishsay = $(this).parent().siblings(".textarea").children().val();
-                if(publishsay){
+                if (publishsay) {
                     var comment = AV.Object.extend("comment");
                     var post = AV.Object.extend("post");
                     var relationcommentid = $(this).attr("value");
@@ -98,13 +98,13 @@
                             });
                         }
                     })
-                }else{
+                } else {
                     alert("你要说点什么");
                 }
             } else {
                 $.ajax({
                     method: "POST",
-                    url: "http://fuwuhao.dianyingren.com/weixin/getAuthUrl",
+                    url: server + "/weixin/getAuthUrl",
                     data: JSON.stringify({
                         page: saveurl
                     }),
@@ -118,7 +118,7 @@
                     }
                 });
             }
-        })
+        });
 
         $("#maxpublish").on("click", function () {
             var currentUser = AV.User.current();
@@ -126,7 +126,7 @@
                 var post = AV.Object.extend("post");
                 var comment = AV.Object.extend("comment");
                 var publishsay = $(this).parent().siblings(".textarea").children().val();
-                if(publishsay){
+                if (publishsay) {
                     var posts = new post();
                     posts.id = postview;
                     var coment = new comment();
@@ -152,13 +152,13 @@
                             });
                         }
                     });
-                }else{
+                } else {
                     alert("你要说点什么");
                 }
             } else {
                 $.ajax({
                     method: "POST",
-                    url: "http://fuwuhao.dianyingren.com/weixin/getAuthUrl",
+                    url: server + "/weixin/getAuthUrl",
                     data: JSON.stringify({
                         page: saveurl
                     }),
@@ -185,20 +185,20 @@
             event.stopPropagation();
         });
         $(".imgpreview").removeClass("imgpreview");
-        var aimg_thumbnail=($(".imgpatterntwo .img"));
-        for(var i=0; i<aimg_thumbnail.length;i++){
+        var aimg_thumbnail = ($(".imgpatterntwo .img"));
+        for (var i = 0; i < aimg_thumbnail.length; i++) {
             var url = aimg_thumbnail[i].className.split(" ")[1];
-            aimg_thumbnail[i].className=("imgthumbnail");
+            aimg_thumbnail[i].className = ("imgthumbnail");
             console.log(aimg_thumbnail[i]);
-            img_thumbnail($(".imgthumbnail"),url,70);
-            aimg_thumbnail[i].className=("");
+            img_thumbnail($(".imgthumbnail"), url, 70);
+            aimg_thumbnail[i].className = ("");
         }
 
         $("#btnname").on("click", function () {
             alert("开始报名");
             var currentUser = AV.User.current();
             if (currentUser) {
-                theuserid= currentUser.id;
+                theuserid = currentUser.id;
                 alert(theuserid)
                 var query = new AV.Query(AV.User);
                 query.get(currentUser.id, {
@@ -209,17 +209,17 @@
                 });
                 if (relationuser) {
                     alert("有报名")
-                    var  bregistration=0;
+                    var bregistration = 0;
                     for (var i = 0; i < relationuser.length; i++) {
                         if (relationuser[i].id == currentUser.id) {
                             $(".usercontent").remove();
                             $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".usercont");
                             $("#btnname").remove();
                             $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
-                        }else{
-                            bregistration+=1;
+                        } else {
+                            bregistration += 1;
                         }
-                        if(bregistration==relationuser.length){
+                        if (bregistration == relationuser.length) {
                             setTimeout(function () {
                                 if (phonenumber) {
                                     var imgurl = currentUser.get("authData").weixin.headimgurl;
@@ -233,7 +233,7 @@
                                     alert(postview);
                                     $.ajax({
                                         method: "POST",
-                                        url: "http://fuwuhao.dianyingren.com/weixin/sendMessage",
+                                        url: server + "/weixin/sendMessage",
                                         data: JSON.stringify({
                                             userId: theuserid,
                                             postId: postview
@@ -251,7 +251,11 @@
                                     query.equalTo("objectId", postview);
                                     query.get(postview, {
                                         success: function (post) {
-                                            post.add("relationuser", {id: usersid, url: imgurl, phonenumber: phonenumber});
+                                            post.add("relationuser", {
+                                                id: usersid,
+                                                url: imgurl,
+                                                phonenumber: phonenumber
+                                            });
                                             post.save();
                                         },
                                         error: function (object, error) {
@@ -292,11 +296,11 @@
                             $("#btnname").remove();
                             $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
                             $(" <img src=\"" + imgurl + "\" value=\" " + usersid + "&" + phonenumber + " \" class=\"am-radius\">").appendTo("#headtle");
-                           alert(theuserid);
+                            alert(theuserid);
                             alert(postview);
                             $.ajax({
                                 method: "POST",
-                                url: "http://fuwuhao.dianyingren.com/weixin/sendMessage",
+                                url: server + "/weixin/sendMessage",
                                 data: JSON.stringify({
                                     userId: theuserid,
                                     postId: postview
@@ -348,7 +352,7 @@
             } else {
                 $.ajax({
                     method: "POST",
-                    url: "http://fuwuhao.dianyingren.com/weixin/getAuthUrl",
+                    url: server + "/weixin/getAuthUrl",
                     data: JSON.stringify({
                         page: saveurl
                     }),
@@ -377,12 +381,12 @@
             var authData = currentUser.get("authData");
             nickname = authData.weixin.nickname
             headimgurl = authData.weixin.headimgurl
-            load+=1
+            load += 1
             if (load == 4) {
                 callbak();
             }
-        }else{
-            load+=1
+        } else {
+            load += 1
             if (load == 4) {
                 callbak();
             }
@@ -496,7 +500,7 @@
                 var object = post[0].get("relationcomment")
                 if (object) {
                     var comment = AV.Object.extend("comment");
-                    for (var i =0; i<object.length; i++) {
+                    for (var i = 0; i < object.length; i++) {
 
                         var query = new AV.Query("comment");
                         query.include("commentrelation");
@@ -535,7 +539,7 @@
                                 var comment = {
                                     commentid: commentid,
                                     commentusername: commentusername,
-                                    commentuserid:commentuserids,
+                                    commentuserid: commentuserids,
                                     commentcontent: commentcontent,
                                     commentusershow: commentusershow,
                                     relation: commentrelation,
@@ -568,14 +572,14 @@
         })
         //……………………………………………………………………………………………
         if (code != "") {
-            $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
+            $.post(server + "/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
                 nickname = res.nickname;
                 AV.User._logInWith("weixin", {
                     "authData": res,
                     success: function (user) {
                         userid = user.id;
-                        commentuserid=userid
+                        commentuserid = userid
                         queryobject = user.get("authData");
                         var query = new AV.Query(AV.User);
                         query.get(userid, {
@@ -612,11 +616,12 @@
             }
         }
     }
+
     function loadwx() {
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
         $.ajax({
             method: "POST",
-            url: "http://fuwuhao.dianyingren.com/weixin/getJsConfig",
+            url: server + "/weixin/getJsConfig",
             data: JSON.stringify({
                 url: window.location.href
             }),
@@ -640,20 +645,20 @@
                 });
                 wx.ready(function () {
                     wx.onMenuShareTimeline({
-                        title: ''+tagvalue+'' ,
+                        title: '' + tagvalue + '',
                         link: window.location.href,
-                        imgUrl:''+headimgurl+'',
+                        imgUrl: '' + headimgurl + '',
                         success: function () {
                         },
                         cancel: function () {
                         }
                     });
                     wx.onMenuShareAppMessage({
-                        title:  ''+tagvalue+'',
-                        desc: ''+content+'',
+                        title: '' + tagvalue + '',
+                        desc: '' + content + '',
                         link: window.location.href,
                         type: 'link',
-                        imgUrl: ''+headimgurl+'',
+                        imgUrl: '' + headimgurl + '',
                         success: function () {
                         },
                         cancel: function () {
@@ -666,6 +671,7 @@
             }
         });
     }
+
     function loadingcomment(comment) {
         var times = 0;
         var newtime = new Date().getTime();
@@ -697,7 +703,7 @@
         var comment = {
             commentid: commentid,
             commentusername: commentusername,
-            commentuserid:commentuserid,
+            commentuserid: commentuserid,
             commentcontent: commentcontent,
             commentusershow: commentusershow,
             relation: commentrelation,
@@ -725,62 +731,63 @@
             }
             $(".reply").removeClass("reply");
         })
-        $(".close").on("click",function(){
+        $(".close").on("click", function () {
             var close = $(this).parent().attr("value");
             destroycomment(close);
         })
         $(".smpublish").on("click", function () {
             var publishsay = $(this).parent().siblings(".textarea").children().val();
-if(publishsay){
-    var comment = AV.Object.extend("comment");
-    var post = AV.Object.extend("post");
-    var relationcommentid = $(this).attr("value");
-    var relationcommentusername = $(this).attr("username");
-    var relationcommentcontent = $(this).attr("usersay");
-    var relationcommentusershow = $(this).attr("usershow");
-    var relationcommentuserid = $(this).attr("userid");
-    var posts = new post();
-    posts.id = postview;
-    var commentrelation = [];
-    commentrelation.push({
-        commentid: relationcommentid,
-        commentusername: relationcommentusername,
-        commentcontent: relationcommentcontent,
-        commentuserid: relationcommentuserid,
-        commentusershow: relationcommentusershow
-    });
-    var comment = new comment();
-    comment.save({
-        commentcontent: publishsay,
-        commentpost: posts,
-        commentuserid: commentuserid,
-        commentusername: nickname,
-        commentusershow: headUrl,
-        commentrelation: commentrelation
-    }, {
-        success: function (comment) {
-            loadingcomment(comment);
-            var query = new AV.Query(post);
-            //query.equalTo("objectId", postview);
-            query.get(postview, {
-                success: function (post) {
-                    post.add("relationcomment", {id: comment.id});
-                    post.save();
-                },
-                error: function (object, error) {
-                    console.log(object);
-                }
-            });
-        }
-    })
-}else{
-    alert("你要说点什么");
-}
+            if (publishsay) {
+                var comment = AV.Object.extend("comment");
+                var post = AV.Object.extend("post");
+                var relationcommentid = $(this).attr("value");
+                var relationcommentusername = $(this).attr("username");
+                var relationcommentcontent = $(this).attr("usersay");
+                var relationcommentusershow = $(this).attr("usershow");
+                var relationcommentuserid = $(this).attr("userid");
+                var posts = new post();
+                posts.id = postview;
+                var commentrelation = [];
+                commentrelation.push({
+                    commentid: relationcommentid,
+                    commentusername: relationcommentusername,
+                    commentcontent: relationcommentcontent,
+                    commentuserid: relationcommentuserid,
+                    commentusershow: relationcommentusershow
+                });
+                var comment = new comment();
+                comment.save({
+                    commentcontent: publishsay,
+                    commentpost: posts,
+                    commentuserid: commentuserid,
+                    commentusername: nickname,
+                    commentusershow: headUrl,
+                    commentrelation: commentrelation
+                }, {
+                    success: function (comment) {
+                        loadingcomment(comment);
+                        var query = new AV.Query(post);
+                        //query.equalTo("objectId", postview);
+                        query.get(postview, {
+                            success: function (post) {
+                                post.add("relationcomment", {id: comment.id});
+                                post.save();
+                            },
+                            error: function (object, error) {
+                                console.log(object);
+                            }
+                        });
+                    }
+                })
+            } else {
+                alert("你要说点什么");
+            }
 
         })
     }
-    function destroycomment(commentid){
-        $(".destroy"+commentid+"").remove();
+
+    function destroycomment(commentid) {
+        $(".destroy" + commentid + "").remove();
         var post = AV.Object.extend("post");
         var query = new AV.Query(post);
         //query.equalTo("objectId", postview);
@@ -793,41 +800,41 @@ if(publishsay){
         });
         var comment = AV.Object.extend("comment");
         var query2 = new AV.Query(comment);
-        query2.get(commentid,{
-            success:function(comment){
+        query2.get(commentid, {
+            success: function (comment) {
                 comment.destroy();
             }
         })
     }
 
-    function img_thumbnail(obj,url,length){
+    function img_thumbnail(obj, url, length) {
         var img = new Image();
-        img.src=url;
-        img.onload = function(){
-            var imgwidth=this.width;
-            var imgHeight=this.height;
-            if(imgwidth==imgHeight){
+        img.src = url;
+        img.onload = function () {
+            var imgwidth = this.width;
+            var imgHeight = this.height;
+            if (imgwidth == imgHeight) {
                 obj.css({
-                    width: ''+length+'px',
-                    height:''+length+'px'
+                    width: '' + length + 'px',
+                    height: '' + length + 'px'
                 });
-            }else{
-                if(imgwidth>imgHeight){
+            } else {
+                if (imgwidth > imgHeight) {
                     var newmargin
-                    var imgwidth =  imgwidth/(imgHeight/length);
-                    var newmargin=-(imgwidth-length)/2;
+                    var imgwidth = imgwidth / (imgHeight / length);
+                    var newmargin = -(imgwidth - length) / 2;
                     obj.css({
-                        height: ''+length+'px'
+                        height: '' + length + 'px'
                     });
-                    obj.css("margin-left",""+newmargin+"px");
-                }else{
-                    var newheight =  imgHeight/(imgwidth/length);
-                    newmargin=-(newheight-length)/2;
+                    obj.css("margin-left", "" + newmargin + "px");
+                } else {
+                    var newheight = imgHeight / (imgwidth / length);
+                    newmargin = -(newheight - length) / 2;
                     obj.css({
-                        width: ''+length+'px',
-                        height: ''+newheight+'px'
+                        width: '' + length + 'px',
+                        height: '' + newheight + 'px'
                     });
-                    obj.css("margin-top",""+newmargin+"px");
+                    obj.css("margin-top", "" + newmargin + "px");
                 }
             }
         }

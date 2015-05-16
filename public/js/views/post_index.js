@@ -173,7 +173,7 @@
             if (currentUser) {
                 window.location.href = "post_save.html?code=";
             } else {
-                $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl", {page: "http://fuwuhao.dianyingren.com/post_save.html"}, function (res) {
+                $.post(server + "/weixin/getAuthUrl", {page: server + "/post_save.html"}, function (res) {
                     window.location.href = res.authUrl;
                 })
             }
@@ -292,32 +292,6 @@
         });
     }
 
-    //function querytag() {
-    //    var tags = AV.Object.extend("tag");
-    //    var querytag = new AV.Query(tags);
-    //    querytag.find({
-    //        success: function (querytag) {
-    //           // var querytags = [];
-    //            var $selected = $("#js-selected");
-    //            for (var i = 0; i < querytag.length; i++) {
-    //                var object = querytag[i];
-    //                var tagid = object.id;
-    //                var tagvalue = object.get('tagtitle');
-    //                // alert(tagid+"&&&"+tagvalue)
-    //                // $selected.append("<option value=\""+tagid+"&"+tagvalue+"\">\""+tagvalue+"\"</option>");
-    //               // $selected.append("<option value=\""+i+"&"+i+"\">\""+i+"\"</option>");
-    //            }
-    //            //console.log(querytags);
-    //            //var $tpl2 = $('#query-tags');
-    //            //var source2 = $tpl2.text();
-    //            //var template2 = Handlebars.compile(source2);
-    //            //var data2 = {querytags: querytags};
-    //            //var html2 = template2(data2);
-    //            //$tpl2.before(html2);
-    //        }
-    //    })
-    //}
-
     function loadtag(tagid, callbak) {
         var post = AV.Object.extend("post");
         var tags = AV.Object.extend("tags");
@@ -421,7 +395,7 @@
         var debug, appId, jslist, noncestr, signature, timestamp, jsApiList;
         $.ajax({
             method: "POST",
-            url: "http://fuwuhao.dianyingren.com/weixin/getJsConfig",
+            url: server + "/weixin/getJsConfig",
             data: JSON.stringify({
                 url: window.location.href
             }),
@@ -447,7 +421,7 @@
                     wx.onMenuShareTimeline({
                         title: '万科三联书社',
                         link: window.location.href,
-                        imgUrl: 'http://fuwuhao.dianyingren.com/imgs/wankelife.jpg',
+                        imgUrl: server + '/imgs/wankelife.jpg',
                         success: function () {
                         },
                         cancel: function () {
@@ -458,7 +432,7 @@
                         desc: '悦读 悦心 悦生活',
                         link: window.location.href,
                         type: 'link',
-                        imgUrl: 'http://fuwuhao.dianyingren.com/imgs/wankelife.jpg',
+                        imgUrl: server + '/imgs/wankelife.jpg',
                         success: function () {
                         },
                         cancel: function () {

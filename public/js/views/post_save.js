@@ -149,7 +149,7 @@ $(function () {
 //………………………………储备函数…………………………………………
     function dataLoad(callbak) {
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
-        $.post("http://fuwuhao.dianyingren.com/weixin/getJsConfig", {url: "" + saveurl + ""}, function (result) {
+        $.post(server + "/weixin/getJsConfig", {url: "" + saveurl + ""}, function (result) {
             appId = result.appId;
             jslist = result.jsApiList;
             noncestr = result.nonceStr;
@@ -194,7 +194,7 @@ $(function () {
             }
         });
         if (code != "") {
-            $.post("http://fuwuhao.dianyingren.com/weixin/userSignUp", {code: code}, function (res) {
+            $.post(server + "/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
                 AV.User._logInWith("weixin", {
                     "authData": res,
@@ -233,7 +233,7 @@ $(function () {
                 var imgserverId=img.serverId;
                 $.ajax({
                     method: "POST",
-                    url: "http://fuwuhao.dianyingren.com/weixin/uploadImage",
+                    url: server + "weixin/uploadImage",
                     data: JSON.stringify({
                         serverId: imgserverId
                     }),

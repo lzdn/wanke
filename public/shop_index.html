@@ -24,20 +24,30 @@
 </head>
 <body>
 <div class="am-animation-fade">
-<ul class="am-list am-list-static am-list-extend">
-    <li style="color: rgb(93, 100, 125); font-size:18px; font-weight:800;" >周边小店</li>
+    <ul class="am-list am-list-static am-list-extend">
+        <li style="color: rgb(93, 100, 125); font-size:18px; font-weight:800;">周边小店</li>
         <script type="text/x-handlebars-template" id="shop">
             {{#each shops}}
-            <li><div  class="shopcontent" value="{{this.id}}"><img class="am-circle" src={{this.logo}} width="40" height="40"/><p class="am-sans-serif">{{this.name}}</p></div><a href="tel:{{this.tel}}" class="am-icon am-icon-phone am-icon-md"></a></li>
+            <li>
+                <div class="shopcontent" value="{{this.id}}"><img class="am-circle" src={{this.logo}} width="40"
+                                                                  height="40"/>
+
+                    <p class="am-sans-serif">{{this.name}}</p></div>
+                <a href="tel:{{this.tel}}" class="am-icon am-icon-phone am-icon-md"></a></li>
             {{/each}}
         </script>
-    <li style="color: rgb(93, 100, 125);  font-size:18px; font-weight:800;" >物业管理</li>
-    <script type="text/x-handlebars-template" id="shop2">
-        {{#each shops}}
-        <li><div  class="shopcontent" value="{{this.id}}"><img class="am-circle" src={{this.logo}} width="40" height="40"/><p class="am-sans-serif">{{this.name}}</p></div><a href="tel:{{this.tel}}" class="am-icon am-icon-phone am-icon-md"></a></li>
-        {{/each}}
-    </script>
-</ul>
+        <li style="color: rgb(93, 100, 125);  font-size:18px; font-weight:800;">物业管理</li>
+        <script type="text/x-handlebars-template" id="shop2">
+            {{#each shops}}
+            <li>
+                <div class="shopcontent" value="{{this.id}}"><img class="am-circle" src={{this.logo}} width="40"
+                                                                  height="40"/>
+
+                    <p class="am-sans-serif">{{this.name}}</p></div>
+                <a href="tel:{{this.tel}}" class="am-icon am-icon-phone am-icon-md"></a></li>
+            {{/each}}
+        </script>
+    </ul>
 </div>
 
 <div data-am-widget="navbar" class="am-navbar am-cf" id="">
@@ -55,7 +65,7 @@
             </a>
         </li>
         <li>
-            <a  id="users">
+            <a id="users">
                 <i class="am-header-icon am-icon-user am-icon-sm"></i>
                 <span class="am-navbar-label">个人中心</span>
             </a>
@@ -63,14 +73,14 @@
     </ul>
 </div>
 
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/amazeui.min.js"></script>
-    <script src="assets/js/amazeui.widgets.helper.min.js"></script>
-    <script src="assets/js/handlebars.min.js"></script>
-    <script src="https://leancloud.cn/scripts/lib/av-0.5.0.min.js"></script>
-    <script src="js/views/shop_index.js"></script>
-    <!--[if lte IE 8 ]>
-    <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
-    <![endif]-->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/amazeui.min.js"></script>
+<script src="assets/js/amazeui.widgets.helper.min.js"></script>
+<script src="assets/js/handlebars.min.js"></script>
+<script src="https://leancloud.cn/scripts/lib/av-0.5.0.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/views/shop_index.js"></script>
+
+
 </body>
 </html>
