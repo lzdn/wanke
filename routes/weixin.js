@@ -192,40 +192,40 @@ router.post('/uploadImage', function (req, res) {
         });
     });
 });
-router.get('/createMenu', function (req, res) {
-    var menu = {
-        "button": [{
-            "type": "view",
-            "name": "易生活",
-            "url": "http://fuwuhao.dianyingren.com/shop_index.html"
-        }, {
-            "type": "view",
-            "name": "邻里圈",
-            "url": "http://fuwuhao.dianyingren.com/post_index.html"
-        }, {
-            "type": "view",
-            "name": "个人中心",
-            "url": "http://fuwuhao.dianyingren.com/user_detail.html?code="
-        }]
-    };
-
-    api.createMenu(menu, function (err, result) {
-        if (err) {
-            res.json(err);
-        }
-
-        res.json(result);
-    });
-});
-
-router.get('/removeMenu', function (req, res) {
+router.post('/publishMenu', function (req, res) {
+    //var menu = {
+    //    "button": [{
+    //        "type": "view",
+    //        "name": "易生活",
+    //        "url": "http://fuwuhao.dianyingren.com/shop_index.html"
+    //    }, {
+    //        "type": "view",
+    //        "name": "邻里圈",
+    //        "url": "http://fuwuhao.dianyingren.com/post_index.html"
+    //    }, {
+    //        "type": "view",
+    //        "name": "个人中心",
+    //        "url": "http://fuwuhao.dianyingren.com/user_detail.html?code="
+    //    }]
+    //};
+    var body = req.body;
 
     api.removeMenu(function (err, result) {
         if (err) {
             res.json(err);
         }
 
-        res.json(result);
+        if (body.menu) {
+            api.createMenu(body.menu, function (err, result) {
+                if (err) {
+                    res.json(err);
+                }
+
+                res.json(result);
+            });
+        } else {
+            res.json({msg: "删除成功！"})
+        }
     });
 });
 
