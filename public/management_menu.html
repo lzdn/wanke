@@ -65,9 +65,9 @@
                         <div class="am-panel-hd">
                             <h4 class="am-panel-title" data-am-collapse="{parent: '#accordion', target: '#{{this.id}}'}">
                               {{this.name}}
-                                <span class="{{this.title}} am-icon-sm menu_icon" title={{this.title}}></span>
+                                <span class="{{this.type}} am-icon-sm menu_icon" title={{this.type}}></span>
                                 <div class="btn_content">
-                                    <button menuid={{this.id}} bmenu="0" grade="2" type="button" class="am-btn am-radius am-btn-default menu_btn">编辑</button>
+                                    <button menuid={{this.id}} bmenu="0" grade="1" type="button" class="am-btn am-radius am-btn-default menu_btn">编辑</button>
                                 </div>
                             </h4>
                         </div>
@@ -76,7 +76,7 @@
                                 <li menuid={{this.id}} bmenu="2" grade="1" class="add_menu_list"><a class="am-icon-arrows" href="#"></a><a href="#" class="add_menu">添加二级菜单</a></li>
                                 {{#if this.relation}}
                                 {{#each this.relation}}
-                                <li menuid={{this.id}} bmenu="0" grade="2" class="menu_list"><a href="#">{{this.name}}<span class="{{this.title}} am-icon-sm menu_icon"></span></a></li>
+                                <li menuid={{this.id}} bmenu="0" grade="2" class="menu_list"><a href="#">{{this.name}}<span class="{{this.type}} am-icon-sm menu_icon"></span></a></li>
                                 {{/each}}
                                 {{/if}}
                             </ul>
@@ -89,7 +89,7 @@
             </div>
 
             <div class="menulist_foot">
-                <button type="button" class="am-btn am-btn-default am-radius">保存</button>
+                <!--<button type="button" class="am-btn am-btn-default am-radius">保存</button>-->
                 <button type="button" class="am-btn am-btn-primary am-radius">发布</button>
             </div>
         </div>
@@ -118,7 +118,7 @@
                 </div>
                 <div class="am-form-group">
                     <label class="input_menu input_menu_input" for="doc-vld-url-2">关联&nbsp&nbsp&nbsp：</label>
-                    <input class="input input_menu_url" type="text" id="doc-vld-url-2" placeholder="请输入关联" required/>
+                    <input class="input input_menu_content" type="text" id="doc-vld-url-2" placeholder="请输入关联" required/>
                 </div>
                 <div class="am-form-group">
                     <label class="input_menu">菜单类型： </label>
