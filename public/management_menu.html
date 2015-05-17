@@ -50,7 +50,7 @@
         <div class="am-cf am-padding">
             <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">自定义菜单设置</strong></div>
             <button type="button" class="am-btn am-radius am-btn-xs am-btn-primary add-menu-btn" menuid="0" bmenu="1"
-                    grade="1">添加一级菜单
+                    grade="1" onclick="upmodal(event,0,1,1)">添加一级菜单
             </button>
         </div>
         <div class="menulist">
@@ -71,20 +71,21 @@
                                     <span class="{{this.type}} am-icon-sm menu_icon" title={{this.type}}></span>
 
                                     <div class="btn_content">
-                                        <button menuid={{this.id}} bmenu="0" grade="1" type="button"
-                                                class="am-btn am-radius am-btn-default menu_btn">编辑
+                                        <button type="button" class="am-btn am-radius am-btn-default menu_btn" menuid={{this.id}}
+                                                bmenu="0" grade="1" onclick="upmodal(event,'{{this.id}}',0,1)"
+                                                >编辑
                                         </button>
                                     </div>
                                 </h4>
                             </div>
                             <div id={{this.id}} class="am-panel-collapse am-collapse">
                                 <ul class="am-list">
-                                    <li menuid={{this.id}} bmenu="2" grade="1" class="add_menu_list"><a
+                                    <li menuid={{this.id}} bmenu="2" grade="1" class="add_menu_list" onclick="upmodal(event,'{{this.id}}',2,1)"><a
                                             class="am-icon-arrows" href="#"></a><a href="#" class="add_menu">添加二级菜单</a>
                                     </li>
                                     {{#if this.relation}}
                                     {{#each this.relation}}
-                                    <li menuid={{this.id}} bmenu="0" grade="2" class="menu_list"><a href="#">{{this.name}}<span
+                                    <li menuid={{this.id}} bmenu="0" grade="2" class="menu_list" onclick="upmodal(event,'{{this.id}}',0,2)"><a href="#">{{this.name}}<span
                                             class="{{this.type}} am-icon-sm menu_icon"></span></a></li>
                                     {{/each}}
                                     {{/if}}
@@ -99,7 +100,7 @@
 
                 <div class="menulist_foot">
                     <!--<button type="button" class="am-btn am-btn-default am-radius">保存</button>-->
-                    <button id="Release" type="button" class="am-btn am-btn-primary am-radius">发布</button>
+                    <button id="Release" onclick="Release_data()" type="button" class="am-btn am-btn-primary am-disabled am-radius">发布</button>
                 </div>
             </div>
         </div>
@@ -118,7 +119,9 @@
             <div class="am-modal-bd">
                 编辑菜单
             </div>
-
+            <div class="am-modal-hd">
+                <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+            </div>
             <form action="" class="am-form">
                 <fieldset>
                     <div class="am-form-group">
@@ -147,9 +150,8 @@
             </form>
 
             <div class="am-modal-footer">
-                <span class="am-modal-btn" data-am-modal-cancel>返回</span>
-                <span class="am-modal-btn remove_menu" data-am-modal-cancel>删除</span>
-                <span class="am-modal-btn save_menu" data-am-modal-confirm>确认</span>
+                <span class="am-modal-btn remove_menu" onclick="remove_menu()" data-am-modal-cancel>删除</span>
+                <span class="am-modal-btn save_menu" onclick="save_menu()" data-am-modal-confirm>保存</span>
             </div>
         </div>
     </div>

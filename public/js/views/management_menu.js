@@ -1,111 +1,10 @@
-(function ($) {
+
     AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
-    loadmenu(function (menusdata, menu_one_length) {
-        var bmenu, menuid, grade,menu;
-        var button =[]
-        for (var i = 0; i < menusdata.length; i++) {
-            if (menusdata[i].type != "null") {
-                var button_data = {
-                    "type": menusdata[i].type,
-                    "name": menusdata[i].name,
-                    "key": menusdata[i].content
-                }
-                button.push(button_data);
-            } else {
-                var relation_data=menusdata[i].relation;
-                var list_data=[];
-                if(relation_data){
-                    for(var j=0;j<relation_data.length;j++){
-                        var list = {
-                            "type": relation_data[j].type,
-                            "name": relation_data[j].name,
-                            "url": relation_data[j].content
-                        }
-                        list_data.push(list);
-                    }
-                    var button_data={
-                        "name": menusdata[i].name,
-                        "sub_button":{
-                            "list":list_data
-                        }
-                    }
-                    button.push(button_data);
-                }else{
-                    var button_data={
-                        "name": menusdata[i].name,
-                        "sub_button":{
-                            "list":list_data
-                        }
-                    }
-                    button.push(button_data);
-                }
-            }
-        }
-        menu ={
-            "button":button
-        }
-        $("#Release").on("click",function(){
-            console.log(menu);
-            //$.ajax({
-            //    method: "POST",
-            //    url: server + "/weixin/publishMenu",
-            //    data: menu,
-            //    contentType: "application/json; charset=utf-8",
-            //    dataType: "json",
-            //    success: function (result) {}
-            //});
-        });
-        $(".view").addClass("am-icon-chain");
-        $(".click").addClass("am-icon-wechat");
-        $(".menu_btn").hide();
-        $("input[name=docVlGender]:eq(0)").attr("checked", 'checked');
-        $("input[name=docVlGender]").on("click", function () {
-            if ($("input[name='docVlGender']:checked").val() == "null") {
-                $(".input_menu_content").attr("disabled", true);
-            } else {
-                $(".input_menu_content").val("");
-                $('.input_menu_content').attr("disabled", false);
-            }
-        });
-        $(".btn_content").mouseout(function () {
-            $(this).children().hide();
-        }).mousemove(function () {
-            $(this).children().show();
-        });
-
-        $(".add-menu-btn,.menu_btn,.menu_list,.add_menu_list").on("click", function (event) {
-            menuid = $(this).attr("menuid");
-            bmenu = $(this).attr("bmenu");
-            grade = $(this).attr("grade");
-            $('#my-prompt').modal();
-            event.stopPropagation();
-        });
-        $(".save_menu").on("click", function () {
-
-            var menuname = $(".input_menu_name").val();
-            var menucontent = $(".input_menu_content").val();
-            var menutype = $("input[name='docVlGender']:checked").val();
-
-            if (!menuname) {
-                alert("请输入菜单名");
-            } else {
-                if (!menucontent && menutype != "null") {
-                    alert("请输入关系");
-                } else {
-                    add_menudata(bmenu, menuid, grade, menuname, menucontent, menutype, menu_one_length);
-                }
-            }
-        });
-        $(".remove_menu").on("click", function () {
-            if (bmenu == 0) {
-                if (grade == 1) {
-                    destroy_menu(menuid, 1);
-                }
-                if (grade == 2) {
-                    destroy_menu(menuid, 2);
-                }
-            }
-        })
+    var bmenu, menuid, grade,menu,menu_one_length;
+    var bRelease_data=0;
+    $(".am-panel-default").remove();
+    loadmenu(function(menusdata){
+        add_event (menusdata);
     });
     function loadmenu(callbak) {
         var menus = AV.Object.extend("menu");
@@ -136,7 +35,8 @@
                 var data = {menus: menus};
                 var html = template(data);
                 $tpl.before(html);
-                callbak(menus, res.length);
+                menu_one_length= res.length;
+                callbak(menus);
             }
         })
     }
@@ -166,13 +66,21 @@
                         }
                         destroy_menu.destroy({
                             success: function () {
-                                window.location.reload();
+                                $(".am-panel-default").remove();
+                                bRelease_data+=1;
+                                loadmenu(function(menusdata){
+                                    add_event (menusdata);
+                                });
                             }
                         });
                     } else {
                         destroy_menu.destroy({
                             success: function () {
-                                window.location.reload();
+                                $(".am-panel-default").remove();
+                                bRelease_data+=1;
+                                loadmenu(function(menusdata){
+                                    add_event (menusdata);
+                                });
                             }
                         });
                     }
@@ -198,7 +106,11 @@
                                 success: function () {
                                     destroy_menu.destroy({
                                         success: function () {
-                                            window.location.reload();
+                                            $(".am-panel-default").remove();
+                                            bRelease_data+=1;
+                                            loadmenu(function(menusdata){
+                                                add_event (menusdata);
+                                            });
                                         }
                                     });
                                 }
@@ -209,7 +121,32 @@
             });
         }
     }
+    function save_menu(){
+        var menuname = $(".input_menu_name").val();
+        var menucontent = $(".input_menu_content").val();
+        var menutype = $("input[name='docVlGender']:checked").val();
 
+        if (!menuname) {
+            alert("请输入菜单名");
+        } else {
+            if (!menucontent && menutype != "null") {
+                alert("请输入关系");
+            } else {
+                add_menudata(bmenu, menuid, grade, menuname, menucontent, menutype, menu_one_length);
+            }
+        }
+    }
+
+    function remove_menu(){
+        if (bmenu == 0) {
+            if (grade == 1) {
+                destroy_menu(menuid, 1);
+            }
+            if (grade == 2) {
+                destroy_menu(menuid, 2);
+            }
+        }
+    }
     function add_menudata(bmenu, menuid, grade, menuname, menucontent, menutype, menu_one_length) {
         var menus = AV.Object.extend("menu");
         var menu = new menus();
@@ -223,7 +160,11 @@
                 menu.set("grade", "1");
                 menu.save({
                     success: function (res) {
-                        window.location.reload();
+                        $(".am-panel-default").remove();
+                        bRelease_data+=1;
+                        loadmenu(function(menusdata){
+                            add_event (menusdata);
+                        });
                     }
                 });
             }
@@ -261,7 +202,11 @@
                                     resmenu.add("relationmenu_id", res.id);
                                     resmenu.save({
                                         success: function (res) {
-                                            window.location.reload();
+                                            $(".am-panel-default").remove();
+                                            bRelease_data+=1;
+                                            loadmenu(function(menusdata){
+                                                add_event (menusdata);
+                                            });
                                         }
                                     });
                                 }
@@ -323,7 +268,11 @@
                                                     up_resmenu2.remove("relationmenu", oldresmenu);
                                                     up_resmenu2.save({
                                                         success: function (res) {
-                                                            window.location.reload();
+                                                            $(".am-panel-default").remove();
+                                                            loadmenu(function(menusdata){
+                                                                bRelease_data+=1;
+                                                                add_event (menusdata);
+                                                            });
                                                         }
                                                     });
                                                 }
@@ -331,7 +280,11 @@
                                         }
                                     });
                                 } else {
-                                    window.location.reload();
+                                    $(".am-panel-default").remove();
+                                    bRelease_data+=1;
+                                    loadmenu(function(menusdata){
+                                        add_event (menusdata);
+                                    });
                                 }
                             }
                         });
@@ -342,9 +295,90 @@
         $(".input_menu_name").val("");
         $(".input_menu_content").val("");
     }
+function upmodal (event,menuids,bmenus,grades){
+    menuid = menuids;
+    bmenu = bmenus;
+    grade = grades;
+    $('#my-prompt').modal();
+    event.stopPropagation();
+}
+    function Release_data(){
 
-})(jQuery);
+            console.log(menu);
+            //$.ajax({
+            //    method: "POST",
+            //    url: server + "/weixin/publishMenu",
+            //    data: menu,
+            //    contentType: "application/json; charset=utf-8",
+            //    dataType: "json",
+            //    success: function (result) {}
+            //});
 
+    }
+    function add_event (menusdata){
+        if(bRelease_data!=0){
+            $("#Release").removeClass("am-disabled");
+        }
+        var button =[]
+        for (var i = 0; i < menusdata.length; i++) {
+            if (menusdata[i].type != "null") {
+                var button_data = {
+                    "type": menusdata[i].type,
+                    "name": menusdata[i].name,
+                    "key": menusdata[i].content
+                }
+                button.push(button_data);
+            } else {
+                var relation_data=menusdata[i].relation;
+                var list_data=[];
+                if(relation_data){
+                    for(var j=0;j<relation_data.length;j++){
+                        var list = {
+                            "type": relation_data[j].type,
+                            "name": relation_data[j].name,
+                            "url": relation_data[j].content
+                        }
+                        list_data.push(list);
+                    }
+                    var button_data={
+                        "name": menusdata[i].name,
+                        "sub_button":{
+                            "list":list_data
+                        }
+                    }
+                    button.push(button_data);
+                }else{
+                    var button_data={
+                        "name": menusdata[i].name,
+                        "sub_button":{
+                            "list":list_data
+                        }
+                    }
+                    button.push(button_data);
+                }
+            }
+        }
+        menu ={
+            "button":button
+        }
+        $(".view").addClass("am-icon-chain");
+        $(".click").addClass("am-icon-wechat");
+        $(".menu_btn").hide();
+        $("input[name=docVlGender]:eq(0)").attr("checked", 'checked');
+        $("input[name=docVlGender]").on("click", function () {
+            if ($("input[name='docVlGender']:checked").val() == "null") {
+                $(".input_menu_content").attr("disabled", true);
+            } else {
+                $(".input_menu_content").val("");
+                $('.input_menu_content').attr("disabled", false);
+            }
+        });
+        $(".btn_content").mouseout(function () {
+            $(this).children().hide();
+        }).mousemove(function () {
+            $(this).children().show();
+        });
+    }
 //var menu = {
 //
 //    "button": [
