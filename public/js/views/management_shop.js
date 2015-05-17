@@ -3,7 +3,7 @@
  */
 AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
 var Shop = AV.Object.extend("shop");
-var Shop_id, shop_name, shop_title, shop_service,shop_address,service_time,shop_range,shop_type,shop_tel,Judge_menu;
+var Shop_id, shop_name, shop_title, shop_service, shop_address, service_time, shop_range, shop_type, shop_tel, Judge_menu;
 window.onload = function () {
     load();
 };
@@ -32,8 +32,8 @@ function load() {
                     shopaddress: '',
                     servicetime: '',
                     range: '',
-                    type:'',
-                    tel:''
+                    type: '',
+                    tel: ''
                 };
                 shop.id = results[x].id;
                 shop.shopname = results[x].get('shopname');
@@ -62,9 +62,7 @@ function load() {
 }
 
 function save() {
-    alert(Judge_menu);
     if (Judge_menu == null) {
-        alert($("#lbl_type ").val());
         var new_shop = new Shop();
         new_shop.set('shopname', shop_name.value);
         new_shop.set('shopservice', shop_service.value);
@@ -121,19 +119,30 @@ function edit(id) {
     var query = new AV.Query(Shop);
     query.get(id, {
         success: function (resshop) {
-            Shop_id.value = resshop.id;
             shop_name.value = resshop.get('shopname');
-            shop_service.value= resshop.get('shopservice');
-            shop_address.value= resshop.get('shopaddress');
-            service_time.value= resshop.get('servicetime');
-            shop_range.value= resshop.get('range');
-            shop_tel.value= resshop.get('shoptel');
-            $("#lbl_logo option[value=\""+resshop.get('logo')+"\"]").attr("selected", "selected");
-            $("#lbl_type option[value=\""+resshop.get('type')+"\"]").attr("selected", "selected");
+            shop_service.value = resshop.get('shopservice');
+            shop_address.value = resshop.get('shopaddress');
+            service_time.value = resshop.get('servicetime');
+            shop_range.value = resshop.get('range');
+            shop_tel.value = resshop.get('shoptel');
+            $("#lbl_logo option[value=\"" + resshop.get('logo') + "\"]").attr("selected", "selected");
+            $("#lbl_type option[value=\"" + resshop.get('type') + "\"]").attr("selected", "selected");
+            var form_input = $(".form_input");
+            for (var i = 0; i < form_input.length; i++) {
+                if (form_input[i].value=="undefined") {
+                    form_input[i].value = ""
+                }
+            }
         }
     })
 }
 
-function Judge (menuid){
-    Judge_menu=menuid;
+function Judge(menuid) {
+    Judge_menu = menuid;
+}
+function remove_list(){
+    var form_input = $(".form_input");
+    for (var i = 0; i < form_input.length; i++) {
+            form_input[i].value = ""
+    }
 }
