@@ -3,17 +3,23 @@
  */
 AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
 var Shop = AV.Object.extend("shop");
-var keyword_id, key, word, keyword_model;
+var Shop_id, shop_name, shop_title, shop_service,shop_address,service_time,shop_range,shop_type,shop_tel;
+
 
 window.onload = function () {
     load();
 };
 
 function load() {
-    keyword_id = document.getElementById('hd_keyword_id');
-    key = document.getElementById('lbl_key');
-    word = document.getElementById('lbl_word');
-    keyword_model = $('#keyword-modal');
+    Shop_id = document.getElementById('hd_keyword_id');
+    shop_name = document.getElementById('lbl_key');                 //名称
+    shop_title = $("#lbl_logo");                                    //类型
+    shop_service = document.getElementById('lbl_shopservice');      //描述
+    shop_address = document.getElementById('lbl_shopaddress');      //地址
+    service_time = document.getElementById('lbl_servicetime');      //时间
+    shop_range = document.getElementById('lbl_range');              //范围
+    shop_tel = document.getElementById('shop_tel');                 //联系电话
+    shop_type = $("#lbl_type ");                                    //隶属
 
     $('td').remove();
     var query = new AV.Query(Shop);
@@ -28,7 +34,9 @@ function load() {
                     shopservice: '',
                     shopaddress: '',
                     servicetime: '',
-                    range: ''
+                    range: '',
+                    type:'',
+                    tel:''
                 };
 
                 shop.id = results[x].id;
@@ -38,7 +46,8 @@ function load() {
                 shop.shopaddress = results[x].get('shopaddress');
                 shop.servicetime = results[x].get('servicetime');
                 shop.range = results[x].get('range');
-
+                shop.type = results[x].get('type');
+                shop.tel = results[x].get('shoptel');
                 shops.push(shop);
                 console.log(shop);
             }
@@ -60,12 +69,12 @@ function save() {
     console.log(keyword_id.value);
     if (keyword_id.value == null || keyword_id.value == '') {
         console.log('id为空');
-        var keyword = new Keyword();
-        keyword.set('key', key.value);
-        keyword.set('word', word.value);
+        var keyword = new Shop();
+        keyword.set('key', Shop.value);
+        keyword.set('word', Shop.value);
         keyword.save(null, {
-            success: function (keyword) {
-                console.log(keyword);
+            success: function (shop) {
+                console.log(shop);
                 console.log('---------------------');
                 keyword_model.modal('close');
                 load();
@@ -76,14 +85,14 @@ function save() {
         })
     } else {
         console.log('id不为空');
-        var query = new AV.Query(Keyword);
+        var query = new AV.Query(Shop);
         query.get(keyword_id.value, {
-            success: function (keyword) {
-                keyword.set('key', key.value);
-                keyword.set('word', word.value);
-                keyword.save(null, {
-                    success: function (keyword) {
-                        console.log(keyword);
+            success: function (shop) {
+                shop.set('key', key.value);
+                shop.set('word', word.value);
+                shop.save(null, {
+                    success: function (resshop) {
+                        console.log(resshop);
                         keyword_model.modal('close');
                         load();
                     },
@@ -120,13 +129,20 @@ function del(id) {
 }
 
 function edit(id) {
-    var query = new AV.Query(Keyword);
+    alert(id)
+    var query = new AV.Query(Shop);
     query.get(id, {
-        success: function (keyword) {
-            keyword_id.value = keyword.id;
-            key.value = keyword.get('key');
-            word.value = keyword.get('word');
-            keyword_model.modal('open');
+        success: function (resshop) {
+            //Shop_id, shop_name, shop_title, shop_service,shop_address,service_time,shop_range,shop_type
+            Shop_id.value = resshop.id;
+            shop_name.value = resshop.get('shopname');
+            shop_service.value= resshop.get('shopservice');
+           // $("#lbl_logo option[value=\""+resshop.get('word')+"\"]").attr("selected", "selected");
+            shop_address.value= resshop.get('shopaddress');
+            service_time.value= resshop.get('servicetime');
+            shop_range.value= resshop.get('range');
+            shop_tel.value= resshop.get('shoptel');
+            $("#lbl_type option[value=\""+resshop.get('lbl_type')+"\"]").attr("selected", "selected");
         },
         error: function () {
 
