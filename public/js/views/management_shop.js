@@ -3,13 +3,10 @@
  */
 AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
 var Shop = AV.Object.extend("shop");
-var Shop_id, shop_name, shop_title, shop_service,shop_address,service_time,shop_range,shop_type,shop_tel;
-
-
+var Shop_id, shop_name, shop_title, shop_service,shop_address,service_time,shop_range,shop_type,shop_tel,Judge_menu;
 window.onload = function () {
     load();
 };
-
 function load() {
     Shop_id = document.getElementById('hd_keyword_id');
     shop_name = document.getElementById('lbl_key');                 //名称
@@ -38,7 +35,6 @@ function load() {
                     type:'',
                     tel:''
                 };
-
                 shop.id = results[x].id;
                 shop.shopname = results[x].get('shopname');
                 shop.logo = results[x].get('logo');
@@ -66,17 +62,20 @@ function load() {
 }
 
 function save() {
-    console.log(keyword_id.value);
-    if (keyword_id.value == null || keyword_id.value == '') {
-        console.log('id为空');
-        var keyword = new Shop();
-        keyword.set('key', Shop.value);
-        keyword.set('word', Shop.value);
-        keyword.save(null, {
+    alert(Judge_menu);
+    if (Judge_menu == null) {
+        alert($("#lbl_type ").val());
+        var new_shop = new Shop();
+        new_shop.set('shopname', shop_name.value);
+        new_shop.set('shopservice', shop_service.value);
+        new_shop.set('shopaddress', shop_address.value);
+        new_shop.set('servicetime', service_time.value);
+        new_shop.set('range', shop_range.value);
+        new_shop.set('shoptel', parseInt(shop_tel.value));
+        new_shop.set('logo', $("#lbl_logo").val());
+        new_shop.set('type', $("#lbl_type ").val());
+        new_shop.save(null, {
             success: function (shop) {
-                console.log(shop);
-                console.log('---------------------');
-                keyword_model.modal('close');
                 load();
             },
             error: function (keyword, error) {
@@ -84,68 +83,57 @@ function save() {
             }
         })
     } else {
-        console.log('id不为空');
         var query = new AV.Query(Shop);
-        query.get(keyword_id.value, {
-            success: function (shop) {
-                shop.set('key', key.value);
-                shop.set('word', word.value);
-                shop.save(null, {
+        query.get(Judge_menu, {
+            success: function (up_shop) {
+                up_shop.set('shopname', shop_name.value);
+                up_shop.set('shopservice', shop_service.value);
+                up_shop.set('shopaddress', shop_address.value);
+                up_shop.set('servicetime', service_time.value);
+                up_shop.set('range', shop_range.value);
+                up_shop.set('shoptel', parseInt(shop_tel.value));
+                up_shop.set('logo', $("#lbl_logo").val());
+                up_shop.set('type', $("#lbl_type ").val());
+                up_shop.save(null, {
                     success: function (resshop) {
-                        console.log(resshop);
-                        keyword_model.modal('close');
                         load();
-                    },
-                    error: function () {
-
                     }
                 })
-            },
-            error: function () {
-
             }
         })
     }
 }
 
 function del(id) {
-    console.log('delete_id:' + id);
-    var query = new AV.Query(Keyword);
+    var query = new AV.Query(Shop);
     query.get(id, {
-        success: function (keyword) {
-            keyword.destroy({
+        success: function (del_shop) {
+            del_shop.destroy({
                 success: function (result) {
                     load();
-                },
-                error: function (result, error) {
-
                 }
             });
-        },
-        error: function () {
-
         }
     })
 }
 
 function edit(id) {
-    alert(id)
     var query = new AV.Query(Shop);
     query.get(id, {
         success: function (resshop) {
-            //Shop_id, shop_name, shop_title, shop_service,shop_address,service_time,shop_range,shop_type
             Shop_id.value = resshop.id;
             shop_name.value = resshop.get('shopname');
             shop_service.value= resshop.get('shopservice');
-           // $("#lbl_logo option[value=\""+resshop.get('word')+"\"]").attr("selected", "selected");
             shop_address.value= resshop.get('shopaddress');
             service_time.value= resshop.get('servicetime');
             shop_range.value= resshop.get('range');
             shop_tel.value= resshop.get('shoptel');
-            $("#lbl_type option[value=\""+resshop.get('lbl_type')+"\"]").attr("selected", "selected");
-        },
-        error: function () {
-
+            $("#lbl_logo option[value=\""+resshop.get('logo')+"\"]").attr("selected", "selected");
+            $("#lbl_type option[value=\""+resshop.get('type')+"\"]").attr("selected", "selected");
         }
     })
+}
+
+function Judge (menuid){
+    Judge_menu=menuid;
 }
