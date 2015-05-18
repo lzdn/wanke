@@ -70,7 +70,6 @@
                                     data-am-collapse="{parent: '#accordion', target: '#{{this.id}}'}">
                                     {{this.name}}
                                     <span class=" am-icon-sm menu_icon"></span>
-
                                     <div class="btn_content">
                                         <button type="button" class="am-btn am-radius am-btn-default menu_btn" menuid={{this.id}}
                                                 bmenu="0" grade="1" onclick="upmodal(event,'{{this.id}}',0,1)"
@@ -86,7 +85,7 @@
                                     </li>
                                     {{#if this.building}}
                                     {{#each this.building}}
-                                    <li class={{this}} houseid={{this}} bmenu="0" grade="2" class="menu_list" onclick="upmodal(event,'{{this}}',0,2)"><a href="#">{{this}}<span
+                                    <li  houseid={{this.id}} bmenu="0" grade="2" class="menu_list" onclick="upmodal(event,'{{this.id}}&{{this.name}}',0,2)"><a href="#">{{this.name}}<span
                                             class=" am-icon-sm menu_icon"></span></a></li>
                                     {{/each}}
                                     {{/if}}

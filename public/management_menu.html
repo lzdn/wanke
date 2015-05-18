@@ -125,33 +125,35 @@
             </div>
             <form action="" class="am-form">
                 <fieldset>
-                    <div class="am-form-group">
+                    <div id="input_menu_name" class="am-form-group">
                         <label class="input_menu input_menu_input" for="doc-vld-name-2">菜单名：</label>
                         <input class="input input_menu_name" type="text" id="doc-vld-name-2" minlength="3"
                                placeholder="输入菜单名" required/>
                     </div>
-                    <div class="am-form-group">
+                    <div id="input_menu_content" class="am-form-group">
                         <label class="input_menu input_menu_input" for="doc-vld-url-2">关联&nbsp&nbsp&nbsp：</label>
                         <input class="input input_menu_content" type="text" id="doc-vld-url-2" placeholder="请输入关联"
                                required/>
                     </div>
-                    <div class="am-form-group">
+                    <div id="am-radio-inline" class="am-form-group">
                         <label class="input_menu">菜单类型： </label>
-                        <label class="am-radio-inline">
-                            <input type="radio" value="click" name="docVlGender" required> 回复
-                        </label>
                         <label class="am-radio-inline">
                             <input type="radio" value="view" name="docVlGender"> 跳转链接
                         </label>
                         <label class="am-radio-inline">
-                            <input type="radio" value="null" name="docVlGender"> 一级菜单
+                            <input type="radio" value="click" name="docVlGender" required> 回复
                         </label>
+
+                        <!--<label class="am-radio-inline">-->
+                            <!--<input type="radio" value="null" name="docVlGender"> 一级菜单-->
+                        <!--</label>-->
                     </div>
                 </fieldset>
             </form>
 
             <div class="am-modal-footer">
-                <span class="am-modal-btn remove_menu" onclick="remove_menu()" data-am-modal-cancel>删除</span>
+                <span id="return_btn" class="am-modal-btn remove_menu" data-am-modal-cancel>返回</span>
+                <span id="delete_btn" class="am-modal-btn remove_menu" onclick="remove_menu()" data-am-modal-cancel>删除</span>
                 <span class="am-modal-btn save_menu" onclick="save_menu()" data-am-modal-confirm>保存</span>
             </div>
         </div>

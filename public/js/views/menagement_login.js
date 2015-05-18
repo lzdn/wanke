@@ -6,6 +6,12 @@
     var userpwd_cookie =cookie.get("wankeloginuserpwd");
     if(useremail_cookie&&userpwd_cookie){
         //…………………………待跳转……………………
+        if(window.location.search.split('?')[1].split('=')[0]=="Jump_url"){
+            window.location.href= window.location.search.split('?')[1].split('=')[0];
+        }else{
+            //^^^^^^设置默认跳转页面……………………
+            window.location.href= server + '/menagement_menu.html';
+        }
     }
    $("#login").on("click",function(){
         var user = $("#email").val();

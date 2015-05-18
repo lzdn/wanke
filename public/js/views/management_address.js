@@ -37,89 +37,48 @@ function loadmenu(callbak) {
 }
 
 // …………………………………储备函数……………………………………………
-function destroy_menu(meun_id, grade) {
-    var menus = AV.Object.extend("menu");
-    if (grade == 1) {
-        var query = new AV.Query(menus);
-        query.get(meun_id, {
-            success: function (destroy_menu) {
-                var destroy_menus = destroy_menu.get("relationmenu_id");
-                if (destroy_menus && destroy_menus.length > 0) {
-                    for (var i = 0; i < destroy_menus.length; i++) {
-                        var query2 = new AV.Query(menus);
-                        query2.get(destroy_menus[i], {
-                            success: function (res) {
-                                res.destroy({
-                                    success: function () {
-                                        if (i == destroy_menus.length - 1) {
-                                            //window.location.reload();
-                                        }
-                                    }
-                                });
-                            }
-                        })
-                    }
-                    destroy_menu.destroy({
-                        success: function () {
-                            $(".am-panel-default").remove();
-                            bRelease_data+=1;
-                            loadmenu(function(menusdata){
-                                add_event (menusdata);
-                            });
-                        }
-                    });
-                } else {
-                    destroy_menu.destroy({
-                        success: function () {
-                            $(".am-panel-default").remove();
-                            bRelease_data+=1;
-                            loadmenu(function(menusdata){
-                                add_event (menusdata);
-                            });
-                        }
-                    });
-                }
-            }
-        })
-    } else {
-        var query = new AV.Query(menus);
-        query.get(meun_id, {
-            success: function (destroy_menu) {
-                var relation_menuid = destroy_menu.get("menu_relation").id;
-                var oldresmenu = {
-                    id: destroy_menu.id,
-                    type: destroy_menu.get("menu_type"),
-                    name: destroy_menu.get("menu_name"),
-                    content: destroy_menu.get("menu_content")
-                }
-                var query2 = new AV.Query(menus);
-                query2.get(relation_menuid, {
-                    success: function (res_menu) {
-                        res_menu.remove("relationmenu_id", meun_id);
-                        res_menu.remove("relationmenu", oldresmenu);
-                        res_menu.save({
-                            success: function () {
-                                destroy_menu.destroy({
-                                    success: function () {
-                                        $(".am-panel-default").remove();
-                                        bRelease_data+=1;
-                                        loadmenu(function(menusdata){
-                                            add_event (menusdata);
-                                        });
-                                    }
-                                });
-                            }
+function destroy_home(meun_id, grade) {
+    var homes = AV.Object.extend("home");
+    var relation_id,old_name;
+    if(grade==1){
+        relation_id=menuid;
+    }else{
+        relation_id=menuid.split("&")[0];
+        old_name=menuid.split("&")[1];
+    }
+    var query = new AV.Query(homes);
+    query.get(relation_id,{
+        success:function(res_house){
+            if(grade==1){
+                res_house.destroy({
+                    success:function(res){
+                        $(".am-panel-default").remove();
+                        loadmenu(function(menusdata){
+                            add_event (menusdata);
                         });
                     }
-                })
+                });
+            }else{
+                res_house.remove("building",{
+                    id:relation_id,
+                    name:old_name
+                });
+                res_house.save({
+                    success:function(){
+                        $(".am-panel-default").remove();
+                        loadmenu(function(menusdata){
+                            add_event (menusdata);
+                        });
+                    }
+                });
             }
-        });
-    }
+        }
+    })
 }
 function save_house(){
     var house_name = $(".input_menu_name").val();
     if (!house_name) {
-        alert("名字");
+        alert("请输入名字");
     } else {
             add_menudata(bmenu, menuid, grade, house_name);
     }
@@ -128,15 +87,14 @@ function save_house(){
 function remove_house(){
     if (bmenu == 0) {
         if (grade == 1) {
-            destroy_menu(menuid, 1);
+            destroy_home(menuid, 1);
         }
         if (grade == 2) {
-            destroy_menu(menuid, 2);
+            destroy_home(menuid, 2);
         }
     }
 }
 function add_menudata(bmenu, menuid, grade,house_name) {
-    alert(menuid+"sdfsdf"+bmenu+"sdssad"+grade+"ddsf"+house_name);
     var homes = AV.Object.extend("home");
     var home = new homes();
     if (bmenu == "1") {
@@ -154,11 +112,13 @@ function add_menudata(bmenu, menuid, grade,house_name) {
                     var query = new AV.Query(homes);
                     query.get(menuid, {
                         success: function (resmenu) {
-                                resmenu.add("building", house_name);
+                                resmenu.add("building", {
+                                    id:menuid,
+                                    name:house_name
+                                });
                                 resmenu.save({
                                     success: function (res) {
                                         $(".am-panel-default").remove();
-                                        bRelease_data+=1;
                                         loadmenu(function(menusdata){
                                             add_event (menusdata);
                                         });
@@ -169,16 +129,52 @@ function add_menudata(bmenu, menuid, grade,house_name) {
 
     }
     if (bmenu == "0") {
+        var relation_id,old_name;
            if(grade==1){
-               alert(menuid+"xcxzczxczxc111111")
+               relation_id=menuid;
            }else{
-               alert(menuid+"sadsdsasds22222");
-               var aa=$(".menuid").parent().attr("value");
-               alert(aa);
+               relation_id=menuid.split("&")[0];
+               old_name=menuid.split("&")[1];
            }
+        var query = new AV.Query(homes);
+        query.get(relation_id,{
+            success: function (reshous) {
+                if(!old_name){
+                    reshous.set("homename", house_name);
+                    reshous.save({
+                        success: function (res) {
+                            $(".am-panel-default").remove();
+                            loadmenu(function(menusdata){
+                                add_event (menusdata);
+                            });
+                        }
+                    });
+                }else{
+                    reshous.add("building",{
+                        id:relation_id,
+                        name:house_name
+                    });
+                    reshous.save({
+                        success:function(res){
+                            res.remove("building",{
+                                id:relation_id,
+                                name:old_name
+                            })
+                            res.save({
+                                success:function(res){
+                                    $(".am-panel-default").remove();
+                                    loadmenu(function(menusdata){
+                                        add_event (menusdata);
+                                    });
+                                }
+                            });
+                        }
+                    })
+                }
+            }
+        })
     }
     $(".input_menu_name").val("");
-    $(".input_menu_content").val("");
 }
 function upmodal (event,menuids,bmenus,grades){
     menuid = menuids;
@@ -187,25 +183,12 @@ function upmodal (event,menuids,bmenus,grades){
     $('#my-prompt').modal();
     event.stopPropagation();
 }
-function Release_data(){
-
-    console.log(menu);
-    //$.ajax({
-    //    method: "POST",
-    //    url: server + "/weixin/publishMenu",
-    //    data: menu,
-    //    contentType: "application/json; charset=utf-8",
-    //    dataType: "json",
-    //    success: function (result) {}
-    //});
-
-}
 function add_event (){
     $(".menu_btn").hide();
-    $(".btn_content").mouseout(function () {
-        $(this).children().hide();
+    $(".am-panel-title").mouseout(function () {
+        $(this).children(".btn_content").children().hide();
     }).mousemove(function () {
-        $(this).children().show();
+        $(this).children(".btn_content").children().show();
     });
 }
 //var menu = {
