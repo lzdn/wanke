@@ -4,9 +4,19 @@
 AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
 var Shop = AV.Object.extend("shop");
 var Shop_id, shop_name, shop_title, shop_service, shop_address, service_time, shop_range, shop_type, shop_tel, Judge_menu;
-window.onload = function () {
+
+var cookie=$.AMUI.utils.cookie;
+var useremail_cookie =cookie.get("wankeloginuseremail");
+var userpwd_cookie =cookie.get("wankeloginuserpwd");
+
+if(!useremail_cookie||!userpwd_cookie){
+    window.location.href= server + '/management_login.html?Jumpurl=management_shop.html';
+}else{
     load();
-};
+}
+//window.onload = function () {
+//    load();
+//};
 function load() {
     Shop_id = document.getElementById('hd_keyword_id');
     shop_name = document.getElementById('lbl_key');                 //名称

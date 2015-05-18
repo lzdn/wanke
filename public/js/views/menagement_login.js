@@ -10,9 +10,9 @@
         //…………………………待跳转……………………
         if(window.location.search.indexof("?Jumpurl=") >=0){
             Jump_url=window.location.search.split("?Jumpurl=")[1];
-            window.location.href= server + '/menagement_menu.html'
-        }
+        }else{
             window.location.href= server + '/'+Jump_url;
+        }
     }
    $("#login").on("click",function(){
         var user = $("#email").val();

@@ -5,9 +5,17 @@ AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygu
 var Keyword = AV.Object.extend("keyword");
 var keyword_id, key, word, keyword_model;
 
-window.onload = function () {
+var cookie=$.AMUI.utils.cookie;
+var useremail_cookie =cookie.get("wankeloginuseremail");
+var userpwd_cookie =cookie.get("wankeloginuserpwd");
+if(!useremail_cookie||!userpwd_cookie){
+    window.location.href= server + '/management_login.html?Jumpurl=management_keyword.html';
+}else{
     load();
-};
+}
+//window.onload = function () {
+//    load();
+//};
 
 function load() {
     keyword_id = document.getElementById('hd_keyword_id');

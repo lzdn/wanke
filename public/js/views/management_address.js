@@ -3,9 +3,17 @@ AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygu
 var bmenu, menuid, grade;
 var bRelease_data=0;
 $(".am-panel-default").remove();
-loadmenu(function(){
-    add_event ();
-});
+var cookie=$.AMUI.utils.cookie;
+var useremail_cookie =cookie.get("wankeloginuseremail");
+var userpwd_cookie =cookie.get("wankeloginuserpwd");
+if(!useremail_cookie||!userpwd_cookie){
+    window.location.href= server + '/management_login.html?Jumpurl=management_address.html';
+}else{
+    loadmenu(function(){
+        add_event ();
+    });
+}
+
 function loadmenu(callbak) {
     var homes = AV.Object.extend("home");
     var querymenu = new AV.Query(homes);
