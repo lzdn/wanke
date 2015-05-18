@@ -6,13 +6,12 @@
     var Jump_url="management_menu.html";
     var useremail_cookie =cookie.get("wankeloginuseremail");
     var userpwd_cookie =cookie.get("wankeloginuserpwd");
+    if(window.location.search.indexof("?Jumpurl=") >=0){
+        Jump_url=window.location.search.split("?Jumpurl=")[1];
+    }
     if(useremail_cookie&&userpwd_cookie){
         //…………………………待跳转……………………
-        if(window.location.search.indexof("?Jumpurl=") >=0){
-            Jump_url=window.location.search.split("?Jumpurl=")[1];
-        }else{
             window.location.href= server + '/'+Jump_url;
-        }
     }
    $("#login").on("click",function(){
         var user = $("#email").val();
