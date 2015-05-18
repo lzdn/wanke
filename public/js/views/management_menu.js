@@ -7,7 +7,7 @@ var bmenu, menuid, grade, menu, menu_one_length;
 var menus = AV.Object.extend("menu");
 var bRelease_data = 0;
 if(!useremail_cookie||!userpwd_cookie){
-    window.location.href= server + '/menagement_login.html?Jumpurl=management_menu.html';
+    window.location.href= server + '/management_login.html?Jumpurl=management_menu.html';
 }else{
     $(".am-panel-default").remove();
     loadmenu(function (menusdata) {
