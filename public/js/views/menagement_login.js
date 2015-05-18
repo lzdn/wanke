@@ -3,7 +3,7 @@
     var cookie=$.AMUI.utils.cookie;
     var adm = AV.Object.extend("admin");
     //……………………此处设置默认跳转……………………
-    var Jump_url="menagement_menu.html";
+    var Jump_url="management_menu.html";
     var useremail_cookie =cookie.get("wankeloginuseremail");
     var userpwd_cookie =cookie.get("wankeloginuserpwd");
     if(useremail_cookie&&userpwd_cookie){
