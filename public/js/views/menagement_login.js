@@ -2,16 +2,17 @@
     AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
     var cookie=$.AMUI.utils.cookie;
     var adm = AV.Object.extend("admin");
+    //……………………此处设置默认跳转……………………
+    var Jump_url="menagement_menu.html";
     var useremail_cookie =cookie.get("wankeloginuseremail");
     var userpwd_cookie =cookie.get("wankeloginuserpwd");
     if(useremail_cookie&&userpwd_cookie){
         //…………………………待跳转……………………
-        if(window.location.search.split('?')[1].split('=')[0]=="Jump_url"){
-            window.location.href= window.location.search.split('?')[1].split('=')[0];
-        }else{
-            //^^^^^^设置默认跳转页面……………………
-            window.location.href= server + '/menagement_menu.html';
+        if(window.location.search.indexof("?Jumpurl=") >=0){
+            Jump_url=window.location.search.split("?Jumpurl=")[1];
+            window.location.href= server + '/menagement_menu.html'
         }
+            window.location.href= server + '/'+Jump_url;
     }
    $("#login").on("click",function(){
         var user = $("#email").val();
