@@ -39,7 +39,7 @@ li{
 li a{
     display:block;
 }
-.am-icon-arrows{
+.am_icon_css{
     width: 20px;
     position:absolute;
     left:20px;
@@ -69,21 +69,42 @@ li a{
     color:#ccc;
     margin-right:2px;
 }
-
-.am-form-group .input_menu{
-position:absolute;
-    left:0;
-    margin-left:20px;
+.am-form-group{
+    height: 43px;
 }
-.input_menu_input{
+.input_menu{
+    height: 43px;
+    line-height: 43px;
+    padding:0;
+}
+.am-u-sm-9{
+    padding:0;
+}
+.radio_am_extent{
+    height: 43px;
+    padding-top:7px;
+    padding-right:205px;
+}
+.am-radio-inline input{
     margin-top:7px;
 }
-#doc-vld-name-2,#doc-vld-url-2{
-    width: 450px;
-}
-.am-form-group .input{
-    margin-left:70px;
-    width: 300px;
-}
+
+/*.am-form-group .input_menu{*/
+/*position:absolute;*/
+    /*left:0;*/
+    /*margin-left:20px;*/
+/*}*/
+/*.input_menu_input{*/
+    /*margin-top:7px;*/
+/*}*/
+/*#doc-vld-name-2,#doc-vld-url-2{*/
+    /*width: 420px;*/
+    /*height: 43px;*/
+    /*margin-lecf:30px;*/
+/*}*/
+/*.am-form-group .input{*/
+    /*margin-left:70px;*/
+    /*width: 300px;*/
+/*}*/
 
 

@@ -393,11 +393,10 @@ function add_event(menusdata) {
     $(".menu_btn").hide();
     $("input[name=docVlGender]:eq(0)").attr("checked", 'checked');
     $("input[name=docVlGender]").on("click", function () {
-        if ($("input[name='docVlGender']:checked").val() == "null") {
-            $(".input_menu_content").attr("disabled", true);
+        if ($("input[name='docVlGender']:checked").val() == "click") {
+            $("#input_menu_type").html("发送文字：");
         } else {
-            $(".input_menu_content").val("");
-            $('.input_menu_content').attr("disabled", false);
+            $("#input_menu_type").html("跳转链接：");
         }
     });
     $(".am-panel-title").mouseout(function () {
