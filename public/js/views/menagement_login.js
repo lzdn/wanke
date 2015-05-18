@@ -6,9 +6,12 @@
     var Jump_url="management_menu.html";
     var useremail_cookie =cookie.get("wankeloginuseremail");
     var userpwd_cookie =cookie.get("wankeloginuserpwd");
-    if(window.location.search.indexof("?Jumpurl=") >=0){
-        Jump_url=window.location.search.split("?Jumpurl=")[1];
+    // window.location.search.split('=')[2]
+    alert(window.location.search.split('?Jumpurl=')[1]);
+    if(window.location.search.split('?Jumpurl=')[1]){
+        Jump_url=window.location.search.split('?Jumpurl=')[1];
     }
+    alert(Jump_url);
     if(useremail_cookie&&userpwd_cookie){
         //…………………………待跳转……………………
             window.location.href= server + '/'+Jump_url;
