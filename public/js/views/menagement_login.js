@@ -47,6 +47,7 @@
         cookie.set("wankeloginuseremail", user,date);
         cookie.set("wankeloginuserpwd", pwd,date);
         //…………………………待跳转……………………
+        window.location.href= server + '/'+Jump_url;
     }
 
 
