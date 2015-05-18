@@ -7,11 +7,9 @@
     var useremail_cookie =cookie.get("wankeloginuseremail");
     var userpwd_cookie =cookie.get("wankeloginuserpwd");
     // window.location.search.split('=')[2]
-    alert(window.location.search.split('?Jumpurl=')[1]);
     if(window.location.search.split('?Jumpurl=')[1]){
         Jump_url=window.location.search.split('?Jumpurl=')[1];
     }
-    alert(Jump_url);
     if(useremail_cookie&&userpwd_cookie){
         //…………………………待跳转……………………
             window.location.href= server + '/'+Jump_url;
@@ -27,9 +25,7 @@
         query.equalTo("email",user);
         query.find({
             success:function(adm_user){
-                alert(adm_user);
                 if(adm_user!=""){
-                    alert(adm_user[0].get("password"));
                     if(adm_user[0].get("password")==pwd){
                         addCookie(user,pwd,30);
                     }else{
