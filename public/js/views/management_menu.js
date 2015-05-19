@@ -311,6 +311,7 @@ function upmodal(event, menuids, bmenus, grades) {
             query.get(menuid, {
                 success: function (menu_name) {
                     $(".input_menu_name").val("" + menu_name.get("menu_name") + "");
+                    $(".input_menu_content").val("" + menu_name.get("menu_content") + "");
                 }
             })
         } else {
@@ -335,14 +336,18 @@ function Release_data() {
     $.ajax({
         method: "POST",
         url: server + "/weixin/publishMenu",
-        data: menu,
+        data: JSON.stringify({
+            data: menu
+        }),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function (result) {
-            alert("chengg"+result);
+        success: function (data) {
+            alert("dsadsadsad++cuowu"+msg);
+        },
+        error: function (msg) {
+              alert("dsadsadsad++cuowu"+msg);
         }
     });
-
 }
 function add_event(menusdata) {
     if (bRelease_data != 0) {
