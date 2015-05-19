@@ -331,13 +331,12 @@ function upmodal(event, menuids, bmenus, grades) {
 }
 function Release_data() {
 
-    console.log(menu);
+    console.log({"menu": menu});
     $.ajax({
         method: "POST",
         url: server + "/weixin/publishMenu",
-        data: {menu: menu},
+        data: {"menu": menu},
         contentType: "application/json; charset=utf-8",
-        dataType: "json",
         success: function (result) {
             alert("chengg" + result);
         }
