@@ -27,7 +27,7 @@
                     var buildings = [];
                     for (var j = 0; j < oldbuilding.length; j++) {
                         var building = {
-                            names: oldbuilding[j]
+                            names: oldbuilding[j].name
                         };
                         buildings.push(building);
                     }
