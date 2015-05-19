@@ -341,10 +341,12 @@ function Release_data() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
-            alert("dsadsadsad++cuowu"+msg);
+            alert("dsadsadsad++chengg"+msg);
+            console.log(msg)
         },
         error: function (msg) {
             alert("dsadsadsad++cuowu" + msg);
+            console.log(msg)
         }
     });
 }
