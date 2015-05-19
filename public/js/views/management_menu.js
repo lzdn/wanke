@@ -6,14 +6,14 @@ var userpwd_cookie = cookie.get("wankeloginuserpwd");
 var bmenu, menuid, grade, menu, menu_one_length;
 var menus = AV.Object.extend("menu");
 var bRelease_data = 0;
-if (!useremail_cookie || !userpwd_cookie) {
-    window.location.href = server + '/management_login.html?Jumpurl=management_menu.html';
-} else {
+//if (!useremail_cookie || !userpwd_cookie) {
+//    window.location.href = server + '/management_login.html?Jumpurl=management_menu.html';
+//} else {
     $(".am-panel-default").remove();
     loadmenu(function (menusdata) {
         add_event(menusdata);
     });
-}
+//}
 function loadmenu(callbak) {
     var menus = AV.Object.extend("menu");
     var querymenu = new AV.Query(menus);
@@ -303,6 +303,7 @@ function upmodal(event, menuids, bmenus, grades) {
     $(".remove_menu").hide();
     if (menuids == 0) {
         $(".input_menu_name").val("");
+        $(".input_menu_content").val("");
         $("#input_menu_content,#am-radio-inline").hide();
     } else {
         $("#input_menu_content,#am-radio-inline").show();
@@ -312,10 +313,24 @@ function upmodal(event, menuids, bmenus, grades) {
                 success: function (menu_name) {
                     $(".input_menu_name").val("" + menu_name.get("menu_name") + "");
                     $(".input_menu_content").val("" + menu_name.get("menu_content") + "");
+                    if(menu_name.get("menu_type")=="click"){
+                        $('input[name=docVlGender]').get(0).checked = true;
+                        $("#input_menu_type").html("发送文字：");
+                        //$("input[name=docVlGender]:eq(0)").attr("checked", 'checked');
+                        //$("input[name=docVlGender]:eq(1)").attr("checked", false);
+                    }else{
+                        $('input[name=docVlGender]').get(1).checked = true;
+                        $("#input_menu_type").html("跳转链接：");
+                        //$("input[name=docVlGender]:eq(1)").attr("checked", 'checked');
+                        //$("input[name=docVlGender]:eq(0)").attr("checked", false);
+                    }
                 }
             })
         } else {
             $(".input_menu_name").val("");
+            $(".input_menu_content").val("");
+            $('input[name=docVlGender]').get(0).checked = true;
+            $("#input_menu_type").html("发送文字：");
         }
     }
     if (bmenus != 0) {
@@ -341,11 +356,9 @@ function Release_data() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {
-            alert("dsadsadsad++chengg"+msg);
             console.log(msg)
         },
         error: function (msg) {
-            alert("dsadsadsad++cuowu" + msg);
             console.log(msg)
         }
     });
@@ -417,7 +430,7 @@ function add_event(menusdata) {
     $(".view").addClass("am-icon-chain");
     $(".click").addClass("am-icon-wechat");
     $(".menu_btn").hide();
-    $("input[name=docVlGender]:eq(0)").attr("checked", 'checked');
+   // $("input[name=docVlGender]:eq(0)").attr("checked", 'checked');
     $("input[name=docVlGender]").on("click", function () {
         if ($("input[name='docVlGender']:checked").val() == "click") {
             $("#input_menu_type").html("发送文字：");
