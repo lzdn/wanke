@@ -209,6 +209,7 @@ router.post('/publishMenu', function (req, res) {
     //    }]
     //};
     var body = req.body;
+    console.log(body);
 
     api.removeMenu(function (err, result) {
         if (err) {
