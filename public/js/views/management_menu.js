@@ -6,14 +6,14 @@ var userpwd_cookie = cookie.get("wankeloginuserpwd");
 var bmenu, menuid, grade, menu, menu_one_length;
 var menus = AV.Object.extend("menu");
 var bRelease_data = 0;
-//if (!useremail_cookie || !userpwd_cookie) {
-//    window.location.href = server + '/management_login.html?Jumpurl=management_menu.html';
-//} else {
+if (!useremail_cookie || !userpwd_cookie) {
+    window.location.href = server + '/management_login.html?Jumpurl=management_menu.html';
+} else {
     $(".am-panel-default").remove();
     loadmenu(function (menusdata) {
         add_event(menusdata);
     });
-//}
+}
 function loadmenu(callbak) {
     var menus = AV.Object.extend("menu");
     var querymenu = new AV.Query(menus);
