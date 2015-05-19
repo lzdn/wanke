@@ -216,7 +216,7 @@ router.post('/publishMenu', function (req, res) {
             res.json(err);
         }
 
-        if (body.menu) {
+        if (body.menu.button.length > 0) {
             api.createMenu(body.menu, function (err, result) {
                 if (err) {
                     res.json(err);
