@@ -38,7 +38,8 @@
     <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
         <div class="am-offcanvas-bar admin-offcanvas-bar">
             <ul class="am-list admin-sidebar-list">
-                <li><a href="management_menu.html"><span class="am-icon-home" style="font-size: 20px;"></span> 自定义菜单</a></li>
+                <li><a href="management_menu.html"><span class="am-icon-home" style="font-size: 20px;"></span> 自定义菜单</a>
+                </li>
                 <li><a href="management_keyword.html"><span class="am-icon-font"></span> 关键词回复</a></li>
                 <li><a href="management_shop.html"><span class="am-icon-users"></span> 易生活</a></li>
                 <li><a href="management_address.html"><span class="am-icon-pencil-square-o"></span> 小区更改</a></li>
@@ -58,7 +59,7 @@
             <div class="am-u-sm-12 am-u-md-6">
                 <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
-                        <button type="button" class="am-btn am-btn-default"menuid="0" bmenu="1"
+                        <button type="button" class="am-btn am-btn-default" menuid="0" bmenu="1"
                                 grade="1" onclick="upmodal(event,0,1,1)">
                             <span class="am-icon-plus"></span> 新增
                         </button>
@@ -84,8 +85,10 @@
                                     data-am-collapse="{parent: '#accordion', target: '#{{this.id}}'}">
                                     {{this.name}}
                                     <span class=" am-icon-sm menu_icon"></span>
+
                                     <div class="btn_content">
-                                        <button type="button" class="am-btn am-radius am-btn-default menu_btn" menuid={{this.id}}
+                                        <button type="button" class="am-btn am-radius am-btn-default menu_btn"
+                                                menuid={{this.id}}
                                                 bmenu="0" grade="1" onclick="upmodal(event,'{{this.id}}',0,1)"
                                                 >编辑
                                         </button>
@@ -94,12 +97,14 @@
                             </div>
                             <div id={{this.id}} class="am-panel-collapse am-collapse">
                                 <ul class="am-list" value={{this.id}}>
-                                    <li houseid={{this.id}} bmenu="2" grade="1" class="add_menu_list" onclick="upmodal(event,'{{this.id}}',2,1)"><a
+                                    <li houseid={{this.id}} bmenu="2" grade="1" class="add_menu_list"
+                                        onclick="upmodal(event,'{{this.id}}',2,1)"><a
                                             class="am_icon_css  am-icon-plus" href="#"></a><a href="#" class="add_menu">添加公寓</a>
                                     </li>
                                     {{#if this.building}}
                                     {{#each this.building}}
-                                    <li  houseid={{this.id}} bmenu="0" grade="2" class="menu_list" onclick="upmodal(event,'{{this.id}}&{{this.name}}',0,2)"><a href="#">{{this.name}}<span
+                                    <li houseid={{this.id}} bmenu="0" grade="2" class="menu_list"
+                                        onclick="upmodal(event,'{{this.id}}&{{this.name}}',0,2)"><a href="#">{{this.name}}<span
                                             class=" am-icon-sm menu_icon"></span></a></li>
                                     {{/each}}
                                     {{/if}}
@@ -109,44 +114,43 @@
 
                         {{/each}}
                     </script>
-                    <!--^^^^^^^^^^^-->
                 </div>
 
 
             </div>
         </div>
     </div>
+</div>
 
-    <a class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
-       data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+<a class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
+   data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
 
-    <footer>
-        <hr>
-        <p class="am-padding-left">北京VK生活馆管理后台</p>
-    </footer>
+<footer>
+    <hr>
+    <p class="am-padding-left">北京VK生活馆管理后台</p>
+</footer>
 
-    <div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
-        <div class="am-modal-dialog">
-            <div class="am-modal-bd">
-                编辑菜单
-            </div>
-            <div class="am-modal-hd">
-                <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
-            </div>
-            <form action="" class="am-form">
-                <fieldset>
-                    <div class="am-form-group">
-                        <label class="input_menu input_menu_input" for="doc-vld-name-2">名称：</label>
-                        <input class="input input_menu_name" type="text" id="doc-vld-name-2" minlength="3"
-                               placeholder="输入名称" required/>
-                    </div>
-                </fieldset>
-            </form>
+<div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
+    <div class="am-modal-dialog">
+        <div class="am-modal-bd">
+            编辑菜单
+        </div>
+        <div class="am-modal-hd">
+            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+        </div>
+        <form action="" class="am-form">
+            <fieldset>
+                <div class="am-form-group">
+                    <label class="input_menu input_menu_input" for="doc-vld-name-2">名称：</label>
+                    <input class="input input_menu_name" type="text" id="doc-vld-name-2" minlength="3"
+                           placeholder="输入名称" required/>
+                </div>
+            </fieldset>
+        </form>
 
-            <div class="am-modal-footer">
-                <span class="am-modal-btn remove_menu" onclick="remove_house()" data-am-modal-cancel>删除</span>
-                <span class="am-modal-btn save_menu" onclick="save_house()" data-am-modal-confirm>保存</span>
-            </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn remove_menu" onclick="remove_house()" data-am-modal-cancel>删除</span>
+            <span class="am-modal-btn save_menu" onclick="save_house()" data-am-modal-confirm>保存</span>
         </div>
     </div>
 </div>
