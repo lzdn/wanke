@@ -105,11 +105,13 @@ function load(callback) {
     var query = new AV.Query(AV.User);
     query.get(postview, {
         success: function (user) {
+            var home_one;
             var home = AV.Object.extend("home");
             var query = new AV.Query(home);
             query.find({
                 success: function (res) {
                     homeval = res[0].id;
+                    home_one = res[0].get("homename");
                     var homes = [];
                     for (var i = 0; i < res.length; i++) {
                         var object = res[i];
@@ -137,7 +139,7 @@ function load(callback) {
                     if (user.get("buliding")) {
                         homename =user.get("buliding");
                     } else {
-                        homename = "孙爽嘉园";
+                        homename = home_one;
                     }
                     var home = AV.Object.extend("home");
                     var query2 = new AV.Query(home);
@@ -149,10 +151,10 @@ function load(callback) {
                             var buildings = [];
                             for (var j = 0; j < oldbuilding.length; j++) {
                                 var building = {
-                                    names: oldbuilding[j],
+                                    names: oldbuilding[j].name,
                                     selected: ""
                                 };
-                                if (user.get("floorname") == oldbuilding[j]) {
+                                if (user.get("floorname") == oldbuilding[j].name) {
                                     building.selected = "selected";
                                 }
                                 buildings.push(building);
