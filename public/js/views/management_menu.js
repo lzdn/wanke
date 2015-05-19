@@ -349,21 +349,39 @@ function add_event(menusdata) {
     var button = []
     for (var i = 0; i < menusdata.length; i++) {
         if (menusdata[i].type != "null") {
-            var button_data = {
-                "type": menusdata[i].type,
-                "name": menusdata[i].name,
-                "key": menusdata[i].content
+            var title;
+            if(menusdata[i].type=="view"){
+                var button_data = {
+                    "type": menusdata[i].type,
+                    "name": menusdata[i].name,
+                    "url": menusdata[i].content
+                }
+            }else{
+                var button_data = {
+                    "type": menusdata[i].type,
+                    "name": menusdata[i].name,
+                    "key": menusdata[i].content
+                }
             }
+
             button.push(button_data);
         } else {
             var relation_data = menusdata[i].relation;
             var list_data = [];
             if (relation_data) {
                 for (var j = 0; j < relation_data.length; j++) {
-                    var list = {
-                        "type": relation_data[j].type,
-                        "name": relation_data[j].name,
-                        "url": relation_data[j].content
+                    if(relation_data[j].type=="view"){
+                        var list = {
+                            "type": relation_data[j].type,
+                            "name": relation_data[j].name,
+                            "url": relation_data[j].content
+                        }
+                    }else{
+                        var list = {
+                            "type": relation_data[j].type,
+                            "name": relation_data[j].name,
+                            "key": relation_data[j].content
+                        }
                     }
                     list_data.push(list);
                 }
