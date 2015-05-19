@@ -311,6 +311,7 @@ function upmodal(event, menuids, bmenus, grades) {
             query.get(menuid, {
                 success: function (menu_name) {
                     $(".input_menu_name").val("" + menu_name.get("menu_name") + "");
+                    $(".input_menu_content").val("" + menu_name.get("menu_content") + "");
                 }
             })
         } else {
@@ -330,18 +331,24 @@ function upmodal(event, menuids, bmenus, grades) {
     event.stopPropagation();
 }
 function Release_data() {
-
     console.log({"menu": menu});
     $.ajax({
         method: "POST",
         url: server + "/weixin/publishMenu",
-        data: {"menu": menu},
+        data: JSON.stringify({
+            menu: menu
+        }),
         contentType: "application/json; charset=utf-8",
-        success: function (result) {
-            alert("chengg" + result);
+        dataType: "json",
+        success: function (msg) {
+            alert("dsadsadsad++chengg"+msg);
+            console.log(msg)
+        },
+        error: function (msg) {
+            alert("dsadsadsad++cuowu" + msg);
+            console.log(msg)
         }
     });
-
 }
 function add_event(menusdata) {
     if (bRelease_data != 0) {
