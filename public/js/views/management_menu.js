@@ -336,11 +336,11 @@ function Release_data() {
         method: "POST",
         url: server + "/weixin/publishMenu",
         data: JSON.stringify({
-            data: menu
+            menu: menu
         }),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function (data) {
+        success: function (msg) {
             alert("dsadsadsad++cuowu"+msg);
         },
         error: function (msg) {
