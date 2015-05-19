@@ -331,12 +331,10 @@ function upmodal(event, menuids, bmenus, grades) {
     event.stopPropagation();
 }
 function Release_data() {
-
     console.log({"menu": menu});
     $.ajax({
         method: "POST",
         url: server + "/weixin/publishMenu",
-<<<<<<< HEAD
         data: JSON.stringify({
             data: menu
         }),
@@ -346,13 +344,7 @@ function Release_data() {
             alert("dsadsadsad++cuowu"+msg);
         },
         error: function (msg) {
-              alert("dsadsadsad++cuowu"+msg);
-=======
-        data: {"menu": menu},
-        contentType: "application/json; charset=utf-8",
-        success: function (result) {
-            alert("chengg" + result);
->>>>>>> origin/master
+            alert("dsadsadsad++cuowu" + msg);
         }
     });
 }
