@@ -193,6 +193,7 @@ router.post('/uploadImage', function (req, res) {
     });
 });
 router.post('/publishMenu', function (req, res) {
+    console.log(req.body);
     //var menu = {
     //    "button": [{
     //        "type": "view",

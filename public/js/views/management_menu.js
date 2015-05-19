@@ -1,14 +1,14 @@
 AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
-var cookie=$.AMUI.utils.cookie;
-var useremail_cookie =cookie.get("wankeloginuseremail");
-var userpwd_cookie =cookie.get("wankeloginuserpwd");
+var cookie = $.AMUI.utils.cookie;
+var useremail_cookie = cookie.get("wankeloginuseremail");
+var userpwd_cookie = cookie.get("wankeloginuserpwd");
 
 var bmenu, menuid, grade, menu, menu_one_length;
 var menus = AV.Object.extend("menu");
 var bRelease_data = 0;
-if(!useremail_cookie||!userpwd_cookie){
-    window.location.href= server + '/management_login.html?Jumpurl=management_menu.html';
-}else{
+if (!useremail_cookie || !userpwd_cookie) {
+    window.location.href = server + '/management_login.html?Jumpurl=management_menu.html';
+} else {
     $(".am-panel-default").remove();
     loadmenu(function (menusdata) {
         add_event(menusdata);
@@ -332,10 +332,11 @@ function upmodal(event, menuids, bmenus, grades) {
 }
 function Release_data() {
 
-    console.log(menu);
+    console.log({"menu": menu});
     $.ajax({
         method: "POST",
         url: server + "/weixin/publishMenu",
+<<<<<<< HEAD
         data: JSON.stringify({
             data: menu
         }),
@@ -346,6 +347,12 @@ function Release_data() {
         },
         error: function (msg) {
               alert("dsadsadsad++cuowu"+msg);
+=======
+        data: {"menu": menu},
+        contentType: "application/json; charset=utf-8",
+        success: function (result) {
+            alert("chengg" + result);
+>>>>>>> origin/master
         }
     });
 }
@@ -357,13 +364,13 @@ function add_event(menusdata) {
     for (var i = 0; i < menusdata.length; i++) {
         if (menusdata[i].type != "null") {
             var title;
-            if(menusdata[i].type=="view"){
+            if (menusdata[i].type == "view") {
                 var button_data = {
                     "type": menusdata[i].type,
                     "name": menusdata[i].name,
                     "url": menusdata[i].content
                 }
-            }else{
+            } else {
                 var button_data = {
                     "type": menusdata[i].type,
                     "name": menusdata[i].name,
@@ -377,13 +384,13 @@ function add_event(menusdata) {
             var list_data = [];
             if (relation_data) {
                 for (var j = 0; j < relation_data.length; j++) {
-                    if(relation_data[j].type=="view"){
+                    if (relation_data[j].type == "view") {
                         var list = {
                             "type": relation_data[j].type,
                             "name": relation_data[j].name,
                             "url": relation_data[j].content
                         }
-                    }else{
+                    } else {
                         var list = {
                             "type": relation_data[j].type,
                             "name": relation_data[j].name,
