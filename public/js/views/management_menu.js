@@ -332,14 +332,16 @@ function upmodal(event, menuids, bmenus, grades) {
 function Release_data() {
 
     console.log(menu);
-    //$.ajax({
-    //    method: "POST",
-    //    url: server + "/weixin/publishMenu",
-    //    data: menu,
-    //    contentType: "application/json; charset=utf-8",
-    //    dataType: "json",
-    //    success: function (result) {}
-    //});
+    $.ajax({
+        method: "POST",
+        url: server + "/weixin/publishMenu",
+        data: menu,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (result) {
+            alert("chengg"+result);
+        }
+    });
 
 }
 function add_event(menusdata) {
