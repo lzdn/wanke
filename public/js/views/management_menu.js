@@ -1,320 +1,79 @@
 AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
-var cookie = $.AMUI.utils.cookie;
-var useremail_cookie = cookie.get("wankeloginuseremail");
-var userpwd_cookie = cookie.get("wankeloginuserpwd");
-
-var bmenu, menuid, grade, menu, menu_one_length,old_cloud_data,new_cloud_data;
 var menus = AV.Object.extend("menu");
+var cloud_id, bmenu, menuid, grade, menu, old_data, new_data;
 var bRelease_data = 0;
-//if (!useremail_cookie || !userpwd_cookie) {
-//    window.location.href = server + '/management_login.html?Jumpurl=management_menu.html';
-//} else {
-    $(".am-panel-default").remove();
-    loadmenu(function (menusdata) {
-        add_event(menusdata);
-    });
-//}
-alert("asdasds");
-
-//onbeforeunload,onunload
-window.onbeforeunload = ss;
-window.onunload = onunload_handler;
-function ss (){
-    var warning="sdsd?";
-    return warning;
-}
-
-//function onunload_handler(){
-//    var warning="谢谢光临";
-//   // alert(warning);
-//}
-
-
-
-
-function loadmenu(callbak) {
-    var menus = AV.Object.extend("menu");
-    var querymenu = new AV.Query(menus);
-    querymenu.equalTo("grade", "1");
-    querymenu.find({
+load_menu(function (data, id) {
+    cloud_id = id;
+    new_data = data;
+    add_event()
+});
+//var menudata = {
+//        "button": [
+//        {
+//            "id":"one01",
+//            "type": "click",
+//            "name": "今日歌曲",
+//            "key": "V1001_TODAY_MUSIC",
+//            "list":[]
+//        },
+//        {
+//            "id":"one02",
+//            "name": "孙爽",
+//            "type":"null",
+//            "key":"null",
+//            "list": [
+//                    {
+//                        "id":"two01",
+//                        "type": "view",
+//                        "name": "搜索",
+//                        "key": "http://www.soso.com/"
+//                    },
+//                    {
+//                        "id":"two02",
+//                        "type": "view",
+//                        "name": "视频",
+//                        "key": "http://v.qq.com/"
+//                    },
+//                    {
+//                        "id":"two03",
+//                        "type": "click",
+//                        "name": "赞一下我们",
+//                        "key": "V1001_GOOD"
+//                    }
+//                ]
+//        },{
+//                "id":"one03",
+//        "type": "view",
+//        "name": "易生活",
+//        "key": "http://fuwuhao.dianyingren.com/shop_index.html",
+//                "list":[]
+//    }
+//    ]
+//};
+//var menu= new menus();
+//menu.set("content",menudata);
+//menu.save();
+function load_menu(callbak) {
+    var query = new AV.Query(menus);
+    query.find({
         success: function (res) {
-            var menus = [];
-            for (var i = 0; i < res.length; i++) {
-                var object = res[i];
-                var menuid = object.id;
-                var menuname = object.get("menu_name");
-                var menutype = object.get("menu_type");
-                var menucontent = object.get("menu_content");
-                var relationmenu = object.get("relationmenu");
-                var menu = {
-                    id: menuid,
-                    name: menuname,
-                    type: menutype,
-                    relation: relationmenu,
-                    content: menucontent
-                }
-                menus.push(menu);
-            }
+            old_data = res[0].get("content");
             var $tpl = $('#push_menu');
             var source = $tpl.text();
             var template = Handlebars.compile(source);
-            var data = {menus: menus};
+            var data = {menus: old_data.button};
             var html = template(data);
             $tpl.before(html);
-            menu_one_length = res.length;
-            callbak(menus);
+            //menu_one_length = res.length;
+            callbak(old_data, res[0].id);
         }
     })
 }
 
-// …………………………………储备函数……………………………………………
-function destroy_menu(meun_id, grade) {
-    var menus = AV.Object.extend("menu");
-    if (grade == 1) {
-        var query = new AV.Query(menus);
-        query.get(meun_id, {
-            success: function (destroy_menu) {
-                var destroy_menus = destroy_menu.get("relationmenu_id");
-                if (destroy_menus && destroy_menus.length > 0) {
-                    for (var i = 0; i < destroy_menus.length; i++) {
-                        var query2 = new AV.Query(menus);
-                        query2.get(destroy_menus[i], {
-                            success: function (res) {
-                                res.destroy({
-                                    success: function () {
-                                        if (i == destroy_menus.length - 1) {
-                                            //window.location.reload();
-                                        }
-                                    }
-                                });
-                            }
-                        })
-                    }
-                    destroy_menu.destroy({
-                        success: function () {
-                            $(".am-panel-default").remove();
-                            bRelease_data += 1;
-                            loadmenu(function (menusdata) {
-                                add_event(menusdata);
-                            });
-                        }
-                    });
-                } else {
-                    destroy_menu.destroy({
-                        success: function () {
-                            $(".am-panel-default").remove();
-                            bRelease_data += 1;
-                            loadmenu(function (menusdata) {
-                                add_event(menusdata);
-                            });
-                        }
-                    });
-                }
-            }
-        })
-    } else {
-        var query = new AV.Query(menus);
-        query.get(meun_id, {
-            success: function (destroy_menu) {
-                var relation_menuid = destroy_menu.get("menu_relation").id;
-                var oldresmenu = {
-                    id: destroy_menu.id,
-                    type: destroy_menu.get("menu_type"),
-                    name: destroy_menu.get("menu_name"),
-                    content: destroy_menu.get("menu_content")
-                }
-                var query2 = new AV.Query(menus);
-                query2.get(relation_menuid, {
-                    success: function (res_menu) {
-                        res_menu.remove("relationmenu_id", meun_id);
-                        res_menu.remove("relationmenu", oldresmenu);
-                        res_menu.save({
-                            success: function () {
-                                destroy_menu.destroy({
-                                    success: function () {
-                                        $(".am-panel-default").remove();
-                                        bRelease_data += 1;
-                                        loadmenu(function (menusdata) {
-                                            add_event(menusdata);
-                                        });
-                                    }
-                                });
-                            }
-                        });
-                    }
-                })
-            }
-        });
-    }
-}
-function save_menu() {
-    var menuname = $(".input_menu_name").val();
-    var menucontent = $(".input_menu_content").val();
-    var menutype = $("input[name='docVlGender']:checked").val();
-    if (menuid == 0) {
-        menutype = "null"
-    }
-    if (!menuname) {
-        alert("请输入菜单名");
-    } else {
-        if (!menucontent && menutype != "null") {
-            alert("请输入关系");
-        } else {
-            $(".input").val("");
-            add_menudata(bmenu, menuid, grade, menuname, menucontent, menutype, menu_one_length);
-        }
-    }
-}
 
-function remove_menu() {
-    if (bmenu == 0) {
-        if (grade == 1) {
-            destroy_menu(menuid, 1);
-        }
-        if (grade == 2) {
-            destroy_menu(menuid, 2);
-        }
-    }
-}
-function add_menudata(bmenu, menuid, grade, menuname, menucontent, menutype, menu_one_length) {
-
-    var menu = new menus();
-    if (bmenu == "1") {
-        if (menu_one_length >= 3) {
-            alert("只允许添加三个一级菜单")
-        } else {
-            menu.set("menu_name", menuname);
-            menu.set("menu_type", menutype);
-            menu.set("menu_content", menucontent);
-            menu.set("grade", "1");
-            menu.save({
-                success: function (res) {
-                    $(".am-panel-default").remove();
-                    bRelease_data += 1;
-                    loadmenu(function (menusdata) {
-                        add_event(menusdata);
-                    });
-                }
-            });
-        }
-    }
-    ;
-    if (bmenu == "2") {
-        var menurelation = new menus();
-        menurelation.id = menuid;
-        menu.set("menu_name", menuname);
-        menu.set("menu_type", menutype);
-        menu.set("menu_content", menucontent);
-        menu.set("grade", "2");
-        menu.set("menu_relation", menurelation);
-        menu.save({
-            success: function (res) {
-                var newmenu = {
-                    id: res.id,
-                    type: res.get("menu_type"),
-                    name: res.get("menu_name"),
-                    content: res.get("menu_content")
-                }
-                var query = new AV.Query(menus);
-                query.get(menuid, {
-                    success: function (resmenu) {
-                        if (resmenu.get("relationmenu_id") && resmenu.get("relationmenu_id").length >= 5) {
-                            alert("每个一级菜单只允许添加五个二级菜单");
-                            res.destroy();
-                        } else {
-                            resmenu.set("menu_type", "null")
-                            resmenu.set("menu_content", "")
-                            resmenu.add("relationmenu", newmenu);
-                            resmenu.add("relationmenu_id", res.id);
-                            resmenu.save({
-                                success: function (res) {
-                                    $(".am-panel-default").remove();
-                                    bRelease_data += 1;
-                                    loadmenu(function (menusdata) {
-                                        add_event(menusdata);
-                                    });
-                                }
-                            });
-                        }
-                    }
-                });
-            }
-        })
-    }
-    if (bmenu == "0") {
-        var query = new AV.Query(menus);
-        query.get(menuid, {
-            success: function (resmenu) {
-                var oldresmenu = {
-                    id: resmenu.id,
-                    type: resmenu.get("menu_type"),
-                    name: resmenu.get("menu_name"),
-                    content: resmenu.get("menu_content")
-                }
-                resmenu.set("menu_name", menuname);
-                resmenu.set("menu_type", menutype);
-                if (menutype != "null") {
-                    resmenu.set("relationmenu", []);
-                    if (resmenu.get("grade") == 1) {
-                        var destroy_menu = resmenu.get("relationmenu_id");
-                        if (destroy_menu) {
-                            for (var i = 0; i < destroy_menu.length; i++) {
-                                var query = new AV.Query(menus);
-                                query.get(destroy_menu[i], {
-                                    success: function (destroy_menu) {
-                                        destroy_menu.destroy();
-                                    }
-                                });
-                            }
-                            resmenu.set("relationmenu_id", []);
-                        }
-                    }
-                }
-                resmenu.set("menu_content", menucontent);
-                resmenu.save({
-                    success: function (newresmenu) {
-                        var newresmenu = {
-                            id: newresmenu.id,
-                            type: newresmenu.get("menu_type"),
-                            name: newresmenu.get("menu_name"),
-                            content: newresmenu.get("menu_content")
-                        }
-                        if (resmenu.get("grade") == 2) {
-                            var updata_id = resmenu.get("menu_relation").id;
-                            var query = new AV.Query(menus);
-                            query.get(updata_id, {
-                                success: function (up_resmenu) {
-                                    up_resmenu.add("relationmenu", newresmenu);
-                                    up_resmenu.save({
-                                        success: function (up_resmenu2) {
-                                            up_resmenu2.remove("relationmenu", oldresmenu);
-                                            up_resmenu2.save({
-                                                success: function (res) {
-                                                    $(".am-panel-default").remove();
-                                                    loadmenu(function (menusdata) {
-                                                        bRelease_data += 1;
-                                                        add_event(menusdata);
-                                                    });
-                                                }
-                                            });
-                                        }
-                                    });
-                                }
-                            });
-                        } else {
-                            $(".am-panel-default").remove();
-                            bRelease_data += 1;
-                            loadmenu(function (menusdata) {
-                                add_event(menusdata);
-                            });
-                        }
-                    }
-                });
-            }
-        });
-    }
-}
 function upmodal(event, menuids, bmenus, grades) {
+    var arry = new_data.button;
+    console.log(menuids + "dfsd" + bmenus + "dsfds" + grades);
     menuid = menuids;
     bmenu = bmenus;
     grade = grades;
@@ -326,24 +85,51 @@ function upmodal(event, menuids, bmenus, grades) {
     } else {
         $("#input_menu_content,#am-radio-inline").show();
         if (bmenus == 0) {
-            var query = new AV.Query(menus);
-            query.get(menuid, {
-                success: function (menu_name) {
-                    $(".input_menu_name").val("" + menu_name.get("menu_name") + "");
-                    $(".input_menu_content").val("" + menu_name.get("menu_content") + "");
-                    if(menu_name.get("menu_type")=="click"){
-                        $('input[name=docVlGender]').get(0).checked = true;
-                        $("#input_menu_type").html("发送文字：");
-                        //$("input[name=docVlGender]:eq(0)").attr("checked", 'checked');
-                        //$("input[name=docVlGender]:eq(1)").attr("checked", false);
-                    }else{
-                        $('input[name=docVlGender]').get(1).checked = true;
-                        $("#input_menu_type").html("跳转链接：");
-                        //$("input[name=docVlGender]:eq(1)").attr("checked", 'checked');
-                        //$("input[name=docVlGender]:eq(0)").attr("checked", false);
+            if (grades == "1") {
+                for (var i = 0; i < arry.length; i++) {
+                    if (arry[i].id == menuid) {
+                        $(".input_menu_name").val("" + arry[i].name + "");
+                        if (arry[i].key != "null") {
+                            $(".input_menu_content").val("" + arry[i].key + "");
+                        } else {
+                            $(".input_menu_content").val("");
+                        }
+
+                        if (arry[i].type == "view") {
+                            $('input[name=docVlGender]').get(1).checked = true;
+                            $("#input_menu_type").html("跳转链接：");
+                        } else {
+                            $('input[name=docVlGender]').get(0).checked = true;
+                            $("#input_menu_type").html("发送文字：");
+                        }
                     }
                 }
-            })
+            } else {
+                var relation_id = $("." + menuid + "").parent().attr("value");
+                for (var i = 0; i < arry.length; i++) {
+                    if (arry[i].id == relation_id) {
+                        var relation_arry = arry[i].list;
+                        for (var j = 0; j < relation_arry.length; j++) {
+                            if (relation_arry[j].id == menuid) {
+                                $(".input_menu_name").val("" + relation_arry[j].name + "");
+                                if (relation_arry[j].key != "null") {
+                                    $(".input_menu_content").val("" + relation_arry[j].key + "");
+                                } else {
+                                    $(".input_menu_content").val("");
+                                }
+
+                                if (relation_arry[j].type == "view") {
+                                    $('input[name=docVlGender]').get(1).checked = true;
+                                    $("#input_menu_type").html("跳转链接：");
+                                } else {
+                                    $('input[name=docVlGender]').get(0).checked = true;
+                                    $("#input_menu_type").html("发送文字：");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         } else {
             $(".input_menu_name").val("");
             $(".input_menu_content").val("");
@@ -351,40 +137,219 @@ function upmodal(event, menuids, bmenus, grades) {
             $("#input_menu_type").html("发送文字：");
         }
     }
+
     if (bmenus != 0) {
         $("#return_btn").addClass("am-modal-btn");
         $("#delete_btn").removeClass("am-modal-btn");
-        $(".am-modal-bd").html("添加菜单");
+        $(".am-modal-bd-extend").html("添加菜单");
     } else {
-        $(".am-modal-bd").html("编辑菜单");
+        $(".am-modal-bd-extend").html("编辑菜单");
         $("#return_btn").removeClass("am-modal-btn");
         $("#delete_btn").addClass("am-modal-btn");
     }
+
     $('#my-prompt').modal();
     event.stopPropagation();
 }
-function Release_data() {
-    console.log({"menu": menu});
-    $.ajax({
-        method: "POST",
-        url: server + "/weixin/publishMenu",
-        data: JSON.stringify({
-            menu: menu
-        }),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function (msg) {
-            console.log(msg)
-        },
-        error: function (msg) {
-            console.log(msg)
+
+function save_menu() {
+    var menuname = $(".input_menu_name").val();
+    var menucontent = $(".input_menu_content").val();
+    var menutype = $("input[name='docVlGender']:checked").val();
+    if (!menuname) {
+        alert("请输入菜单名称");
+    } else {
+        if (!menucontent && menuid != 0) {
+            alert("请输入关联");
+        } else {
+            var arry = new_data.button;
+            if (bmenu == 1) {
+                if (arry.length >= 3) {
+                    alert("最多可以创建三个一级菜单");
+                } else {
+                    var arry_oneids = ["1", "2", "3"];
+                    for (var j = 0; j < arry.length; j++) {
+                        arry_oneids.splice($.inArray(arry[j].id.split("0")[1], arry_oneids), 1);
+                    }
+                    new_data.button.push({
+                        "id": "one0" + arry_oneids[0],
+                        "type": "null",
+                        "name": menuname,
+                        "key": "null",
+                        "list": []
+                    });
+                    new_load_menu(new_data);
+                }
+            }
+            if (bmenu == 2) {
+                for (var i = 0; i < arry.length; i++) {
+                    if (arry[i].id == menuid) {
+                        arry[i].type = "null";
+                        arry[i].key = "null";
+                        if (arry[i].list.length >= 5) {
+                            alert("不能超过五个二级菜单");
+                        } else {
+                            var arry_twoids = ["1", "2", "3", "4", "5"];
+                            for (var j = 0; j < arry[i].list.length; j++) {
+                                arry_twoids.splice($.inArray(arry[i].list[j].id.split("0")[1], arry_twoids), 1);
+                            }
+                            arry[i].list.push({
+                                "id": "two0" + arry_twoids[0],
+                                "type": menutype,
+                                "name": menuname,
+                                "key": menucontent
+                            })
+                            new_load_menu(new_data);
+                        }
+                    }
+                }
+
+            }
+            if (bmenu == 0) {
+                if (grade == 1) {
+                    for (var i = 0; i < arry.length; i++) {
+                        if (arry[i].id == menuid) {
+                            arry[i].type = menutype;
+                            arry[i].name = menuname;
+                            arry[i].key = menucontent;
+                            arry[i].list = [];
+                        }
+                    }
+                    new_load_menu(new_data);
+                } else {
+                    var relation_id = $("." + menuid + "").parent().attr("value");
+                    for (var i = 0; i < arry.length; i++) {
+                        if (arry[i].id == relation_id) {
+                            var arry_tow = arry[i].list;
+                            for (var i = 0; i < arry_tow.length; i++) {
+                                if (arry_tow[i].id == menuid) {
+                                    arry_tow[i].type = menutype;
+                                    arry_tow[i].name = menuname;
+                                    arry_tow[i].key = menucontent;
+                                }
+                            }
+                            new_load_menu(new_data);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+function remove_menu() {
+    var arry = new_data.button;
+    if (grade == 1) {
+        for (var i = 0; i < arry.length; i++) {
+            if (arry[i].id == menuid) {
+                arry.splice($.inArray(arry[i], arry), 1);
+                new_load_menu(new_data);
+            }
+        }
+    } else {
+        var relation_id = $("." + menuid + "").parent().attr("value");
+        for (var i = 0; i < arry.length; i++) {
+            if (arry[i].id == relation_id) {
+                var remove_arry = arry[i].list
+                for (var j = 0; j < remove_arry.length; j++) {
+                    if (remove_arry[j].id == menuid) {
+                        remove_arry.splice($.inArray(remove_arry[j], remove_arry), 1);
+                        new_load_menu(new_data);
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+function new_load_menu(data) {
+    bRelease_data += 1;
+    $(".am-panel-default").remove();
+    var $tpl = $('#push_menu');
+    var source = $tpl.text();
+    var template = Handlebars.compile(source);
+    var data = {menus: data.button};
+    var html = template(data);
+    $tpl.before(html);
+    add_event();
+}
+
+function add_event() {
+    if (bRelease_data != 0) {
+        $("#save_data").removeClass("am-disabled");
+    }
+    $(".view").addClass("am-icon-chain");
+    $(".click").addClass("am-icon-wechat");
+    $(".menu_btn").hide();
+    // $("input[name=docVlGender]:eq(0)").attr("checked", 'checked');
+    $("input[name=docVlGender]").on("click", function () {
+        if ($("input[name='docVlGender']:checked").val() == "click") {
+            $("#input_menu_type").html("发送文字：");
+        } else {
+            $("#input_menu_type").html("跳转链接：");
+        }
+    });
+    $(".am-panel-title").mouseout(function () {
+        $(this).children(".btn_content").children().hide();
+    }).mousemove(function () {
+        $(this).children(".btn_content").children().show();
+    });
+}
+
+function save_data() {
+    $('#my-save_data').modal({
+        relatedTarget: this,
+        onConfirm: function (options) {
+            $("#Release").removeClass("am-disabled");
+            var query = new AV.Query(menus);
+            query.get(cloud_id, {
+                success: function (res) {
+                    res.set("content", new_data);
+                    res.save({
+                        success: function () {
+                            $(".am-panel-default").remove();
+                            load_menu(function (data, id) {
+                                cloud_id = id;
+                                new_data = data;
+                                add_event()
+                            });
+                        }
+                    });
+                }
+            })
         }
     });
 }
-function add_event(menusdata) {
-    if (bRelease_data != 0) {
-        $("#Release").removeClass("am-disabled");
-    }
+
+
+function Release_data() {
+    $('#my-Release_data').modal({
+        relatedTarget: this,
+        onConfirm: function (options) {
+            var query = new AV.Query(menus);
+            query.find({
+                success: function (menu) {
+                    var menusdata = menu[0].get("content").button;
+                    if (menusdata.length != 0) {
+                        Release_save_data(menusdata);
+                    } else {
+                        $('#destroy_data').modal({
+                            relatedTarget: this,
+                            onConfirm: function (options) {
+                                Release_save_data(menusdata);
+                            }
+                        });
+                    }
+
+                }
+            })
+        }
+    });
+
+}
+function Release_save_data(menusdata) {
     var button = []
     for (var i = 0; i < menusdata.length; i++) {
         if (menusdata[i].type != "null") {
@@ -393,19 +358,19 @@ function add_event(menusdata) {
                 var button_data = {
                     "type": menusdata[i].type,
                     "name": menusdata[i].name,
-                    "url": menusdata[i].content
+                    "url": menusdata[i].key
                 }
             } else {
                 var button_data = {
                     "type": menusdata[i].type,
                     "name": menusdata[i].name,
-                    "key": menusdata[i].content
+                    "key": menusdata[i].key
                 }
             }
 
             button.push(button_data);
         } else {
-            var relation_data = menusdata[i].relation;
+            var relation_data = menusdata[i].list;
             var list_data = [];
             if (relation_data) {
                 for (var j = 0; j < relation_data.length; j++) {
@@ -413,13 +378,13 @@ function add_event(menusdata) {
                         var list = {
                             "type": relation_data[j].type,
                             "name": relation_data[j].name,
-                            "url": relation_data[j].content
+                            "url": relation_data[j].key
                         }
                     } else {
                         var list = {
                             "type": relation_data[j].type,
                             "name": relation_data[j].name,
-                            "key": relation_data[j].content
+                            "key": relation_data[j].key
                         }
                     }
                     list_data.push(list);
@@ -445,71 +410,43 @@ function add_event(menusdata) {
     menu = {
         "button": button
     }
-    $(".view").addClass("am-icon-chain");
-    $(".click").addClass("am-icon-wechat");
-    $(".menu_btn").hide();
-   // $("input[name=docVlGender]:eq(0)").attr("checked", 'checked');
-    $("input[name=docVlGender]").on("click", function () {
-        if ($("input[name='docVlGender']:checked").val() == "click") {
-            $("#input_menu_type").html("发送文字：");
-        } else {
-            $("#input_menu_type").html("跳转链接：");
+    console.log(menu);
+    $.ajax({
+        method: "POST",
+        url: server + "/weixin/publishMenu",
+        data: JSON.stringify({
+            menu: menu
+        }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            alert("chengg"+data);
+        },
+        error: function (msg) {
+            // alert(msg);
+            alert("shibai"+msg);
         }
     });
-    $(".am-panel-title").mouseout(function () {
-        $(this).children(".btn_content").children().hide();
-    }).mousemove(function () {
-        $(this).children(".btn_content").children().show();
-    });
 }
-
-
-
-//var menu = {
-//    "button": [{
-//        "type": "view",
+//{
+//    "button"
+//:
+//    [{
+//        "id": "one01",
 //        "name": "易生活",
-//        "url": "http://fuwuhao.dianyingren.com/shop_index.html"
-//    }, {
-//        "type": "view",
-//        "name": "邻里圈",
-//        "url": "http://fuwuhao.dianyingren.com/post_index.html"
-//    }, {
-//        "type": "view",
-//        "name": "个人中心",
-//        "url": "http://fuwuhao.dianyingren.com/user_detail.html?code="
+//        "key": "null",
+//        "list": [{"id": "two01", "type": "click", "name": "更换合格合格后", "key": "hj "}],
+//        "type": "null"
 //    }]
-//};
-
-//var menu = {
-//
-//    "button": [
-//        {
-//            "type": "click",
-//            "name": "今日歌曲",
-//            "key": "V1001_TODAY_MUSIC"
-//        },
-//        {
-//            "name": "菜单",
-//            "sub_button": {
-//                "list": [
-//                    {
-//                        "type": "view",
-//                        "name": "搜索",
-//                        "url": "http://www.soso.com/"
-//                    },
-//                    {
-//                        "type": "view",
-//                        "name": "视频",
-//                        "url": "http://v.qq.com/"
-//                    },
-//                    {
-//                        "type": "click",
-//                        "name": "赞一下我们",
-//                        "key": "V1001_GOOD"
-//                    }
-//                ]
-//            }
-//        }
-//    ]
+//}
+//{
+//    "button"
+//:
+//    [{
+//        "id": "one01",
+//        "name": "易生活",
+//        "key": "null",
+//        "list": [{"id": "two01", "type": "click", "name": "更换合格合格后", "key": "hj "}],
+//        "type": "null"
+//    }, {"id": "one02", "name": "打发打发打发", "key": "", "list": []}]
 //}

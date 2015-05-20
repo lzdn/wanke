@@ -306,9 +306,8 @@ function Release_data(){
     var query = new AV.Query(menus);
     query.find({
         success:function(menu){
-            console.log(menu[0].get("content"));
-            var menusdata=menu[0].get("content")
-
+            var menusdata=menu[0].get("content").button;
+            var button = []
             for (var i = 0; i < menusdata.length; i++) {
                 if (menusdata[i].type != "null") {
                     var title;
@@ -316,19 +315,19 @@ function Release_data(){
                         var button_data = {
                             "type": menusdata[i].type,
                             "name": menusdata[i].name,
-                            "url": menusdata[i].content
+                            "url": menusdata[i].key
                         }
                     } else {
                         var button_data = {
                             "type": menusdata[i].type,
                             "name": menusdata[i].name,
-                            "key": menusdata[i].content
+                            "key": menusdata[i].key
                         }
                     }
 
                     button.push(button_data);
                 } else {
-                    var relation_data = menusdata[i].relation;
+                    var relation_data = menusdata[i].list;
                     var list_data = [];
                     if (relation_data) {
                         for (var j = 0; j < relation_data.length; j++) {
@@ -336,13 +335,13 @@ function Release_data(){
                                 var list = {
                                     "type": relation_data[j].type,
                                     "name": relation_data[j].name,
-                                    "url": relation_data[j].content
+                                    "url": relation_data[j].key
                                 }
                             } else {
                                 var list = {
                                     "type": relation_data[j].type,
                                     "name": relation_data[j].name,
-                                    "key": relation_data[j].content
+                                    "key": relation_data[j].key
                                 }
                             }
                             list_data.push(list);
@@ -368,86 +367,7 @@ function Release_data(){
             menu = {
                 "button": button
             }
-
+            console.log(menu);
         }
     })
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//var menu = {
-//    "button": [{
-//        "type": "view",
-//        "name": "易生活",
-//        "url": "http://fuwuhao.dianyingren.com/shop_index.html"
-//    }, {
-//        "type": "view",
-//        "name": "邻里圈",
-//        "url": "http://fuwuhao.dianyingren.com/post_index.html"
-//    }, {
-//        "type": "view",
-//        "name": "个人中心",
-//        "url": "http://fuwuhao.dianyingren.com/user_detail.html?code="
-//    }]
-//};
-
-//var menu = {
-//
-//    "button": [
-//        {
-//            "type": "click",
-//            "name": "今日歌曲",
-//            "key": "V1001_TODAY_MUSIC"
-//        },
-//        {
-//            "name": "菜单",
-//            "sub_button": {
-//                "list": [
-//                    {
-//                        "type": "view",
-//                        "name": "搜索",
-//                        "url": "http://www.soso.com/"
-//                    },
-//                    {
-//                        "type": "view",
-//                        "name": "视频",
-//                        "url": "http://v.qq.com/"
-//                    },
-//                    {
-//                        "type": "click",
-//                        "name": "赞一下我们",
-//                        "key": "V1001_GOOD"
-//                    }
-//                ]
-//            }
-//        }
-//    ]
-//}
-
