@@ -5,7 +5,6 @@ var bRelease_data = 0;
 var cookie=$.AMUI.utils.cookie;
 var useremail_cookie =cookie.get("wankeloginuseremail");
 var userpwd_cookie =cookie.get("wankeloginuserpwd");
-$(".btn_span_extent").hide();
 if(!useremail_cookie||!userpwd_cookie){
     window.location.href= server + '/management_login.html?Jumpurl=management_address.html';
 }else{
@@ -240,7 +239,7 @@ function new_load_menu(data) {
 
 function add_event() {
     if (bRelease_data != 0) {
-        $("#save_data").show();
+        $("#save_data").removeClass("am-disabled");
     }
     $(".view").addClass("am-icon-chain");
     $(".click").addClass("am-icon-wechat");
@@ -264,7 +263,7 @@ function save_data() {
     $('#my-save_data').modal({
         relatedTarget: this,
         onConfirm: function (options) {
-            $("#Release").show();
+            $("#Release").removeClass("am-disabled");
             var query = new AV.Query(menus);
             query.get(cloud_id, {
                 success: function (res) {

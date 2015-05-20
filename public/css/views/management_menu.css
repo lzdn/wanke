@@ -17,8 +17,6 @@
 }
 .menulist_content{
     width: 100%;
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
 }
 .least_height{
     height: 413px;
@@ -27,7 +25,11 @@
 .menulist_foot{
     padding:3px 0 0 3px;
     position:absolute;
-    bottom:45px;
+    bottom:60px;
+}
+.menulist_foot button{
+    margin-left: 13px;
+    border:1px solid transparent;
 }
 select{
     display:block;
@@ -43,6 +45,7 @@ select{
     position:absolute;
     left:20px;
     top:0;
+
 }
 .add-menu-btn{
     float:right;
