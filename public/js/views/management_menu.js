@@ -1,4 +1,6 @@
 AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
+var least_height=document.documentElement.clientHeight-254;
+$(".least_height").css({"height":""+least_height+""});
 var menus = AV.Object.extend("menu");
 var cloud_id, bmenu, menuid, grade, menu, old_data, new_data;
 var bRelease_data = 0;

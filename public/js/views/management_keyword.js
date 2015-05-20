@@ -2,6 +2,8 @@
  * Created by Administrator on 2015/5/14.
  */
 AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
+var least_height=document.documentElement.clientHeight-217;
+$(".least_height").css({"height":""+least_height+""});
 var Keyword = AV.Object.extend("keyword");
 var keyword_id, key, word, keyword_model;
 
