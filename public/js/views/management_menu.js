@@ -5,15 +5,16 @@ var bRelease_data = 0;
 var cookie=$.AMUI.utils.cookie;
 var useremail_cookie =cookie.get("wankeloginuseremail");
 var userpwd_cookie =cookie.get("wankeloginuserpwd");
-if(!useremail_cookie||!userpwd_cookie){
-    window.location.href= server + '/management_login.html?Jumpurl=management_address.html';
-}else{
+$(".btn_span_extent").hide();
+//if(!useremail_cookie||!userpwd_cookie){
+//    window.location.href= server + '/management_login.html?Jumpurl=management_address.html';
+//}else{
     load_menu(function (data, id) {
         cloud_id = id;
         new_data = data;
         add_event()
     });
-}
+//}
 function load_menu(callbak) {
     var query = new AV.Query(menus);
     query.find({
@@ -239,7 +240,7 @@ function new_load_menu(data) {
 
 function add_event() {
     if (bRelease_data != 0) {
-        $("#save_data").removeClass("am-disabled");
+        $("#save_data").show();
     }
     $(".view").addClass("am-icon-chain");
     $(".click").addClass("am-icon-wechat");
@@ -263,7 +264,7 @@ function save_data() {
     $('#my-save_data').modal({
         relatedTarget: this,
         onConfirm: function (options) {
-            $("#Release").removeClass("am-disabled");
+            $("#Release").show();
             var query = new AV.Query(menus);
             query.get(cloud_id, {
                 success: function (res) {
