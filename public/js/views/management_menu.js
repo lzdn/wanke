@@ -3,17 +3,35 @@ var cookie = $.AMUI.utils.cookie;
 var useremail_cookie = cookie.get("wankeloginuseremail");
 var userpwd_cookie = cookie.get("wankeloginuserpwd");
 
-var bmenu, menuid, grade, menu, menu_one_length;
+var bmenu, menuid, grade, menu, menu_one_length,old_cloud_data,new_cloud_data;
 var menus = AV.Object.extend("menu");
 var bRelease_data = 0;
-if (!useremail_cookie || !userpwd_cookie) {
-    window.location.href = server + '/management_login.html?Jumpurl=management_menu.html';
-} else {
+//if (!useremail_cookie || !userpwd_cookie) {
+//    window.location.href = server + '/management_login.html?Jumpurl=management_menu.html';
+//} else {
     $(".am-panel-default").remove();
     loadmenu(function (menusdata) {
         add_event(menusdata);
     });
+//}
+alert("asdasds");
+
+//onbeforeunload,onunload
+window.onbeforeunload = ss;
+window.onunload = onunload_handler;
+function ss (){
+    var warning="sdsd?";
+    return warning;
 }
+
+//function onunload_handler(){
+//    var warning="谢谢光临";
+//   // alert(warning);
+//}
+
+
+
+
 function loadmenu(callbak) {
     var menus = AV.Object.extend("menu");
     var querymenu = new AV.Query(menus);
@@ -444,6 +462,8 @@ function add_event(menusdata) {
         $(this).children(".btn_content").children().show();
     });
 }
+
+
 
 //var menu = {
 //    "button": [{
