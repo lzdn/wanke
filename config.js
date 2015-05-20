@@ -2,10 +2,10 @@
  * Created by amberglasses on 15/3/30.
  */
 module.exports = {
-    appId: "wxf44ff09e67caaad3",
-    appSecret: "3ccef678e38cf9bb3e5a1f137804210c",
-    url: "http://fuwuhao.dianyingren.com",
-    token: "dianyingren",
+    appId: "wx83299eb9a40e040f",
+    appSecret: "b4f01789803fb5afd6e06846622a3fe8",
+    url: "http://wanke.dianyingren.com",
+    token: "wanke.yanshulife",
     access_token: "",
     expireTime: 0
 };
