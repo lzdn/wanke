@@ -8,11 +8,11 @@ var keyword_id, key, word, keyword_model;
 var cookie=$.AMUI.utils.cookie;
 var useremail_cookie =cookie.get("wankeloginuseremail");
 var userpwd_cookie =cookie.get("wankeloginuserpwd");
-//if(!useremail_cookie||!userpwd_cookie){
-//    window.location.href= server + '/management_login.html?Jumpurl=management_keyword.html';
-//}else{
+if(!useremail_cookie||!userpwd_cookie){
+    window.location.href= server + '/management_login.html?Jumpurl=management_keyword.html';
+}else{
     load();
-//}
+}
 //window.onload = function () {
 //    load();
 //};
