@@ -107,6 +107,7 @@ function add_menudata(bmenu, menuid, grade,house_name) {
     var home = new homes();
     if (bmenu == "1") {
             home.set("homename", house_name);
+            home.set("building", []);
             home.save({
                 success: function (res) {
                     $(".am-panel-default").remove();
