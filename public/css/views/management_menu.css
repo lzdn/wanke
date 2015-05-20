@@ -15,6 +15,9 @@
     line-height: 50px;
     text-align: center;
 }
+.admin-content{
+    position:relative;
+}
 .menulist_content{
     width: 100%;
 }
@@ -24,12 +27,11 @@
     float:left;
 }
 .menulist_foot{
-    padding:3px 0 0 3px;
     position:absolute;
-    bottom:60px;
+    bottom:14px;
 }
 .menulist_foot button{
-    margin-left: 13px;
+    margin-left: 15px;
     border:1px solid transparent;
 }
 select{
