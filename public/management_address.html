@@ -34,9 +34,8 @@
 </header>
 
 <div class="am-cf admin-main">
-    <!-- sidebar start -->
+
     <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
-        <div class="am-offcanvas-bar admin-offcanvas-bar">
             <ul class="am-list admin-sidebar-list">
                 <li><a href="management_menu.html"><span class="am-icon-th-list"></span> 自定义菜单</a></li>
                 <li><a href="management_keyword.html"><span class="am-icon-font"></span> 关键词回复</a></li>
@@ -45,9 +44,10 @@
             </ul>
             <div class="am-panel am-panel-default admin-sidebar-panel">
             </div>
-        </div>
     </div>
     <!-- sidebar end -->
+
+    <!-- content start -->
     <div class="admin-content">
         <div class="am-cf am-padding">
             <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">小区更改</strong> /
@@ -74,6 +74,7 @@
             <!--</div>-->
             <div class="menulist_content">
                 <!--^^^^^^^^^^^-->
+                <div class="least_height"></div>
                 <div class="am-panel-group" id="accordion">
                     <script type="text/x-handlebars-template" id="push_house">
                         {{#each houses}}
@@ -93,7 +94,7 @@
                                 </h4>
                             </div>
                             <div id={{this.id}} class="am-panel-collapse am-collapse">
-                                <ul class="am-list" value={{this.id}}>
+                                <ul class="am-list am-list-extend" value={{this.id}}>
                                     <li houseid={{this.id}} bmenu="2" grade="1" class="add_menu_list" onclick="upmodal(event,'{{this.id}}',2,1)"><a
                                             class="am_icon_css  am-icon-plus" href="#"></a><a href="#" class="add_menu">添加公寓</a>
                                     </li>

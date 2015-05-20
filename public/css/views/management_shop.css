@@ -4,3 +4,7 @@
 .am_model_dialog{
     height: 600px;
 }
+.least_height{
+    height: 450px;
+    float:left;
+}

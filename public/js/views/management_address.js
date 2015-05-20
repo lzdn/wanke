@@ -6,13 +6,13 @@ $(".am-panel-default").remove();
 var cookie=$.AMUI.utils.cookie;
 var useremail_cookie =cookie.get("wankeloginuseremail");
 var userpwd_cookie =cookie.get("wankeloginuserpwd");
-if(!useremail_cookie||!userpwd_cookie){
-    window.location.href= server + '/management_login.html?Jumpurl=management_address.html';
-}else{
+//if(!useremail_cookie||!userpwd_cookie){
+//    window.location.href= server + '/management_login.html?Jumpurl=management_address.html';
+//}else{
     loadmenu(function(){
         add_event ();
     });
-}
+//}
 
 function loadmenu(callbak) {
     var homes = AV.Object.extend("home");

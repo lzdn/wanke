@@ -2,57 +2,18 @@ AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygu
 var menus = AV.Object.extend("menu");
 var cloud_id, bmenu, menuid, grade, menu, old_data, new_data;
 var bRelease_data = 0;
-load_menu(function (data, id) {
-    cloud_id = id;
-    new_data = data;
-    add_event()
-});
-//var menudata = {
-//        "button": [
-//        {
-//            "id":"one01",
-//            "type": "click",
-//            "name": "今日歌曲",
-//            "key": "V1001_TODAY_MUSIC",
-//            "list":[]
-//        },
-//        {
-//            "id":"one02",
-//            "name": "孙爽",
-//            "type":"null",
-//            "key":"null",
-//            "list": [
-//                    {
-//                        "id":"two01",
-//                        "type": "view",
-//                        "name": "搜索",
-//                        "key": "http://www.soso.com/"
-//                    },
-//                    {
-//                        "id":"two02",
-//                        "type": "view",
-//                        "name": "视频",
-//                        "key": "http://v.qq.com/"
-//                    },
-//                    {
-//                        "id":"two03",
-//                        "type": "click",
-//                        "name": "赞一下我们",
-//                        "key": "V1001_GOOD"
-//                    }
-//                ]
-//        },{
-//                "id":"one03",
-//        "type": "view",
-//        "name": "易生活",
-//        "key": "http://fuwuhao.dianyingren.com/shop_index.html",
-//                "list":[]
-//    }
-//    ]
-//};
-//var menu= new menus();
-//menu.set("content",menudata);
-//menu.save();
+var cookie=$.AMUI.utils.cookie;
+var useremail_cookie =cookie.get("wankeloginuseremail");
+var userpwd_cookie =cookie.get("wankeloginuserpwd");
+//if(!useremail_cookie||!userpwd_cookie){
+//    window.location.href= server + '/management_login.html?Jumpurl=management_address.html';
+//}else{
+    load_menu(function (data, id) {
+        cloud_id = id;
+        new_data = data;
+        add_event()
+    });
+//}
 function load_menu(callbak) {
     var query = new AV.Query(menus);
     query.find({
@@ -428,25 +389,3 @@ function Release_save_data(menusdata) {
         }
     });
 }
-//{
-//    "button"
-//:
-//    [{
-//        "id": "one01",
-//        "name": "易生活",
-//        "key": "null",
-//        "list": [{"id": "two01", "type": "click", "name": "更换合格合格后", "key": "hj "}],
-//        "type": "null"
-//    }]
-//}
-//{
-//    "button"
-//:
-//    [{
-//        "id": "one01",
-//        "name": "易生活",
-//        "key": "null",
-//        "list": [{"id": "two01", "type": "click", "name": "更换合格合格后", "key": "hj "}],
-//        "type": "null"
-//    }, {"id": "one02", "name": "打发打发打发", "key": "", "list": []}]
-//}
