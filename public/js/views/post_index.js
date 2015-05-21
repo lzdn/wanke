@@ -31,29 +31,31 @@ alert(code);
                     }
                 })
             });
+        }else{
+            var currentUser = AV.User.current();
+            if (currentUser) {
+                alert("已登录");
+            } else {
+                alert("meidenglu");
+                $.ajax({
+                    method: "POST",
+                    url: server + "/weixin/getAuthUrl",
+                    data: JSON.stringify({
+                        page: saveurl
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        window.location.href = data.authUrl;
+                    },
+                    error: function (msg) {
+                        // alert(msg);
+                    }
+                });
+            }
         }
 
-    var currentUser = AV.User.current();
-    if (currentUser) {
-        alert("已登录");
-    } else {
-        alert("meidenglu");
-        $.ajax({
-            method: "POST",
-            url: server + "/weixin/getAuthUrl",
-            data: JSON.stringify({
-                page: saveurl
-            }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                window.location.href = data.authUrl;
-            },
-            error: function (msg) {
-                // alert(msg);
-            }
-        });
-    }
+
 
     var skx = -5;
     var bload = 1;
