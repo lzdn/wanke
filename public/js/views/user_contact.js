@@ -6,7 +6,6 @@
         $("#haederleft").on("click", function () {
             window.location.href = "user_detail.html?code=";
         });
-
         $('#phonenum').keydown(function () {
             setTimeout(function () {
                 if ($('#phonenum').val() && /^1[3|4|5|7|8]\d{9}$/.test($('#phonenum').val())) {
@@ -15,7 +14,6 @@
                     $(".am-alert").alert('close');
                 } else {
                     bnum = 0;
-                    // $("#usr-sbm-sub").addClass("am-disabled");
                 }
             }, 10);
         });
@@ -29,14 +27,12 @@
                 }
             }, 20);
         });
-
         $("#usr-sbm-sub").on("click", function () {
             phonenum = $("#phonenum").val();
             if (bnum == 1) {
                 var query = new AV.Query(AV.User);
                 query.get(postview, {
                     success: function (user) {
-
                         user.set('mobilePhoneNumber', phonenum);
                         user.save().then(function () {
                             window.location.href = "user_detail.html?" + postview + "";
@@ -44,8 +40,6 @@
                     },
                     error: function (object, error) {
                         console.log(object);
-                        // The object was not retrieved successfully.
-                        // error is a AV.Error with an error code and description.
                     }
                 });
             } else {
