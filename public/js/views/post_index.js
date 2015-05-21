@@ -1,4 +1,4 @@
-(function ($) {
+
     AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
     loadwx();
     var load_href;
@@ -547,11 +547,12 @@
         }
     }
 
-    function location(href,value){
-        alert(href+value);
+
+    function location_href(href,value){
+       alert(href+"sadsd"+value);
        // window.location.href = href;
     }
 
-})(jQuery);
+
 
 
