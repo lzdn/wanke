@@ -209,7 +209,6 @@
         }
     });
     function loading(callbak) {
-        $("#foots").on("click", function () {
             var currentUser = AV.User.current();
             if (currentUser) {
                 load_href = server + "/post_detail.html";
@@ -218,7 +217,6 @@
                     load_href=res.authUrl;
                 })
             }
-        });
 
 
         $("#load").show();
