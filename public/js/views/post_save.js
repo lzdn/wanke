@@ -226,6 +226,7 @@ $(function () {
     }
     function uploadIds(localIds,index) {
         var idx=index;
+        alert( "http://wanke.dianyingren.com");
         wx.uploadImage({
             localId: localIds[index] + "",
             isShowProgressTips: 1,
