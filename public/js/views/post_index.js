@@ -1,7 +1,53 @@
 
     AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
     loadwx();
-    var load_href;
+    var saveurl = window.location.href;
+    var currentUser = AV.User.current();
+    if (currentUser) {
+        $("#arrow").hide();
+        skx = -5;
+        loading(function () {
+            var adoremove = document.getElementsByClassName("doremove");
+            if (adoremove.length < 5) {
+                $("#load").hide();
+            }
+            //$(".Publish").on("click", function () {
+            //    var postview = $(this).attr("value");
+            //    window.location.href = "post_detail.html?id=" + postview + "";
+            //});
+            $("#users").on("click", function () {
+                window.location.href = "user_detail.html?code=";
+            });
+            clickevent();
+            $("#foots").on("click", function () {
+                var currentUser = AV.User.current();
+                if (currentUser) {
+                    window.location.href = "post_save.html?code=";
+                } else {
+                    $.post(server + "/weixin/getAuthUrl", {page: server + "/post_save.html"}, function (res) {
+                        window.location.href = res.authUrl;
+                    })
+                }
+            });
+
+        });
+    }else{
+        $.ajax({
+            method: "POST",
+            url: server + "/weixin/getAuthUrl",
+            data: JSON.stringify({
+                page: saveurl
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                window.location.href = data.authUrl;
+            },
+            error: function (msg) {
+                // alert(msg);
+            }
+        });
+    }
     $("#load").hide();
     //var $selected = $("#js-selected");
     //for(var i = 0; i<5;i++){
@@ -155,33 +201,7 @@
         } else {
         }
     });
-    $("#arrow").hide();
-    skx = -5;
-    loading(function () {
-        var adoremove = document.getElementsByClassName("doremove");
-        if (adoremove.length < 5) {
-            $("#load").hide();
-        }
-        //$(".Publish").on("click", function () {
-        //    var postview = $(this).attr("value");
-        //    window.location.href = "post_detail.html?id=" + postview + "";
-        //});
-        $("#users").on("click", function () {
-            window.location.href = "user_detail.html?code=";
-        });
-        clickevent();
-        $("#foots").on("click", function () {
-            var currentUser = AV.User.current();
-            if (currentUser) {
-                window.location.href = "post_save.html?code=";
-            } else {
-                $.post(server + "/weixin/getAuthUrl", {page: server + "/post_save.html"}, function (res) {
-                    window.location.href = res.authUrl;
-                })
-            }
-        });
 
-    });
     $(window).scroll(function () {
         var htmlHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
         var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
@@ -209,16 +229,6 @@
         }
     });
     function loading(callbak) {
-            var currentUser = AV.User.current();
-            if (currentUser) {
-                load_href = server + "/post_detail.html";
-            } else {
-                $.post(server + "/weixin/getAuthUrl", {page: server + "/post_detail.html"}, function (res) {
-                    load_href=res.authUrl;
-                })
-            }
-
-
         $("#load").show();
         var post = AV.Object.extend("post");
         var user = AV.Object.extend("User");
