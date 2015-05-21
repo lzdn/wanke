@@ -547,9 +547,9 @@
         }
     }
 
-    function location_href(href,value){
+    function location(href,value){
         alert(href+value);
-        window.location.href = href;
+       // window.location.href = href;
     }
 
 })(jQuery);
