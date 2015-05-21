@@ -4,7 +4,6 @@
 var express = require('express');
 var router = express.Router();
 var config = require('../config');
-var config_server= require('../js/config.js');
 var API = require('wechat-api');
 var OAuth = require('wechat-oauth');
 var fs = require('fs');
@@ -149,7 +148,7 @@ router.post('/sendMessage', function (req, res) {
                 "姓名:" + user.get("authData").weixin.nickname + "\n" +
                 "联系方式:" + user.get("mobilePhoneNumber") + "\n" +
                 "\n" +
-                "<a href=\""+server+"/post_detail.html?id=" + postId + "\">点击查看详情</a>"
+                "<a href=\"http://wanke.dianyingren.com/post_detail.html?id=" + postId + "\">点击查看详情</a>"
                 "\n";
                 console.log(user.get("authData").weixin);
                 console.log(user.get("authData").weixin.openid);
