@@ -3,7 +3,6 @@
     loadwx();
     var saveurl = window.location.href;
     var code = "";
-    $("#load").hide();
     if (saveurl.split("=").length > 2) {
         userlog = window.location.search.split('=')[1];
         code = userlog.split("&")[0];
@@ -293,7 +292,6 @@
     });
     function loading(callbak) {
 
-        $("#load").show();
         var post = AV.Object.extend("post");
         var user = AV.Object.extend("User");
         var query = new AV.Query(post);
@@ -372,7 +370,6 @@
                         var data = {posts: posts};
                         var html = template(data);
                         $tpl.before(html);
-                        $("#load").hide();
                         callbak();
                     }
                 });
