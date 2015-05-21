@@ -9,7 +9,6 @@
         userlog = window.location.search.split('=')[1];
         code = userlog.split("&")[0];
     }
-alert(code);
         if (code != "") {
             $.post(server + "/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
@@ -28,6 +27,32 @@ alert(code);
                                 user.save()
                             }
                         });
+                        skx = -5;
+                        loading(function () {
+                            var adoremove = document.getElementsByClassName("doremove");
+                            if (adoremove.length < 5) {
+                                $("#load").hide();
+                            }
+                            //$(".Publish").on("click", function () {
+                            //    var postview = $(this).attr("value");
+                            //    window.location.href = "post_detail.html?id=" + postview + "";
+                            //});
+                            $("#users").on("click", function () {
+                                window.location.href = "user_detail.html?code=";
+                            });
+                            clickevent();
+                            $("#foots").on("click", function () {
+                                var currentUser = AV.User.current();
+                                if (currentUser) {
+                                    window.location.href = "post_save.html?code=";
+                                } else {
+                                    $.post(server + "/weixin/getAuthUrl", {page: server + "/post_save.html"}, function (res) {
+                                        window.location.href = res.authUrl;
+                                    })
+                                }
+                            });
+
+                        });
                     }
                 })
             });
@@ -35,6 +60,32 @@ alert(code);
             var currentUser = AV.User.current();
             if (currentUser) {
                 alert("已登录");
+                skx = -5;
+                loading(function () {
+                    var adoremove = document.getElementsByClassName("doremove");
+                    if (adoremove.length < 5) {
+                        $("#load").hide();
+                    }
+                    //$(".Publish").on("click", function () {
+                    //    var postview = $(this).attr("value");
+                    //    window.location.href = "post_detail.html?id=" + postview + "";
+                    //});
+                    $("#users").on("click", function () {
+                        window.location.href = "user_detail.html?code=";
+                    });
+                    clickevent();
+                    $("#foots").on("click", function () {
+                        var currentUser = AV.User.current();
+                        if (currentUser) {
+                            window.location.href = "post_save.html?code=";
+                        } else {
+                            $.post(server + "/weixin/getAuthUrl", {page: server + "/post_save.html"}, function (res) {
+                                window.location.href = res.authUrl;
+                            })
+                        }
+                    });
+
+                });
             } else {
                 alert("meidenglu");
                 $.ajax({
@@ -585,9 +636,8 @@ alert(code);
     }
 
 
-    function location_href(href,value){
-       alert(href+"sadsd"+value);
-       // window.location.href = href;
+    function location_href(value){
+        window.location.href = "post_detail.html?id=" +value+ "";
     }
 
 
