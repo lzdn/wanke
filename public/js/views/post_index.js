@@ -29,6 +29,8 @@
                             var adoremove = document.getElementsByClassName("doremove");
                             if (adoremove.length < 5) {
                                 $("#load").hide();
+                            }else{
+                                $("#load").show();
                             }
                             $("#users").on("click", function () {
                                 window.location.href = "user_detail.html?code=";
@@ -57,6 +59,8 @@
                     var adoremove = document.getElementsByClassName("doremove");
                     if (adoremove.length < 5) {
                         $("#load").hide();
+                    }else{
+                        $("#load").show();
                     }
                     $("#users").on("click", function () {
                         window.location.href = "user_detail.html?code=";
@@ -106,6 +110,8 @@
         var adoremove = document.getElementsByClassName("doremove");
         if (adoremove.length < 5) {
             $("#load").hide();
+        }else{
+            $("#load").show();
         }
         selectchange(function (width) {
             $(".tagsearch").css("width", "" + width + "px");
@@ -247,6 +253,8 @@
         var adoremove = document.getElementsByClassName("doremove");
         if (adoremove.length < 5) {
             $("#load").hide();
+        }else{
+            $("#load").show();
         }
         $("#users").on("click", function () {
             window.location.href = "user_detail.html?code=";
@@ -302,6 +310,8 @@
                 skx += 5;
                 if (skx >= skip) {
                     $("#load").hide();
+                }else{
+                    $("#load").show();
                 }
                 query.limit(5).skip(skx);
                 query.include("tagkey");
@@ -390,6 +400,8 @@
                 skx += 5;
                 if (skx >= skip) {
                     $("#load").hide();
+                }else{
+                    $("#load").show();
                 }
                 query.limit(5).skip(skx);
                 query.include("tagkey");
