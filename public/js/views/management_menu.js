@@ -338,6 +338,9 @@ function save_data() {
                     });
                 }
             })
+            $("#save_data").addClass("am-disabled");
+            bRelease_data=0;
+
         }
     });
 }
@@ -364,6 +367,7 @@ function Release_data() {
 
                 }
             })
+            $("#Release").addClass("am-disabled");
         }
     });
 
@@ -438,12 +442,11 @@ function Release_save_data(menusdata) {
         }),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function (data) {
-            alert("chengg" + data);
+        success: function (res) {
+            alert("发布成功")
         },
         error: function (msg) {
-            // alert(msg);
-            alert("shibai" + msg);
+            alert("发布失败")
         }
     });
 }
