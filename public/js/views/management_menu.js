@@ -383,7 +383,7 @@ function Release_save_data(menusdata) {
                 var button_data = {
                     "type": menusdata[i].type,
                     "name": menusdata[i].name,
-                    "key": menusdata[i].relation_key
+                    "key": menusdata[i].key
                 }
             }
 
@@ -403,7 +403,7 @@ function Release_save_data(menusdata) {
                         var list = {
                             "type": relation_data[j].type,
                             "name": relation_data[j].name,
-                            "key": relation_data[j].relation_key
+                            "key": relation_data[j].key
                         }
                     }
                     list_data.push(list);
