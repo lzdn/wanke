@@ -562,9 +562,8 @@
     }
 
 
-    function location_href(href,value){
-       alert(href+"sadsd"+value);
-       // window.location.href = href;
+    function location_href(value){
+        window.location.href = "post_detail.html?id=" + value + "";
     }
 
     function SignUp(code){
