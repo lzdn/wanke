@@ -298,12 +298,10 @@
                                 time: times,
                                 value: avalue,
                                 img: imgs,
-                                pattern: imgpattern,
-                                href:load_href
+                                pattern: imgpattern
                             };
                             posts.push(opost);
                         }
-                        alert(load_href);
                         var $tpl = $('#usercontent');
                         var source = $tpl.text();
                         var template = Handlebars.compile(source);
