@@ -37,9 +37,21 @@ alert(code);
         alert("已登录");
     } else {
         alert("meidenglu");
-        $.post(server + "/weixin/getAuthUrl", {page: server + "/post_detail.html"}, function (res) {
-            window.location.href=res.authUrl;
-        })
+        $.ajax({
+            method: "POST",
+            url: server + "/weixin/getAuthUrl",
+            data: JSON.stringify({
+                page: saveurl
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                window.location.href = data.authUrl;
+            },
+            error: function (msg) {
+                // alert(msg);
+            }
+        });
     }
 
     var skx = -5;
