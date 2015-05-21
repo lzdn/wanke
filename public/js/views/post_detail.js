@@ -202,7 +202,6 @@
                 query.get(currentUser.id, {
                     success: function (user) {
                         phonenumber = user.get('mobilePhoneNumber');
-                        alert(phonenumber);
                     }
                 });
                 if (relationuser) {
