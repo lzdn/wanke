@@ -153,6 +153,7 @@ function Judge(menuid) {
     Judge_menu = menuid;
 }
 function remove_list(){
+    Judge_menu = null;
     var form_input = $(".form_input");
     for (var i = 0; i < form_input.length; i++) {
             form_input[i].value = ""
