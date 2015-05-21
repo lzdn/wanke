@@ -414,9 +414,7 @@ function Release_save_data(menusdata) {
                 }
                 var button_data = {
                     "name": menusdata[i].name,
-                    "sub_button": {
-                        "list": list_data
-                    }
+                    "sub_button":list_data
                 }
                 button.push(button_data);
             } else {
