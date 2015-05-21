@@ -5,8 +5,8 @@
     var code = "";
     $("#load").hide();
     alert(saveurl);
-    if (saveurl.split("=").length - 1 > 1) {
-        userlog = window.location.search.split('=')[2];
+    if (saveurl.split("=").length > 2) {
+        userlog = window.location.search.split('=')[1];
         code = userlog.split("&")[0];
     }
 alert(code);
