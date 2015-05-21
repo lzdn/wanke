@@ -8,7 +8,7 @@
         userlog = window.location.search.split('=')[2];
         code = userlog.split("&")[0];
     }
-       alert(code);
+
         if (code != "") {
             $.post(server + "/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
@@ -33,34 +33,9 @@
 
     var currentUser = AV.User.current();
     if (currentUser) {
-        skx = -5;
-        loading(function () {
-            alert("haha");
-            var adoremove = document.getElementsByClassName("doremove");
-            if (adoremove.length < 5) {
-                $("#load").hide();
-            }
-            //$(".Publish").on("click", function () {
-            //    var postview = $(this).attr("value");
-            //    window.location.href = "post_detail.html?id=" + postview + "";
-            //});
-            $("#users").on("click", function () {
-                window.location.href = "user_detail.html?code=";
-            });
-            clickevent();
-            $("#foots").on("click", function () {
-                var currentUser = AV.User.current();
-                if (currentUser) {
-                    window.location.href = "post_save.html?code=";
-                } else {
-                    $.post(server + "/weixin/getAuthUrl", {page: server + "/post_save.html"}, function (res) {
-                        window.location.href = res.authUrl;
-                    })
-                }
-            });
-
-        });
+        alert("已登录");
     } else {
+        alert("meidenglu");
         $.post(server + "/weixin/getAuthUrl", {page: server + "/post_detail.html"}, function (res) {
             load_href=res.authUrl;
         })
@@ -214,7 +189,32 @@
         }
     });
     $("#arrow").hide();
+    skx = -5;
+    loading(function () {
+        var adoremove = document.getElementsByClassName("doremove");
+        if (adoremove.length < 5) {
+            $("#load").hide();
+        }
+        //$(".Publish").on("click", function () {
+        //    var postview = $(this).attr("value");
+        //    window.location.href = "post_detail.html?id=" + postview + "";
+        //});
+        $("#users").on("click", function () {
+            window.location.href = "user_detail.html?code=";
+        });
+        clickevent();
+        $("#foots").on("click", function () {
+            var currentUser = AV.User.current();
+            if (currentUser) {
+                window.location.href = "post_save.html?code=";
+            } else {
+                $.post(server + "/weixin/getAuthUrl", {page: server + "/post_save.html"}, function (res) {
+                    window.location.href = res.authUrl;
+                })
+            }
+        });
 
+    });
     $(window).scroll(function () {
         var htmlHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
         var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
