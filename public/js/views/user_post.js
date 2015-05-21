@@ -2,10 +2,10 @@
     var userid=window.location.search.split('=')[1];
     var skx = -5;
     var postview,contentlength;
-    $("#load").hide();
    // loadwx();
     $("#arrow").hide();
     loading(function(){
+
         var adoremove = document.getElementsByClassName("doremove");
         if(adoremove.length<5){
             $("#load").hide();
@@ -61,9 +61,8 @@
             $("#arrow").hide();
             $("#arrow").hide().removeClass("am-animation-fade");
         }
-        if (scrollTop + newheight + 300 >= htmlHeight) {
+        if (scrollTop + newheight + 200 >= htmlHeight) {
             loading(function(){
-                alert("load")
                 $(".Publish").on("click", function () {
                     postview = $(this).attr("value");
                 });
@@ -102,7 +101,6 @@
     });
 
     function loading(callbak) {
-        $("#load").show();
         var userpost = window.location.href;
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
         $.post(server + "/weixin/getJsConfig", {url: "" + userpost + ""}, function (result) {
@@ -213,7 +211,6 @@
                                 var data = {tags: tags};
                                 var html = template(data);
                                 $tpl.before(html);
-                                $("#load").hide();
                                 callbak();
                             }
                         });
@@ -242,42 +239,7 @@
                         }
                         if(destroylength.length==0){
                             $("hr").remove();
-                            loading(function(){
-                                var adoremove = document.getElementsByClassName("doremove");
-                                if(adoremove.length<5){
-                                    $("#load").hide();
-                                }
-                                if(adoremove.length==0){
-                                    $("hr").remove();
-                                    $(" <div id=\"null\"><p class=\"am-sans-serif\">暂时没有发表评论</p></div>").prependTo("#content");
-                                }
-                                $(".Publish").on("click", function () {
-                                    postview = $(this).attr("value");
-                                });
-                                //$("#users").on("click", function () {
-                                //    window.location.href = "user_detail.html";
-                                //});
-                                $(".imgpreview").on("click", function () {
-                                    var cur = $(this).attr("src");
-                                    var url = $(this).parent(".images").attr("value");
-                                    var arr = url.split(",");
-                                    wx.previewImage({
-                                        current: cur, // 当前显示的图片链接
-                                        urls: arr // 需要预览的图片链接列表
-                                    });
-                                    event.stopPropagation();
-                                });
-                                $(".imgpreview").removeClass("imgpreview");
-                                var aimg_thumbnail=($(".imgpatterntwo .img"));
-                                for(var i=0; i<aimg_thumbnail.length;i++){
-                                    var url = aimg_thumbnail[i].className.split(" ")[1];
-                                    aimg_thumbnail[i].className=("imgthumbnail");
-                                    console.log(aimg_thumbnail[i]);
-                                    img_thumbnail($(".imgthumbnail"),url,70);
-                                    aimg_thumbnail[i].className=("");
-                                }
-                            });
-                           // $(" <div id=\"null\"><p class=\"am-sans-serif\">暂时没有发表评论</p></div>").prependTo("#content");
+                            $(" <div id=\"null\"><p class=\"am-sans-serif\">暂时没有发表评论</p></div>").prependTo("#content");
                         }
                     }
                 });
