@@ -31,7 +31,7 @@ router.post('/', wechat(config.token, function (req, res, next) {
                 res.reply("服务器在向我们发起进攻，我们的工程师和首席打气官正英勇的与其战斗...");
             }
         });
-    }else if((message.MsgType === 'event')){
+    }else if((message.Event === 'CLICK')){
         var Keyword = AV.Object.extend('keyword');
         var query = new AV.Query(Keyword);
         query.find({
