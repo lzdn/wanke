@@ -295,6 +295,7 @@
                             };
                             posts.push(opost);
                         }
+                        alert(load_href);
                         var $tpl = $('#usercontent');
                         var source = $tpl.text();
                         var template = Handlebars.compile(source);
