@@ -240,7 +240,6 @@
                             $("#load").hide();
                         }
                         if(destroylength.length==0){
-                            $("hr").remove();
                             loading(function(){
 
                                 var adoremove = document.getElementsByClassName("doremove");
@@ -277,6 +276,8 @@
                                     aimg_thumbnail[i].className=("");
                                 }
                             });
+                            $("hr").remove();
+
                             //$(" <div id=\"null\"><p class=\"am-sans-serif\">暂时没有发表评论</p></div>").prependTo("#content");
                         }
                     }
