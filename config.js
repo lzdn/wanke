@@ -2,8 +2,8 @@
  * Created by amberglasses on 15/3/30.
  */
 module.exports = {
-    appId: "wx83299eb9a40e040f",
-    appSecret: "b4f01789803fb5afd6e06846622a3fe8",
+    appId: "wxb813c10cb909e542",
+    appSecret: "d3f9e6bf9fa89ac38acbbfc8f01267c1",
     url: "http://wanke.dianyingren.com",
     token: "wanke_yanshulife",
     EncodingAESKey:"RUDUaZysSALJ1SP9YveGJn4860uCXorQhnc5mLvkd2m",
