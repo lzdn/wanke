@@ -37,7 +37,6 @@ function load_menu(callbak) {
 
 function upmodal(event, menuids, bmenus, grades) {
     var arry = new_data.button;
-    console.log(menuids + "dfsd" + bmenus + "dsfds" + grades);
     menuid = menuids;
     bmenu = bmenus;
     grade = grades;
@@ -150,6 +149,7 @@ function save_menu() {
                     if (arry[i].id == menuid) {
                         arry[i].type = "null";
                         arry[i].key = "null";
+                        arry[i].relation_key=undefined;
                         if (arry[i].list.length >= 5) {
                             alert("不能超过五个二级菜单");
                         } else {
@@ -183,7 +183,10 @@ function save_menu() {
                             arry[i].list = [];
                             if(menutype=="click"){
                                 arry[i].relation_key=menuid;
+                            }else{
+                                arry[i].relation_key=undefined;
                             }
+                            console.log(arry[i])
                         }
                     }
                     new_load_menu(new_data);
@@ -199,8 +202,11 @@ function save_menu() {
                                     arry_tow[i].key = menucontent;
                                     if(menutype=="click"){
                                         arry_tow[i].relation_key=relation_id+"0"+menuid
+                                    }else{
+                                        arry_tow[i].relation_key=undefined;
                                     }
                                 }
+                                console.log(arry_tow[i]);
                             }
                             new_load_menu(new_data);
                         }
@@ -277,7 +283,6 @@ function save_data() {
         relatedTarget: this,
         onConfirm: function (options) {
             $("#Release").removeClass("am-disabled");
-            console.log(new_data);
             var query = new AV.Query(keywords);
             query.equalTo("isMenuKey",true);
             query.find({
@@ -288,7 +293,6 @@ function save_data() {
                 }
             });
             if($("[keyword='click']").length>0){
-                alert($("[keyword='click']").length);
                 var new_data_object=new_data.button;
                 for(var i=0; i<new_data_object.length;i++){
                     if(new_data_object[i].type=="click"){
@@ -298,7 +302,6 @@ function save_data() {
                         keyword.set("word", new_data_object[i].key);
                         keyword.save(null,{
                             success:function(res){
-                                console.log(res);
                             }
                         });
                     }
@@ -312,7 +315,6 @@ function save_data() {
                                  keyword.set("word", new_relation_list[j].key);
                                  keyword.save(null,{
                                      success:function(res){
-                                         console.log(res);
                                      }
                                  });
                              }
