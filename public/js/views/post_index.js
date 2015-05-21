@@ -8,7 +8,7 @@
         userlog = window.location.search.split('=')[2];
         code = userlog.split("&")[0];
     }
-alert("code");
+alert(code);
         if (code != "") {
             $.post(server + "/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
@@ -38,7 +38,7 @@ alert("code");
     } else {
         alert("meidenglu");
         $.post(server + "/weixin/getAuthUrl", {page: server + "/post_detail.html"}, function (res) {
-            load_href=res.authUrl;
+            window.location.href=res.authUrl;
         })
     }
 
