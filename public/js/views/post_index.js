@@ -3,12 +3,12 @@
     loadwx();
     var saveurl = window.location.href;
     var code="";
-     SignUp(code);
     if (saveurl.split("=").length - 1 > 1) {
         var userlog = window.location.search.split('=')[2];
              code = userlog.split("&")[0];
         postview = window.location.search.split('=')[1].split("&")[0];
     }
+    SignUp(code);
     var currentUser = AV.User.current();
     if (currentUser) {
         $("#arrow").hide();
