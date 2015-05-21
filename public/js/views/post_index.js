@@ -4,6 +4,7 @@
     var saveurl = window.location.href;
     var code = "";
     $("#load").hide();
+    alert(saveurl);
     if (saveurl.split("=").length - 1 > 1) {
         userlog = window.location.search.split('=')[2];
         code = userlog.split("&")[0];
