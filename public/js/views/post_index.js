@@ -8,7 +8,7 @@
         userlog = window.location.search.split('=')[2];
         code = userlog.split("&")[0];
     }
-
+alert("code");
         if (code != "") {
             $.post(server + "/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
@@ -16,6 +16,7 @@
                 AV.User._logInWith("weixin", {
                     "authData": res,
                     success: function (user) {
+                        alert("登录成功")
                         userid = user.id;
                         commentuserid = userid
                         queryobject = user.get("authData");
