@@ -1,15 +1,16 @@
 AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
-var least_height=document.documentElement.clientHeight-254;
-$(".least_height").css({"height":""+least_height+""});
+var least_height = document.documentElement.clientHeight - 254;
+$(".least_height").css({"height": "" + least_height + ""});
 var menus = AV.Object.extend("menu");
+var keywords = AV.Object.extend("keyword");
 var cloud_id, bmenu, menuid, grade, menu, old_data, new_data;
 var bRelease_data = 0;
-var cookie=$.AMUI.utils.cookie;
-var useremail_cookie =cookie.get("wankeloginuseremail");
-var userpwd_cookie =cookie.get("wankeloginuserpwd");
-if(!useremail_cookie||!userpwd_cookie){
-    window.location.href= server + '/management_login.html?Jumpurl=management_address.html';
-}else{
+var cookie = $.AMUI.utils.cookie;
+var useremail_cookie = cookie.get("wankeloginuseremail");
+var userpwd_cookie = cookie.get("wankeloginuserpwd");
+if (!useremail_cookie || !userpwd_cookie) {
+    window.location.href = server + '/management_login.html?Jumpurl=management_address.html';
+} else {
     load_menu(function (data, id) {
         cloud_id = id;
         new_data = data;
@@ -156,12 +157,16 @@ function save_menu() {
                             for (var j = 0; j < arry[i].list.length; j++) {
                                 arry_twoids.splice($.inArray(arry[i].list[j].id.split("0")[1], arry_twoids), 1);
                             }
-                            arry[i].list.push({
+                            var  new_menu_objict={
                                 "id": "two0" + arry_twoids[0],
                                 "type": menutype,
                                 "name": menuname,
                                 "key": menucontent
-                            })
+                            }
+                            if(menutype=="click"){
+                                new_menu_objict.relation_key=menuid+"0"+new_menu_objict.id;
+                            }
+                            arry[i].list.push(new_menu_objict);
                             new_load_menu(new_data);
                         }
                     }
@@ -176,6 +181,9 @@ function save_menu() {
                             arry[i].name = menuname;
                             arry[i].key = menucontent;
                             arry[i].list = [];
+                            if(menutype=="click"){
+                                arry[i].relation_key=menuid;
+                            }
                         }
                     }
                     new_load_menu(new_data);
@@ -189,6 +197,9 @@ function save_menu() {
                                     arry_tow[i].type = menutype;
                                     arry_tow[i].name = menuname;
                                     arry_tow[i].key = menucontent;
+                                    if(menutype=="click"){
+                                        arry_tow[i].relation_key=relation_id+"0"+menuid
+                                    }
                                 }
                             }
                             new_load_menu(new_data);
@@ -266,6 +277,49 @@ function save_data() {
         relatedTarget: this,
         onConfirm: function (options) {
             $("#Release").removeClass("am-disabled");
+            console.log(new_data);
+            var query = new AV.Query(keywords);
+            query.equalTo("isMenuKey",true);
+            query.find({
+                success:function(res){
+                    for(var x = 0; x<res.length;x++){
+                        res[x].destroy();
+                    }
+                }
+            });
+            if($("[keyword='click']").length>0){
+                alert($("[keyword='click']").length);
+                var new_data_object=new_data.button;
+                for(var i=0; i<new_data_object.length;i++){
+                    if(new_data_object[i].type=="click"){
+                        var keyword = new keywords();
+                        keyword.set("isMenuKey",true);
+                        keyword.set("key", new_data_object[i].relation_key);
+                        keyword.set("word", new_data_object[i].key);
+                        keyword.save(null,{
+                            success:function(res){
+                                console.log(res);
+                            }
+                        });
+                    }
+                    if(new_data_object[i].type=="null"){
+                        var new_relation_list=new_data_object[i].list
+                         for( var j=0;j<new_relation_list.length;j++){
+                             if(new_relation_list[j].type=="click"){
+                                 var keyword = new keywords();
+                                 keyword.set("isMenuKey",true);
+                                 keyword.set("key", new_relation_list[j].relation_key);
+                                 keyword.set("word", new_relation_list[j].key);
+                                 keyword.save(null,{
+                                     success:function(res){
+                                         console.log(res);
+                                     }
+                                 });
+                             }
+                         }
+                    }
+                }
+            }
             var query = new AV.Query(menus);
             query.get(cloud_id, {
                 success: function (res) {
@@ -383,11 +437,34 @@ function Release_save_data(menusdata) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {
-            alert("chengg"+data);
+            alert("chengg" + data);
         },
         error: function (msg) {
             // alert(msg);
-            alert("shibai"+msg);
+            alert("shibai" + msg);
         }
     });
 }
+//{
+//    "button"
+//:
+//    [{
+//        "id": "one01",
+//        "name": "易生活",
+//        "key": "112121212",
+//        "list": [],
+//        "type": "click"
+//    }, {
+//        "id": "one02",
+//        "type": "view",
+//        "name": "邻里圈",
+//        "key": "http://wanke.dianyingren.com/post_index.html",
+//        "list": []
+//    }, {
+//        "id": "one03",
+//        "type": "view",
+//        "name": "个人中心",
+//        "key": "http://wanke.dianyingren.com/user_detail.html?code=",
+//        "list": []
+//    }]
+//}

@@ -82,7 +82,7 @@
                                     <span class="{{this.type}} am-icon-sm menu_icon" title={{this.type}}></span>
 
                                     <div class="btn_content">
-                                        <button type="button"  class="am-btn am-radius am-btn-default menu_btn" menuid={{this.id}}
+                                        <button type="button"  keyword={{this.type}}  class="am-btn am-radius am-btn-default menu_btn" menuid={{this.id}}
                                                 bmenu="0" grade="1" onclick="upmodal(event,'{{this.id}}',0,1)"
                                                 >编辑
                                         </button>
@@ -96,7 +96,7 @@
                                     </li>
                                     {{#if this.list}}
                                     {{#each this.list}}
-                                    <li bmenu="0" grade="2"  class="menu_list {{this.id}}" onclick="upmodal(event,'{{this.id}}',0,2)"><a href="#">{{this.name}}<span
+                                    <li bmenu="0" grade="2"  class="menu_list {{this.id}}" keyword={{this.type}} onclick="upmodal(event,'{{this.id}}',0,2)"><a href="#">{{this.name}}<span
                                             class="{{this.type}} am-icon-sm menu_icon"></span></a></li>
                                     {{/each}}
                                     {{/if}}

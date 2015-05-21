@@ -27,6 +27,7 @@ function load() {
 
     $('td').remove();
     var query = new AV.Query(Keyword);
+    query.equalTo("isMenuKey",false);
     query.find({
         success: function (results) {
             var keywords = new Array();
