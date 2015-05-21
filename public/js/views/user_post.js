@@ -63,6 +63,7 @@
         }
         if (scrollTop + newheight + 200 >= htmlHeight) {
             loading(function(){
+                alert("load")
                 $(".Publish").on("click", function () {
                     postview = $(this).attr("value");
                 });
