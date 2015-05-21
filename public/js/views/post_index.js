@@ -2,65 +2,44 @@
     AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
     loadwx();
     var saveurl = window.location.href;
-    var code="";
+    var code = "";
+    $("#load").hide();
     if (saveurl.split("=").length - 1 > 1) {
-        var userlog = window.location.search.split('=')[2];
-             code = userlog.split("&")[0];
-        postview = window.location.search.split('=')[1].split("&")[0];
+        userlog = window.location.search.split('=')[2];
+        code = userlog.split("&")[0];
     }
-    SignUp(code);
+
+        if (code != "") {
+            $.post(server + "/weixin/userSignUp", {code: code}, function (res) {
+                queryobject = res;
+                nickname = res.nickname;
+                AV.User._logInWith("weixin", {
+                    "authData": res,
+                    success: function (user) {
+                        userid = user.id;
+                        commentuserid = userid
+                        queryobject = user.get("authData");
+                        var query = new AV.Query(AV.User);
+                        query.get(userid, {
+                            success: function (user) {
+                                user.set('nickname', nickname);
+                                user.save()
+                            }
+                        });
+                    }
+                })
+            });
+        }
+
     var currentUser = AV.User.current();
     if (currentUser) {
-        $("#arrow").hide();
-        skx = -5;
-        loading(function () {
-            var adoremove = document.getElementsByClassName("doremove");
-            if (adoremove.length < 5) {
-                $("#load").hide();
-            }
-            //$(".Publish").on("click", function () {
-            //    var postview = $(this).attr("value");
-            //    window.location.href = "post_detail.html?id=" + postview + "";
-            //});
-            $("#users").on("click", function () {
-                window.location.href = "user_detail.html?code=";
-            });
-            clickevent();
-            $("#foots").on("click", function () {
-                var currentUser = AV.User.current();
-                if (currentUser) {
-                    window.location.href = "post_save.html?code=";
-                } else {
-                    $.post(server + "/weixin/getAuthUrl", {page: server + "/post_save.html"}, function (res) {
-                        window.location.href = res.authUrl;
-                    })
-                }
-            });
-
-        });
-    }else{
-        $.ajax({
-            method: "POST",
-            url: server + "/weixin/getAuthUrl",
-            data: JSON.stringify({
-                page: saveurl
-            }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                window.location.href = data.authUrl;
-            },
-            error: function (msg) {
-                // alert(msg);
-            }
-        });
+        load_href = server + "/post_detail.html";
+    } else {
+        $.post(server + "/weixin/getAuthUrl", {page: server + "/post_detail.html"}, function (res) {
+            load_href=res.authUrl;
+        })
     }
-    $("#load").hide();
-    //var $selected = $("#js-selected");
-    //for(var i = 0; i<5;i++){
-    //    $selected.append("<option value=\""+i+"&"+i+"\">\""+i+"\"</option>");
-    //}
-    //querytag();
+
     var skx = -5;
     var bload = 1;
     var length;
@@ -208,7 +187,33 @@
         } else {
         }
     });
+    $("#arrow").hide();
+    skx = -5;
+    loading(function () {
+        var adoremove = document.getElementsByClassName("doremove");
+        if (adoremove.length < 5) {
+            $("#load").hide();
+        }
+        //$(".Publish").on("click", function () {
+        //    var postview = $(this).attr("value");
+        //    window.location.href = "post_detail.html?id=" + postview + "";
+        //});
+        $("#users").on("click", function () {
+            window.location.href = "user_detail.html?code=";
+        });
+        clickevent();
+        $("#foots").on("click", function () {
+            var currentUser = AV.User.current();
+            if (currentUser) {
+                window.location.href = "post_save.html?code=";
+            } else {
+                $.post(server + "/weixin/getAuthUrl", {page: server + "/post_save.html"}, function (res) {
+                    window.location.href = res.authUrl;
+                })
+            }
+        });
 
+    });
     $(window).scroll(function () {
         var htmlHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
         var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
@@ -236,6 +241,7 @@
         }
     });
     function loading(callbak) {
+
         $("#load").show();
         var post = AV.Object.extend("post");
         var user = AV.Object.extend("User");
@@ -562,32 +568,9 @@
     }
 
 
-    function location_href(value){
-        window.location.href = "post_detail.html?id=" + value + "";
-    }
-
-    function SignUp(code){
-        if (code != "") {
-            $.post(server + "/weixin/userSignUp", {code: code}, function (res) {
-                queryobject = res;
-                nickname = res.nickname;
-                AV.User._logInWith("weixin", {
-                    "authData": res,
-                    success: function (user) {
-                        userid = user.id;
-                        commentuserid = userid
-                        queryobject = user.get("authData");
-                        var query = new AV.Query(AV.User);
-                        query.get(userid, {
-                            success: function (user) {
-                                user.set('nickname', nickname);
-                                user.save()
-                            }
-                        });
-                    }
-                })
-            });
-        }
+    function location_href(href,value){
+       alert(href+"sadsd"+value);
+       // window.location.href = href;
     }
 
 
