@@ -1,6 +1,7 @@
 (function ($) {
     AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
     loadwx();
+    $("#load").hide();
     //var $selected = $("#js-selected");
     //for(var i = 0; i<5;i++){
     //    $selected.append("<option value=\""+i+"&"+i+"\">\""+i+"\"</option>");
@@ -207,6 +208,7 @@
         }
     });
     function loading(callbak) {
+        $("#load").show();
         var post = AV.Object.extend("post");
         var user = AV.Object.extend("User");
         var query = new AV.Query(post);
@@ -216,7 +218,7 @@
                 query.descending("createdAt");
                 skx += 5;
                 if (skx >= skip) {
-                    $("#load").remove();
+                    $("#load").hide();
                 }
                 query.limit(5).skip(skx);
                 query.include("tagkey");
@@ -285,6 +287,7 @@
                         var data = {posts: posts};
                         var html = template(data);
                         $tpl.before(html);
+                        $("#load").hide();
                         callbak();
                     }
                 });
@@ -304,7 +307,7 @@
                 query.descending("createdAt");
                 skx += 5;
                 if (skx >= skip) {
-                    $("#load").remove();
+                    $("#load").hide();
                 }
                 query.limit(5).skip(skx);
                 query.include("tagkey");

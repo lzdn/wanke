@@ -2,6 +2,7 @@
     var userid=window.location.search.split('=')[1];
     var skx = -5;
     var postview,contentlength;
+    $("#load").hide();
    // loadwx();
     $("#arrow").hide();
     loading(function(){
@@ -101,6 +102,7 @@
     });
 
     function loading(callbak) {
+        $("#load").show();
         var userpost = window.location.href;
         var appId, jslist, noncestr, signature, timestamp, jsApiList;
         $.post(server + "/weixin/getJsConfig", {url: "" + userpost + ""}, function (result) {
@@ -211,6 +213,7 @@
                                 var data = {tags: tags};
                                 var html = template(data);
                                 $tpl.before(html);
+                                $("#load").hide();
                                 callbak();
                             }
                         });
