@@ -17,12 +17,10 @@
     loading(function () {
         $(".close").hide();
         var currentUser = AV.User.current();
-        if (currentUser) {
             usersid = currentUser.id;
             var authData = currentUser.get("authData");
             headUrl = authData.weixin.headimgurl
             $(".nullusershow").attr("src", headUrl);
-        }
         $(".replypublish").hide();
         var aclose = document.getElementsByClassName("close");
         for (var i = 0; i < aclose.length; i++) {
@@ -52,7 +50,6 @@
         })
         $(".smpublish").on("click", function () {
             var currentUser = AV.User.current();
-            if (currentUser) {
                 var publishsay = $(this).parent().siblings(".textarea").children().val();
                 if (publishsay) {
                     var comment = AV.Object.extend("comment");
@@ -101,28 +98,10 @@
                 } else {
                     alert("你要说点什么");
                 }
-            } else {
-                $.ajax({
-                    method: "POST",
-                    url: server + "/weixin/getAuthUrl",
-                    data: JSON.stringify({
-                        page: saveurl
-                    }),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (data) {
-                        window.location.href = data.authUrl;
-                    },
-                    error: function (msg) {
-                        // alert(msg);
-                    }
-                });
-            }
         });
 
         $("#maxpublish").on("click", function () {
             var currentUser = AV.User.current();
-            if (currentUser) {
                 var post = AV.Object.extend("post");
                 var comment = AV.Object.extend("comment");
                 var publishsay = $(this).parent().siblings(".textarea").children().val();
@@ -155,23 +134,6 @@
                 } else {
                     alert("你要说点什么");
                 }
-            } else {
-                $.ajax({
-                    method: "POST",
-                    url: server + "/weixin/getAuthUrl",
-                    data: JSON.stringify({
-                        page: saveurl
-                    }),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (data) {
-                        window.location.href = data.authUrl;
-                    },
-                    error: function (msg) {
-                        // alert(msg);
-                    }
-                });
-            }
         });
 
         $(".imgpreview").on("click", function () {
@@ -196,7 +158,6 @@
 
         $("#btnname").on("click", function () {
             var currentUser = AV.User.current();
-            if (currentUser) {
                 theuserid = currentUser.id;
                 var query = new AV.Query(AV.User);
                 query.get(currentUser.id, {
@@ -338,27 +299,6 @@
                         }
                     }, 100);
                 }
-
-            } else {
-                $.ajax({
-                    method: "POST",
-                    url: server + "/weixin/getAuthUrl",
-                    data: JSON.stringify({
-                        page: saveurl
-                    }),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (data) {
-                        window.location.href = data.authUrl;
-                    },
-                    error: function (msg) {
-                        // alert(msg);
-                    }
-                });
-                //    $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl",{page:saveurl}, function (res) {
-                //        window.location.href = res.authUrl;
-                //})
-            }
         });
     });
 
@@ -366,7 +306,6 @@
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
         var load = 0 //ject.createWithoutData('className',id);
         var currentUser = AV.User.current();
-        if (currentUser) {
             commentuserid = currentUser.id;
             var authData = currentUser.get("authData");
             nickname = authData.weixin.nickname
@@ -375,13 +314,6 @@
             if (load == 4) {
                 callbak();
             }
-        } else {
-            load += 1
-            if (load == 4) {
-                callbak();
-            }
-        }
-
         var post = AV.Object.extend("post");
         var tags = AV.Object.extend("tags");
         var user = AV.Object.extend("User");
@@ -468,7 +400,7 @@
 
                 if (relationuser) {
                     var currentUser = AV.User.current();
-                    if (currentUser) {
+                    //if (currentUser) {
                         usersid = currentUser.id;
                         for (var i = 0; i < relationuser.length; i++) {
                             if (relationuser[i].id == usersid) {
@@ -478,7 +410,7 @@
                                 $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
                             }
                         }
-                    }
+                    //}
                 }
             }
         });
