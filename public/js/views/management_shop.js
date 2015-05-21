@@ -57,7 +57,6 @@ function load() {
                 shop.type = results[x].get('type');
                 shop.tel = results[x].get('shoptel');
                 shops.push(shop);
-                console.log(shop);
             }
 
             var $tpl = $('#shops');
@@ -89,7 +88,6 @@ function save() {
                 load();
             },
             error: function (keyword, error) {
-                console.log(error);
             }
         })
     } else {
