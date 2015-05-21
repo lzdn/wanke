@@ -28,7 +28,23 @@ router.post('/', wechat(config.token, function (req, res, next) {
             }
             ,
             error: function (results, error) {
-                res.reply("服务器向我们发起进攻，我们的工程师和首席打气官正在英勇的与其战斗...");
+                res.reply("服务器在向我们发起进攻，我们的工程师和首席打气官正英勇的与其战斗...");
+            }
+        });
+    }else if((message.MsgType === 'event')){
+        var Keyword = AV.Object.extend('keyword');
+        var query = new AV.Query(Keyword);
+        query.find({
+            success: function (results) {
+                for (var x = 0; x < results.length; x++) {
+                    if (results[x].get('key') == message.EventKey) {
+                        res.reply(results[x].get('word'));
+                    }
+                }
+            }
+            ,
+            error: function (results, error) {
+                res.reply("服务器在向我们发起进攻，我们的工程师和首席打气官正英勇的与其战斗...");
             }
         });
     }
