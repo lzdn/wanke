@@ -256,6 +256,7 @@
                                         }
                                     });
                                 } else {
+                                    alert(phonenumber);
                                     $('#my-prompt').modal({
                                         // relatedTarget: this,
                                         onConfirm: function (e) {
