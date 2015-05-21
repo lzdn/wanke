@@ -30,6 +30,7 @@ function load() {
     query.equalTo("isMenuKey",false);
     query.find({
         success: function (results) {
+            console.log(results)
             var keywords = new Array();
             for (var x = 0; x < results.length; x++) {
                 var keyword = {
@@ -66,6 +67,7 @@ function save() {
         var keyword = new Keyword();
         keyword.set('key', key.value);
         keyword.set('word', word.value);
+        keyword.set('isMenuKey', false);
         keyword.save(null, {
             success: function (keyword) {
                 console.log(keyword);
@@ -123,16 +125,28 @@ function del(id) {
 }
 
 function edit(id) {
-    var query = new AV.Query(Keyword);
-    query.get(id, {
-        success: function (keyword) {
-            keyword_id.value = keyword.id;
-            key.value = keyword.get('key');
-            word.value = keyword.get('word');
-            keyword_model.modal('open');
-        },
-        error: function () {
+    if(id==0){
+        keyword_id.value = "";
+        key.value = "";
+        word.value ="";
+        keyword_model.modal('open');
+    }else{
+        var query = new AV.Query(Keyword);
+        query.get(id, {
+            success: function (keyword) {
+                keyword_id.value = keyword.id;
+                key.value = keyword.get('key');
+                word.value = keyword.get('word');
+                keyword_model.modal('open');
+            },
+            error: function () {
 
-        }
-    })
+            }
+        })
+    }
+}
+function remove_list(){
+    keyword_id.value = "";
+    key.value ="";
+    word.value ="";
 }
