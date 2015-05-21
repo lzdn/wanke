@@ -33,7 +33,32 @@
 
     var currentUser = AV.User.current();
     if (currentUser) {
-        load_href = server + "/post_detail.html";
+        skx = -5;
+        loading(function () {
+            var adoremove = document.getElementsByClassName("doremove");
+            if (adoremove.length < 5) {
+                $("#load").hide();
+            }
+            //$(".Publish").on("click", function () {
+            //    var postview = $(this).attr("value");
+            //    window.location.href = "post_detail.html?id=" + postview + "";
+            //});
+            $("#users").on("click", function () {
+                window.location.href = "user_detail.html?code=";
+            });
+            clickevent();
+            $("#foots").on("click", function () {
+                var currentUser = AV.User.current();
+                if (currentUser) {
+                    window.location.href = "post_save.html?code=";
+                } else {
+                    $.post(server + "/weixin/getAuthUrl", {page: server + "/post_save.html"}, function (res) {
+                        window.location.href = res.authUrl;
+                    })
+                }
+            });
+
+        });
     } else {
         $.post(server + "/weixin/getAuthUrl", {page: server + "/post_detail.html"}, function (res) {
             load_href=res.authUrl;
@@ -188,32 +213,7 @@
         }
     });
     $("#arrow").hide();
-    skx = -5;
-    loading(function () {
-        var adoremove = document.getElementsByClassName("doremove");
-        if (adoremove.length < 5) {
-            $("#load").hide();
-        }
-        //$(".Publish").on("click", function () {
-        //    var postview = $(this).attr("value");
-        //    window.location.href = "post_detail.html?id=" + postview + "";
-        //});
-        $("#users").on("click", function () {
-            window.location.href = "user_detail.html?code=";
-        });
-        clickevent();
-        $("#foots").on("click", function () {
-            var currentUser = AV.User.current();
-            if (currentUser) {
-                window.location.href = "post_save.html?code=";
-            } else {
-                $.post(server + "/weixin/getAuthUrl", {page: server + "/post_save.html"}, function (res) {
-                    window.location.href = res.authUrl;
-                })
-            }
-        });
 
-    });
     $(window).scroll(function () {
         var htmlHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
         var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
