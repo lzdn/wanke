@@ -61,7 +61,7 @@
             $("#arrow").hide();
             $("#arrow").hide().removeClass("am-animation-fade");
         }
-        if (scrollTop + newheight + 200 >= htmlHeight) {
+        if (scrollTop + newheight + 300 >= htmlHeight) {
             loading(function(){
                 alert("load")
                 $(".Publish").on("click", function () {
