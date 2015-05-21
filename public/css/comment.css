@@ -181,6 +181,9 @@ hr{
 #arrow div {
     line-height: 58px;
 }
+.load_content{
+    height: 45px;
+}
 #load{
     width: 22px;
     height: 22px;
