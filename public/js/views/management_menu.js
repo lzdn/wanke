@@ -8,15 +8,15 @@ var bRelease_data = 0;
 var cookie = $.AMUI.utils.cookie;
 var useremail_cookie = cookie.get("wankeloginuseremail");
 var userpwd_cookie = cookie.get("wankeloginuserpwd");
-//if (!useremail_cookie || !userpwd_cookie) {
-//    window.location.href = server + '/management_login.html?Jumpurl=management_address.html';
-//} else {
+if (!useremail_cookie || !userpwd_cookie) {
+    window.location.href = server + '/management_login.html?Jumpurl=management_address.html';
+} else {
     load_menu(function (data, id) {
         cloud_id = id;
         new_data = data;
         add_event()
     });
-//}
+}
 function load_menu(callbak) {
     var query = new AV.Query(menus);
     query.find({
@@ -430,21 +430,21 @@ function Release_save_data(menusdata) {
         "button": button
     }
     console.log(menu);
-    //$.ajax({
-    //    method: "POST",
-    //    url: server + "/weixin/publishMenu",
-    //    data: JSON.stringify({
-    //        menu: menu
-    //    }),
-    //    contentType: "application/json; charset=utf-8",
-    //    dataType: "json",
-    //    success: function (res) {
-    //        alert("发布成功")
-    //    },
-    //    error: function (msg) {
-    //        alert("发布失败")
-    //    }
-    //});
+    $.ajax({
+        method: "POST",
+        url: server + "/weixin/publishMenu",
+        data: JSON.stringify({
+            menu: menu
+        }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (res) {
+            alert("发布成功")
+        },
+        error: function (msg) {
+            alert("发布失败")
+        }
+    });
 }
 //{
 //    "button"
