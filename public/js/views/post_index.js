@@ -2,7 +2,13 @@
     AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
     loadwx();
     var saveurl = window.location.href;
-    alert(saveurl);
+    var code="";
+     SignUp(code);
+    if (saveurl.split("=").length - 1 > 1) {
+        var userlog = window.location.search.split('=')[2];
+             code = userlog.split("&")[0];
+        postview = window.location.search.split('=')[1].split("&")[0];
+    }
     var currentUser = AV.User.current();
     if (currentUser) {
         $("#arrow").hide();
@@ -559,6 +565,30 @@
     function location_href(href,value){
        alert(href+"sadsd"+value);
        // window.location.href = href;
+    }
+
+    function SignUp(code){
+        if (code != "") {
+            $.post(server + "/weixin/userSignUp", {code: code}, function (res) {
+                queryobject = res;
+                nickname = res.nickname;
+                AV.User._logInWith("weixin", {
+                    "authData": res,
+                    success: function (user) {
+                        userid = user.id;
+                        commentuserid = userid
+                        queryobject = user.get("authData");
+                        var query = new AV.Query(AV.User);
+                        query.get(userid, {
+                            success: function (user) {
+                                user.set('nickname', nickname);
+                                user.save()
+                            }
+                        });
+                    }
+                })
+            });
+        }
     }
 
 
