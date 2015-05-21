@@ -8,7 +8,7 @@
         userlog = window.location.search.split('=')[2];
         code = userlog.split("&")[0];
     }
-
+       alert(code);
         if (code != "") {
             $.post(server + "/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
@@ -35,6 +35,7 @@
     if (currentUser) {
         skx = -5;
         loading(function () {
+            alert("haha");
             var adoremove = document.getElementsByClassName("doremove");
             if (adoremove.length < 5) {
                 $("#load").hide();
