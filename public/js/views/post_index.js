@@ -1,6 +1,7 @@
 (function ($) {
     AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
     loadwx();
+    var load_href;
     $("#load").hide();
     //var $selected = $("#js-selected");
     //for(var i = 0; i<5;i++){
@@ -208,6 +209,18 @@
         }
     });
     function loading(callbak) {
+        $("#foots").on("click", function () {
+            var currentUser = AV.User.current();
+            if (currentUser) {
+                load_href = server + "/post_detail.html";
+            } else {
+                $.post(server + "/weixin/getAuthUrl", {page: server + "/post_detail.html"}, function (res) {
+                    load_href=res.authUrl;
+                })
+            }
+        });
+
+
         $("#load").show();
         var post = AV.Object.extend("post");
         var user = AV.Object.extend("User");
@@ -277,7 +290,8 @@
                                 time: times,
                                 value: avalue,
                                 img: imgs,
-                                pattern: imgpattern
+                                pattern: imgpattern,
+                                href:load_href
                             };
                             posts.push(opost);
                         }
@@ -475,10 +489,10 @@
     }
 
     function clickevent() {
-        $(".Publish").on("click", function () {
-            var postview = $(this).attr("value");
-            window.location.href = "post_detail.html?id=" + postview + "";
-        });
+        //$(".Publish").on("click", function () {
+        //    var postview = $(this).attr("value");
+        //    window.location.href = "post_detail.html?id=" + postview + "";
+        //});
         $(".imgpreview").on("click", function () {
             var cur = $(this).attr("src");
             var url = $(this).parent(".images").attr("value");
@@ -532,6 +546,12 @@
             }
         }
     }
+
+    function location_href(href,value){
+        alert(href+value);
+        window.location.href = href;
+    }
+
 })(jQuery);
 
 
