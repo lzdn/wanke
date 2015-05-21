@@ -195,11 +195,9 @@
         }
 
         $("#btnname").on("click", function () {
-            alert("开始报名");
             var currentUser = AV.User.current();
             if (currentUser) {
                 theuserid = currentUser.id;
-                alert(theuserid)
                 var query = new AV.Query(AV.User);
                 query.get(currentUser.id, {
                     success: function (user) {
@@ -208,7 +206,6 @@
                     }
                 });
                 if (relationuser) {
-                    alert("有报名")
                     var bregistration = 0;
                     for (var i = 0; i < relationuser.length; i++) {
                         if (relationuser[i].id == currentUser.id) {
@@ -223,14 +220,11 @@
                             setTimeout(function () {
                                 if (phonenumber) {
                                     var imgurl = currentUser.get("authData").weixin.headimgurl;
-                                    alert(imgurl);
                                     $(".usercontent").remove();
                                     $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".usercont");
                                     $("#btnname").remove();
                                     $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
                                     $(" <img src=\"" + imgurl + "\" value=\" " + usersid + "&" + phonenumber + " \" class=\"am-radius\">").appendTo("#headtle");
-                                    alert(theuserid);
-                                    alert(postview);
                                     $.ajax({
                                         method: "POST",
                                         url: server + "/weixin/sendMessage",
@@ -290,14 +284,11 @@
                     setTimeout(function () {
                         if (phonenumber) {
                             var imgurl = currentUser.get("authData").weixin.headimgurl;
-                            alert(imgurl);
                             $(".usercontent").remove();
                             $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".usercont");
                             $("#btnname").remove();
                             $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
                             $(" <img src=\"" + imgurl + "\" value=\" " + usersid + "&" + phonenumber + " \" class=\"am-radius\">").appendTo("#headtle");
-                            alert(theuserid);
-                            alert(postview);
                             $.ajax({
                                 method: "POST",
                                 url: server + "/weixin/sendMessage",
