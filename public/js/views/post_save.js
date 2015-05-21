@@ -233,7 +233,7 @@ $(function () {
                 var imgserverId=img.serverId;
                 $.ajax({
                     method: "POST",
-                    url: server + "weixin/uploadImage",
+                    url: server + "/weixin/uploadImage",
                     data: JSON.stringify({
                         serverId: imgserverId
                     }),
