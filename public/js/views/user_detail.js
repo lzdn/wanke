@@ -19,7 +19,8 @@
         var code = "";
         var saveurl = window.location.href;
         var userlog, userid, queryobject, nickname;
-        var postview = window.location.search.split('=')[1];
+        //var postview = window.location.search.split('=')[1];
+        alert(saveurl);
         if (saveurl.split("=").length - 1 > 1) {
             userlog = window.location.search.split('=')[1];
             code = userlog.split("&")[0];
