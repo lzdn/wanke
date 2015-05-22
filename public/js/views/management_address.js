@@ -7,13 +7,13 @@ $(".am-panel-default").remove();
 var cookie = $.AMUI.utils.cookie;
 var useremail_cookie = cookie.get("wankeloginuseremail");
 var userpwd_cookie = cookie.get("wankeloginuserpwd");
-//if(!useremail_cookie||!userpwd_cookie){
-//    window.location.href= server + '/management_login.html?Jumpurl=management_address.html';
-//}else{
+if(!useremail_cookie||!userpwd_cookie){
+    window.location.href= server + '/management_login.html?Jumpurl=management_address.html';
+}else{
 loadmenu(function () {
     add_event();
 });
-//}
+}
 
 function loadmenu(callbak) {
     var homes = AV.Object.extend("home");
@@ -217,36 +217,5 @@ function add_event() {
         $(this).children(".btn_content").children().show();
     });
 }
-//var menu = {
-//
-//    "button": [
-//        {
-//            "type": "click",
-//            "name": "今日歌曲",
-//            "key": "V1001_TODAY_MUSIC"
-//        },
-//        {
-//            "name": "菜单",
-//            "sub_button": {
-//                "list": [
-//                    {
-//                        "type": "view",
-//                        "name": "搜索",
-//                        "url": "http://www.soso.com/"
-//                    },
-//                    {
-//                        "type": "view",
-//                        "name": "视频",
-//                        "url": "http://v.qq.com/"
-//                    },
-//                    {
-//                        "type": "click",
-//                        "name": "赞一下我们",
-//                        "key": "V1001_GOOD"
-//                    }
-//                ]
-//            }
-//        }
-//    ]
-//}
+
 
