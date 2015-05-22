@@ -245,7 +245,8 @@ $(function () {
                         $("#addimg").show();
                         $("#usr-sbm-sub").removeClass("am-disabled");
                         fileurls.push(fileurl);
-                        $("<div id=\"" + fileId + "\" class=\"imgnav\"><img src=\"" + localIds[index] + "\" alt=\"\"/><a id=\"destroy" + fileId + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div>").prependTo("#imgwall");
+                        $("<div id=\"" + fileId + "\" class=\"imgnav\"><div class=\"push_img\"><img class=\"" + localIds[index] + "\" src=\"" + localIds[index] + "\" alt=\"\"/><a id=\"destroy" + fileId + "\" class=\"am-icon-close \" value=\"" + fileId + "\"  \"></a></div></div>").prependTo("#imgwall");
+                        img_thumbnail($("."+localIds[index]+""), localIds[index], 100)
                         $("#destroy" + fileId + "").on("click", function () {
                             fileurls.splice(jQuery.inArray(fileurl, fileurls), 1);
                             $("#" + fileId + "").remove();
@@ -269,6 +270,40 @@ $(function () {
             }
         });
     }
+
+    function img_thumbnail(obj, url, length) {
+        var img = new Image();
+        img.src = url;
+        img.onload = function () {
+            var imgwidth = this.width;
+            var imgHeight = this.height;
+            if (imgwidth == imgHeight) {
+                obj.css({
+                    width: '' + length + 'px',
+                    height: '' + length + 'px'
+                });
+            } else {
+                if (imgwidth > imgHeight) {
+                    var newmargin
+                    var imgwidth = imgwidth / (imgHeight / length);
+                    var newmargin = -(imgwidth - length) / 2;
+                    obj.css({
+                        height: '' + length + 'px'
+                    });
+                    obj.css("margin-left", "" + newmargin + "px");
+                } else {
+                    var newheight = imgHeight / (imgwidth / length);
+                    newmargin = -(newheight - length) / 2;
+                    obj.css({
+                        width: '' + length + 'px',
+                        height: '' + newheight + 'px'
+                    });
+                    obj.css("margin-top", "" + newmargin + "px");
+                }
+            }
+        }
+    }
+
 });
 
 
