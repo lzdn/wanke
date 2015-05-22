@@ -143,7 +143,9 @@
                         query.descending("createdAt");
                          skx+=5;
                         if(skx>=skip){
-                            $("#load").remove();
+                            $("#load").hide();
+                        }else{
+                            $("#load").show();
                         }
                         query.limit(5).skip(skx);
                         query.descending("createdAt");
@@ -238,6 +240,8 @@
                         $("#"+destroyid+"").remove();
                         if(destroylength.length<5){
                             $("#load").hide();
+                        }else{
+                            $("#load").show();
                         }
                         if(destroylength.length==0){
                             loading(function(){
