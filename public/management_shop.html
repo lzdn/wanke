@@ -88,12 +88,12 @@
                         {{#each shops}}
                         <tr>
                             <td><input type="hidden" value="{{this.id}}"/></td>
-                            <td><a href="#">{{this.shopname}}</a></td>
-                            <td><img src="{{this.logo}}" width="30px" height="30px" alt=""/></td>
-                            <td>{{this.shopservice}}</td>
-                            <td>{{this.shopaddress}}</td>
-                            <td>{{this.servicetime}}</td>
-                            <td>{{this.range}}</td>
+                            <td style="max-width:100px"><a href="#">{{this.shopname}}</a></td>
+                            <td style="max-width:100px"><img src="{{this.logo}}" width="30px" height="30px" alt=""/></td>
+                            <td style="max-width:160px">{{this.shopservice}}</td>
+                            <td style="max-width:150px">{{this.shopaddress}}</td>
+                            <td style="max-width:100px">{{this.servicetime}}</td>
+                            <td style="max-width:110px">{{this.range}}</td>
                             <td>{{this.type}}</td>
                             <td>{{this.tel}}</td>
                             <td>
@@ -143,11 +143,11 @@
 
                     <div class="am-u-sm-9">
                             <select id="lbl_logo" required>
-                                <option value="imgs/洁.png">洁</option>
-                                <option value="imgs/闲.png">闲</option>
-                                <option value="imgs/美.png">美</option>
-                                <option value="imgs/食.png">食</option>
-                                <option value="imgs/物.png">物</option>
+                                <option value="imgs/洁.png">家政保洁</option>
+                                <option value="imgs/闲.png">休闲娱乐</option>
+                                <option value="imgs/美.png">美容美体</option>
+                                <option value="imgs/食.png">健康美食</option>
+                                <option value="imgs/物.png">物业管理</option>
                                 <option value="imgs/诉.PNG">诉</option>
                             </select>
                             <span class="am-form-caret"></span>
