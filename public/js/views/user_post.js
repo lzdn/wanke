@@ -4,6 +4,7 @@
     var postview,contentlength;
    // loadwx();
     $("#arrow").hide();
+    loading_wx();
     loading(function(){
 
         var adoremove = document.getElementsByClassName("doremove");
@@ -103,27 +104,7 @@
     });
 
     function loading(callbak) {
-        var userpost = window.location.href;
-        var appId, jslist, noncestr, signature, timestamp, jsApiList;
-        $.post(server + "/weixin/getJsConfig", {url: "" + userpost + ""}, function (result) {
-            appId = result.appId;
-            jslist = result.jsApiList;
-            noncestr = result.nonceStr;
-            signature = result.signature;
-            timestamp = result.timestamp;
-            jsApiList = result.jsApiList;
-            wx.config({
-                debug: result.debug,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                appId: appId, // 必填，公众号的唯一标识
-                timestamp: timestamp, // 必填，生成签名的时间戳
-                nonceStr: noncestr, // 必填，生成签名的随机串
-                signature: signature,// 必填，签名，见附录1
-                jsApiList: jsApiList// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-            });
-            wx.ready(function () {
-                wx.hideOptionMenu();
-            });
-        });
+
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
         //ject.createWithoutData('className',id);
         var post = AV.Object.extend("post");
@@ -225,6 +206,29 @@
 
     }
 
+    function loading_wx(){
+        var userpost = window.location.href;
+        var appId, jslist, noncestr, signature, timestamp, jsApiList;
+        $.post(server + "/weixin/getJsConfig", {url: "" + userpost + ""}, function (result) {
+            appId = result.appId;
+            jslist = result.jsApiList;
+            noncestr = result.nonceStr;
+            signature = result.signature;
+            timestamp = result.timestamp;
+            jsApiList = result.jsApiList;
+            wx.config({
+                debug: result.debug,// 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: appId, // 必填，公众号的唯一标识
+                timestamp: timestamp, // 必填，生成签名的时间戳
+                nonceStr: noncestr, // 必填，生成签名的随机串
+                signature: signature,// 必填，签名，见附录1
+                jsApiList: jsApiList// 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            });
+            wx.ready(function () {
+                wx.hideOptionMenu();
+            });
+        });
+    }
 
 
     function destroy(postid){
@@ -244,7 +248,7 @@
                             $("#load").show();
                         }
                         if(destroylength.length==0){
-                            document.URL=location.href
+                            loading();
                         }
                     }
                 });
