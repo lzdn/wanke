@@ -6,7 +6,7 @@
     var marktags = ["约吃", "约玩", "约聊", "约运动"];
     var commentuserid;
     var userlog, userid, queryobject, content, nickname, phonenumber, usersid, postId, tagvalue, openid, postview, username, headimgurl, headUrl, theuserid;
-    if (saveurl.split("=").length - 1 > 1) {
+    if (saveurl.split("=").length > 2) {
         userlog = window.location.search.split('=')[2];
         code = userlog.split("&")[0];
         postview = window.location.search.split('=')[1].split("&")[0];
@@ -36,7 +36,7 @@
     }else{
         var currentUser = AV.User.current();
         if (currentUser) {
-           
+
         } else {
             $.ajax({
                 method: "POST",
