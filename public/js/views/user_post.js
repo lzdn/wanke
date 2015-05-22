@@ -241,52 +241,45 @@
                 var destroyid= res[0].id;
                 res[0].destroy({
                     success: function(myObject) {
-                        $("#"+destroyid+"").remove();
-                        if(destroylength.length<5){
-                            $("#load").hide();
-                        }else{
-                            $("#load").show();
-                        }
-                        if(destroylength.length==0){
-                            loading(function(){
+                        skx = -5;
+                        loading(function(){
 
-                                var adoremove = document.getElementsByClassName("doremove");
-                                if(adoremove.length<=5){
-                                    $("#load").hide();
-                                }else{
-                                    $("#load").show();
-                                }
-                                if(adoremove.length==0){
-                                    $("hr").remove();
-                                    $(" <div id=\"null\"><p class=\"am-sans-serif\">暂时没有发表评论</p></div>").prependTo("#content");
-                                }
-                                $(".Publish").on("click", function () {
-                                    postview = $(this).attr("value");
-                                });
-                                //$("#users").on("click", function () {
-                                //    window.location.href = "user_detail.html";
-                                //});
-                                $(".imgpreview").on("click", function () {
-                                    var cur = $(this).attr("src");
-                                    var url = $(this).parent(".images").attr("value");
-                                    var arr = url.split(",");
-                                    wx.previewImage({
-                                        current: cur, // 当前显示的图片链接
-                                        urls: arr // 需要预览的图片链接列表
-                                    });
-                                    event.stopPropagation();
-                                });
-                                $(".imgpreview").removeClass("imgpreview");
-                                var aimg_thumbnail=($(".imgpatterntwo .img"));
-                                for(var i=0; i<aimg_thumbnail.length;i++){
-                                    var url = aimg_thumbnail[i].className.split(" ")[1];
-                                    aimg_thumbnail[i].className=("imgthumbnail");
-                                    console.log(aimg_thumbnail[i]);
-                                    img_thumbnail($(".imgthumbnail"),url,70);
-                                    aimg_thumbnail[i].className=("");
-                                }
+                            var adoremove = document.getElementsByClassName("doremove");
+                            if(adoremove.length<=5){
+                                $("#load").hide();
+                            }else{
+                                $("#load").show();
+                            }
+                            if(adoremove.length==0){
+                                $("hr").remove();
+                                $(" <div id=\"null\"><p class=\"am-sans-serif\">暂时没有发表评论</p></div>").prependTo("#content");
+                            }
+                            $(".Publish").on("click", function () {
+                                postview = $(this).attr("value");
                             });
-                        }
+                            //$("#users").on("click", function () {
+                            //    window.location.href = "user_detail.html";
+                            //});
+                            $(".imgpreview").on("click", function () {
+                                var cur = $(this).attr("src");
+                                var url = $(this).parent(".images").attr("value");
+                                var arr = url.split(",");
+                                wx.previewImage({
+                                    current: cur, // 当前显示的图片链接
+                                    urls: arr // 需要预览的图片链接列表
+                                });
+                                event.stopPropagation();
+                            });
+                            $(".imgpreview").removeClass("imgpreview");
+                            var aimg_thumbnail=($(".imgpatterntwo .img"));
+                            for(var i=0; i<aimg_thumbnail.length;i++){
+                                var url = aimg_thumbnail[i].className.split(" ")[1];
+                                aimg_thumbnail[i].className=("imgthumbnail");
+                                console.log(aimg_thumbnail[i]);
+                                img_thumbnail($(".imgthumbnail"),url,70);
+                                aimg_thumbnail[i].className=("");
+                            }
+                        });
                     }
                 });
             }
