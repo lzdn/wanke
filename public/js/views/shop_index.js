@@ -48,9 +48,12 @@
                     var shop = {
                         id: shopid,
                         name: shopname,
-                        tel: shoptel,
+                        tel: "tel:"+shoptel,
                         logo: logo
                     };
+                    if(!shoptel){
+                        shop.tel="#"
+                    }
                     shops.push(shop);
                     console.log(shops);
                 }
