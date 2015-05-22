@@ -198,7 +198,7 @@ function upmodal(event, menuids, bmenus, grades) {
                 if(grade==1){
                     $("#doc-vld-name-2").val(""+res[0].get("homename")+"");
                 }else{
-                    $("#doc-vld-name-2").val(""+res[0].get("homename")+"-");
+                    $("#doc-vld-name-2").val(""+menuid.split("&")[1]+"");
                 }
             }
         })
