@@ -1,20 +1,19 @@
-
 AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
-var least_height=document.documentElement.clientHeight-254;
-$(".least_height").css({"height":""+least_height+""});
+var least_height = document.documentElement.clientHeight - 254;
+$(".least_height").css({"height": "" + least_height + ""});
 var bmenu, menuid, grade;
-var bRelease_data=0;
+var bRelease_data = 0;
 $(".am-panel-default").remove();
-var cookie=$.AMUI.utils.cookie;
-var useremail_cookie =cookie.get("wankeloginuseremail");
-var userpwd_cookie =cookie.get("wankeloginuserpwd");
-if(!useremail_cookie||!userpwd_cookie){
-    window.location.href= server + '/management_login.html?Jumpurl=management_address.html';
-}else{
-    loadmenu(function(){
-        add_event ();
-    });
-}
+var cookie = $.AMUI.utils.cookie;
+var useremail_cookie = cookie.get("wankeloginuseremail");
+var userpwd_cookie = cookie.get("wankeloginuserpwd");
+//if(!useremail_cookie||!userpwd_cookie){
+//    window.location.href= server + '/management_login.html?Jumpurl=management_address.html';
+//}else{
+loadmenu(function () {
+    add_event();
+});
+//}
 
 function loadmenu(callbak) {
     var homes = AV.Object.extend("home");
@@ -40,7 +39,7 @@ function loadmenu(callbak) {
             var data = {houses: houses};
             var html = template(data);
             $tpl.before(html);
-          //  menu_one_length= res.length;
+            //  menu_one_length= res.length;
             callbak();
         }
     })
@@ -49,35 +48,35 @@ function loadmenu(callbak) {
 // …………………………………储备函数……………………………………………
 function destroy_home(meun_id, grade) {
     var homes = AV.Object.extend("home");
-    var relation_id,old_name;
-    if(grade==1){
-        relation_id=menuid;
-    }else{
-        relation_id=menuid.split("&")[0];
-        old_name=menuid.split("&")[1];
+    var relation_id, old_name;
+    if (grade == 1) {
+        relation_id = menuid;
+    } else {
+        relation_id = menuid.split("&")[0];
+        old_name = menuid.split("&")[1];
     }
     var query = new AV.Query(homes);
-    query.get(relation_id,{
-        success:function(res_house){
-            if(grade==1){
+    query.get(relation_id, {
+        success: function (res_house) {
+            if (grade == 1) {
                 res_house.destroy({
-                    success:function(res){
+                    success: function (res) {
                         $(".am-panel-default").remove();
-                        loadmenu(function(menusdata){
-                            add_event (menusdata);
+                        loadmenu(function (menusdata) {
+                            add_event(menusdata);
                         });
                     }
                 });
-            }else{
-                res_house.remove("building",{
-                    id:relation_id,
-                    name:old_name
+            } else {
+                res_house.remove("building", {
+                    id: relation_id,
+                    name: old_name
                 });
                 res_house.save({
-                    success:function(){
+                    success: function () {
                         $(".am-panel-default").remove();
-                        loadmenu(function(menusdata){
-                            add_event (menusdata);
+                        loadmenu(function (menusdata) {
+                            add_event(menusdata);
                         });
                     }
                 });
@@ -85,16 +84,16 @@ function destroy_home(meun_id, grade) {
         }
     })
 }
-function save_house(){
+function save_house() {
     var house_name = $(".input_menu_name").val();
     if (!house_name) {
         alert("请输入名字");
     } else {
-            add_menudata(bmenu, menuid, grade, house_name);
+        add_menudata(bmenu, menuid, grade, house_name);
     }
 }
 
-function remove_house(){
+function remove_house() {
     if (bmenu == 0) {
         if (grade == 1) {
             destroy_home(menuid, 1);
@@ -104,78 +103,79 @@ function remove_house(){
         }
     }
 }
-function add_menudata(bmenu, menuid, grade,house_name) {
+function add_menudata(bmenu, menuid, grade, house_name) {
     var homes = AV.Object.extend("home");
     var home = new homes();
     if (bmenu == "1") {
-            home.set("homename", house_name);
-            home.set("building", []);
-            home.save({
-                success: function (res) {
-                    $(".am-panel-default").remove();
-                    loadmenu(function(menusdata){
-                        add_event (menusdata);
-                    });
-                }
-            });
-    };
+        home.set("homename", house_name);
+        home.set("building", []);
+        home.save({
+            success: function (res) {
+                $(".am-panel-default").remove();
+                loadmenu(function (menusdata) {
+                    add_event(menusdata);
+                });
+            }
+        });
+    }
+    ;
     if (bmenu == "2") {
-                    var query = new AV.Query(homes);
-                    query.get(menuid, {
-                        success: function (resmenu) {
-                                resmenu.add("building", {
-                                    id:menuid,
-                                    name:house_name
-                                });
-                                resmenu.save({
-                                    success: function (res) {
-                                        $(".am-panel-default").remove();
-                                        loadmenu(function(menusdata){
-                                            add_event (menusdata);
-                                        });
-                                    }
-                                });
-                        }
-                    });
+        var query = new AV.Query(homes);
+        query.get(menuid, {
+            success: function (resmenu) {
+                resmenu.add("building", {
+                    id: menuid,
+                    name: house_name
+                });
+                resmenu.save({
+                    success: function (res) {
+                        $(".am-panel-default").remove();
+                        loadmenu(function (menusdata) {
+                            add_event(menusdata);
+                        });
+                    }
+                });
+            }
+        });
 
     }
     if (bmenu == "0") {
-        var relation_id,old_name;
-           if(grade==1){
-               relation_id=menuid;
-           }else{
-               relation_id=menuid.split("&")[0];
-               old_name=menuid.split("&")[1];
-           }
+        var relation_id, old_name;
+        if (grade == 1) {
+            relation_id = menuid;
+        } else {
+            relation_id = menuid.split("&")[0];
+            old_name = menuid.split("&")[1];
+        }
         var query = new AV.Query(homes);
-        query.get(relation_id,{
+        query.get(relation_id, {
             success: function (reshous) {
-                if(!old_name){
+                if (!old_name) {
                     reshous.set("homename", house_name);
                     reshous.save({
                         success: function (res) {
                             $(".am-panel-default").remove();
-                            loadmenu(function(menusdata){
-                                add_event (menusdata);
+                            loadmenu(function (menusdata) {
+                                add_event(menusdata);
                             });
                         }
                     });
-                }else{
-                    reshous.add("building",{
-                        id:relation_id,
-                        name:house_name
+                } else {
+                    reshous.add("building", {
+                        id: relation_id,
+                        name: house_name
                     });
                     reshous.save({
-                        success:function(res){
-                            res.remove("building",{
-                                id:relation_id,
-                                name:old_name
+                        success: function (res) {
+                            res.remove("building", {
+                                id: relation_id,
+                                name: old_name
                             })
                             res.save({
-                                success:function(res){
+                                success: function (res) {
                                     $(".am-panel-default").remove();
-                                    loadmenu(function(menusdata){
-                                        add_event (menusdata);
+                                    loadmenu(function (menusdata) {
+                                        add_event(menusdata);
                                     });
                                 }
                             });
@@ -187,14 +187,29 @@ function add_menudata(bmenu, menuid, grade,house_name) {
     }
     $(".input_menu_name").val("");
 }
-function upmodal (event,menuids,bmenus,grades){
+function upmodal(event, menuids, bmenus, grades) {
+    var homes = AV.Object.extend("home");
     menuid = menuids;
     bmenu = bmenus;
     grade = grades;
+    if (menuid != 0 && bmenu == 0) {
+        if (grades == 1) {
+            var query = new AV.Query(homes);
+            query.get(menuid, {
+                success: function (res) {
+                    $("#doc-vld-name-2").val(""+res.get("homename")+"");
+                }
+            })
+        }else{
+            $("#doc-vld-name-2").val(""+menuid.split("&")[1]+"");
+        }
+    } else {
+        $("#doc-vld-name-2").val("");
+    }
     $('#my-prompt').modal();
     event.stopPropagation();
 }
-function add_event (){
+function add_event() {
     $(".menu_btn").hide();
     $(".am-panel-title").mouseout(function () {
         $(this).children(".btn_content").children().hide();
