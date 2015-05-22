@@ -27,6 +27,9 @@
                         skx = -5;
                         loading(function () {
                             var adoremove = document.getElementsByClassName("doremove");
+                            if($(".Publish").length==0){
+                                $("#publish").append("<p id=\"publish_title\">当前没有发布动态</p>");
+                            }
                             if (adoremove.length < 5) {
                                 $("#load").hide();
                             }else{
@@ -57,6 +60,9 @@
                 skx = -5;
                 loading(function () {
                     var adoremove = document.getElementsByClassName("doremove");
+                    if($(".Publish").length==0){
+                        $("#publish").append("<p id=\"publish_title\">当前没有发布动态</p>");
+                    }
                     if (adoremove.length < 5) {
                         $("#load").hide();
                     }else{

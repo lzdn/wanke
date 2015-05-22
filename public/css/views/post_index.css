@@ -250,4 +250,7 @@ hr{
 .am-selected-list{
     color:rgb(50,137,199);
 }
+#publish_title{
+    text-align:center;
+}
 
