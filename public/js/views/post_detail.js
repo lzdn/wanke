@@ -383,7 +383,7 @@
         nickname = authData.weixin.nickname
         headimgurl = authData.weixin.headimgurl
         load += 1
-        if (load == 4) {
+        if (load == 3) {
             callbak();
         }
         var post = AV.Object.extend("post");
@@ -459,7 +459,7 @@
                 var html2 = template2(data2);
                 $tpl2.before(html2);
                 load += 1
-                if (load == 4) {
+                if (load == 3) {
                     callbak();
                 }
                 $(".userphone").hide();
@@ -468,8 +468,6 @@
                         $(".userphone").show();
                     }
                 }
-
-
                 if (relationuser) {
                     var currentUser = AV.User.current();
                     if (currentUser) {
@@ -548,7 +546,7 @@
                                 $tpl3.before(html3);
                                 if ($(".commentlength").length == object.length) {
                                     load += 1
-                                    if (load == 4) {
+                                    if (load == 3) {
                                         callbak();
                                     }
                                 }
@@ -557,7 +555,7 @@
                     }
                 } else {
                     load += 1
-                    if (load == 4) {
+                    if (load == 3) {
                         callbak();
                     }
                 }
@@ -565,23 +563,7 @@
             }
         })
         //……………………………………………………………………………………………
-        if (code != "") {
-            $.post(server + "/weixin/userSignUp", {code: code}, function (res) {
-                queryobject = res;
-                nickname = res.nickname;
-                AV.User._logInWith("weixin", {
-                    "authData": res,
-                    success: function (user) {
-                        userid = user.id;
-                        commentuserid = userid
-                        queryobject = user.get("authData");
-                        var query = new AV.Query(AV.User);
-                        query.get(userid, {
-                            success: function (user) {
-                                user.set('nickname', nickname);
-                                user.save()
-                            }
-                        });
+
                         if (relationuser) {
                             var currentUser = AV.User.current();
                             if (currentUser) {
@@ -596,19 +578,6 @@
                                 }
                             }
                         }
-                        load += 1
-                        if (load == 4) {
-                            callbak();
-                        }
-                    }
-                })
-            });
-        } else {
-            load += 1
-            if (load == 4) {
-                callbak();
-            }
-        }
     }
 
     function loadwx() {
