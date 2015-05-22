@@ -559,25 +559,9 @@
                         callbak();
                     }
                 }
-                // callbak();
             }
         })
         //……………………………………………………………………………………………
-
-                        if (relationuser) {
-                            var currentUser = AV.User.current();
-                            if (currentUser) {
-                                usersid = currentUser.id;
-                                for (var i = 0; i < relationuser.length; i++) {
-                                    if (relationuser[i].id == usersid) {
-                                        $(".usercontent").remove();
-                                        $("<p id=\"usercontent\" class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".usercont");
-                                        $("#btnname").remove();
-                                        $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
-                                    }
-                                }
-                            }
-                        }
     }
 
     function loadwx() {
