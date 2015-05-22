@@ -111,6 +111,7 @@ function load(callback) {
                     homeval = res[0].id;
                     home_one = res[0].get("homename");
                     var homes = [];
+                    var bhome=0;
                     for (var i = 0; i < res.length; i++) {
                         var object = res[i];
                         var homename = object.get("homename");
@@ -123,6 +124,7 @@ function load(callback) {
                         };
                         if (user.get("buliding") == homename) {
                             home.selected = "selected";
+                            bhome=1;
                         }
                         homes.push(home);
                     }
@@ -134,7 +136,7 @@ function load(callback) {
                     $tpl.before(html);
 
                     var homename = "";
-                    if (user.get("buliding")) {
+                    if (user.get("buliding")&&bhome==1) {
                         homename =user.get("buliding");
                     } else {
                         homename = home_one;
