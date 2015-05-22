@@ -30,3 +30,7 @@
 #life{
     color:rgb(50,137,199);
 }
+.am-panel-default{
+    margin:0;
+    border:none;
+}

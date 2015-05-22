@@ -23,11 +23,19 @@
     <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 </head>
 <body>
-<div class="am-animation-fade">
-    <ul class="am-list am-list-static am-list-extend">
-        <li style="color: rgb(93, 100, 125); font-size:18px; font-weight:800;">周边小店</li>
-        <script type="text/x-handlebars-template" id="shop">
-            {{#each shops}}
+<script type="text/x-handlebars-template" id="shop">
+<div class="am-panel am-panel-default">
+    <div class="am-panel-hd">
+        <h4 class="am-panel-title"
+            data-am-collapse="{parent: '#accordion', target: '#surrounding'}">
+           周边小店
+            <span class=" am-icon-sm menu_icon"></span>
+        </h4>
+    </div>
+    <div id=surrounding class="am-panel-collapse am-collapse">
+        <ul class="am-list am-list-extend">
+
+                {{#each shops}}
             <li class="shop_list">
                 <div class="shopcontent" value="{{this.id}}">
                     <img class="am-circle" src={{this.logo}} width="40"height="40"/>
@@ -35,22 +43,36 @@
                 </div>
                 <a href="{{this.tel}}" class="am-icon am-icon-phone am-icon-md"></a>
             </li>
-            {{/each}}
-        </script>
-        <li style="color: rgb(93, 100, 125);  font-size:18px; font-weight:800;">物业管理</li>
-        <script type="text/x-handlebars-template" id="shop2">
-            {{#each shops}}
-            <li class="shop_list">
-                <div class="shopcontent" value="{{this.id}}"><img class="am-circle" src={{this.logo}} width="40"
-                                                                  height="40"/>
-
-                    <p class="am-sans-serif">{{this.name}}</p></div>
-                <a href="{{this.tel}}" class="am-icon am-icon-phone am-icon-md"></a></li>
-            {{/each}}
-        </script>
-    </ul>
+                {{/each}}
+        </ul>
+    </div>
 </div>
+</script>
+<script type="text/x-handlebars-template" id="shop2">
+<div class="am-panel am-panel-default">
+    <div class="am-panel-hd">
+        <h4 class="am-panel-title"
+            data-am-collapse="{parent: '#accordion', target: '#Property'}">
+            物业管理
+            <span class=" am-icon-sm menu_icon"></span>
+        </h4>
+    </div>
+    <div id=Property class="am-panel-collapse am-collapse">
+        <ul class="am-list am-list-extend" value={{this.id}}>
 
+                {{#each shops}}
+                <li class="shop_list">
+                    <div class="shopcontent" value="{{this.id}}">
+                        <img class="am-circle" src={{this.logo}} width="40"height="40"/>
+                        <p class="am-sans-serif">{{this.name}}</p>
+                    </div>
+                    <a href="{{this.tel}}" class="am-icon am-icon-phone am-icon-md"></a>
+                </li>
+                {{/each}}
+        </ul>
+    </div>
+</div>
+</script>
 <div data-am-widget="navbar" class="am-navbar am-cf" id="">
     <ul class="am-navbar-nav am-cf am-avg-sm-4 am-navbar-nav-extend ">
         <li>
