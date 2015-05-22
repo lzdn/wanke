@@ -241,6 +241,7 @@
                 var destroyid= res[0].id;
                 res[0].destroy({
                     success: function(myObject) {
+                        $(".Publish,hr").remove();
                         skx = -5;
                         loading(function(){
 
