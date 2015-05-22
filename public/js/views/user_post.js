@@ -244,6 +244,7 @@
                             $("#load").show();
                         }
                         if(destroylength.length==0){
+                            alert("重新加载")
                             loading(function(){
 
                                 var adoremove = document.getElementsByClassName("doremove");
