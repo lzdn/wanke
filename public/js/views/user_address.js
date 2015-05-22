@@ -1,5 +1,5 @@
 (function ($) {
-    load(function (err, user) {
+    load(function (err, user,bhome) {
         var buliding;
         $("#doc-select-2").change(function () {
             $("#usr-sbm-sub").removeClass("am-disabled");});
@@ -10,8 +10,9 @@
                 $("#usr-sbm-sub").removeClass("am-disabled");
             }, 100);
         });
-        $('#wxnum').val(user.get("housenumber"));
-
+        if(user.get("housenumber")&&bhome==1){
+            $('#wxnum').val(user.get("housenumber"));
+        }
         $("#haederleft").on("click", function () {
             window.location.href = "user_detail.html?code=";
         });
@@ -165,7 +166,7 @@ function load(callback) {
                             var data2 = {buildings: buildings};
                             var html2 = template2(data2);
                             $buildings.before(html2);
-                            callback(null, user);
+                            callback(null, user,bhome);
                         },
                         error: function (error) {
                         }
