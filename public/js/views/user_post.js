@@ -9,6 +9,8 @@
         var adoremove = document.getElementsByClassName("doremove");
         if(adoremove.length<=5){
             $("#load").hide();
+        }else{
+            $("#load").show();
         }
         if(adoremove.length==0){
             $("hr").remove();
@@ -62,11 +64,9 @@
             $("#arrow").hide().removeClass("am-animation-fade");
         }
         if (scrollTop + newheight + 200 >= htmlHeight) {
-            $("#load").show();
             loading(function(){
                 $(".Publish").on("click", function () {
                     postview = $(this).attr("value");
-                    $("#load").hide();
                 });
                 //$("#users").on("click", function () {
                 //    window.location.href = "user_detail.html";
@@ -245,6 +245,8 @@
                                 var adoremove = document.getElementsByClassName("doremove");
                                 if(adoremove.length<=5){
                                     $("#load").hide();
+                                }else{
+                                    $("#load").show();
                                 }
                                 if(adoremove.length==0){
                                     $("hr").remove();
