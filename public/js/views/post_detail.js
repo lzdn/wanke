@@ -34,10 +34,12 @@
             })
         });
     }else{
+        alert("开始判断 是否登录")
         var currentUser = AV.User.current();
         if (currentUser) {
-
+            alert("sdasdsd")
         } else {
+            alert("dgfgfg")
             $.ajax({
                 method: "POST",
                 url: server + "/weixin/getAuthUrl",
