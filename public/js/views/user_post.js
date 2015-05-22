@@ -43,16 +43,16 @@
             aimg_thumbnail[i].className=("");
         }
     });
-    //$("#foots").on("click", function () {
-    //    var currentUser = AV.User.current();
-    //    if (currentUser) {
-    //        window.location.href = "post_save.html?code=";
-    //    } else {
-    //        $.get(server + "/weixin/getAuthUrl?page=post_save", function (res) {
-    //            window.location.href = res.authUrl;
-    //        })
-    //    }
-    //});
+    $("#foots").on("click", function () {
+        //var currentUser = AV.User.current();
+        //if (currentUser) {
+            window.location.href = "post_save.html?code=";
+        //} else {
+        //    $.get(server + "/weixin/getAuthUrl?page=post_save", function (res) {
+        //        window.location.href = res.authUrl;
+        //    })
+        //}
+    });
     $(window).scroll(function () {
         var htmlHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
         var clientHeight = document.body.clientHeight || document.documentElement.clientHeight;

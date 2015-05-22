@@ -29,11 +29,12 @@
         <script type="text/x-handlebars-template" id="shop">
             {{#each shops}}
             <li>
-                <div class="shopcontent" value="{{this.id}}"><img class="am-circle" src={{this.logo}} width="40"
-                                                                  height="40"/>
-
-                    <p class="am-sans-serif">{{this.name}}</p></div>
-                <a href="tel:{{this.tel}}" class="am-icon am-icon-phone am-icon-md"></a></li>
+                <div class="shopcontent" value="{{this.id}}">
+                    <img class="am-circle" src={{this.logo}} width="40"height="40"/>
+                </div>
+                <p class="am-sans-serif">{{this.name}}</p>
+                <a href="tel:{{this.tel}}" class="am-icon am-icon-phone am-icon-md"></a>
+            </li>
             {{/each}}
         </script>
         <li style="color: rgb(93, 100, 125);  font-size:18px; font-weight:800;">物业管理</li>
