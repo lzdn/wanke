@@ -4,8 +4,13 @@
     padding-left: 20px;
     padding-right: 50px;
 }
+.shopcontent{
+    width: 100%;
+    height: 40px;
+}
 .am-list-extend img{
     position:absolute;
+    top:10px;
 }
 .am-list-extend p{
     margin:5px 0 0 50px;
