@@ -15,7 +15,7 @@
     } else {
         postview = window.location.search.split('=')[1];
     }
-    $(".am-comments-list .advertising").hide();
+    $("#commentslist #advertising").hide();
     if (code != "") {
         $.post(server + "/weixin/userSignUp", {code: code}, function (res) {
             queryobject = res;
@@ -63,7 +63,7 @@
     function loading_event() {
         loading(function () {
             $(".close").hide();
-            $(".am-comments-list .advertising").show();
+            $("#commentslist #advertising").show();
             var currentUser = AV.User.current();
             usersid = currentUser.id;
             var authData = currentUser.get("authData");
