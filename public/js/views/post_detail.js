@@ -1,6 +1,9 @@
 (function ($) {
     AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
     loadwx();
+    $("#advertising,#commentslist").hide();
+    $("#divider").hide();
+
     var saveurl = window.location.href;
     var number = "";
     var code = "";
@@ -15,7 +18,6 @@
     } else {
         postview = window.location.search.split('=')[1];
     }
-    $("#commentslist #advertising").hide();
     if (code != "") {
         $.post(server + "/weixin/userSignUp", {code: code}, function (res) {
             queryobject = res;
@@ -63,7 +65,8 @@
     function loading_event() {
         loading(function () {
             $(".close").hide();
-            $("#commentslist #advertising").show();
+            $("#advertising,#commentslist").show();
+            $("#divider").show();
             var currentUser = AV.User.current();
             usersid = currentUser.id;
             var authData = currentUser.get("authData");
