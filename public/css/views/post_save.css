@@ -144,11 +144,6 @@ textarea{
     height: 100px;
     background: blue;
     position: relative;
-    overflow:hidden;
-}
-#imgwall .imgnav .push_img{
-    width:400px;
-    height: 100px;
 }
 #imgwall a{
     width: 20px;
