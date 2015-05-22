@@ -13,358 +13,358 @@
     } else {
         postview = window.location.search.split('=')[1];
     }
-    if (code != "") {
-        $.post(server + "/weixin/userSignUp", {code: code}, function (res) {
-            queryobject = res;
-            nickname = res.nickname;
-            AV.User._logInWith("weixin", {
-                "authData": res,
-                success: function (user) {
-                    userid = user.id;
-                    commentuserid = userid
-                    queryobject = user.get("authData");
-                    var query = new AV.Query(AV.User);
-                    query.get(userid, {
-                        success: function (user) {
-                            user.set('nickname', nickname);
-                            user.save()
-                        }
-                    });
-                }
-            })
-        });
-    }else{
+    //if (code != "") {
+    //    $.post(server + "/weixin/userSignUp", {code: code}, function (res) {
+    //        queryobject = res;
+    //        nickname = res.nickname;
+    //        AV.User._logInWith("weixin", {
+    //            "authData": res,
+    //            success: function (user) {
+    //                userid = user.id;
+    //                commentuserid = userid
+    //                queryobject = user.get("authData");
+    //                var query = new AV.Query(AV.User);
+    //                query.get(userid, {
+    //                    success: function (user) {
+    //                        user.set('nickname', nickname);
+    //                        user.save()
+    //                    }
+    //                });
+    //            }
+    //        })
+    //    });
+    //}else{
+    //    var currentUser = AV.User.current();
+    //    if (currentUser) {
+    //
+    //    } else {
+    //        $.ajax({
+    //            method: "POST",
+    //            url: server + "/weixin/getAuthUrl",
+    //            data: JSON.stringify({
+    //                page: saveurl
+    //            }),
+    //            contentType: "application/json; charset=utf-8",
+    //            dataType: "json",
+    //            success: function (data) {
+    //                window.location.href = data.authUrl;
+    //            },
+    //            error: function (msg) {
+    //                // alert(msg);
+    //            }
+    //        });
+    //    }
+    //}
+
+    loadwx();
+    loading(function () {
+        $(".close").hide();
         var currentUser = AV.User.current();
-        if (currentUser) {
-            loadwx();
-            loading(function () {
-                $(".close").hide();
-                var currentUser = AV.User.current();
-                usersid = currentUser.id;
-                var authData = currentUser.get("authData");
-                headUrl = authData.weixin.headimgurl
-                $(".nullusershow").attr("src", headUrl);
-                $(".replypublish").hide();
-                var aclose = document.getElementsByClassName("close");
-                for (var i = 0; i < aclose.length; i++) {
-                    var commentuser = aclose[i].className.substr(14);
-                    if (commentuser == commentuserid) {
-                        aclose[i].className = "close hide";
-                        $(".hide").show();
-                    } else {
-                    }
-                }
-                $(".close").on("click", function () {
-                    var close = $(this).parent().attr("value");
-                    destroycomment(close);
-                });
-                $(".reply").on("click", function () {
-                    $(".replypublish").hide();
-                    var reply = $(this).parent().attr("value");
-                    var $reply = $(this).parent().siblings("." + reply + "");
-                    if ($reply.attr("bshow") == 0) {
-                        $reply.show();
-                        $reply.attr("bshow", "1");
-                    } else {
-                        $reply.hide();
-                        $reply.attr("bshow", "0");
-                    }
-                    $(".reply").removeClass("reply");
-                })
-                $(".smpublish").on("click", function () {
-                    var currentUser = AV.User.current();
-                    var publishsay = $(this).parent().siblings(".textarea").children().val();
-                    if (publishsay) {
-                        var comment = AV.Object.extend("comment");
-                        var post = AV.Object.extend("post");
-                        var relationcommentid = $(this).attr("value");
-                        var relationcommentusername = $(this).attr("username");
-                        var relationcommentcontent = $(this).attr("usersay");
-                        var relationcommentusershow = $(this).attr("usershow");
-                        var relationcommentuserid = $(this).attr("userid");
-                        console.log(relationcommentid + "$" + relationcommentusername + "$" + relationcommentcontent + "$" + relationcommentusershow)
-                        var posts = new post();
-                        posts.id = postview;
-                        var commentrelation = [];
-                        commentrelation.push({
-                            commentid: relationcommentid,
-                            commentusername: relationcommentusername,
-                            commentcontent: relationcommentcontent,
-                            commentuserid: relationcommentuserid,
-                            commentusershow: relationcommentusershow
-                        });
-                        console.log(commentrelation);
-                        var comment = new comment();
-                        comment.save({
-                            commentcontent: publishsay,
-                            commentpost: posts,
-                            commentuserid: commentuserid,
-                            commentusername: nickname,
-                            commentusershow: headUrl,
-                            commentrelation: commentrelation
-                        }, {
-                            success: function (comment) {
-                                $("textarea").val("");
-                                loadingcomment(comment);
-                                var query = new AV.Query(post);
-                                query.get(postview, {
-                                    success: function (post) {
-                                        post.add("relationcomment", {id: comment.id});
-                                        post.save();
-                                    },
-                                    error: function (object, error) {
-                                        console.log(object);
-                                    }
-                                });
-                            }
-                        })
-                    } else {
-                        alert("你要说点什么");
-                    }
-                });
-
-                $("#maxpublish").on("click", function () {
-                    var currentUser = AV.User.current();
-                    var post = AV.Object.extend("post");
+            usersid = currentUser.id;
+            var authData = currentUser.get("authData");
+            headUrl = authData.weixin.headimgurl
+            $(".nullusershow").attr("src", headUrl);
+        $(".replypublish").hide();
+        var aclose = document.getElementsByClassName("close");
+        for (var i = 0; i < aclose.length; i++) {
+            var commentuser = aclose[i].className.substr(14);
+            if (commentuser == commentuserid) {
+                aclose[i].className = "close hide";
+                $(".hide").show();
+            } else {
+            }
+        }
+        $(".close").on("click", function () {
+            var close = $(this).parent().attr("value");
+            destroycomment(close);
+        });
+        $(".reply").on("click", function () {
+            $(".replypublish").hide();
+            var reply = $(this).parent().attr("value");
+            var $reply = $(this).parent().siblings("." + reply + "");
+            if ($reply.attr("bshow") == 0) {
+                $reply.show();
+                $reply.attr("bshow", "1");
+            } else {
+                $reply.hide();
+                $reply.attr("bshow", "0");
+            }
+            $(".reply").removeClass("reply");
+        })
+        $(".smpublish").on("click", function () {
+            var currentUser = AV.User.current();
+                var publishsay = $(this).parent().siblings(".textarea").children().val();
+                if (publishsay) {
                     var comment = AV.Object.extend("comment");
-                    var publishsay = $(this).parent().siblings(".textarea").children().val();
-                    if (publishsay) {
-                        var posts = new post();
-                        posts.id = postview;
-                        var coment = new comment();
-                        coment.save({
-                            commentcontent: publishsay,
-                            commentpost: posts,
-                            commentusername: nickname,
-                            commentuserid: commentuserid,
-                            commentusershow: headUrl
-                        }, {
-                            success: function (comment) {
-                                var query = new AV.Query(post);
-                                $("textarea").val("");
-                                loadingcomment(comment);
-                                query.get(postview, {
-                                    success: function (post) {
-                                        post.add("relationcomment", {id: comment.id});
-                                        post.save();
-                                    },
-                                    error: function (object, error) {
-                                        console.log(object);
-                                    }
-                                });
-                            }
-                        });
-                    } else {
-                        alert("你要说点什么");
-                    }
-                });
-
-                $(".imgpreview").on("click", function () {
-                    var cur = $(this).attr("src");
-                    var url = $(this).parent(".images").attr("value");
-                    var arr = url.split(",");
-                    wx.previewImage({
-                        current: cur, // 当前显示的图片链接
-                        urls: arr // 需要预览的图片链接列表
+                    var post = AV.Object.extend("post");
+                    var relationcommentid = $(this).attr("value");
+                    var relationcommentusername = $(this).attr("username");
+                    var relationcommentcontent = $(this).attr("usersay");
+                    var relationcommentusershow = $(this).attr("usershow");
+                    var relationcommentuserid = $(this).attr("userid");
+                    console.log(relationcommentid + "$" + relationcommentusername + "$" + relationcommentcontent + "$" + relationcommentusershow)
+                    var posts = new post();
+                    posts.id = postview;
+                    var commentrelation = [];
+                    commentrelation.push({
+                        commentid: relationcommentid,
+                        commentusername: relationcommentusername,
+                        commentcontent: relationcommentcontent,
+                        commentuserid: relationcommentuserid,
+                        commentusershow: relationcommentusershow
                     });
-                    event.stopPropagation();
-                });
-                $(".imgpreview").removeClass("imgpreview");
-                var aimg_thumbnail = ($(".imgpatterntwo .img"));
-                for (var i = 0; i < aimg_thumbnail.length; i++) {
-                    var url = aimg_thumbnail[i].className.split(" ")[1];
-                    aimg_thumbnail[i].className = ("imgthumbnail");
-                    console.log(aimg_thumbnail[i]);
-                    img_thumbnail($(".imgthumbnail"), url, 70);
-                    aimg_thumbnail[i].className = ("");
+                    console.log(commentrelation);
+                    var comment = new comment();
+                    comment.save({
+                        commentcontent: publishsay,
+                        commentpost: posts,
+                        commentuserid: commentuserid,
+                        commentusername: nickname,
+                        commentusershow: headUrl,
+                        commentrelation: commentrelation
+                    }, {
+                        success: function (comment) {
+                            $("textarea").val("");
+                            loadingcomment(comment);
+                            var query = new AV.Query(post);
+                            query.get(postview, {
+                                success: function (post) {
+                                    post.add("relationcomment", {id: comment.id});
+                                    post.save();
+                                },
+                                error: function (object, error) {
+                                    console.log(object);
+                                }
+                            });
+                        }
+                    })
+                } else {
+                    alert("你要说点什么");
                 }
+        });
 
-                $("#btnname").on("click", function () {
-                    var currentUser = AV.User.current();
-                    theuserid = currentUser.id;
-                    var query = new AV.Query(AV.User);
-                    query.get(currentUser.id, {
-                        success: function (user) {
-                            phonenumber = user.get('mobilePhoneNumber');
+        $("#maxpublish").on("click", function () {
+            var currentUser = AV.User.current();
+                var post = AV.Object.extend("post");
+                var comment = AV.Object.extend("comment");
+                var publishsay = $(this).parent().siblings(".textarea").children().val();
+                if (publishsay) {
+                    var posts = new post();
+                    posts.id = postview;
+                    var coment = new comment();
+                    coment.save({
+                        commentcontent: publishsay,
+                        commentpost: posts,
+                        commentusername: nickname,
+                        commentuserid: commentuserid,
+                        commentusershow: headUrl
+                    }, {
+                        success: function (comment) {
+                            var query = new AV.Query(post);
+                            $("textarea").val("");
+                            loadingcomment(comment);
+                            query.get(postview, {
+                                success: function (post) {
+                                    post.add("relationcomment", {id: comment.id});
+                                    post.save();
+                                },
+                                error: function (object, error) {
+                                    console.log(object);
+                                }
+                            });
                         }
                     });
-                    if (relationuser) {
-                        var bregistration = 0;
-                        for (var i = 0; i < relationuser.length; i++) {
-                            if (relationuser[i].id == currentUser.id) {
-                                $(".usercontent").remove();
-                                $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".usercont");
-                                $("#btnname").remove();
-                                $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
-                            } else {
-                                bregistration += 1;
-                            }
-                            if (bregistration == relationuser.length) {
-                                setTimeout(function () {
-                                    if (phonenumber) {
-                                        var imgurl = currentUser.get("authData").weixin.headimgurl;
-                                        $(".usercontent").remove();
-                                        $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".usercont");
-                                        $("#btnname").remove();
-                                        $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
-                                        $(" <img src=\"" + imgurl + "\" value=\" " + usersid + "&" + phonenumber + " \" class=\"am-radius\">").appendTo("#headtle");
-                                        $.ajax({
-                                            method: "POST",
-                                            url: server + "/weixin/sendMessage",
-                                            data: JSON.stringify({
-                                                userId: theuserid,
-                                                postId: postview
-                                            }),
-                                            contentType: "application/json; charset=utf-8",
-                                            dataType: "json",
-                                            success: function (data) {
-                                            },
-                                            error: function (msg) {
-                                            }
-                                        });
-                                        //usersid  postId  openid
-                                        var post = AV.Object.extend("post");
-                                        var query = new AV.Query(post);
-                                        query.equalTo("objectId", postview);
-                                        query.get(postview, {
-                                            success: function (post) {
-                                                post.add("relationuser", {
-                                                    id: usersid,
-                                                    url: imgurl,
-                                                    phonenumber: phonenumber
+                } else {
+                    alert("你要说点什么");
+                }
+        });
+
+        $(".imgpreview").on("click", function () {
+            var cur = $(this).attr("src");
+            var url = $(this).parent(".images").attr("value");
+            var arr = url.split(",");
+            wx.previewImage({
+                current: cur, // 当前显示的图片链接
+                urls: arr // 需要预览的图片链接列表
+            });
+            event.stopPropagation();
+        });
+        $(".imgpreview").removeClass("imgpreview");
+        var aimg_thumbnail = ($(".imgpatterntwo .img"));
+        for (var i = 0; i < aimg_thumbnail.length; i++) {
+            var url = aimg_thumbnail[i].className.split(" ")[1];
+            aimg_thumbnail[i].className = ("imgthumbnail");
+            console.log(aimg_thumbnail[i]);
+            img_thumbnail($(".imgthumbnail"), url, 70);
+            aimg_thumbnail[i].className = ("");
+        }
+
+        $("#btnname").on("click", function () {
+            var currentUser = AV.User.current();
+                theuserid = currentUser.id;
+                var query = new AV.Query(AV.User);
+                query.get(currentUser.id, {
+                    success: function (user) {
+                        phonenumber = user.get('mobilePhoneNumber');
+                    }
+                });
+                if (relationuser) {
+                    var bregistration = 0;
+                    for (var i = 0; i < relationuser.length; i++) {
+                        if (relationuser[i].id == currentUser.id) {
+                            $(".usercontent").remove();
+                            $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".usercont");
+                            $("#btnname").remove();
+                            $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
+                        } else {
+                            bregistration += 1;
+                        }
+                        if (bregistration == relationuser.length) {
+                            setTimeout(function () {
+                                if (phonenumber) {
+                                    var imgurl = currentUser.get("authData").weixin.headimgurl;
+                                    $(".usercontent").remove();
+                                    $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".usercont");
+                                    $("#btnname").remove();
+                                    $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
+                                    $(" <img src=\"" + imgurl + "\" value=\" " + usersid + "&" + phonenumber + " \" class=\"am-radius\">").appendTo("#headtle");
+                                    $.ajax({
+                                        method: "POST",
+                                        url: server + "/weixin/sendMessage",
+                                        data: JSON.stringify({
+                                            userId: theuserid,
+                                            postId: postview
+                                        }),
+                                        contentType: "application/json; charset=utf-8",
+                                        dataType: "json",
+                                        success: function (data) {
+                                        },
+                                        error: function (msg) {
+                                        }
+                                    });
+                                    //usersid  postId  openid
+                                    var post = AV.Object.extend("post");
+                                    var query = new AV.Query(post);
+                                    query.equalTo("objectId", postview);
+                                    query.get(postview, {
+                                        success: function (post) {
+                                            post.add("relationuser", {
+                                                id: usersid,
+                                                url: imgurl,
+                                                phonenumber: phonenumber
+                                            });
+                                            post.save();
+                                        },
+                                        error: function (object, error) {
+                                            console.log(object);
+                                        }
+                                    });
+                                } else {
+                                    $('#my-prompt').modal({
+                                        // relatedTarget: this,
+                                        onConfirm: function (e) {
+                                            //e.data
+                                            if (/^1[3|4|5|7|8]\d{9}$/.test(e.data)) {
+                                                var query = new AV.Query(AV.User);
+                                                query.get(usersid, {
+                                                    success: function (user) {
+                                                        user.set('mobilePhoneNumber', e.data);
+                                                        user.save()
+                                                    }
                                                 });
-                                                post.save();
-                                            },
-                                            error: function (object, error) {
-                                                console.log(object);
+                                            } else {
+                                                alert("请输入正确的电话号码");
+                                            }
+                                        },
+                                        onCancel: function (e) {
+                                        }
+                                    });
+                                }
+                            }, 100);
+                        }
+                    }
+                } else {
+                    setTimeout(function () {
+                        if (phonenumber) {
+                            var imgurl = currentUser.get("authData").weixin.headimgurl;
+                            $(".usercontent").remove();
+                            $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".usercont");
+                            $("#btnname").remove();
+                            $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
+                            $(" <img src=\"" + imgurl + "\" value=\" " + usersid + "&" + phonenumber + " \" class=\"am-radius\">").appendTo("#headtle");
+                            $.ajax({
+                                method: "POST",
+                                url: server + "/weixin/sendMessage",
+                                data: JSON.stringify({
+                                    userId: theuserid,
+                                    postId: postview
+                                }),
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (data) {
+                                },
+                                error: function (msg) {
+                                }
+                            });
+                            //usersid  postId  openid
+                            var post = AV.Object.extend("post");
+                            var query = new AV.Query(post);
+                            query.equalTo("objectId", postview);
+                            query.get(postview, {
+                                success: function (post) {
+                                    post.add("relationuser", {id: usersid, url: imgurl, phonenumber: phonenumber});
+                                    post.save();
+                                },
+                                error: function (object, error) {
+                                    console.log(object);
+                                }
+                            });
+                        } else {
+                            $('#my-prompt').modal({
+                                // relatedTarget: this,
+                                onConfirm: function (e) {
+                                    //e.data
+                                    if (/^1[3|4|5|7|8]\d{9}$/.test(e.data)) {
+                                        var query = new AV.Query(AV.User);
+                                        query.get(usersid, {
+                                            success: function (user) {
+                                                user.set('mobilePhoneNumber', e.data);
+                                                user.save()
                                             }
                                         });
                                     } else {
-                                        $('#my-prompt').modal({
-                                            // relatedTarget: this,
-                                            onConfirm: function (e) {
-                                                //e.data
-                                                if (/^1[3|4|5|7|8]\d{9}$/.test(e.data)) {
-                                                    var query = new AV.Query(AV.User);
-                                                    query.get(usersid, {
-                                                        success: function (user) {
-                                                            user.set('mobilePhoneNumber', e.data);
-                                                            user.save()
-                                                        }
-                                                    });
-                                                } else {
-                                                    alert("请输入正确的电话号码");
-                                                }
-                                            },
-                                            onCancel: function (e) {
-                                            }
-                                        });
+                                        alert("请输入正确的电话号码");
                                     }
-                                }, 100);
-                            }
+                                },
+                                onCancel: function (e) {
+                                }
+                            });
                         }
-                    } else {
-                        setTimeout(function () {
-                            if (phonenumber) {
-                                var imgurl = currentUser.get("authData").weixin.headimgurl;
-                                $(".usercontent").remove();
-                                $(" <p class=\"usercontent am-sans-serif\">联系方式：" + number + "</p>").prependTo(".usercont");
-                                $("#btnname").remove();
-                                $(" <div id=\"btnname\"><button type=\"button\" class=\"am-btn am-btn-warning am-disabled\">已报名</button></div>").prependTo(".userphone");
-                                $(" <img src=\"" + imgurl + "\" value=\" " + usersid + "&" + phonenumber + " \" class=\"am-radius\">").appendTo("#headtle");
-                                $.ajax({
-                                    method: "POST",
-                                    url: server + "/weixin/sendMessage",
-                                    data: JSON.stringify({
-                                        userId: theuserid,
-                                        postId: postview
-                                    }),
-                                    contentType: "application/json; charset=utf-8",
-                                    dataType: "json",
-                                    success: function (data) {
-                                    },
-                                    error: function (msg) {
-                                    }
-                                });
-                                //usersid  postId  openid
-                                var post = AV.Object.extend("post");
-                                var query = new AV.Query(post);
-                                query.equalTo("objectId", postview);
-                                query.get(postview, {
-                                    success: function (post) {
-                                        post.add("relationuser", {id: usersid, url: imgurl, phonenumber: phonenumber});
-                                        post.save();
-                                    },
-                                    error: function (object, error) {
-                                        console.log(object);
-                                    }
-                                });
-                            } else {
-                                $('#my-prompt').modal({
-                                    // relatedTarget: this,
-                                    onConfirm: function (e) {
-                                        //e.data
-                                        if (/^1[3|4|5|7|8]\d{9}$/.test(e.data)) {
-                                            var query = new AV.Query(AV.User);
-                                            query.get(usersid, {
-                                                success: function (user) {
-                                                    user.set('mobilePhoneNumber', e.data);
-                                                    user.save()
-                                                }
-                                            });
-                                        } else {
-                                            alert("请输入正确的电话号码");
-                                        }
-                                    },
-                                    onCancel: function (e) {
-                                    }
-                                });
-                            }
-                        }, 100);
-                    }
-                    //
-                    //} else {
-                    //    $.ajax({
-                    //        method: "POST",
-                    //        url: server + "/weixin/getAuthUrl",
-                    //        data: JSON.stringify({
-                    //            page: saveurl
-                    //        }),
-                    //        contentType: "application/json; charset=utf-8",
-                    //        dataType: "json",
-                    //        success: function (data) {
-                    //            window.location.href = data.authUrl;
-                    //        },
-                    //        error: function (msg) {
-                    //            // alert(msg);
-                    //        }
-                    //    });
-                    //    //    $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl",{page:saveurl}, function (res) {
-                    //    //        window.location.href = res.authUrl;
-                    //    //})
-                    //}
-                });
-            });
-        } else {
-            $.ajax({
-                method: "POST",
-                url: server + "/weixin/getAuthUrl",
-                data: JSON.stringify({
-                    page: saveurl
-                }),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data) {
-                    window.location.href = data.authUrl;
-                },
-                error: function (msg) {
-                    // alert(msg);
+                    }, 100);
                 }
-            });
-        }
-    }
-
-
+            //
+            //} else {
+            //    $.ajax({
+            //        method: "POST",
+            //        url: server + "/weixin/getAuthUrl",
+            //        data: JSON.stringify({
+            //            page: saveurl
+            //        }),
+            //        contentType: "application/json; charset=utf-8",
+            //        dataType: "json",
+            //        success: function (data) {
+            //            window.location.href = data.authUrl;
+            //        },
+            //        error: function (msg) {
+            //            // alert(msg);
+            //        }
+            //    });
+            //    //    $.post("http://fuwuhao.dianyingren.com/weixin/getAuthUrl",{page:saveurl}, function (res) {
+            //    //        window.location.href = res.authUrl;
+            //    //})
+            //}
+        });
+    });
 
     function loading(callbak) {
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
