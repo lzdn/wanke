@@ -248,7 +248,9 @@
                             $("#load").show();
                         }
                         if(destroylength.length==0){
-                            loading();
+                            loading(function(){
+                                alert("重新加载…………")
+                            });
                         }
                     }
                 });
