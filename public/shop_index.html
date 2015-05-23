@@ -27,7 +27,7 @@
     <i class="am-icon-refresh am-icon-spin am-icon-sm"></i>
 </div>
 <script type="text/x-handlebars-template" id="shop">
-<div class="am-panel am-panel-default">
+<div class="am-panel am-panel-default am-animation-fade">
     <div class="am-panel-hd"  data-am-collapse="{parent: '#accordion', target: '#surrounding'}">
         <h4 class="am-panel-title" >
            周边小店
@@ -50,7 +50,7 @@
 </div>
 </script>
 <script type="text/x-handlebars-template" id="shop2">
-<div class="am-panel am-panel-default">
+<div class="am-panel am-panel-default am-animation-fade">
     <div class="am-panel-hd"  data-am-collapse="{parent: '#accordion', target: '#Property'}">
         <h4 class="am-panel-title">
             物业管理
@@ -59,7 +59,6 @@
     </div>
     <div id=Property class="am-panel-collapse am-collapse">
         <ul class="am-list am-list-extend" value={{this.id}}>
-
                 {{#each shops}}
                 <li class="shop_list">
                     <div class="shopcontent" value="{{this.id}}">
@@ -73,7 +72,7 @@
     </div>
 </div>
 </script>
-<div data-am-widget="navbar" class="am-navbar am-cf" id="">
+<div data-am-widget="navbar" class="am-navbar am-cf">
     <ul class="am-navbar-nav am-cf am-avg-sm-4 am-navbar-nav-extend ">
         <li>
             <a id="life" href="shop_index.html" class="">
