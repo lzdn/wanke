@@ -31,6 +31,11 @@
     color:rgb(50,137,199);
 }
 .am-panel-default{
-    margin:0;
-    border:none;
+    margin:5px 0 0 0;
+    border:1px solid #ccc;
+}
+.am-panel-default .am-panel-hd{
+    height: 62px;
+    padding-top:18px;
+    /*line-height: 58px;*/
 }
