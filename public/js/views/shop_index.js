@@ -1,5 +1,5 @@
 (function ($) {
- loadwx(function () {
+loadwx(function () {
         loading(function () {
             $(".load").hide();
             $(".am-icon-phone").on("click",function(){
