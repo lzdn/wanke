@@ -1,5 +1,5 @@
 (function ($) {
- // loadwx(function () {
+ loadwx(function () {
         loading(function () {
             $(".am-icon-phone").on("click",function(){
                 var thisphone = $(this);
@@ -26,7 +26,7 @@
                 });
             });
         });
- //});
+ });
 
     function loading(callbak) {
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
