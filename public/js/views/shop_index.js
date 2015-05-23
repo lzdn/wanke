@@ -1,6 +1,7 @@
 (function ($) {
  loadwx(function () {
         loading(function () {
+            $(".load").hide();
             $(".am-icon-phone").on("click",function(){
                 var thisphone = $(this);
                 thisphone.css("color","#e0690c");
