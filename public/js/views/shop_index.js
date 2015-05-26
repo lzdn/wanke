@@ -1,5 +1,5 @@
 (function ($) {
-//loadwx(function () {
+loadwx(function () {
         loading(function () {
             $(".load").hide();
             if($(".shop_list_surrounding").length==0){
@@ -33,7 +33,7 @@
                 });
             });
         });
- //});
+ });
 
     function loading(callbak) {
         AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
