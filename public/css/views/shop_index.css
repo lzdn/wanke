@@ -36,13 +36,14 @@
 
 .am-panel-default{
     margin:0;
+    border:none;
 }
 .am-panel-default .am-panel-hd{
     height: 62px;
     padding-top:18px;
     font-weight: 900;
     color: rgb(93, 100, 125);
-    border:none;
+    border-bottom:1px solid #ccc;
 }
 .load{
     width: 25px;
