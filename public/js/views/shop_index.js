@@ -3,10 +3,10 @@ loadwx(function () {
         loading(function () {
             $(".load").hide();
             if($(".shop_list_surrounding").length==0){
-                $("#surrounding").hide();
+                $("#shop_list_surrounding").hide();
             }
             if($(".shop_list_property").length==0){
-                $("#Property").hide();
+                $("#shop_list_property").hide();
             }
             $(".am-icon-phone").on("click",function(){
                 var thisphone = $(this);
