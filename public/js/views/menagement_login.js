@@ -40,7 +40,6 @@
 
     function addCookie(user,pwd,expiresHours){
             var date=new Date();
-          console.log(date);
         date.setTime(date.getTime()+expiresHours*24*3600*1000);
         cookie.set("wankeloginuseremail", user,date);
         cookie.set("wankeloginuserpwd", pwd,date);

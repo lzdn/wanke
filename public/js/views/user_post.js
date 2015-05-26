@@ -38,7 +38,6 @@
         for(var i=0; i<aimg_thumbnail.length;i++){
             var url = aimg_thumbnail[i].className.split(" ")[1];
             aimg_thumbnail[i].className=("imgthumbnail");
-            console.log(aimg_thumbnail[i]);
             img_thumbnail($(".imgthumbnail"),url,70);
             aimg_thumbnail[i].className=("");
         }
@@ -87,7 +86,6 @@
                 for(var i=0; i<aimg_thumbnail.length;i++){
                     var url = aimg_thumbnail[i].className.split(" ")[1];
                     aimg_thumbnail[i].className=("imgthumbnail");
-                    console.log(aimg_thumbnail[i]);
                     img_thumbnail($(".imgthumbnail"),url,70);
                     aimg_thumbnail[i].className=("");
                 }
@@ -141,7 +139,6 @@
                                 var imgpattern="";
                                 for (var i = 0; i < arry.length; i++) {
                                     var object = arry[i];
-                                    console.log(object);
                                     var avalue = object.id;
                                     var content = object.get('content');
                                     var imgs = object.get('relationimgs');
@@ -276,7 +273,6 @@
                             for(var i=0; i<aimg_thumbnail.length;i++){
                                 var url = aimg_thumbnail[i].className.split(" ")[1];
                                 aimg_thumbnail[i].className=("imgthumbnail");
-                                console.log(aimg_thumbnail[i]);
                                 img_thumbnail($(".imgthumbnail"),url,70);
                                 aimg_thumbnail[i].className=("");
                             }

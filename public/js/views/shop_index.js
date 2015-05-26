@@ -2,6 +2,12 @@
 loadwx(function () {
         loading(function () {
             $(".load").hide();
+            if($(".shop_list_surrounding").length==0){
+                $("#surrounding").hide();
+            }
+            if($(".shop_list_property").length==0){
+                $("#Property").hide();
+            }
             $(".am-icon-phone").on("click",function(){
                 var thisphone = $(this);
                 thisphone.css("color","#e0690c");

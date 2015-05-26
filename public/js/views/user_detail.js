@@ -55,7 +55,6 @@
                         callbak(null, user);
                     },
                     error: function (err) {
-                        console.dir(err);
                         callbak(err);
                     }
                 })
