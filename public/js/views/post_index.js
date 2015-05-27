@@ -300,6 +300,7 @@
         }
     });
     function loading(callbak) {
+        alert("haishiload");
         var post = AV.Object.extend("post");
         var user = AV.Object.extend("User");
         var query = new AV.Query(post);
