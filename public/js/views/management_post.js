@@ -11,16 +11,16 @@ var cookie=$.AMUI.utils.cookie;
 var useremail_cookie =cookie.get("wankeloginuseremail");
 var userpwd_cookie =cookie.get("wankeloginuserpwd");
 
-//if(!useremail_cookie||!userpwd_cookie){
-//    window.location.href= server + '/management_login.html?Jumpurl=management_shop.html';
-//}else{
+if(!useremail_cookie||!userpwd_cookie){
+    window.location.href= server + '/management_login.html?Jumpurl=management_shop.html';
+}else{
     load(function(){
         $(".am-icon-eyeicon").css("color","#3bb4f2");
         $(".am-icon-eye-slashicon").css("color","#dd514c");
         $(".showam-icon-eye").hide();
         $(".hideam-icon-eye-slash").hide();
     });
-//}
+}
 //window.onload = function () {
 //    load();
 //};
