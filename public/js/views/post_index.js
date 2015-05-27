@@ -70,6 +70,7 @@
         }else{
             var currentUser = AV.User.current();
             if (currentUser) {
+                alert("shizhelicuowu??")
                 skx = -5;
                 loading(function () {
                     var adoremove = document.getElementsByClassName("doremove");
