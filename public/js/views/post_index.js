@@ -1,6 +1,6 @@
 
     AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
-    loadwx();
+    //loadwx();
     var skx = -5;
     var bload = 1;
     var length;
@@ -634,6 +634,6 @@
             }
         }
     }
-    //function location_href(value){
-    //    window.location.href = "post_detail.html?id=" +value+ "";
-    //}
+    function location_href(value){
+        window.location.href = "post_detail.html?id=" +value+ "";
+    }
