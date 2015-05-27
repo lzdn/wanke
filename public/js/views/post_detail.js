@@ -116,9 +116,11 @@
                                 }
                             }
                             if(blacklistid!=1){
+                                alert("1haocuowu");
                                 up_smpublish(publishsay);
                             }
                         }else{
+                            alert("2haocuowu");
                             up_smpublish(publishsay);
                         }
                     }
