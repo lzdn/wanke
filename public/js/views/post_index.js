@@ -278,19 +278,6 @@
         }
     });
     $("#arrow").hide();
-    skx = -5;
-    loading(function () {
-        var adoremove = document.getElementsByClassName("doremove");
-        if (adoremove.length < 5) {
-            $("#load").hide();
-        }else{
-            $("#load").show();
-        }
-        $("#users").on("click", function () {
-            window.location.href = "user_detail.html?code=";
-        });
-        clickevent();
-    });
     $(window).scroll(function () {
         var htmlHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
         var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
@@ -318,7 +305,6 @@
         }
     });
     function loading(callbak) {
-
         var post = AV.Object.extend("post");
         var user = AV.Object.extend("User");
         var query = new AV.Query(post);
@@ -653,8 +639,6 @@
             }
         }
     }
-
-
     function location_href(value){
         window.location.href = "post_detail.html?id=" +value+ "";
     }
