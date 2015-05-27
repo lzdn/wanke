@@ -138,6 +138,8 @@
         }else{
             $("#load").show();
         }
+        $("hr").remove();
+        $(".Publish").remove();
         selectchange(function (width) {
             $(".tagsearch").css("width", "" + width + "px");
             var iconleft = width - 20;
