@@ -42,7 +42,24 @@
     } else {
         var currentUser = AV.User.current();
         if (currentUser) {
-            loading_event()
+            var BlackList = AV.Object.extend('blacklist');
+            var query = new AV.Query(BlackList);
+            query.find({
+                success:function(blacklist){
+                    if(blacklist.length>0){
+                        for(var i = 0 ;i<blacklist.length;i++){
+                            if(currentUser.id==blacklist[i].get('user_id')){
+                                alert("您的账户已被冻结，如有疑问请联系官方");
+                                window.location.href = "post_index.html";
+                            }else{
+                                loading_event();
+                            }
+                        }
+                    }else{
+                        loading_event();
+                    }
+                }
+            });
         } else {
             $.ajax({
                 method: "POST",

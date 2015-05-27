@@ -4,6 +4,7 @@
     var skx = -5;
     var bload = 1;
     var length;
+    var blacklistid=1;
     var width = "";
     var tagname = "全部"
     var saveurl = window.location.href;
@@ -56,6 +57,7 @@
         }else{
             var currentUser = AV.User.current();
             if (currentUser) {
+
                 skx = -5;
                 loading(function () {
                     var adoremove = document.getElementsByClassName("doremove");
@@ -74,7 +76,23 @@
                     $("#foots").on("click", function () {
                         var currentUser = AV.User.current();
                         if (currentUser) {
-                            window.location.href = "post_save.html?code=";
+                            var BlackList = AV.Object.extend('blacklist');
+                            var query = new AV.Query(BlackList);
+                            query.find({
+                                success:function(blacklist){
+                                    if(blacklist.length>0){
+                                        for(var i = 0 ;i<blacklist.length;i++){
+                                            if(currentUser.id==blacklist[i].get('user_id')){
+                                                alert("您的账户已被冻结，如有疑问请联系官方");
+                                            }else{
+                                                window.location.href = "post_save.html?code=";
+                                            }
+                                        }
+                                    }else{
+                                        window.location.href = "post_save.html?code=";
+                                    }
+                                }
+                            });
                         } else {
                             $.post(server + "/weixin/getAuthUrl", {page: server + "/post_save.html"}, function (res) {
                                 window.location.href = res.authUrl;
