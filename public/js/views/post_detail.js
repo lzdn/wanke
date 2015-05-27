@@ -127,8 +127,7 @@
             $("#maxpublish").on("click", function () {
                 var currentUser = AV.User.current();
                 theuserid = currentUser.id;
-                var post = AV.Object.extend("post");
-                var comment = AV.Object.extend("comment");
+
                 var publishsay = $(this).parent().siblings(".textarea").children().val();
                 var BlackList = AV.Object.extend('blacklist');
                 var query = new AV.Query(BlackList);
@@ -798,6 +797,8 @@
         }
     }
     function up_maxpublish(publishsay){
+        var post = AV.Object.extend("post");
+        var comment = AV.Object.extend("comment");
         if (publishsay) {
             var posts = new post();
             posts.id = postview;
