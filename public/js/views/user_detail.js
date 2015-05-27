@@ -1,4 +1,5 @@
 (function ($) {
+    var blacklistid=0;
     userloading(function (err, user) {
         $("#user_post").on("click", function () {
             window.location.href = "user_post.html?id=" + user.id + "";
@@ -70,26 +71,45 @@
                             for(var i = 0 ;i<blacklist.length;i++){
                                 if(currentUser.id==blacklist[i].get('user_id')){
                                     alert("您的账户已被冻结，如有疑问请联系官方");
+                                    blacklistid=1
                                     window.location.href = "post_index.html";
                                 }
                             }
+                            if(blacklistid!=1){
+                                var authData = currentUser.get("authData");
+                                var $tpl = $('#user');
+                                var source = $tpl.text();
+                                var template = Handlebars.compile(source);
+                                var data = {
+                                    user: {
+                                        openid: authData.weixin.openid,
+                                        nickname: authData.weixin.nickname,
+                                        headUrl: authData.weixin.headimgurl
+                                    }
+                                };
+                                var html = template(data);
+                                $tpl.before(html);
+                                callbak(null, currentUser);
+                            }
+                        }else{
+                            var authData = currentUser.get("authData");
+                            var $tpl = $('#user');
+                            var source = $tpl.text();
+                            var template = Handlebars.compile(source);
+                            var data = {
+                                user: {
+                                    openid: authData.weixin.openid,
+                                    nickname: authData.weixin.nickname,
+                                    headUrl: authData.weixin.headimgurl
+                                }
+                            };
+                            var html = template(data);
+                            $tpl.before(html);
+                            callbak(null, currentUser);
                         }
                     }
                 });
-                var authData = currentUser.get("authData");
-                var $tpl = $('#user');
-                var source = $tpl.text();
-                var template = Handlebars.compile(source);
-                var data = {
-                    user: {
-                        openid: authData.weixin.openid,
-                        nickname: authData.weixin.nickname,
-                        headUrl: authData.weixin.headimgurl
-                    }
-                };
-                var html = template(data);
-                $tpl.before(html);
-                callbak(null, currentUser);
+
             } else {
                 $.post(server + "/weixin/getAuthUrl", {page: server + "/user_detail.html"}, function (res) {
                     window.location.href = res.authUrl;
