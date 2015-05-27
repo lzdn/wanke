@@ -104,6 +104,7 @@
                 var currentUser = AV.User.current();
                 theuserid = currentUser.id;
                 var publishsay = $(this).parent().siblings(".textarea").children().val();
+                var BlackList = AV.Object.extend('blacklist');
                 var query = new AV.Query(BlackList);
                 query.find({
                     success:function(blacklist){
@@ -129,6 +130,7 @@
                 var post = AV.Object.extend("post");
                 var comment = AV.Object.extend("comment");
                 var publishsay = $(this).parent().siblings(".textarea").children().val();
+                var BlackList = AV.Object.extend('blacklist');
                 var query = new AV.Query(BlackList);
                 query.find({
                     success:function(blacklist){
@@ -178,6 +180,7 @@
                         phonenumber = user.get('mobilePhoneNumber');
                     }
                 });
+                var BlackList = AV.Object.extend('blacklist');
                     var query = new AV.Query(BlackList);
                     query.find({
                         success:function(blacklist){
