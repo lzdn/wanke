@@ -72,7 +72,6 @@
         }else{
             var currentUser = AV.User.current();
             if (currentUser) {
-
                 skx = -5;
                 loading(function () {
                     var adoremove = document.getElementsByClassName("doremove");
@@ -116,6 +115,7 @@
 
                 });
             } else {
+                alert(saveurl);
                 $.ajax({
                     method: "POST",
                     url: server + "/weixin/getAuthUrl",
@@ -125,6 +125,7 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (data) {
+                        alert(data);
                         window.location.href = data.authUrl;
                     },
                     error: function (msg) {
@@ -639,10 +640,6 @@
             }
         }
     }
-    function location_href(value){
-        window.location.href = "post_detail.html?id=" +value+ "";
-    }
-
-
-
-
+    //function location_href(value){
+    //    window.location.href = "post_detail.html?id=" +value+ "";
+    //}
