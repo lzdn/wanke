@@ -71,6 +71,7 @@
             if (currentUser) {
                 skx = -5;
                 loading(function () {
+                    alert("qwe")
                     var adoremove = document.getElementsByClassName("doremove");
                   if (adoremove.length < 5) {
                         $("#load").hide();
