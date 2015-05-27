@@ -14,12 +14,14 @@
         code = userlog.split("&")[0];
     }
         if (code != "") {
+            alert(code);
             $.post(server + "/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
                 nickname = res.nickname;
                 AV.User._logInWith("weixin", {
                     "authData": res,
                     success: function (user) {
+                        alert("dengluchengg")
                         userid = user.id;
                         commentuserid = userid
                         queryobject = user.get("authData");
