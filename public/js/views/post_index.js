@@ -1,6 +1,6 @@
 
     AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
-    //loadwx();
+    loadwx();
     var skx = -5;
     var bload = 1;
     var length;
@@ -31,37 +31,37 @@
                             }
                         });
                         skx = -5;
-                        loading(function () {
-                            $("#users").on("click", function () {
-                                window.location.href = "user_detail.html?code=";
-                            });
-                            clickevent();
-                            $("#foots").on("click", function () {
-                                var currentUser = AV.User.current();
-                                if (currentUser) {
-                                    var BlackList = AV.Object.extend('blacklist');
-                                    var query = new AV.Query(BlackList);
-                                    query.find({
-                                        success:function(blacklist){
-                                            if(blacklist.length>0){
-                                                for(var i = 0 ;i<blacklist.length;i++){
-                                                    if(currentUser.id==blacklist[i].get('user_id')){
-                                                        alert("您的账户已被冻结，如有疑问请联系官方");
-                                                        blacklistid=1
-                                                    }
-                                                }
-                                                if(blacklistid!=1){
-                                                    window.location.href = "post_save.html?code=";
-                                                }
-                                            }else{
-                                                window.location.href = "post_save.html?code=";
-                                            }
-                                        }
-                                    });
-                                }
-                            });
-
-                        });
+                        //loading(function () {
+                        //    $("#users").on("click", function () {
+                        //        window.location.href = "user_detail.html?code=";
+                        //    });
+                        //    clickevent();
+                        //    $("#foots").on("click", function () {
+                        //        var currentUser = AV.User.current();
+                        //        if (currentUser) {
+                        //            var BlackList = AV.Object.extend('blacklist');
+                        //            var query = new AV.Query(BlackList);
+                        //            query.find({
+                        //                success:function(blacklist){
+                        //                    if(blacklist.length>0){
+                        //                        for(var i = 0 ;i<blacklist.length;i++){
+                        //                            if(currentUser.id==blacklist[i].get('user_id')){
+                        //                                alert("您的账户已被冻结，如有疑问请联系官方");
+                        //                                blacklistid=1
+                        //                            }
+                        //                        }
+                        //                        if(blacklistid!=1){
+                        //                            window.location.href = "post_save.html?code=";
+                        //                        }
+                        //                    }else{
+                        //                        window.location.href = "post_save.html?code=";
+                        //                    }
+                        //                }
+                        //            });
+                        //        }
+                        //    });
+                        //
+                        //});
                     }
                 })
             });
@@ -69,47 +69,47 @@
             var currentUser = AV.User.current();
             if (currentUser) {
                 skx = -5;
-                loading(function () {
-                    var adoremove = document.getElementsByClassName("doremove");
-                  if (adoremove.length < 5) {
-                        $("#load").hide();
-                    }else{
-                        $("#load").show();
-                    }
-                    $("#users").on("click", function () {
-                        window.location.href = "user_detail.html?code=";
-                    });
-                    clickevent();
-                    $("#foots").on("click", function () {
-                        var currentUser = AV.User.current();
-                        if (currentUser) {
-                            var BlackList = AV.Object.extend('blacklist');
-                            var query = new AV.Query(BlackList);
-                            query.find({
-                                success:function(blacklist){
-                                    if(blacklist.length>0){
-                                        for(var i = 0 ;i<blacklist.length;i++){
-                                            if(currentUser.id==blacklist[i].get('user_id')){
-                                                alert("您的账户已被冻结，如有疑问请联系官方");
-                                                blacklistid=1
-                                            }
-                                        }
-                                        if(blacklistid!=1){
-                                            window.location.href = "post_save.html?code=";
-                                        }
-                                    }else{
-                                        window.location.href = "post_save.html?code=";
-                                    }
-                                }
-                            });
-                        } else {
-                            $.post(server + "/weixin/getAuthUrl", {page: server + "/post_save.html"}, function (res) {
-                                window.location.href = res.authUrl;
-                            })
-                        }
-                    });
-
-                });
+                //loading(function () {
+                //    var adoremove = document.getElementsByClassName("doremove");
+                //  if (adoremove.length < 5) {
+                //        $("#load").hide();
+                //    }else{
+                //        $("#load").show();
+                //    }
+                //    $("#users").on("click", function () {
+                //        window.location.href = "user_detail.html?code=";
+                //    });
+                //    clickevent();
+                //    $("#foots").on("click", function () {
+                //        var currentUser = AV.User.current();
+                //        if (currentUser) {
+                //            var BlackList = AV.Object.extend('blacklist');
+                //            var query = new AV.Query(BlackList);
+                //            query.find({
+                //                success:function(blacklist){
+                //                    if(blacklist.length>0){
+                //                        for(var i = 0 ;i<blacklist.length;i++){
+                //                            if(currentUser.id==blacklist[i].get('user_id')){
+                //                                alert("您的账户已被冻结，如有疑问请联系官方");
+                //                                blacklistid=1
+                //                            }
+                //                        }
+                //                        if(blacklistid!=1){
+                //                            window.location.href = "post_save.html?code=";
+                //                        }
+                //                    }else{
+                //                        window.location.href = "post_save.html?code=";
+                //                    }
+                //                }
+                //            });
+                //        } else {
+                //            $.post(server + "/weixin/getAuthUrl", {page: server + "/post_save.html"}, function (res) {
+                //                window.location.href = res.authUrl;
+                //            })
+                //        }
+                //    });
+                //
+                //});
             } else {
                 $.ajax({
                     method: "POST",
