@@ -31,7 +31,13 @@
                             }
                         });
                         skx = -5;
+                        $("hr").remove();
+                        $(".Publish").remove();
                         loading(function () {
+                            if($(".Publish").length==0){
+                                $("#publish_title").remove();
+                                $("#publish").append("<p id=\"publish_title\">当前没有发布动态</p>");
+                            }
                             $("#users").on("click", function () {
                                 window.location.href = "user_detail.html?code=";
                             });
@@ -69,7 +75,13 @@
             var currentUser = AV.User.current();
             if (currentUser) {
                 skx = -5;
+                $("hr").remove();
+                $(".Publish").remove();
                 loading(function () {
+                    if($(".Publish").length==0){
+                        $("#publish_title").remove();
+                        $("#publish").append("<p id=\"publish_title\">当前没有发布动态</p>");
+                    }
                     var adoremove = document.getElementsByClassName("doremove");
                   if (adoremove.length < 5) {
                         $("#load").hide();
@@ -130,7 +142,6 @@
         }
 
     $("select").change(function () {
-        alert("woyoubing");
         $(".Delete").empty();
         $(".am-form-field").val("");
         var adoremove = document.getElementsByClassName("doremove");
@@ -141,6 +152,7 @@
         }
         $("hr").remove();
         $(".Publish").remove();
+        skx = -5;
         selectchange(function (width) {
             $(".tagsearch").css("width", "" + width + "px");
             var iconleft = width - 20;
@@ -157,6 +169,10 @@
                 var tag = $("select").val().split('&')[0];
                 if (tag == "全部") {
                     loading(function () {
+                        if($(".Publish").length==0){
+                            $("#publish_title").remove();
+                            $("#publish").append("<p id=\"publish_title\">当前没有发布动态</p>");
+                        }
                         clickevent();
                     });
                 } else {
@@ -291,6 +307,10 @@
             if (bload != 0) {
                 if (tag == "全部") {
                     loading(function () {
+                        if($(".Publish").length==0){
+                            $("#publish_title").remove();
+                            $("#publish").append("<p id=\"publish_title\">当前没有发布动态</p>");
+                        }
                         clickevent();
                     });
                 } else {
@@ -567,6 +587,10 @@
             $(".Publish").remove();
             skx = -5;
             loadtag(tag, function () {
+                if($(".Publish").length==0){
+                    $("#publish_title").remove();
+                    $("#publish").append("<p id=\"publish_title\">当前没有发布动态</p>");
+                }
                 clickevent();
             });
             callback(width);
@@ -580,10 +604,7 @@
         }else{
             $("#load").show();
         }
-        if($(".Publish").length==0){
-            $("#publish_title").remove();
-            $("#publish").append("<p id=\"publish_title\">当前没有发布动态</p>");
-        }
+
         $(".imgpreview").on("click", function () {
             var cur = $(this).attr("src");
             var url = $(this).parent(".images").attr("value");
