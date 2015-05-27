@@ -1,0 +1,68 @@
+/**
+ * Created by Administrator on 2015/5/14.
+ */
+AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
+var least_height=document.documentElement.clientHeight-217;
+$(".least_height").css({"height":""+least_height+""});
+var post = AV.Object.extend("post");
+var Shop_id, shop_name, shop_title, shop_service, shop_address, service_time, shop_range, shop_type, shop_tel, Judge_menu;
+
+var cookie=$.AMUI.utils.cookie;
+var useremail_cookie =cookie.get("wankeloginuseremail");
+var userpwd_cookie =cookie.get("wankeloginuserpwd");
+
+//if(!useremail_cookie||!userpwd_cookie){
+//    window.location.href= server + '/management_login.html?Jumpurl=management_shop.html';
+//}else{
+    load();
+//}
+//window.onload = function () {
+//    load();
+//};
+function load() {
+    $('td').remove();
+    var query = new AV.Query(post);
+    query.include("username");
+    query.find({
+        success: function (results) {
+            console.log(results);
+            var posts = new Array();
+            for (var x = 0; x < results.length; x++) {
+                var post = {
+                    id: '',
+                    content: '',
+                    usershow: '',
+                    username: '',
+                    user_show:''
+                };
+                post.id = results[x].id;
+                post.content = results[x].get('content');
+                post.usershow = results[x].get('username').get("authData").weixin.headimgurl;
+                post.username = results[x].get('username').get("nickname");
+                if(results[x].get('b_show')==1){
+                    post.user_show = results[x].get('b_show');
+                }else{
+                    post.user_show = results[x].get('b_show');
+                }
+                posts.push(post);
+            }
+            console.log(posts)
+            var $tpl = $('#posts');
+            var source = $tpl.text();
+            var template = Handlebars.compile(source);
+            var data = {posts: posts};
+            var html = template(data);
+            $tpl.before(html);
+        }
+    })
+}
+
+function del (id){
+    var query = new AV.Query(post);
+    query.get(id,{
+        success:function(post){
+            post.destroy();
+        }
+    })
+    $("."+id+"").remove();
+}
