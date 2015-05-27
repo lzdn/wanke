@@ -5,7 +5,7 @@ AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygu
 var least_height=document.documentElement.clientHeight-217;
 $(".least_height").css({"height":""+least_height+""});
 var post = AV.Object.extend("post");
-var Shop_id, shop_name, shop_title, shop_service, shop_address, service_time, shop_range, shop_type, shop_tel, Judge_menu;
+var skx=-10;
 
 var cookie=$.AMUI.utils.cookie;
 var useremail_cookie =cookie.get("wankeloginuseremail");
@@ -25,8 +25,19 @@ if(!useremail_cookie||!userpwd_cookie){
 //    load();
 //};
 function load(calback) {
+    skx+=10;
     $('td').remove();
     var query = new AV.Query(post);
+    query.count({
+        success:function(res){
+            if(res<=10){
+                $(".pagination").hide();
+            }else{
+
+            }
+        }
+    });
+    query.limit(10).skip(skx);
     query.include("username");
     query.find({
         success: function (results) {
