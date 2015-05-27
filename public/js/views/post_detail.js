@@ -43,8 +43,6 @@
     } else {
         var currentUser = AV.User.current();
         if (currentUser) {
-            var BlackList = AV.Object.extend('blacklist');
-
             loading_event()
         } else {
             $.ajax({
@@ -104,92 +102,53 @@
             })
             $(".smpublish").on("click", function () {
                 var currentUser = AV.User.current();
+                theuserid = currentUser.id;
                 var publishsay = $(this).parent().siblings(".textarea").children().val();
-                if (publishsay) {
-                    var comment = AV.Object.extend("comment");
-                    var post = AV.Object.extend("post");
-                    var relationcommentid = $(this).attr("value");
-                    var relationcommentusername = $(this).attr("username");
-                    var relationcommentcontent = $(this).attr("usersay");
-                    var relationcommentusershow = $(this).attr("usershow");
-                    var relationcommentuserid = $(this).attr("userid");
-                    console.log(relationcommentid + "$" + relationcommentusername + "$" + relationcommentcontent + "$" + relationcommentusershow)
-                    var posts = new post();
-                    posts.id = postview;
-                    var commentrelation = [];
-                    commentrelation.push({
-                        commentid: relationcommentid,
-                        commentusername: relationcommentusername,
-                        commentcontent: relationcommentcontent,
-                        commentuserid: relationcommentuserid,
-                        commentusershow: relationcommentusershow
-                    });
-                    console.log(commentrelation);
-                    var comment = new comment();
-                    comment.save({
-                        commentcontent: publishsay,
-                        commentpost: posts,
-                        commentuserid: commentuserid,
-                        commentusername: nickname,
-                        commentusershow: headUrl,
-                        commentrelation: commentrelation
-                    }, {
-                        success: function (comment) {
-                            $("textarea").val("");
-                            loadingcomment(comment);
-                            var query = new AV.Query(post);
-                            query.get(postview, {
-                                success: function (post) {
-                                    post.add("relationcomment", {id: comment.id});
-                                    post.save();
-                                },
-                                error: function (object, error) {
-                                    console.log(object);
+                var query = new AV.Query(BlackList);
+                query.find({
+                    success:function(blacklist){
+                        if(blacklist.length>0){
+                            for(var i = 0 ;i<blacklist.length;i++){
+                                if(currentUser.id==blacklist[i].get('user_id')){
+                                    alert("您已经被官方冻结，请联系官方");
+                                    blacklistid=1;
                                 }
-                            });
+                            }
+                            if(blacklistid!=1){
+                                up_smpublish(publishsay);
+                            }
+                        }else{
+                            up_smpublish(publishsay);
                         }
-                    })
-                } else {
-                    alert("你要说点什么");
-                }
+                    }
+                });
             });
-
             $("#maxpublish").on("click", function () {
                 var currentUser = AV.User.current();
+                theuserid = currentUser.id;
                 var post = AV.Object.extend("post");
                 var comment = AV.Object.extend("comment");
                 var publishsay = $(this).parent().siblings(".textarea").children().val();
-                if (publishsay) {
-                    var posts = new post();
-                    posts.id = postview;
-                    var coment = new comment();
-                    coment.save({
-                        commentcontent: publishsay,
-                        commentpost: posts,
-                        commentusername: nickname,
-                        commentuserid: commentuserid,
-                        commentusershow: headUrl
-                    }, {
-                        success: function (comment) {
-                            var query = new AV.Query(post);
-                            $("textarea").val("");
-                            loadingcomment(comment);
-                            query.get(postview, {
-                                success: function (post) {
-                                    post.add("relationcomment", {id: comment.id});
-                                    post.save();
-                                },
-                                error: function (object, error) {
-                                    console.log(object);
+                var query = new AV.Query(BlackList);
+                query.find({
+                    success:function(blacklist){
+                        if(blacklist.length>0){
+                            for(var i = 0 ;i<blacklist.length;i++){
+                                if(currentUser.id==blacklist[i].get('user_id')){
+                                    alert("您已经被官方冻结，请联系官方");
+                                    blacklistid=1;
                                 }
-                            });
+                            }
+                            if(blacklistid!=1){
+                                up_maxpublish(publishsay);
+                            }
+                        }else{
+                            up_maxpublish(publishsay);
                         }
-                    });
-                } else {
-                    alert("你要说点什么");
-                }
-            });
+                    }
+                });
 
+            });
             $(".imgpreview").on("click", function () {
                 var cur = $(this).attr("src");
                 var url = $(this).parent(".images").attr("value");
@@ -241,7 +200,6 @@
             });
         });
     }
-
     function loading(callbak) {
         var load = 0 //ject.createWithoutData('className',id);
         var currentUser = AV.User.current();
@@ -485,7 +443,6 @@
             }
         });
     }
-
     function loadingcomment(comment) {
         var times = 0;
         var newtime = new Date().getTime();
@@ -599,7 +556,6 @@
 
         })
     }
-
     function destroycomment(commentid) {
         $(".destroy" + commentid + "").remove();
         var post = AV.Object.extend("post");
@@ -787,6 +743,86 @@
                     });
                 }
             }, 100);
+        }
+    }
+    function up_smpublish(publishsay){
+        if (publishsay) {
+            var comment = AV.Object.extend("comment");
+            var post = AV.Object.extend("post");
+            var relationcommentid = $(this).attr("value");
+            var relationcommentusername = $(this).attr("username");
+            var relationcommentcontent = $(this).attr("usersay");
+            var relationcommentusershow = $(this).attr("usershow");
+            var relationcommentuserid = $(this).attr("userid");
+            console.log(relationcommentid + "$" + relationcommentusername + "$" + relationcommentcontent + "$" + relationcommentusershow)
+            var posts = new post();
+            posts.id = postview;
+            var commentrelation = [];
+            commentrelation.push({
+                commentid: relationcommentid,
+                commentusername: relationcommentusername,
+                commentcontent: relationcommentcontent,
+                commentuserid: relationcommentuserid,
+                commentusershow: relationcommentusershow
+            });
+            console.log(commentrelation);
+            var comment = new comment();
+            comment.save({
+                commentcontent: publishsay,
+                commentpost: posts,
+                commentuserid: commentuserid,
+                commentusername: nickname,
+                commentusershow: headUrl,
+                commentrelation: commentrelation
+            }, {
+                success: function (comment) {
+                    $("textarea").val("");
+                    loadingcomment(comment);
+                    var query = new AV.Query(post);
+                    query.get(postview, {
+                        success: function (post) {
+                            post.add("relationcomment", {id: comment.id});
+                            post.save();
+                        },
+                        error: function (object, error) {
+                            console.log(object);
+                        }
+                    });
+                }
+            })
+        } else {
+            alert("你要说点什么");
+        }
+    }
+    function up_maxpublish(publishsay){
+        if (publishsay) {
+            var posts = new post();
+            posts.id = postview;
+            var coment = new comment();
+            coment.save({
+                commentcontent: publishsay,
+                commentpost: posts,
+                commentusername: nickname,
+                commentuserid: commentuserid,
+                commentusershow: headUrl
+            }, {
+                success: function (comment) {
+                    var query = new AV.Query(post);
+                    $("textarea").val("");
+                    loadingcomment(comment);
+                    query.get(postview, {
+                        success: function (post) {
+                            post.add("relationcomment", {id: comment.id});
+                            post.save();
+                        },
+                        error: function (object, error) {
+                            console.log(object);
+                        }
+                    });
+                }
+            });
+        } else {
+            alert("你要说点什么");
         }
     }
 })(jQuery);
