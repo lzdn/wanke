@@ -88,7 +88,7 @@
                     <tbody>
                     <script type="text/x-handlebars-template" id="posts">
                         {{#each posts}}
-                        <tr class="{{this.id}}">
+                        <tr class="load_list" class="{{this.id}}">
                             <td><input type="hidden" value="{{this.id}}"/></td>
                             <td><span class="{{this.id}}icon {{this.post_show}} {{this.post_show}}icon am-icon-sm"></span></td>
                             <td><img src="{{this.usershow}}" width="30px" height="30px" alt=""/></td>
@@ -120,11 +120,10 @@
             </div>
         </div>
         <ul class="am-pagination am-pagination-centered">
-            <li class="pagination"><a href="#">&laquo;</a></li>
-            <li class="number_list"><a href="#">1</a></li>
+            <li id="pagination_left"><a href="#">&laquo;</a></li>
+            <li class="number_list list_1" onclick="new_load(1)"><a href="#">1</a></li>
             <li id="pagination_right" class="pagination"><a href="#">&raquo;</a></li>
         </ul>
-
     </div>
 </div>
 

@@ -31,7 +31,9 @@
         .am-icon-minus-circle {
             color: #dd514c;
         }
-
+        .am-pagination{
+            margin:0 0 10px 0;
+        }
     </style>
 </head>
 <body>
@@ -121,7 +123,11 @@
                 </table>
             </div>
         </div>
-
+        <ul class="am-pagination am-pagination-centered">
+            <li id="pagination_left"><a href="#">&laquo;</a></li>
+            <li class="number_list list_1" onclick="new_load(1)"><a href="#">1</a></li>
+            <li id="pagination_right" class="pagination"><a href="#">&raquo;</a></li>
+        </ul>
     </div>
 </div>
 
