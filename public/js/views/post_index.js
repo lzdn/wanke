@@ -153,9 +153,9 @@
                 skx = -5;
                 var tag = $("select").val().split('&')[0];
                 if (tag == "全部") {
-                    //loading(function () {
-                    //    clickevent();
-                    //});
+                    loading(function () {
+                        clickevent();
+                    });
                 } else {
                     loadtag(tag, function () {
                         clickevent();
@@ -300,6 +300,7 @@
         }
     });
     function loading(callbak) {
+        alert("load")
         var post = AV.Object.extend("post");
         var user = AV.Object.extend("User");
         var query = new AV.Query(post);
@@ -555,10 +556,10 @@
             $("hr").remove();
             $(".Publish").remove();
             skx = -5;
-            loading(function () {
-                clickevent();
-                callback(width);
-            });
+            //loading(function () {
+            //    clickevent();
+            //    callback(width);
+            //});
         } else {
             $("hr").remove();
             $(".Publish").remove();
