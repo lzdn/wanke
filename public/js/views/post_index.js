@@ -138,11 +138,11 @@
         }else{
             $("#load").show();
         }
-        //selectchange(function (width) {
-        //    $(".tagsearch").css("width", "" + width + "px");
-        //    var iconleft = width - 20;
-        //    $(" .am-selected-icon").css("left", "" + iconleft + "px")
-        //})
+        selectchange(function (width) {
+            $(".tagsearch").css("width", "" + width + "px");
+            var iconleft = width - 20;
+            $(" .am-selected-icon").css("left", "" + iconleft + "px")
+        })
     })
     $(".am-form-field").keydown(function () {
         setTimeout(function () {
@@ -300,7 +300,6 @@
         }
     });
     function loading(callbak) {
-        alert("load")
         var post = AV.Object.extend("post");
         var user = AV.Object.extend("User");
         var query = new AV.Query(post);
