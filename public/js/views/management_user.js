@@ -15,10 +15,10 @@ if(!useremail_cookie||!userpwd_cookie){
     window.location.href= server + '/management_login.html?Jumpurl=management_shop.html';
 }else{
 load(function(){
-    $(".am-icon-minus-circleicon").css("color","#3bb4f2");
-    $(".am-icon-external-link-squareicon").css("color","#dd514c");
-    $(".showam-icon-external-link-square").hide();
-    $(".hideam-icon-minus-circle").hide();
+    $(".am-icon-checkicon").css("color","#3bb4f2");
+    $(".am-icon-closeicon").css("color","#dd514c");
+    $(".showam-icon-check").hide();
+    $(".hideam-icon-close").hide();
 });
 }
 //window.onload = function () {
@@ -44,17 +44,15 @@ function load(calback) {
                             user.id = results[x].id;
                             user.username = results[x].get('nickname');
                             user.usershow = results[x].get('authData').weixin.headimgurl;
-                            user.buser_show = "am-icon-external-link-square";
+                            user.buser_show = "am-icon-check";
 
                             if (blacklist.length > 0) {
                                 for (var y = 0; y < blacklist.length; y++) {
                                     if (results[x].id == blacklist[y].get('user_id')) {
-                                        user.buser_show = "am-icon-minus-circle";
-                                        users.push(user);
-                                    } else {
-                                        users.push(user);
+                                        user.buser_show = "am-icon-close";
                                     }
                                 }
+                                users.push(user);
                             } else {
                                 users.push(user);
                             }
@@ -85,7 +83,7 @@ function busershow(id, bshow) {
             success: function (blacklist) {
                 $("."+id+"show").show();
                 $("."+id+"hide").hide();
-                $("."+id+"icon").removeClass("am-icon-external-link-square").addClass("am-icon-minus-circle").css("color","#dd514c");
+                $("."+id+"icon").removeClass("am-icon-check").addClass("am-icon-close").css("color","#dd514c");
                // load();
             }, error: function (object, error) {
 
@@ -101,7 +99,7 @@ function busershow(id, bshow) {
                         // The object was deleted from the LeanCloud.
                         $("."+id+"show").hide();
                         $("."+id+"hide").show();
-                        $("."+id+"icon").removeClass("am-icon-minus-circle").addClass("am-icon-external-link-square").css("color","#3bb4f2");
+                        $("."+id+"icon").removeClass("am-icon-close").addClass("am-icon-check").css("color","#3bb4f2");
                       //  load();
                     },
                     error: function (object, error) {

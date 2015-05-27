@@ -97,7 +97,7 @@
                         {{#each users}}
                         <tr>
                             <td><input type="hidden" value="{{this.id}}"/></td>
-                            <td><span class="{{this.id}} {{this.id}}icon {{this.buser_show}} am-icon-sm"></span></td>
+                            <td><span class="{{this.id}} {{this.id}}icon {{this.buser_show}} {{this.buser_show}}icon am-icon-sm"></span></td>
                             <td><img src="{{this.usershow}}" width="30px" height="30px" alt=""/></td>
                             <td><a href="#{{this.username}}" id="{{this.username}}">{{this.username}}</a></td>
                             <td>
@@ -105,11 +105,11 @@
                                     <div class="am-btn-group am-btn-group-xs">
                                         <button class="am-btn am-btn-default am-text-secondary {{this.id}}show show{{this.buser_show}}"
                                                 onclick="busershow('{{this.id}}','1')"><span
-                                                class="am-icon-external-link-square"></span> 解除
+                                                class="am-icon-check"></span> 解除
                                         </button>
                                         <button class="am-btn am-btn-default am-btn-xs am-text-danger {{this.id}}hide hide{{this.buser_show}}"
                                                 onclick="busershow('{{this.id}}','0')">
-                                            <span class="am-icon-minus-circle"></span> 冻结
+                                            <span class="am-icon-close"></span> 冻结
                                         </button>
                                     </div>
                                 </div>

@@ -33,8 +33,10 @@ function load(calback) {
             if(res<=10){
                 $(".pagination").hide();
             }else{
-               var length = Math.ceil(res/10);
-                alert(length);
+               var length = Math.ceil(res/2);
+                for(var i = 1;i<length;i++){
+                    $("<li class=\"number_list\"><a href=\"#\">"+(i+1)+"</a></li>").insertBefore($("#pagination_right"));
+                }
             }
         }
     });
