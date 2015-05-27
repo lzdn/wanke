@@ -14,18 +14,22 @@ var userpwd_cookie =cookie.get("wankeloginuserpwd");
 //if(!useremail_cookie||!userpwd_cookie){
 //    window.location.href= server + '/management_login.html?Jumpurl=management_shop.html';
 //}else{
-    load();
+    load(function(){
+        $(".am-icon-eyeicon").css("color","#3bb4f2");
+        $(".am-icon-eye-slashicon").css("color","#dd514c");
+        $(".showam-icon-eye").hide();
+        $(".hideam-icon-eye-slash").hide();
+    });
 //}
 //window.onload = function () {
 //    load();
 //};
-function load() {
+function load(calback) {
     $('td').remove();
     var query = new AV.Query(post);
     query.include("username");
     query.find({
         success: function (results) {
-            console.log(results);
             var posts = new Array();
             for (var x = 0; x < results.length; x++) {
                 var post = {
@@ -33,36 +37,46 @@ function load() {
                     content: '',
                     usershow: '',
                     username: '',
-                    user_show:''
+                    post_show:''
                 };
                 post.id = results[x].id;
                 post.content = results[x].get('content');
                 post.usershow = results[x].get('username').get("authData").weixin.headimgurl;
                 post.username = results[x].get('username').get("nickname");
                 if(results[x].get('b_show')==1){
-                    post.user_show = results[x].get('b_show');
+                    post.post_show = "am-icon-eye";
                 }else{
-                    post.user_show = results[x].get('b_show');
+                    post.post_show = "am-icon-eye-slash";
                 }
                 posts.push(post);
             }
-            console.log(posts)
             var $tpl = $('#posts');
             var source = $tpl.text();
             var template = Handlebars.compile(source);
             var data = {posts: posts};
             var html = template(data);
             $tpl.before(html);
+            calback();
         }
     })
+
 }
 
-function del (id){
+function post_show (id,key){
     var query = new AV.Query(post);
     query.get(id,{
         success:function(post){
-            post.destroy();
+            post.set("b_show",key);
+            post.save();
         }
     })
-    $("."+id+"").remove();
+    if(key==0){
+        $("."+id+"show").show();
+        $("."+id+"hide").hide();
+        $("."+id+"icon").removeClass("am-icon-eye").addClass("am-icon-eye-slash").css("color","#dd514c");
+    }else{
+        $("."+id+"show").hide();
+        $("."+id+"hide").show();
+        $("."+id+"icon").removeClass("am-icon-eye-slash").addClass("am-icon-eye").css("color","#3bb4f2");
+    }
 }

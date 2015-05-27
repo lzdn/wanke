@@ -323,6 +323,7 @@
                 query.include("tagkey");
                 query.include("relationimgs");
                 query.include("username");
+                query.equalTo("b_show","1");
                 query.find({
                     success: function (arry) {
                         var times = 0;
@@ -416,6 +417,7 @@
                 var tag = new tags();
                 tag.id = tagid;
                 query.equalTo("tagkey", tag);
+                query.equalTo("b_show","1");
                 query.find({
                     success: function (arry) {
                         var times = 0;

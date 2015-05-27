@@ -87,20 +87,25 @@
                         {{#each posts}}
                         <tr class="{{this.id}}">
                             <td><input type="hidden" value="{{this.id}}"/></td>
-                            <td><span class={{this.user_show}}></span></td>
+                            <td><span class="{{this.id}}icon {{this.post_show}} {{this.post_show}}icon am-icon-sm"></span></td>
                             <td><img src="{{this.usershow}}" width="30px" height="30px" alt=""/></td>
                             <td><a href="#">{{this.username}}</a></td>
                             <td>{{this.content}}</td>
                             <td>
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
-                                        <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
-                                                onclick="del('{{this.id}}')">
-                                            <span class="am-icon-trash-o"></span> 显示
+                                        <button class="{{this.id}}show am-btn am-btn-default am-text-secondary show{{this.post_show}}"
+                                                onclick="post_show('{{this.id}}','1')"><span
+                                                class="am-icon-eye"></span> 显示
                                         </button>
-                                        <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
-                                            <span class="am-icon-trash-o"></span>隐藏
+                                        <button class="{{this.id}}hide am-btn am-btn-default am-text-danger am-text-secondary hide{{this.post_show}}"
+                                                onclick="post_show('{{this.id}}','0')"><span
+                                                class="am-icon-eye-slash"></span> 隐藏
                                         </button>
+                                        <!--<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only hide{{this.usershow}}"-->
+                                                <!--onclick="post_show('{{this.id}}','0')">-->
+                                            <!--<span class="am-icon-eye-slash"></span>隐藏-->
+                                        <!--</button>-->
                                     </div>
                                 </div>
                             </td>
