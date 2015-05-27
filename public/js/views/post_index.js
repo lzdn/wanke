@@ -14,6 +14,7 @@
         code = userlog.split("&")[0];
     }
         if (code != "") {
+            alert("zheli youwenti")
             $.post(server + "/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
                 nickname = res.nickname;
@@ -31,6 +32,7 @@
                             }
                         });
                         skx = -5;
+                        alert("haihuizaiload")
                         loading(function () {
                             $("#users").on("click", function () {
                                 window.location.href = "user_detail.html?code=";
