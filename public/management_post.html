@@ -83,12 +83,13 @@
                         <th class="table-title">用户</th>
                         <th class="table-title">内容</th>
                         <th class="table-set">操作</th>
+                        <!--<th class="table-set">删除</th>-->
                     </tr>
                     </thead>
                     <tbody>
                     <script type="text/x-handlebars-template" id="posts">
                         {{#each posts}}
-                        <tr class="load_list" class="{{this.id}}">
+                        <tr class="load_list list_{{this.id}}">
                             <td><input type="hidden" value="{{this.id}}"/></td>
                             <td><span class="{{this.id}}icon {{this.post_show}} {{this.post_show}}icon am-icon-sm"></span></td>
                             <td><img src="{{this.usershow}}" width="30px" height="30px" alt=""/></td>
@@ -105,13 +106,24 @@
                                                 onclick="post_show('{{this.id}}','0')"><span
                                                 class="am-icon-eye-slash"></span> 隐藏
                                         </button>
-                                        <!--<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only hide{{this.usershow}}"-->
-                                                <!--onclick="post_show('{{this.id}}','0')">-->
-                                            <!--<span class="am-icon-eye-slash"></span>隐藏-->
-                                        <!--</button>-->
+                                        <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+                                                onclick="del('{{this.id}}')">
+                                            <span class="am-icon-trash-o"></span> 删除
+                                        </button>
                                     </div>
                                 </div>
                             </td>
+                            <!--<td>-->
+                                <!--<div class="am-btn-toolbar">-->
+                                    <!--<div class="am-btn-group am-btn-group-xs">-->
+                                        <!--<button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"-->
+                                                <!--onclick="del('{{this.id}}')">-->
+                                            <!--<span class="am-icon-trash-o"></span> 删除-->
+                                        <!--</button>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</td>-->
+                        </tr>
                         </tr>
                         {{/each}}
                     </script>

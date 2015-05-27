@@ -12,9 +12,9 @@ var cookie = $.AMUI.utils.cookie;
 var useremail_cookie = cookie.get("wankeloginuseremail");
 var userpwd_cookie = cookie.get("wankeloginuserpwd");
 
-if(!useremail_cookie||!userpwd_cookie){
-    window.location.href= server + '/management_login.html?Jumpurl=management_shop.html';
-}else{
+//if(!useremail_cookie||!userpwd_cookie){
+//    window.location.href= server + '/management_login.html?Jumpurl=management_shop.html';
+//}else{
 load(function () {
     $(".am-icon-eyeicon").css("color", "#3bb4f2");
     $(".am-icon-eye-slashicon").css("color", "#dd514c");
@@ -27,7 +27,7 @@ load(function () {
     $(".list_" + (1 - 1) + "").show();
     $(".list_" + (1 - 2) + "").show();
 },0);
-}
+//}
 //window.onload = function () {
 //    load();
 //};
@@ -139,6 +139,15 @@ function post_show(id, key) {
         $("." + id + "hide").show();
         $("." + id + "icon").removeClass("am-icon-eye-slash").addClass("am-icon-eye").css("color", "#3bb4f2");
     }
+}
+function del(id){
+    var query = new AV.Query(post);
+    query.get(id, {
+        success: function (post) {
+            post.destroy();
+            $(".list_"+id+"").remove();
+        }
+    })
 }
 
 function new_load(key) {
