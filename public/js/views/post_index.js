@@ -41,8 +41,24 @@
                             clickevent();
                             $("#foots").on("click", function () {
                                 var currentUser = AV.User.current();
-                                if (currentUser) {
-                                    window.location.href = "post_save.html?code=";
+                                if (currentUser) {  
+                                    var BlackList = AV.Object.extend('blacklist');
+                                    var query = new AV.Query(BlackList);
+                                    query.find({
+                                        success:function(blacklist){
+                                            if(blacklist.length>0){
+                                                for(var i = 0 ;i<blacklist.length;i++){
+                                                    if(currentUser.id==blacklist[i].get('user_id')){
+                                                        alert("您的账户已被冻结，如有疑问请联系官方");
+                                                    }else{
+                                                        window.location.href = "post_save.html?code=";
+                                                    }
+                                                }
+                                            }else{
+                                                window.location.href = "post_save.html?code=";
+                                            }
+                                        }
+                                    });
                                 } else {
                                     $.post(server + "/weixin/getAuthUrl", {page: server + "/post_save.html"}, function (res) {
                                         window.location.href = res.authUrl;
@@ -276,17 +292,6 @@
             window.location.href = "user_detail.html?code=";
         });
         clickevent();
-        $("#foots").on("click", function () {
-            var currentUser = AV.User.current();
-            if (currentUser) {
-                window.location.href = "post_save.html?code=";
-            } else {
-                $.post(server + "/weixin/getAuthUrl", {page: server + "/post_save.html"}, function (res) {
-                    window.location.href = res.authUrl;
-                })
-            }
-        });
-
     });
     $(window).scroll(function () {
         var htmlHeight = document.body.scrollHeight || document.documentElement.scrollHeight;
