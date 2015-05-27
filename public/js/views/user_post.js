@@ -115,6 +115,7 @@
             success: function (res) {
                 var query = new AV.Query(post);
                 query.equalTo("username", res[0]);
+                query.equalTo("b_show","1");
                 query.count({
                     success: function (skip) {
                         contentlength=skip;
@@ -132,6 +133,7 @@
                         query.include("imgs")
                         query.include("username")
                         query.equalTo("username", res[0]);
+                        query.equalTo("b_show","1");
                         query.find({
                             success: function (arry) {
                                 var times = 0;

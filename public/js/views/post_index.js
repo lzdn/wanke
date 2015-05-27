@@ -1,6 +1,11 @@
 
     AV.initialize("f7r02mj6nyjeocgqv7psbb31mxy2hdt22zp2mcyckpkz7ll8", "blq4yetdf0ygukc7fgfogp3npz33s2t2cjm8l5mns5gf9w3z");
     loadwx();
+    var skx = -5;
+    var bload = 1;
+    var length;
+    var width = "";
+    var tagname = "全部"
     var saveurl = window.location.href;
     var code = "";
     if (saveurl.split("=").length > 2) {
@@ -26,14 +31,8 @@
                         });
                         skx = -5;
                         loading(function () {
-                            var adoremove = document.getElementsByClassName("doremove");
                             if($(".Publish").length==0){
                                 $("#publish").append("<p id=\"publish_title\">当前没有发布动态</p>");
-                            }
-                            if (adoremove.length < 5) {
-                                $("#load").hide();
-                            }else{
-                                $("#load").show();
                             }
                             $("#users").on("click", function () {
                                 window.location.href = "user_detail.html?code=";
@@ -103,13 +102,6 @@
             }
         }
 
-
-
-    var skx = -5;
-    var bload = 1;
-    var length;
-    var width = "";
-    var tagname = "全部"
     $("select").change(function () {
         $(".Delete").empty();
         $(".am-form-field").val("");
@@ -323,6 +315,7 @@
                 query.include("tagkey");
                 query.include("relationimgs");
                 query.include("username");
+                query.equalTo("b_show","1");
                 query.find({
                     success: function (arry) {
                         var times = 0;
@@ -416,6 +409,7 @@
                 var tag = new tags();
                 tag.id = tagid;
                 query.equalTo("tagkey", tag);
+                query.equalTo("b_show","1");
                 query.find({
                     success: function (arry) {
                         var times = 0;
@@ -575,6 +569,12 @@
     }
 
     function clickevent() {
+        var adoremove = document.getElementsByClassName("doremove");
+        if (adoremove.length < 5) {
+            $("#load").hide();
+        }else{
+            $("#load").show();
+        }
         $(".imgpreview").on("click", function () {
             var cur = $(this).attr("src");
             var url = $(this).parent(".images").attr("value");
