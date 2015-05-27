@@ -130,6 +130,7 @@
         }
 
     $("select").change(function () {
+        alert("woyoubing");
         $(".Delete").empty();
         $(".am-form-field").val("");
         var adoremove = document.getElementsByClassName("doremove");
