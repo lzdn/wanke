@@ -13,63 +13,59 @@
         userlog = window.location.search.split('=')[1];
         code = userlog.split("&")[0];
     }
-        if (code != "") {
-            $.post(server + "/weixin/userSignUp", {code: code}, function (res) {
-                queryobject = res;
-                nickname = res.nickname;
-                AV.User._logInWith("weixin", {
-                    "authData": res,
-                    success: function (user) {
-                        userid = user.id;
-                        commentuserid = userid
-                        queryobject = user.get("authData");
-                        var query = new AV.Query(AV.User);
-                        query.get(userid, {
-                            success: function (user) {
-                                user.set('nickname', nickname);
-                                user.save()
-                            }
-                        });
-                        skx = -5;
-                        loading(function () {
-                            $("#users").on("click", function () {
-                                window.location.href = "user_detail.html?code=";
-                            });
-                            clickevent();
-                            $("#foots").on("click", function () {
-                                var currentUser = AV.User.current();
-                                if (currentUser) {
-                                    var BlackList = AV.Object.extend('blacklist');
-                                    var query = new AV.Query(BlackList);
-                                    query.find({
-                                        success:function(blacklist){
-                                            if(blacklist.length>0){
-                                                for(var i = 0 ;i<blacklist.length;i++){
-                                                    if(currentUser.id==blacklist[i].get('user_id')){
-                                                        alert("您的账户已被冻结，如有疑问请联系官方");
-                                                        blacklistid=1
-                                                    }
-                                                }
-                                                if(blacklistid!=1){
-                                                    window.location.href = "post_save.html?code=";
-                                                }
-                                            }else{
-                                                window.location.href = "post_save.html?code=";
-                                            }
-                                        }
-                                    });
-                                } else {
-                                    $.post(server + "/weixin/getAuthUrl", {page: server + "/post_save.html"}, function (res) {
-                                        window.location.href = res.authUrl;
-                                    })
-                                }
-                            });
-
-                        });
-                    }
-                })
-            });
-        }else{
+        //if (code != "") {
+        //    $.post(server + "/weixin/userSignUp", {code: code}, function (res) {
+        //        queryobject = res;
+        //        nickname = res.nickname;
+        //        AV.User._logInWith("weixin", {
+        //            "authData": res,
+        //            success: function (user) {
+        //                userid = user.id;
+        //                commentuserid = userid
+        //                queryobject = user.get("authData");
+        //                var query = new AV.Query(AV.User);
+        //                query.get(userid, {
+        //                    success: function (user) {
+        //                        user.set('nickname', nickname);
+        //                        user.save()
+        //                    }
+        //                });
+        //                skx = -5;
+        //                loading(function () {
+        //                    $("#users").on("click", function () {
+        //                        window.location.href = "user_detail.html?code=";
+        //                    });
+        //                    clickevent();
+        //                    $("#foots").on("click", function () {
+        //                        var currentUser = AV.User.current();
+        //                        if (currentUser) {
+        //                            var BlackList = AV.Object.extend('blacklist');
+        //                            var query = new AV.Query(BlackList);
+        //                            query.find({
+        //                                success:function(blacklist){
+        //                                    if(blacklist.length>0){
+        //                                        for(var i = 0 ;i<blacklist.length;i++){
+        //                                            if(currentUser.id==blacklist[i].get('user_id')){
+        //                                                alert("您的账户已被冻结，如有疑问请联系官方");
+        //                                                blacklistid=1
+        //                                            }
+        //                                        }
+        //                                        if(blacklistid!=1){
+        //                                            window.location.href = "post_save.html?code=";
+        //                                        }
+        //                                    }else{
+        //                                        window.location.href = "post_save.html?code=";
+        //                                    }
+        //                                }
+        //                            });
+        //                        }
+        //                    });
+        //
+        //                });
+        //            }
+        //        })
+        //    });
+        //}else{
             var currentUser = AV.User.current();
             if (currentUser) {
                 skx = -5;
@@ -131,7 +127,7 @@
                     }
                 });
             }
-        }
+        //}
 
     $("select").change(function () {
         $(".Delete").empty();
