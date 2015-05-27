@@ -38,6 +38,12 @@
                                 $("#publish_title").remove();
                                 $("#publish").append("<p id=\"publish_title\">当前没有发布动态</p>");
                             }
+                            var adoremove = document.getElementsByClassName("doremove");
+                            if (adoremove.length < 5) {
+                                $("#load").hide();
+                            }else{
+                                $("#load").show();
+                            }
                             $("#users").on("click", function () {
                                 window.location.href = "user_detail.html?code=";
                             });
@@ -587,10 +593,6 @@
             $(".Publish").remove();
             skx = -5;
             loadtag(tag, function () {
-                if($(".Publish").length==0){
-                    $("#publish_title").remove();
-                    $("#publish").append("<p id=\"publish_title\">当前没有发布动态</p>");
-                }
                 clickevent();
             });
             callback(width);
@@ -604,7 +606,6 @@
         }else{
             $("#load").show();
         }
-
         $(".imgpreview").on("click", function () {
             var cur = $(this).attr("src");
             var url = $(this).parent(".images").attr("value");
