@@ -287,9 +287,9 @@
             var tag = $("select").val().split('&')[0];
             if (bload != 0) {
                 if (tag == "全部") {
-                    loading(function () {
-                        clickevent();
-                    });
+                    //loading(function () {
+                    //    clickevent();
+                    //});
                 } else {
                     loadtag(tag, function () {
                         clickevent();
