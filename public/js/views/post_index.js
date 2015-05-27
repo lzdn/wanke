@@ -32,7 +32,6 @@
                         });
                         skx = -5;
                         loading(function () {
-                            alert("asd")
                             $("#users").on("click", function () {
                                 window.location.href = "user_detail.html?code=";
                             });
@@ -71,7 +70,6 @@
             if (currentUser) {
                 skx = -5;
                 loading(function () {
-                    alert("qwe")
                     var adoremove = document.getElementsByClassName("doremove");
                   if (adoremove.length < 5) {
                         $("#load").hide();
