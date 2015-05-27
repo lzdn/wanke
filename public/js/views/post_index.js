@@ -592,6 +592,7 @@
         }else{
             $("#load").show();
         }
+        $("#publish_title").remove();
         if($(".Publish").length==0){
             $("#publish").append("<p id=\"publish_title\">当前没有发布动态</p>");
         }
