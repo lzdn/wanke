@@ -11,15 +11,20 @@ var cookie = $.AMUI.utils.cookie;
 var useremail_cookie = cookie.get("wankeloginuseremail");
 var userpwd_cookie = cookie.get("wankeloginuserpwd");
 
-//if(!useremail_cookie||!userpwd_cookie){
-//    window.location.href= server + '/management_login.html?Jumpurl=management_shop.html';
-//}else{
-load();
-//}
+if(!useremail_cookie||!userpwd_cookie){
+    window.location.href= server + '/management_login.html?Jumpurl=management_shop.html';
+}else{
+load(function(){
+    $(".am-icon-minus-circleicon").css("color","#3bb4f2");
+    $(".am-icon-external-link-squareicon").css("color","#dd514c");
+    $(".showam-icon-external-link-square").hide();
+    $(".hideam-icon-minus-circle").hide();
+});
+}
 //window.onload = function () {
 //    load();
 //};
-function load() {
+function load(calback) {
     $('td').remove();
     var query = new AV.Query(user);
     query.find({
@@ -61,6 +66,7 @@ function load() {
                         var data = {users: users};
                         var html = template(data);
                         $tpl.before(html);
+                        calback();
                     }
                 }
             );
@@ -77,7 +83,10 @@ function busershow(id, bshow) {
         blacklist.set('user_id', id);
         blacklist.save(null, {
             success: function (blacklist) {
-                load();
+                $("."+id+"show").show();
+                $("."+id+"hide").hide();
+                $("."+id+"icon").removeClass("am-icon-external-link-square").addClass("am-icon-minus-circle").css("color","#dd514c");
+               // load();
             }, error: function (object, error) {
 
             }
@@ -90,7 +99,10 @@ function busershow(id, bshow) {
                 users[0].destroy({
                     success: function (user) {
                         // The object was deleted from the LeanCloud.
-                        load();
+                        $("."+id+"show").hide();
+                        $("."+id+"hide").show();
+                        $("."+id+"icon").removeClass("am-icon-minus-circle").addClass("am-icon-external-link-square").css("color","#3bb4f2");
+                      //  load();
                     },
                     error: function (object, error) {
                         // The delete failed.

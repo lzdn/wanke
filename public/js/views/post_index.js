@@ -41,7 +41,7 @@
                             clickevent();
                             $("#foots").on("click", function () {
                                 var currentUser = AV.User.current();
-                                if (currentUser) {  
+                                if (currentUser) {
                                     var BlackList = AV.Object.extend('blacklist');
                                     var query = new AV.Query(BlackList);
                                     query.find({
