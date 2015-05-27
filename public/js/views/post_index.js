@@ -14,7 +14,6 @@
         code = userlog.split("&")[0];
     }
         if (code != "") {
-            alert("zheli youwenti")
             $.post(server + "/weixin/userSignUp", {code: code}, function (res) {
                 queryobject = res;
                 nickname = res.nickname;
@@ -32,7 +31,6 @@
                             }
                         });
                         skx = -5;
-                        alert("haihuizaiload")
                         loading(function () {
                             $("#users").on("click", function () {
                                 window.location.href = "user_detail.html?code=";
@@ -70,7 +68,6 @@
         }else{
             var currentUser = AV.User.current();
             if (currentUser) {
-                alert("shizhelicuowu??")
                 skx = -5;
                 loading(function () {
                     var adoremove = document.getElementsByClassName("doremove");
@@ -303,7 +300,6 @@
         }
     });
     function loading(callbak) {
-        alert("haishiload");
         var post = AV.Object.extend("post");
         var user = AV.Object.extend("User");
         var query = new AV.Query(post);
