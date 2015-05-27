@@ -345,6 +345,9 @@
                         var posts = [];
                         var imgurls = [];
                         var imgpattern = "";
+                        if(arry.length==0&&skx==0){
+                            $("#publish").append("<p id=\"publish_title\">当前没有发布动态</p>");
+                        }
                         for (var i = 0; i < arry.length; i++) {
                             var object = arry[i];
                             var imgs = object.get('relationimgs');
