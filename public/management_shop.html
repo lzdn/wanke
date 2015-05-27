@@ -36,11 +36,14 @@
 <div class="am-cf admin-main">
     <!-- sidebar start -->
     <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
-            <ul class="am-list admin-sidebar-list">
-                <li><a href="management_shop.html"><span class="am-icon-cutlery" style="font-size: 18px;"></span> 易生活</a></li>
-                <li><a href="management_post.html"><span class="am-icon-users"></span> 邻里圈</a></li>
-                <li><a href="management_user.html"><span class="am-icon-user"  style="font-size: 20px;"></span> 用户管理</a></li>
-                <li><a href="management_address.html"><span class="am-icon-map-marker" style="font-size: 22px;"></span> 小区更改</a></li>
+        <ul class="am-list admin-sidebar-list">
+            <li><a href="management_shop.html"><span class="am-icon-cutlery" style="font-size: 18px;"></span> 易生活</a>
+            </li>
+            <li><a href="management_post.html"><span class="am-icon-users"></span> 邻里圈</a></li>
+            <li><a href="management_user.html"><span class="am-icon-user" style="font-size: 20px;"></span> 用户管理</a></li>
+            <li><a href="management_address.html"><span class="am-icon-map-marker" style="font-size: 22px;"></span> 小区更改</a>
+            </li>
+        </ul>
     </div>
     <!-- sidebar end -->
 
@@ -88,7 +91,8 @@
                         <tr>
                             <td><input type="hidden" value="{{this.id}}"/></td>
                             <td style="max-width:100px"><a href="#">{{this.shopname}}</a></td>
-                            <td style="max-width:100px"><img src="{{this.logo}}" width="30px" height="30px" alt=""/></td>
+                            <td style="max-width:100px"><img src="{{this.logo}}" width="30px" height="30px" alt=""/>
+                            </td>
                             <td style="max-width:160px">{{this.shopservice}}</td>
                             <td style="max-width:150px">{{this.shopaddress}}</td>
                             <td style="max-width:100px">{{this.servicetime}}</td>
@@ -99,7 +103,8 @@
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
                                         <button class="am-btn am-btn-default am-btn-xs am-text-secondary"
-                                                onclick="edit('{{this.id}}'),Judge('{{this.id}}')" data-am-modal="{target: '#keyword-modal', closeViaDimmer: 0, width: 600, height: 600}"><span
+                                                onclick="edit('{{this.id}}'),Judge('{{this.id}}')"
+                                                data-am-modal="{target: '#keyword-modal', closeViaDimmer: 0, width: 600, height: 600}"><span
                                                 class="am-icon-pencil-square-o"></span> 编辑
                                         </button>
                                         <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
@@ -141,15 +146,15 @@
                     <label for="lbl_logo" class="am-u-sm-3 am-form-label">类型</label>
 
                     <div class="am-u-sm-9">
-                            <select id="lbl_logo" required>
-                                <option value="imgs/洁.png">家政保洁</option>
-                                <option value="imgs/闲.png">休闲娱乐</option>
-                                <option value="imgs/美.png">美容美体</option>
-                                <option value="imgs/食.png">健康美食</option>
-                                <option value="imgs/物.png">物业管理</option>
-                                <option value="imgs/诉.PNG">诉</option>
-                            </select>
-                            <span class="am-form-caret"></span>
+                        <select id="lbl_logo" required>
+                            <option value="imgs/洁.png">家政保洁</option>
+                            <option value="imgs/闲.png">休闲娱乐</option>
+                            <option value="imgs/美.png">美容美体</option>
+                            <option value="imgs/食.png">健康美食</option>
+                            <option value="imgs/物.png">物业管理</option>
+                            <option value="imgs/诉.PNG">诉</option>
+                        </select>
+                        <span class="am-form-caret"></span>
                     </div>
                 </div>
 
@@ -185,18 +190,19 @@
                 </div>
 
                 <div class="am-form-group am-form-group-sm">
-                <label for="lbl_type" class="am-u-sm-3 am-form-label">隶属类型</label>
+                    <label for="lbl_type" class="am-u-sm-3 am-form-label">隶属类型</label>
 
-                <div class="am-u-sm-9">
+                    <div class="am-u-sm-9">
                         <select id="lbl_type" required>
                             <option value="周边小店">周边小店</option>
                             <option value="物业管理">物业管理</option>
                         </select>
                         <span class="am-form-caret"></span>
-                </div>
+                    </div>
                 </div>
                 <div class="am-form-group am-form-group-sm">
                     <label for="shop_tel" class="am-u-sm-3 am-form-label">联系电话</label>
+
                     <div class="am-u-sm-9">
                         <input class="form_input" type="number" id="shop_tel" class="am-form-field">
                     </div>
@@ -204,7 +210,8 @@
                 <div class="am-form-group am-form-group-sm">
                     <div class="am-u-sm-12">
                         <input class="form_input" type="hidden" id="hd_keyword_id" value=""/>
-                        <button type="button" class="am-btn am-btn-default" onclick="save()" data-am-modal-close>保存</button>
+                        <button type="button" class="am-btn am-btn-default" onclick="save()" data-am-modal-close>保存
+                        </button>
                     </div>
                 </div>
             </form>
