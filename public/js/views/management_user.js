@@ -6,7 +6,7 @@ var least_height = document.documentElement.clientHeight - 269;
 $(".least_height").css({"height": "" + least_height + ""});
 var user = AV.Object.extend("User");
 var number = 7;
-var max_number;
+var max_number=0;
 var skx = -number;
 var cookie = $.AMUI.utils.cookie;
 var useremail_cookie = cookie.get("wankeloginuseremail");
@@ -103,7 +103,7 @@ function load(calback,val) {
         query.count({
             success: function (res) {
                 if (res <= number) {
-                    $(".pagination").hide();
+                    //$(".pagination").hide();
                 } else {
                     max_number = Math.ceil(res / number) * number - number;
                     var length = Math.ceil(res / number);
@@ -174,7 +174,7 @@ $("#pagination_left").on("click", function () {
     }
 })
 $("#pagination_right").on("click", function () {
-    if (skx >= max_number) {
+    if (skx >= max_number||max_number==0) {
 
     } else {
         var nu_key = (skx + number * 2) / number
