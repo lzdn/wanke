@@ -11,7 +11,7 @@ var skx = -number;
 var cookie = $.AMUI.utils.cookie;
 var useremail_cookie = cookie.get("wankeloginuseremail");
 var userpwd_cookie = cookie.get("wankeloginuserpwd");
-
+//
 if(!useremail_cookie||!userpwd_cookie){
     window.location.href= server + '/management_login.html?Jumpurl=management_shop.html';
 }else{
@@ -88,6 +88,14 @@ $(".am-input-group-label").on("click", function () {
 
             }
         });
+    }else{
+            skx -= number;
+            load(function () {
+                $(".am-icon-checkicon").css("color","#3bb4f2");
+                $(".am-icon-closeicon").css("color","#dd514c");
+                $(".showam-icon-check").hide();
+                $(".hideam-icon-close").hide();
+            },1);
     }
 });
 

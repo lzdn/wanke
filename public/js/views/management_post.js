@@ -97,6 +97,14 @@ $(".am-input-group-label").on("click", function () {
                 }
             }
         });
+    }else{
+        skx -= number;
+        load(function () {
+            $(".am-icon-eyeicon").css("color", "#3bb4f2");
+            $(".am-icon-eye-slashicon").css("color", "#dd514c");
+            $(".showam-icon-eye").hide();
+            $(".hideam-icon-eye-slash").hide();
+        },1);
     }
 });
 
