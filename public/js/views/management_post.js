@@ -108,7 +108,7 @@ function load(calback,val) {
         query.count({
             success: function (res) {
                 if (res <= number) {
-                    $(".pagination").hide();
+                   // $(".pagination").hide();
                 } else {
                     max_number = Math.ceil(res / number) * number - number;
                     var length = Math.ceil(res / number);
