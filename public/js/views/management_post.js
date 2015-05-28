@@ -21,11 +21,7 @@ load(function () {
     $(".showam-icon-eye").hide();
     $(".hideam-icon-eye-slash").hide();
     $(".number_list").hide().children().css("background", "none");
-    $(".list_1").show().children().css("background", "#f37b1d");
-    $(".list_" + (1 + 1) + "").show();
-    $(".list_" + (1 + 2) + "").show();
-    $(".list_" + (1 - 1) + "").show();
-    $(".list_" + (1 - 2) + "").show();
+    flip_up(1,((max_number/number)+1));
 },0);
 }
 //window.onload = function () {
@@ -166,11 +162,7 @@ $("#pagination_left").on("click", function () {
         skx -= number * 2;
         var nu_key = (skx + number * 2) / number
         $(".number_list").hide().children().css("background", "none");
-        $(".list_" + nu_key + "").show().children().css("background", "#f37b1d");
-        $(".list_" + (nu_key + 1) + "").show();
-        $(".list_" + (nu_key + 2) + "").show();
-        $(".list_" + (nu_key - 1) + "").show();
-        $(".list_" + (nu_key - 2) + "").show();
+        flip_up(nu_key,((max_number/number)+1));
         load(function () {
             $(".am-icon-eyeicon").css("color", "#3bb4f2");
             $(".am-icon-eye-slashicon").css("color", "#dd514c");
@@ -185,11 +177,7 @@ $("#pagination_right").on("click", function () {
     } else {
         var nu_key = (skx + number * 2) / number
         $(".number_list").hide().children().css("background", "none");
-        $(".list_" + nu_key + "").show().children().css("background", "#f37b1d");
-        $(".list_" + (nu_key + 1) + "").show();
-        $(".list_" + (nu_key + 2) + "").show();
-        $(".list_" + (nu_key - 1) + "").show();
-        $(".list_" + (nu_key - 2) + "").show();
+        flip_up(nu_key,((max_number/number)+1));
         load(function () {
             $(".am-icon-eyeicon").css("color", "#3bb4f2");
             $(".am-icon-eye-slashicon").css("color", "#dd514c");
@@ -230,11 +218,7 @@ function del(id){
 function new_load(key) {
     $(".load_list").remove();
     $(".number_list").hide().children().css("background", "none");
-    $(".list_" + key + "").show().children().css("background", "#f37b1d");
-    $(".list_" + (key + 1) + "").show();
-    $(".list_" + (key + 2) + "").show();
-    $(".list_" + (key - 1) + "").show();
-    $(".list_" + (key - 2) + "").show();
+    flip_up(key,((max_number/number)+1));
     skx = (key - 1) * number - number;
     load(function () {
         $(".am-icon-eyeicon").css("color", "#3bb4f2");
@@ -242,4 +226,25 @@ function new_load(key) {
         $(".showam-icon-eye").hide();
         $(".hideam-icon-eye-slash").hide();
     },1);
+}
+function flip_up(key,max_key){
+    $(".list_" + key + "").show().children().css("background", "#f37b1d");
+    $(".list_" + (key + 1) + "").show();
+    $(".list_" + (key + 2) + "").show();
+    $(".list_" + (key - 1) + "").show();
+    $(".list_" + (key - 2) + "").show();
+    if(key==1){
+        $(".list_" + (key + 3) + "").show();
+        $(".list_" + (key + 4) + "").show();
+    }
+    if(key==2){
+        $(".list_" + (key + 3) + "").show();
+    }
+    if((max_key-key)==0){
+        $(".list_" + (key - 3) + "").show();
+        $(".list_" + (key - 4) + "").show();
+    }
+    if((max_key-key)==1){
+        $(".list_" + (key - 3) + "").show();
+    }
 }
