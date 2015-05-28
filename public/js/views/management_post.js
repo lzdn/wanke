@@ -93,7 +93,7 @@ $(".am-input-group-label").on("click", function () {
                         })
                     }
                 } else {
-                    alert("关于“" + val + "”的查询结果不存在");
+                    alert("查询结果不存在");
                 }
             }
         });

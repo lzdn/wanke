@@ -38,49 +38,54 @@ $(".am-input-group-label").on("click", function () {
         AV.Query.doCloudQuery("select * from _User where (nickname like \"" + val + "\")", {
             success: function (res) {
                 var results = res.results;
-                var BlackList = AV.Object.extend('blacklist');
-                var query = new AV.Query(BlackList);
-                query.find({
-                        success: function (blacklist) {
-                            var users = new Array();
-                            for (var x = 0; x < results.length; x++) {
-                                var user = {
-                                    id: '',
-                                    username: '',
-                                    usershow: '',
-                                    buser_show: ''
-                                };
-                                user.id = results[x].id;
-                                user.username = results[x].get('nickname');
-                                user.usershow = results[x].get('authData').weixin.headimgurl;
-                                user.buser_show = "am-icon-check";
+                if(results.length!=0){
+                    var BlackList = AV.Object.extend('blacklist');
+                    var query = new AV.Query(BlackList);
+                    query.find({
+                            success: function (blacklist) {
+                                var users = new Array();
+                                for (var x = 0; x < results.length; x++) {
+                                    var user = {
+                                        id: '',
+                                        username: '',
+                                        usershow: '',
+                                        buser_show: ''
+                                    };
+                                    user.id = results[x].id;
+                                    user.username = results[x].get('nickname');
+                                    user.usershow = results[x].get('authData').weixin.headimgurl;
+                                    user.buser_show = "am-icon-check";
 
-                                if (blacklist.length > 0) {
-                                    for (var y = 0; y < blacklist.length; y++) {
-                                        if (results[x].id == blacklist[y].get('user_id')) {
-                                            user.buser_show = "am-icon-close";
+                                    if (blacklist.length > 0) {
+                                        for (var y = 0; y < blacklist.length; y++) {
+                                            if (results[x].id == blacklist[y].get('user_id')) {
+                                                user.buser_show = "am-icon-close";
+                                            }
                                         }
+                                        users.push(user);
+                                    } else {
+                                        users.push(user);
                                     }
-                                    users.push(user);
-                                } else {
-                                    users.push(user);
                                 }
+                                $(".load_list").remove();
+                                var $tpl = $('#users');
+                                var source = $tpl.text();
+                                var template = Handlebars.compile(source);
+                                var data = {users: users};
+                                var html = template(data);
+                                $tpl.before(html);
+                                $(".am-form-field").val("");
+                                $(".am-icon-checkicon").css("color","#3bb4f2");
+                                $(".am-icon-closeicon").css("color","#dd514c");
+                                $(".showam-icon-check").hide();
+                                $(".hideam-icon-close").hide();
                             }
-                            $(".load_list").remove();
-                            var $tpl = $('#users');
-                            var source = $tpl.text();
-                            var template = Handlebars.compile(source);
-                            var data = {users: users};
-                            var html = template(data);
-                            $tpl.before(html);
-                            $(".am-form-field").val("");
-                            $(".am-icon-checkicon").css("color","#3bb4f2");
-                            $(".am-icon-closeicon").css("color","#dd514c");
-                            $(".showam-icon-check").hide();
-                            $(".hideam-icon-close").hide();
                         }
-                    }
-                );
+                    );
+                }else{
+                    alert("查询结果不存在");
+                }
+
             }
         });
     }
