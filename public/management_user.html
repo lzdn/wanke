@@ -34,6 +34,11 @@
         .am-pagination{
             margin:0 0 10px 0;
         }
+        .search{
+            width: 300px;
+            position:absolute;
+            right:22px;
+        }
     </style>
 </head>
 <body>
@@ -74,6 +79,14 @@
                 <small>设置</small>
             </div>
         </div>
+        <div class="search">
+            <div class="am-input-group am-input-exend">
+                <input type="text" class="am-form-field" placeholder="搜索">
+        <span class="am-input-group-label">
+            <span class="am-icon-search am-icon-extend"></span>
+        </span>
+            </div>
+        </div>
         <div class="am-g">
             <div class="am-u-sm-12 am-u-md-6">
                 <div class="am-btn-toolbar">
@@ -97,7 +110,7 @@
                     <tbody>
                     <script type="text/x-handlebars-template" id="users">
                         {{#each users}}
-                        <tr>
+                        <tr class="load_list list_{{this.id}}">
                             <td><input type="hidden" value="{{this.id}}"/></td>
                             <td><span class="{{this.id}} {{this.id}}icon {{this.buser_show}} {{this.buser_show}}icon am-icon-sm"></span></td>
                             <td><img src="{{this.usershow}}" width="30px" height="30px" alt=""/></td>
