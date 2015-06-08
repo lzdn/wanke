@@ -128,6 +128,7 @@ $(function () {
                                         content: aUserval2,
                                         tagkey: tag,
                                         relationimgs: fileurls,
+                                        b_show:"1",
                                         username: user
                                     }, {
                                         success: function (object) {
