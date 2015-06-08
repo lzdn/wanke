@@ -9,6 +9,7 @@
     var tagname = "全部"
     var saveurl = window.location.href;
     var code = "";
+
     if (saveurl.split("=").length > 2) {
         userlog = window.location.search.split('=')[1];
         code = userlog.split("&")[0];
@@ -153,6 +154,7 @@
         var adoremove = document.getElementsByClassName("doremove");
         if (adoremove.length < 5) {
             $("#load").hide();
+         //   $("#end_load").show();
         }else{
             $("#load").show();
         }
@@ -337,8 +339,9 @@
                 var newtime = new Date().getTime();
                 query.descending("createdAt");
                 skx += 5;
-                if (skx >= skip) {
+                if (skx >= skip+5) {
                     $("#load").hide();
+                    $("#end_load").show();
                 }else{
                     $("#load").show();
                 }
@@ -428,8 +431,9 @@
                 var newtime = new Date().getTime();
                 query.descending("createdAt");
                 skx += 5;
-                if (skx >= skip) {
+                if (skx >= skip+5) {
                     $("#load").hide();
+                    $("#end_load").show();
                 }else{
                     $("#load").show();
                 }

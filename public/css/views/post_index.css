@@ -253,4 +253,7 @@ hr{
 #publish_title{
     text-align:center;
 }
+#end_load{
+    display:none;
+}
 
