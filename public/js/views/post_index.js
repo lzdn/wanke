@@ -344,6 +344,7 @@
                     $("#end_load").show();
                 }else{
                     $("#load").show();
+                    $("#end_load").hide();
                 }
                 query.limit(5).skip(skx);
                 query.include("tagkey");
@@ -436,6 +437,7 @@
                     $("#end_load").show();
                 }else{
                     $("#load").show();
+                    $("#end_load").hide();
                 }
                 query.limit(5).skip(skx);
                 query.include("tagkey");
