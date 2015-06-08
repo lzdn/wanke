@@ -138,7 +138,9 @@ function load(calback,val) {
                 };
                 post.id = results[x].id;
                 post.content = results[x].get('content');
-                post.usershow = results[x].get('username').get("authData").weixin.headimgurl;
+                if(results[x].get('username').get("authData").weixin.headimgurl){
+                    post.usershow = results[x].get('username').get("authData").weixin.headimgurl;
+                }
                 post.username = results[x].get('username').get("nickname");
                 if (results[x].get('b_show') == 1) {
                     post.post_show = "am-icon-eye";
